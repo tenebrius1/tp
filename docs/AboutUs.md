@@ -1,13 +1,8 @@
----
-layout: page
-title: About Us
----
-
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ### Chng Zi Hao
 
-<img src="docs\images\profilepictures\zihao.png" width="200px">
+<img src="images/profilepictures/zihao.png" width="200px">
 
 [[github](http://github.com/zihaooo9)]
 [[portfolio](team/zihao.md)]
@@ -18,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Liaw Xin Yan
 
-<img src="docs/images/profilepictures/xinyan.png" width="200px">
+<img src="images/profilepictures/xinyan.png" width="200px">
 
 [[github](http://github.com/lemonsr)]
 [[portfolio](team/xinyan.md)]
@@ -27,7 +22,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities:
 
 ### Kleon Ang
-![](docs/images/profilepictures/kleon.png)
+
 <img src="images/profilepictures/kleonang.png" width="200px">
 
 [[github](http://github.com/kleonang)]
