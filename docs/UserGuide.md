@@ -1,6 +1,6 @@
-# {{CLI}}Tutors User Guide
+# CLITutors User Guide
 
-**`{{CLI}}Tutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `{{CLI}}Tutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
 The application supports matching the following levels of education:
 
@@ -50,7 +50,7 @@ Here are the possible categories of qualifications for tutors:
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `{{CLI}}Tutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
+2. Download the latest `CLITutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
@@ -97,11 +97,11 @@ Here are the possible categories of qualifications for tutors:
 
 ### Viewing help: `help`
 
-Shows a message with all the commands available to use on `{{CLI}}Tutors`.
+Shows a message with all the commands available to use on `CLITutors`.
 
 ### Getting interactive help: `ihelp`
 
-Starts the interactive tutorial done by Zi Hao to introduce new users to `{{CLI}}Tutors`.
+Starts the interactive tutorial done by Zi Hao to introduce new users to `CLITutors`.
 
 ### Adding a tutor/student: `add`
 
@@ -180,14 +180,14 @@ Format: <br>`exit`
 
 ### Saving the data
 
-`{{CLI}}Tutors` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+`CLITutors` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-`{{CLI}}Tutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`CLITutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-❗<b>Caution:</b> If your changes to the data file makes its format invalid, `{{CLI}}Tutors` will discard all data and start with an empty data file at the next run.
+❗<b>Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
 </div>
 
 ## Command summary
