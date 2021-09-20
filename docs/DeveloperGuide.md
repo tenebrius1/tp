@@ -151,6 +151,19 @@ Manage the matching of tutors and students for teaching jobs more efficiently th
 * 1a. There are no tutors that match the requirements of the student.
   Use case ends.
 
+### Non-Functional Requirements
+
+1. Should work on any *mainstream OS* as long as it has Java 11 or above installed.
+2. Should be able to run on both 32-bit and 64-bit systems.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should not require the use of remote databases.
+5. System should be able to run even if the data file has errors arising from a user manually editing it.
+6. Response to user command (add, delete, edit, match) should be visible within 2 seconds.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8. The system should be usable by a novice who may not be familar with CLI. i.e. Users are not expected to key in complicated commands to get desired outputs.
+9. Product should not be able to send out any information to the student
+10. Product should not be able to verify the legitimacy of the information of the student or private tutor.
+
 ### Glossary
 
 | Term              | Meaning                                                                                                                                           |
@@ -158,4 +171,8 @@ Manage the matching of tutors and students for teaching jobs more efficiently th
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
 | **Mainstream OS** | Windows, macOS, Linux   
+| **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …​                                                        |
+| **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
+| **Tag**           | Subjects each Tutors teach are saved under tags as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math. |
+| **Bloatware**     |                                                         Software that uses excessive memory and disk space, which makes the program run slow|
 
