@@ -2,7 +2,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Chng Zi Hao
 
-<img src="images/profilepictures/zihao.png" width="200px">
+<img src="images/profilepictures/zihaooo9.png" width="200px">
 
 [[github](http://github.com/zihaooo9)]
 [[portfolio](team/zihao.md)]
@@ -13,9 +13,9 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Liaw Xin Yan
 
-<img src="images/profilepictures/xinyan.png" width="200px">
+<img src="images/profilepictures/Lemonsr.png" width="200px">
 
-[[github](http://github.com/lemonsr)]
+[[github](http://github.com/Lemonsr)]
 [[portfolio](team/xinyan.md)]
 
 * Role: UI Designer and Developer
@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Kleon Ang
 
-<img src="images/profilepictures/kleon.png" width="200px">
+<img src="images/profilepictures/kleonang.png" width="200px">
 
 [[github](http://github.com/kleonang)]
 [[portfolio](team/kleon.md)]
@@ -33,7 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Tan Yi Guan
 
-<img src="images/profilepictures/yiguan.png" width="200px">
+<img src="images/profilepictures/tenebrius1.png" width="200px">
 
 [[github](http://github.com/tenebrius1)]
 [[portfolio](team/yiguan.md)]
@@ -43,7 +43,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Kenneth Hong Jia Wei
 
-<img src="images/profilepictures/kennethhong.png" width="200px">
+<img src="images/profilepictures/knotstoks.png" width="200px">
 
 [[github](http://github.com/knotstoks)]
 [[portfolio](team/kennethhong.md)]
