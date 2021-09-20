@@ -1,3 +1,21 @@
+## Appendix: Requirements
+
+### Product scope
+
+#### Target user profile
+
+* Has a need to manage a significant number of private tutors and students
+* Likes a lightweight tutor management application to reduce *bloatware*
+* Wants to have a platform to match students to private tutors 
+* Prefers desktop app over other platforms
+* Can type fast
+* Prefers typing to mouse interactions
+* Is comfortable with using a CLI
+
+#### Value Proposition
+
+Manage the matching of tutors and students for teaching jobs more efficiently than a regular GUI-driven application.
+
 ### Use Cases
 
 (For all use cases below, the System is the `CLITutorsBook` and the Actor is the user, unless otherwise specified)
@@ -132,3 +150,11 @@
 
 * 1a. There are no tutors that match the requirements of the student.
   Use case ends.
+
+### Glossary
+
+| Term              | Meaning                                                                                                                                           |
+|:----------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CLI**           | Command-Line Interface                                                                                                                            |
+| **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
+| **Mainstream OS** | Windows, macOS, Linux   
