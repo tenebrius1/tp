@@ -89,6 +89,8 @@ Here are the possible categories of qualifications for tutors:
 - Tags are denoted by `t/[Level][Subject]`. <br>
   e.g. The tag t/PM stands for Primary Math.
 
+- Editing information of any `Person` will override the current information stored about the specified `Person`.
+
 - Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
   e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 </div>
@@ -134,10 +136,11 @@ Examples:<br>
 Edits a tutor/student's personal particulars from the data.
 
 Format:<br>
-`edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`<br>
+`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`
 
 Example:<br>
-`edit 0 n/Karina Nabay g/F`
+`edit s 0 n/Karina Nabay g/F` to edit student.
 
 ### Listing all tutors/students: `list`
 
@@ -153,6 +156,15 @@ Format: <br>`find KEYWORD`
 
 Example:<br>
 `find Cheese`
+
+### Matching a student to tutor(s): `match`
+
+Find tutor(s) who teaches the subject that the student wants.
+
+Format: <br>`match INDEX`
+
+Example:<br>
+`match 1`
 
 ### Clearing all entries: `clear`
 
@@ -185,9 +197,10 @@ Format: <br>`exit`
 |  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br> e.g. `edit 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list`           |
 |  **Find**  | `find KEYWORD` <br> e.g. `find John`  |
+| **Match**  | `match INDEX` <br> e.g. `match 1`          |
 | **Clear**  | `clear`          |
 |  **Exit**  | `exit`           |
 
