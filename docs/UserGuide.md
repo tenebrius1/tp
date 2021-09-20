@@ -71,26 +71,26 @@ Here are the possible categories of qualifications for tutors:
 <div markdown="block" class="alert alert-info">
 <b>:information_source: Notes about the command format:</b><br>
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-- Items in square brackets are optional.
+- Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…` after them can be used multiple times including zero times.
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Items with `…` after them can be used multiple times.<br>
+  e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM PC PB` etc.
 
-- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Tags are denoted by t/[Level][Subject].
-  e.g. The tag t/PM stands for Primary Math
+- Tags are denoted by `t/[Level][Subject]`. <br>
+  e.g. The tag t/PM stands for Primary Math.
 
-- Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.
-  e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors
+- Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
+  e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 </div>
 
 ### Viewing help: `help`
@@ -105,66 +105,66 @@ Starts the interactive tutorial done by Zi Hao to introduce new users to `{{CLI}
 
 Adds a tutor/student to the data.
 
-Format:
-`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...`
+Format:<br>
+`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...`<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG`
 
-Examples:
-`add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`
+Examples:<br>
+`add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `add s n/Mary Sue p/98765432 g/F t/PM`
 
 ### Deleting a tutor/student: `delete`
 
 Deletes the specified tutor/student from the data.
 
-Format:
-`delete t INDEX`
+Format:<br>
+`delete t INDEX`<br>
 `delete s INDEX`
 
-- Deletes the tutor/student at the specified INDEX.
+- Deletes the tutor/student at the specified `INDEX`.
 - The index refers to the index number shown on the tutor/student list.
-- The index **must be a positive integer** eg. 1, 2, 3, ...
+- The index **must be a positive integer**, eg. `1`, `2`, `3`, ...
 
-Examples:
-`delete t 0`
+Examples:<br>
+`delete t 0`<br>
 `delete s 5`
 
 ### Editing a tutor/student's particulars: `edit`
 
 Edits a tutor/student's personal particulars from the data.
 
-Format:
+Format:<br>
 `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
 
-Example:
+Example:<br>
 `edit 0 n/Karina Nabay g/F`
 
 ### Listing all tutors/students: `list`
 
 Shows the list of all tutors.
 
-Format: `list`
+Format: <br>`list`
 
 ### Finding a tutor/student: `find`
 
 Finds a tutor/student whose names or contact numbers contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: <br>`find KEYWORD`
 
-Example:
+Example:<br>
 `find Cheese`
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the database.
+Clears all entries from storage.
 
-Format: `clear`
+Format: <br>`clear`
 
 ### Exiting the program: `exit`
 
 Exits the program.
 
-Format: `exit`
+Format: <br>`exit`
 
 ### Saving the data
 
