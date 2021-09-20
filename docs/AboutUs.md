@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+### Chng Zi Hao
 
-## Project team
+<img src="docs\images\profilepictures\zihao.png" width="200px">
 
-### John Doe
+[[github](http://github.com/zihaooo9)]
+[[portfolio](team/zihao.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: Placeholder guy
+* Responsibilities: I identify as a placeholder
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+### Liaw Xin Yan
 
-### Jane Doe
+<img src="docs/images/profilepictures/xinyan.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/lemonsr)]
+[[portfolio](team/xinyan.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: UI Designer and Developer
+* Responsibilities:
 
-* Role: Team Lead
-* Responsibilities: UI
+### Kleon Ang
+![](docs/images/profilepictures/kleon.png)
+<img src="images/profilepictures/kleonang.png" width="200px">
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/kleonang)]
+[[portfolio](team/kleon.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Yi Guan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/profilepictures/tenebrius1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tenebrius1)]
+[[portfolio](team/yiguan.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Literally Yan Dao
+
+### Kenneth Hong Jia Wei
+
+<img src="images/profilepictures/kennethhong.png" width="200px">
+
+[[github](http://github.com/knotstoks)]
+[[portfolio](team/kennethhong.md)]
+
+* Role: Developer
+* Responsibilities: Burden
