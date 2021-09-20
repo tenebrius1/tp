@@ -1,14 +1,16 @@
+# {{CLI}}Tutors
+
 [![CI Status](https://github.com/AY2122S1-CS2103T-T17-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T17-2/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+**`{{CLI}}Tutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `{{CLI}}Tutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+
+## User Guide
+The User Guide can be accessed [here](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/docs/UserGuide.md). 
+
+## Developer Guide
+The Developer Guide can be accessed [here](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/docs/DeveloperGuide.md).
+
+## Acknowledgements
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
