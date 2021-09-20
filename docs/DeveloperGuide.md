@@ -158,3 +158,4 @@ Manage the matching of tutors and students for teaching jobs more efficiently th
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
 | **Mainstream OS** | Windows, macOS, Linux   
+
