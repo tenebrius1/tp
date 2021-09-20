@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Kleon Ang
 
-<img src="images/profilepictures/kleonang.png" width="200px">
+<img src="images/profilepictures/kleon.png" width="200px">
 
 [[github](http://github.com/kleonang)]
 [[portfolio](team/kleon.md)]
@@ -33,7 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Tan Yi Guan
 
-<img src="images/profilepictures/tenebrius1.png" width="200px">
+<img src="images/profilepictures/yiguan.png" width="200px">
 
 [[github](http://github.com/tenebrius1)]
 [[portfolio](team/yiguan.md)]

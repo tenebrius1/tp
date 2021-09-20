@@ -1,192 +1,194 @@
----
-layout: page
-title: User Guide
----
+# {{CLI}}Tutors User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**`{{CLI}}Tutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `{{CLI}}Tutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
-* Table of Contents
-{:toc}
+The application supports matching the following levels of education:
 
---------------------------------------------------------------------------------------------------------------------
+- **P**rimary
+- **S**econdary
+- **T**ertiary
+
+And the following subjects:
+
+- Math and Sciences
+    - **P**hysics
+    - **C**hemistry
+    - **B**iology
+    - **M**athematics
+
+- Humanities
+    - **H**istory
+    - **G**eography
+    - **L**iterature
+    - **E**conomics
+
+Here are the possible categories of qualifications for tutors:
+
+- Qualifications
+    - `0`: Pre-University
+    - `1`: University Student
+    - `2`: Post-Grad
+    - `3`: MOE-Trained
+
+## Table of Contents
+- [Quick Start](#Quick-Start)
+- [Features](#Features)
+    - [Viewing help: `help`](#Viewing-help-help)
+    - [Getting interactive help: `ihelp`](#Getting-interactive-help-ihelp)
+    - [Adding a tutor/student: `add`](#Adding-a-tutorstudent-add)
+    - [Deleting a tutor/student: `delete`](#Deleting-a-tutorstudent-delete)
+    - [Editing a tutor/student's particulars: `edit`](#Editing-a-tutorstudent%E2%80%99s-particulars-edit)
+    - [Listing all tutors/students: `list`](#Listing-all-tutorsstudents-list)
+    - [Finding a tutor/student: `find`](#Finding-a-tutorstudent-find)
+    - [Clearing all entries: `clear`](#Clearing-all-entries-clear)
+    - [Exiting the program: `exit`](#Exiting-the-program-exit)
+    - [Saving the data](#Saving-the-data)
+    - [Editing the data file](#Editing-the-data-file)
+- [Command summary](#Command-summary)
+<!-- - [FAQ](#FAQ) -->
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+2. Download the latest `{{CLI}}Tutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
+3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
+5. Type the command in the command box and press `Enter` to execute it. e.g. typing `ihelp` and pressing `Enter` will open the interactive tutorial done by Zi Hao. Some example commands you can try:
+    - `list`: lists all tutors and students
+    - `help`: shows all commands available
+    - `add`: add a tutor/student to the program
+    - `delete`: delete a tutor/student from the program
+    - `edit`: edit details of a tutor/student
+    - `find`: find a tutor/student matching a given keyword
+    - `clear`: clears all entries
+    - `exit`: exits the program
+6. Refer to the [Features](#Features) below for details of each command.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * **`list`** : Lists all contacts.
-
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 <div markdown="block" class="alert alert-info">
+<b>:information_source: Notes about the command format:</b><br>
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+- Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Items with `…` after them can be used multiple times.<br>
+  e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM PC PB` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+- Tags are denoted by `t/[Level][Subject]`. <br>
+  e.g. The tag t/PM stands for Primary Math.
+
+- Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
+  e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message with all the commands available to use on `{{CLI}}Tutors`.
 
-![help message](images/helpMessage.png)
+### Getting interactive help: `ihelp`
 
-Format: `help`
+Starts the interactive tutorial done by Zi Hao to introduce new users to `{{CLI}}Tutors`.
 
+### Adding a tutor/student: `add`
 
-### Adding a person: `add`
+Adds a tutor/student to the data.
 
-Adds a person to the address book.
+Format:<br>
+`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...`<br>
+`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Examples:<br>
+`add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
+`add s n/Mary Sue p/98765432 g/F t/PM`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+### Deleting a tutor/student: `delete`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Deletes the specified tutor/student from the data.
 
-### Listing all persons : `list`
+Format:<br>
+`delete t INDEX`<br>
+`delete s INDEX`
 
-Shows a list of all persons in the address book.
+- Deletes the tutor/student at the specified `INDEX`.
+- The index refers to the index number shown on the tutor/student list.
+- The index **must be a positive integer**, eg. `1`, `2`, `3`, ...
 
-Format: `list`
+Examples:<br>
+`delete t 0`<br>
+`delete s 5`
 
-### Editing a person : `edit`
+### Editing a tutor/student's particulars: `edit`
 
-Edits an existing person in the address book.
+Edits a tutor/student's personal particulars from the data.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format:<br>
+`edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Example:<br>
+`edit 0 n/Karina Nabay g/F`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### Listing all tutors/students: `list`
 
-### Locating persons by name: `find`
+Shows the list of all tutors.
 
-Finds persons whose names contain any of the given keywords.
+Format: <br>`list`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+### Finding a tutor/student: `find`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Finds a tutor/student whose names or contact numbers contain any of the given keywords.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Format: <br>`find KEYWORD`
 
-### Deleting a person : `delete`
+Example:<br>
+`find Cheese`
 
-Deletes the specified person from the address book.
+### Clearing all entries: `clear`
 
-Format: `delete INDEX`
+Clears all entries from storage.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: <br>`clear`
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
-Format: `exit`
+Format: <br>`exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+`{{CLI}}Tutors` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`{{CLI}}Tutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">
+❗<b>Caution:</b> If your changes to the data file makes its format invalid, `{{CLI}}Tutors` will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+|   Action   | Format, Examples |
+|:----------:|:---------------- |
+|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 t/PM`    |
+| **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
+|  **Help**  | `help`           |
+|  **Edit**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br> e.g. `edit 2 n/John Doe q/1`   |
+|  **List**  | `list`           |
+|  **Find**  | `find KEYWORD` <br> e.g. `find John`  |
+| **Clear**  | `clear`          |
+|  **Exit**  | `exit`           |
+
+<!-- ## FAQ -->
