@@ -1,3 +1,10 @@
+---
+layout: page
+title: Developer Guide
+---
+* Table of Contents
+  {:toc}
+
 ## Appendix: Requirements
 
 ### Product scope
@@ -15,6 +22,36 @@
 #### Value Proposition
 
 Manage the matching of tutors and students for teaching jobs more efficiently than a regular GUI-driven application.
+
+### User Stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a ...                                       | I want to ...                                         | So that I can …                                                   |
+| -------- | ---------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- |
+| `* * *`  | new user ready to adopt the app for my own use | purge all data                                        | clear all dummy data and begin to use the app                     |
+| `* * *`  | user                                           | delete students and tutors from the list              | remove those people who do not use the service anymore            |
+| `* * *`  | user                                           | add new students and tutors to the app                |                                                                   |
+| `* * *`  | user                                           | view my saved data                                    | recall the information of my tutors/students                      |
+| `* * *`  | user                                           | find people that match some keywords                  | avoid scrolling through thousands of entries of data              |
+| `* * *`  | user                                           | assign tags to tutors and students                    | categorize them by their needs                                    |
+| `* * *`  | user                                           | match students and tutors according to their needs    |                                                                   |
+| `* * *`  | user                                           | To get feedback from the system                       | see if my commands are working                                    |
+| `* * *`  | user                                           | type the commands I want to execute                   |                                                                   |
+| `* * *`  | busy user                                      | use shorter commands                                  | save time keying in full commands                                 |
+| `* *`    | first-time user                                | see some sample data when I open the app              | easily try out the features without needing to add my data first  |
+| `* *`    | clumsy user                                    | have a safety net                                     | avoid purging my data by accident                                 |
+| `* *`    | user                                           | edit personal details                                 | update any new particulars of the tutors/students                 |
+| `* *`    | user                                           | sort by tags                                          | easily find groups of people with the same tags                   |
+| `* *`    | forgetful user                                 | see the available commands for the program            | know what tasks I can do with the program                         |
+| `* *`    | user                                           | search students and tutors by tags                    | easily import data from one machine to another                    |
+| `* *`    | user                                           | load in pre-existing data                             | save time keying in full commands                                 |
+| `* *`    | user                                           | assign ratings to tutors                              | see how well their ratings are when teaching students             |
+| `* *`    | user                                           | undo my commands made                                 | retrieve the previous state of data if I’ve made a mistake        |
+| `* *`    | user                                           | add priority for matching certain tutors and students | schedule urgent cases ahead of other cases for greater efficiency |
+| `*`      | user                                           | be able to go through the history of my command       | avoid reentering frequently used commands                         |
+| `*`      | user                                           | save pictures of students and tutors                  | match faces to names                                              |
+| `*`      | first-time user                                | view an interactive tutorial                          | learn how to use the app                                          |
 
 ### Use Cases
 
@@ -151,6 +188,19 @@ Manage the matching of tutors and students for teaching jobs more efficiently th
 * 1a. There are no tutors that match the requirements of the student.
   Use case ends.
 
+### Non-Functional Requirements
+
+1. Should work on any *mainstream OS* as long as it has Java 11 or above installed.
+2. Should be able to run on both 32-bit and 64-bit systems.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should not require the use of remote databases.
+5. System should be able to run even if the data file has errors arising from a user manually editing it.
+6. Response to user command (add, delete, edit, match) should be visible within 2 seconds.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8. The system should be usable by a novice who may not be familar with CLI. i.e. Users are not expected to key in complicated commands to get desired outputs.
+9. Product should not be able to send out any information to the student
+10. Product should not be able to verify the legitimacy of the information of the student or private tutor.
+
 ### Glossary
 
 | Term              | Meaning                                                                                                                                           |
@@ -158,3 +208,7 @@ Manage the matching of tutors and students for teaching jobs more efficiently th
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
 | **Mainstream OS** | Windows, macOS, Linux   
+| **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …​                                                        |
+| **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
+| **Tag**           | Subjects each Tutors teach are saved under tags as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math. |
+| **Bloatware**     |                                                         Software that uses excessive memory and disk space, which makes the program run slow|

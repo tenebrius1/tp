@@ -1,4 +1,7 @@
-# CLITutors User Guide
+---
+layout: page
+title: User Guide
+---
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
@@ -31,21 +34,8 @@ Here are the possible categories of qualifications for tutors:
     - `3`: MOE-Trained
 
 ## Table of Contents
-- [Quick Start](#Quick-Start)
-- [Features](#Features)
-    - [Viewing help: `help`](#Viewing-help-help)
-    - [Getting interactive help: `ihelp`](#Getting-interactive-help-ihelp)
-    - [Adding a tutor/student: `add`](#Adding-a-tutorstudent-add)
-    - [Deleting a tutor/student: `delete`](#Deleting-a-tutorstudent-delete)
-    - [Editing a tutor/student's particulars: `edit`](#Editing-a-tutorstudent%E2%80%99s-particulars-edit)
-    - [Listing all tutors/students: `list`](#Listing-all-tutorsstudents-list)
-    - [Finding a tutor/student: `find`](#Finding-a-tutorstudent-find)
-    - [Clearing all entries: `clear`](#Clearing-all-entries-clear)
-    - [Exiting the program: `exit`](#Exiting-the-program-exit)
-    - [Saving the data](#Saving-the-data)
-    - [Editing the data file](#Editing-the-data-file)
-- [Command summary](#Command-summary)
-<!-- - [FAQ](#FAQ) -->
+* Table of Contents
+  {:toc}
 
 ## Quick start
 
