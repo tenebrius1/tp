@@ -1,4 +1,9 @@
-# Developer Guide
+---
+layout: page
+title: Developer Guide
+---
+* Table of Contents
+  {:toc}
 
 ## Appendix: Requirements
 
