@@ -18,7 +18,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Liaw Xin Yan
 
-<img src="images/Lemonsr.png" width="200px" alt="Xin Yan">
+<img src="images/lemonsr.png" width="200px" alt="Xin Yan">
 
 [[github](http://github.com/Lemonsr)]
 [[portfolio](team/xinyan.md)]
