@@ -35,7 +35,7 @@ Here are the possible categories of qualifications for tutors:
 
 ## Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
 ## Quick start
 
