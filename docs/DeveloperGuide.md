@@ -54,6 +54,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC01): Add a Tutor
 
+##### MSS
+
 1. User keys in the tutor's details
 2. Tutor is added to the database
    Use case ends.
@@ -66,6 +68,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC02): Add a Student
 
+##### MSS
+
 1. User keys in the student's details
 2. Tutor is added to the database
    Use case ends.
@@ -77,6 +81,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 #### Use case (UC03): Edit a Student name
+
+##### MSS
 
 1. User enters the command to edit the name of Student A
 2. System replies with a confirmation message that the edit is successful
@@ -91,6 +97,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 #### Use case (UC04): Edit a Student phone number
+
+##### MSS
 
 1. User enters the command to edit the phone number of Student B
 2. System replies with a confirmation message that the edit is successful
