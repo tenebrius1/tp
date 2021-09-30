@@ -35,7 +35,7 @@ The application supports the following level of education and subjects as shown 
             <td style="text-align:center"><b>SB</b></td>
         </tr>
         <tr>
-            <td><b>C</b>hemisrty</td>
+            <td><b>C</b>hemistry</td>
             <td style="text-align:center"><b>SC</b></td>
         </tr>
         <tr>
@@ -68,7 +68,7 @@ The application supports the following level of education and subjects as shown 
             <td style="text-align:center"><b>TB</b></td>
         </tr>
         <tr>
-            <td><b>C</b>hemisrty</td>
+            <td><b>C</b>hemistry</td>
             <td style="text-align:center"><b>TC</b></td>
         </tr>
         <tr>
