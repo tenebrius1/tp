@@ -5,7 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -64,6 +65,9 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Note: getFilteredPersonList() no longer exists.
+        // TODO: Replace with getFilteredStudentList() or getFilteredTutorList() depending on which list you want.
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -78,7 +82,11 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // Added both statements below for compatibility with Model
+        // TODO: Split into if/else or switch/case statements depending on "edit t" or "edit s"
+        model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

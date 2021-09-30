@@ -13,12 +13,15 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private Tag tag;
+
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Gender gender, Tag tag) {
-        super(name, phone, gender, tagWrapper(tag));
+        super(name, phone, gender, wrapTag(tag));
         requireAllNonNull(name, phone, gender, tag);
+        this.tag = tag;
     }
 
     /**
@@ -27,10 +30,13 @@ public class Student extends Person {
      * @param tag The given tag to wrap.
      * @return A Set containing only the given tag.
      */
-    private static Set<Tag> tagWrapper(Tag tag) {
+    private static Set<Tag> wrapTag(Tag tag) {
         Set<Tag> set = new HashSet<>();
         set.add(tag);
         return set;
     }
 
+    public Tag getTag() {
+        return tag;
+    }
 }

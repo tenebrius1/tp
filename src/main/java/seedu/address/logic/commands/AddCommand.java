@@ -47,6 +47,9 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // Note: hasPerson() and addPerson no longer exists.
+        // They have been replaced by hasTutor() / hasStudent() and addTutor() / addStudent() in model.
+        // TODO: Split hasPerson() and addPerson() into more specific Tutor and Student-related methods stated above.
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -61,4 +64,5 @@ public class AddCommand extends Command {
                 || (other instanceof AddCommand // instanceof handles nulls
                 && toAdd.equals(((AddCommand) other).toAdd));
     }
+
 }

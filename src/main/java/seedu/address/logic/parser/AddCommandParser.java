@@ -41,6 +41,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        // Note: Person is now abstract.
+        // TODO: Create Tutor or Student depending on command parameters.
         Person person = new Person(name, phone, gender, tagList);
 
         return new AddCommand(person);

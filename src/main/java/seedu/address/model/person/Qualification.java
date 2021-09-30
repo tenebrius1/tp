@@ -11,7 +11,7 @@ public class Qualification {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Qualification should be '0', '1', '2' or '3'";
-    public static final String VALIDATION_REGEX = "[MF]";
+    public static final String VALIDATION_REGEX = "[0123]";
     public final String index;
 
     /**
