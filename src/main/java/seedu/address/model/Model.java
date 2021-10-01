@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
@@ -13,10 +14,10 @@ import seedu.address.model.person.Tutor;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Tutor> PREDICATE_SHOW_ALL_TUTORS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_TUTORS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -115,11 +116,11 @@ public interface Model {
      * Updates the filter of the filtered tutor list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredTutorList(Predicate<Tutor> predicate);
+    void updateFilteredTutorList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredStudentList(Predicate<Student> predicate);
+    void updateFilteredStudentList(Predicate<Person> predicate);
 }

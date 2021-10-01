@@ -1,39 +1,43 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
+  "tutors" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "gender" : "F",
-    "tagged" : [ "friends" ]
+    "qualification" : "0",
+    "tagged" : [ "PM" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "gender" : "M",
-    "tagged" : [ "owesMoney", "friends" ]
+    "qualification" : "1",
+    "tagged" : [ "SM", "SC" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "gender" : "M",
-    "tagged" : [ ]
-  }, {
+    "qualification" : "2",
+    "tagged" : [ "TL", "TE" ]
+  } ],
+  "students" : [ {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "PM" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "gender" : "F",
-    "tagged" : [ ]
+    "tagged" : [ "SC" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "gender" : "F",
-    "tagged" : [ ]
+    "tagged" : [ "TG" ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "gender" : "M",
-    "tagged" : [ ]
+    "tagged" : [ "TP" ]
   } ]
 }

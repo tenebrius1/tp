@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
@@ -160,13 +161,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredTutorList(Predicate<Tutor> predicate) {
+    public void updateFilteredTutorList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredTutors.setPredicate(predicate);
     }
 
     @Override
-    public void updateFilteredStudentList(Predicate<Student> predicate) {
+    public void updateFilteredStudentList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }

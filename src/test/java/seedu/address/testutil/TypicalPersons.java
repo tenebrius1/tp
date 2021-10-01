@@ -46,9 +46,9 @@ public class TypicalPersons {
 
     // Manually added
     public static final Tutor HOON = new TutorBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withGender("M").build();
+            .withGender("M").withQualification("2").withTags("TG, TL").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withGender("F").build();
+            .withGender("F").withTag("PE").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
