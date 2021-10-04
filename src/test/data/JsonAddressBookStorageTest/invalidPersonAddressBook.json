@@ -1,8 +1,15 @@
 {
-  "persons": [ {
+  "tutors": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "gender" : "M",
+    "qualification" : "0",
+    "tagged" : [ "PM" ]
+  } ],
+  "students": [ {
+    "name": "Dank Muster",
+    "phone": "9069420",
+    "gender" : "F",
+    "tagged" : [ "S*" ]
   } ]
 }

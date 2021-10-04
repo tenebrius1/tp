@@ -33,6 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Note: getFilteredPersonList() no longer exists.
+        // TODO: Replace with getFilteredStudentList() or getFilteredTutorList() depending on which list you want.
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -40,6 +43,9 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Note: deletePerson() no longer exists
+        // TODO: Change to deleteTutor() or deleteStudent() depending on the case.
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
