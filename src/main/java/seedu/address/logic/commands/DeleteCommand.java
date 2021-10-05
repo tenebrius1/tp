@@ -51,7 +51,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         switch (personType) {
-        case PersonType.TUTOR:
+        case TUTOR:
             List<Tutor> lastShownTutorList = model.getFilteredTutorList();
 
             if (targetIndex.getZeroBased() >= lastShownTutorList.size()) {
@@ -61,7 +61,8 @@ public class DeleteCommand extends Command {
             Tutor tutorToDelete = lastShownTutorList.get(targetIndex.getZeroBased());
             model.deleteTutor(tutorToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete));
-        case PersonType.STUDENT:
+            break;
+        case STUDENT:
             List<Student> lastShownStudentList = model.getFilteredStudentList();
 
             if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
