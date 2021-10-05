@@ -23,7 +23,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * @see Person#isSamePerson(Person)
  */
 public class UniqueStudentList implements Iterable<Student> {
-    
+
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -134,5 +134,4 @@ public class UniqueStudentList implements Iterable<Student> {
         }
         return true;
     }
-    
 }

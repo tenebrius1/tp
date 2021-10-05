@@ -15,7 +15,7 @@ import java.util.Set;
  * A utility class to help with building Tutor objects.
  */
 public class TutorBuilder {
-    
+
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";

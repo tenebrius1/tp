@@ -4,9 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
+
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -25,11 +33,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -78,17 +88,18 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM + TAG_DESC_TP;
+        Tutor expectedTutor = new TutorBuilder().withTags(TAG_DESC_PM, TAG_DESC_TP).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addTutor(expectedTutor);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTutorList().remove(0));
     }
 
     /**

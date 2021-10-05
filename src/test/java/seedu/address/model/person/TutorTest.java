@@ -88,5 +88,4 @@ public class TutorTest {
         editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_PM).build();
         assertFalse(ALICE.equals(editedAlice));
     }
-    
 }
