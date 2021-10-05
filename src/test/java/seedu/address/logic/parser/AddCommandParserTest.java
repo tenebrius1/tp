@@ -11,15 +11,18 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -32,45 +35,70 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_TP).build();
+        Tutor expectedTutor = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
+        Student expectedStudent = new StudentBuilder(AMY).withTag(VALID_TAG_PM).build();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedPerson));
-
+        //Tests for tutors
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple genders - last gender accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY + GENDER_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_TP, VALID_TAG_PM)
+        Person expectedTutorMultipleTags = new TutorBuilder(BOB).withTags(VALID_TAG_TP, VALID_TAG_PM)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedPersonMultipleTags));
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
+
+        //Tests for students
+        // multiple names - last name accepted
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+
+        // multiple phones - last phone accepted
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+
+        // multiple genders - last gender accepted
+        assertParseSuccess(parser,  VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+
+        // one tag - accepted
+        Student expectedStudentOneTag = new StudentBuilder(AMY).withTag(VALID_TAG_TP)
+                .build();
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_TP, new AddCommand(expectedStudentOneTag, VALID_STUDENT_TYPE));
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY,
-                new AddCommand(expectedPerson));
+    public void parse_studentTooManyTags_failure() {
+        // multiple tags - not accepted
+        String expectedMultipleTagsStudentMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_TOO_MANY_TAGS);
+
+        assertParseFailure(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_PM + TAG_DESC_TP, expectedMultipleTagsStudentMessage);
     }
 
     @Test
@@ -78,47 +106,55 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_TUTOR_TYPE + VALID_NAME_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + GENDER_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + VALID_PHONE_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM, expectedMessage);
 
         // missing gender prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_GENDER_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_GENDER_BOB
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM, expectedMessage);
+
+        // missing qualification prefix
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + VALID_QUALIFICATION_BOB + TAG_DESC_PM, expectedMessage);
+
+        // missing tag prefix
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + VALID_TAG_PM, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_GENDER_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_TUTOR_TYPE + VALID_NAME_BOB + VALID_PHONE_BOB + VALID_GENDER_BOB
+                + VALID_QUALIFICATION_BOB + VALID_TAG_PM, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
+        assertParseFailure(parser, VALID_TUTOR_TYPE + INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + TAG_DESC_PM + TAG_DESC_TP, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
                 + TAG_DESC_PM + TAG_DESC_TP, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid gender
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
                 + TAG_DESC_PM + TAG_DESC_TP, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        assertParseFailure(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_TP, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_GENDER_DESC,
+        assertParseFailure(parser, VALID_TUTOR_TYPE + INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_GENDER_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_PM + TAG_DESC_TP,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

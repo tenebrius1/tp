@@ -23,6 +23,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Qualification;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -131,6 +132,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Gender gender;
+        private Qualification qualification;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -143,6 +145,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
+            setQualification(toCopy.qualification);
             setTags(toCopy.tags);
         }
 
@@ -175,6 +178,14 @@ public class EditCommand extends Command {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setQualification(Qualification qualification) {
+            this.qualification = qualification;
+        }
+
+        public Optional<Qualification> getQualification() {
+            return Optional.ofNullable(qualification);
         }
 
         /**
@@ -212,6 +223,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getGender().equals(e.getGender())
+                    && getQualification().equals(e.getQualification())
                     && getTags().equals(e.getTags());
         }
     }
