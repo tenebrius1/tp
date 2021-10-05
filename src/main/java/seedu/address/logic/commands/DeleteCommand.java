@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
@@ -61,7 +62,7 @@ public class DeleteCommand extends Command {
             Tutor tutorToDelete = lastShownTutorList.get(targetIndex.getZeroBased());
             model.deleteTutor(tutorToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete));
-            break;
+            // No break necessary due to return statement
         case STUDENT:
             List<Student> lastShownStudentList = model.getFilteredStudentList();
 
@@ -72,6 +73,7 @@ public class DeleteCommand extends Command {
             Student studentToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
             model.deleteStudent(studentToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+            // No break necessary due to return statement
         default:
             // Any invalid input would be handled by the DeleteCommandParser and will not reach here
             throw new CommandException(MESSAGE_USAGE);
