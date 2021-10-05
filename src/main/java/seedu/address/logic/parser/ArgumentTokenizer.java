@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +26,7 @@ public class ArgumentTokenizer {
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+        System.out.println(argsString);
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -103,10 +106,29 @@ public class ArgumentTokenizer {
             // Extract and store prefixes and their arguments
             Prefix argPrefix = prefixPositions.get(i).getPrefix();
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
-            argMultimap.put(argPrefix, argValue);
+            // Check if we are handling Tag Prefix
+            if (argPrefix.equals(PREFIX_TAG)) {
+                handleTags(argMultimap, argValue);
+            } else {
+                argMultimap.put(argPrefix, argValue);
+            }
         }
 
         return argMultimap;
+    }
+
+    /**
+     * Handles the Tag arguments in the argument string specified by {@code argValue}.
+     */
+    private static void handleTags(ArgumentMultimap argMultimap, String argValue) {
+        // If user specifies two t/ Prefixes, take the latest occurrence
+        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            argMultimap.delete(PREFIX_TAG);
+        }
+        String[] tagList = argValue.split(" ");
+        for (String s: tagList) {
+            argMultimap.put(PREFIX_TAG, s);
+        }
     }
 
     /**

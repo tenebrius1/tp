@@ -142,7 +142,7 @@ Here are the possible categories of qualifications for tutors:
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…` after them can be used multiple times.<br>
+- Items with `…` after them can have multiple arguments in them.<br>
   e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM PC PB` etc.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -163,10 +163,6 @@ Here are the possible categories of qualifications for tutors:
 ### Viewing help: `help`
 
 Shows a message with all the commands available to use on `CLITutors`.
-
-### Getting interactive help: `ihelp`
-
-Starts the interactive tutorial done by Zi Hao to introduce new users to `CLITutors`.
 
 ### Adding a tutor/student: `add`
 

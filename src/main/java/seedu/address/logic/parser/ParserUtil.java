@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,10 +105,12 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        // Checks Tag argument against allowed Tags, throws exception if not valid
+        if (!Tag.isValidTagName(trimmedTag) || !LevelSubjectCode.isValidTag(trimmedTag)) {
+            throw new ParseException(Tag.INVALID_TAG);
         }
-        return new Tag(trimmedTag);
+        String label = LevelSubjectCode.getLabel(trimmedTag);
+        return new Tag(label);
     }
 
     /**
