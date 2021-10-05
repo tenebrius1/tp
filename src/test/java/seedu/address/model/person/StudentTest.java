@@ -83,5 +83,4 @@ public class StudentTest {
         editedDaniel = new StudentBuilder(DANIEL).withTag(VALID_TAG_PM).build();
         assertFalse(DANIEL.equals(editedDaniel));
     }
-    
 }
