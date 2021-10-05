@@ -23,6 +23,15 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
+     * Parses {@code String args} and extracts out the type of Person (Tutor/Student).
+     *
+     * @return Returns the string at the index of args.
+     */
+    public static String parsePersonType(String args, int index) {
+        return args.substring(index, index + 1);
+    }
+
+    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
