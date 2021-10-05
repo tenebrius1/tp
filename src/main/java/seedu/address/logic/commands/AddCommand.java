@@ -1,9 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
@@ -35,16 +40,13 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TUTOR = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This person already exists in the address book";
 
-    private static final String tutor = "t";
-    private static final String student = "s";
-
     private final Person toAdd;
-    private final String personType;
+    private final PersonType personType;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person, String personType) {
+    public AddCommand(Person person, PersonType personType) {
         requireNonNull(person);
         requireNonNull(personType);
         toAdd = person;
@@ -54,7 +56,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (personType.equals(tutor)) {
+        if (personType.equals(PersonType.TUTOR)) {
             Tutor tutor = (Tutor) toAdd;
             if (model.hasTutor(tutor)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
@@ -64,14 +66,14 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_TUTOR, tutor));
         }
 
-        if (personType.equals(student)) {
+        if (personType.equals(PersonType.STUDENT)) {
             Student student = (Student) toAdd;
             if (model.hasStudent(student)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
             }
 
             model.addStudent(student);
-            return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, tutor));
+            return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, student));
         }
 
         //Any invalid input would be handled by the AddCommandParser and will not reach here
@@ -84,5 +86,4 @@ public class AddCommand extends Command {
                 || (other instanceof AddCommand // instanceof handles nulls
                 && toAdd.equals(((AddCommand) other).toAdd));
     }
-
 }

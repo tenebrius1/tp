@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -27,13 +28,11 @@ import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
 public class AddCommandTest {
-    private static final String personTypeTutor = "t";
-    private static final String personTypeStudent = "s";
 
     @Test
     public void constructor_nullTutorOrStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null, personTypeTutor));
-        assertThrows(NullPointerException.class, () -> new AddCommand(null, personTypeStudent));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null, PersonType.TUTOR));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null, PersonType.STUDENT));
     }
 
     @Test
@@ -43,8 +42,8 @@ public class AddCommandTest {
         Tutor validTutor = new TutorBuilder().build();
         Student validStudent = new StudentBuilder().build();
 
-        CommandResult commandResultTutor = new AddCommand(validTutor, personTypeTutor).execute(modelStubTutor);
-        CommandResult commandResultStudent = new AddCommand(validStudent, personTypeStudent).execute(modelStubStudent);
+        CommandResult commandResultTutor = new AddCommand(validTutor, PersonType.TUTOR).execute(modelStubTutor);
+        CommandResult commandResultStudent = new AddCommand(validStudent, PersonType.STUDENT).execute(modelStubStudent);
 
         // Adding a tutor
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_TUTOR, validTutor),
@@ -61,8 +60,8 @@ public class AddCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Tutor validTutor = new TutorBuilder().build();
         Student validStudent = new StudentBuilder().build();
-        AddCommand addCommandTutor = new AddCommand(validTutor, personTypeTutor);
-        AddCommand addCommandStudent = new AddCommand(validStudent, personTypeStudent);
+        AddCommand addCommandTutor = new AddCommand(validTutor, PersonType.TUTOR);
+        AddCommand addCommandStudent = new AddCommand(validStudent, PersonType.STUDENT);
         ModelStub modelStubTutor = new ModelStubWithTutor(validTutor);
         ModelStub modelStubStudent = new ModelStubWithStudent(validStudent);
 
@@ -82,15 +81,15 @@ public class AddCommandTest {
 
         Student studentCharlie = new StudentBuilder().withName("Charlie").build();
 
-        AddCommand addAliceCommand = new AddCommand(tutorAlice, personTypeTutor);
-        AddCommand addBobCommand = new AddCommand(tutorBob, personTypeTutor);
-        AddCommand addCharlieCommand = new AddCommand(studentCharlie, personTypeStudent);
+        AddCommand addAliceCommand = new AddCommand(tutorAlice, PersonType.STUDENT);
+        AddCommand addBobCommand = new AddCommand(tutorBob, PersonType.TUTOR);
+        AddCommand addCharlieCommand = new AddCommand(studentCharlie, PersonType.STUDENT);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(tutorAlice, personTypeTutor);
+        AddCommand addAliceCommandCopy = new AddCommand(tutorAlice, PersonType.TUTOR);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

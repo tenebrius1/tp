@@ -1,10 +1,32 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,50 +47,48 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Tutor expectedTutor = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
-        String personTypeTutor = "t";
         Student expectedStudent = new StudentBuilder(AMY).withTag(VALID_TAG_PM).build();
-        String personTypeStudent = "s";
 
         //Tests for tutors
         // multiple names - last name accepted
         assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedTutor, personTypeTutor));
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedTutor, personTypeTutor));
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedTutor, personTypeTutor));
+                + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tags - all accepted
         Person expectedTutorMultipleTags = new TutorBuilder(BOB).withTags(VALID_TAG_TP, VALID_TAG_PM)
                 .build();
         assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTags, personTypeTutor));
+                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
 
         //Tests for students
         // multiple names - last name accepted
         assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, personTypeStudent));
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, personTypeStudent));
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser,  VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, personTypeStudent));
+                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // one tag - accepted
         Student expectedStudentOneTag = new StudentBuilder(AMY).withTag(VALID_TAG_TP)
                 .build();
         assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_TP, new AddCommand(expectedStudentOneTag, personTypeStudent));
+                + TAG_DESC_TP, new AddCommand(expectedStudentOneTag, VALID_STUDENT_TYPE));
     }
 
     @Test
