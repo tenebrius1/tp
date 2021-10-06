@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithSim
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -134,7 +135,6 @@ public class FindCommandTest {
      */
     private NameContainsKeywordsPredicate preparePredicate(String userInput) throws ParseException {
         Name name = FindCommandParserStub.extractName(userInput);
-        String[] nameList = new String[] {name.toString()};
-        return new NameContainsKeywordsPredicate(Arrays.asList(nameList));
+        return new NameContainsKeywordsPredicate(List.of(name.toString()));
     }
 }

@@ -14,6 +14,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,8 +120,9 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        // Checks Tag argument against allowed Tags, throws exception if not valid
+        if (!Tag.isValidTagName(trimmedTag) || !LevelSubjectCode.isValidTag(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_INVALID_TAG);
         }
         return new Tag(trimmedTag);
     }
