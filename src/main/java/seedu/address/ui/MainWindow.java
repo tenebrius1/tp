@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PersonListPanel personListPanel; // Probably have to split into TutorListPanel and StudentListPanel
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -110,6 +110,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // Note: getFilteredPersonList() no longer exists.
+        // TODO: Replace with getFilteredStudentList() or getFilteredTutorList() depending on which list you want.
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 

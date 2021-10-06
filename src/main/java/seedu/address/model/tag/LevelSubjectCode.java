@@ -1,7 +1,5 @@
 package seedu.address.model.tag;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 public enum LevelSubjectCode {
     PE("pe", "PriEng"), // Primary English
     PM("pm", "PriMath"), // Primary Math
@@ -21,7 +19,8 @@ public enum LevelSubjectCode {
     TH("th", "TerHist"), // Tertiary History
     TL("tl", "TerLit"), // Tertiary Literature
     TM("tm", "TerMath"), // Tertiary Math
-    TP("tp", "TerPhy"); // Tertiary Physics
+    TP("tp", "TerPhy"), // Tertiary Physics
+    INVALID("Invalid", "Invalid");
 
     public final String subCode;
     public final String label;
@@ -52,12 +51,12 @@ public enum LevelSubjectCode {
      * @param subCode Tag from user input.
      * @return Label corresponding to the Tag.
      */
-    public static String getLabel(String subCode) throws ParseException {
+    public static String getLabel(String subCode) {
         for (LevelSubjectCode x : values()) {
             if (x.subCode.equalsIgnoreCase(subCode)) {
                 return x.label;
             }
         }
-        throw new ParseException(Tag.INVALID_TAG);
+        return INVALID.label;
     }
 }
