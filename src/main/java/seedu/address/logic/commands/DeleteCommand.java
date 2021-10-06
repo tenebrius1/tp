@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
 
     private final Index targetIndex;
-
     private final PersonType personType;
 
     /**

@@ -152,10 +152,6 @@ public class ParserUtil {
         String formattedString = args.replaceAll("\\s{2,}", " ").trim();
         String[] parsedString = formattedString.split(" ");
         String personType = (String) Array.get(parsedString, 1);
-        try {
-            return PersonType.detectPersonType(personType);
-        } catch (ParseException e) {
-            throw e;
-        }
+        return PersonType.detectPersonType(personType);
     }
 }
