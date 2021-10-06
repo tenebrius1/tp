@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -38,8 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_QUALIFICATION_BOB = "0";
     public static final String VALID_TAG_PM = "PM";
     public static final String VALID_TAG_TP = "TP";
-    public static final String VALID_TAG_PM_LABEL = "PriMath";
-    public static final String VALID_TAG_TP_LABEL = "TerPhy";
+    public static final String VALID_TAG_TP_UNCAPITALIZED = "tp";
     public static final PersonType VALID_TUTOR_TYPE = PersonType.TUTOR;
     public static final PersonType VALID_STUDENT_TYPE = PersonType.STUDENT;
 
@@ -50,13 +49,15 @@ public class CommandTestUtil {
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String QUALIFICATION_DESC_BOB = " " + PREFIX_QUALIFICATION + VALID_QUALIFICATION_BOB;
+    public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + VALID_TAG_TP;
     public static final String TAG_DESC_PM = " " + PREFIX_TAG + VALID_TAG_PM;
     public static final String TAG_DESC_TP = " " + PREFIX_TAG + VALID_TAG_TP;
+    public static final String TAG_DESC_UNCAPITALIZED = " " + PREFIX_TAG + VALID_TAG_TP_UNCAPITALIZED;
 
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Z"; // 'Z' not allowed in gender
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "P*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE"; //  invalid tag, does not correspond with LevelSubjectCode
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -68,11 +69,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_PM_LABEL).build();
+                .withTags(VALID_TAG_PM).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB)
-                .withTags(VALID_TAG_PM_LABEL, VALID_TAG_TP_LABEL).build();
+                .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
     }
 
     /**

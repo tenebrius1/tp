@@ -20,6 +20,7 @@ public class TutorBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_QUALIFICATION = "3";
+    public static final String DEFAULT_TAG = "PM";
 
     private Name name;
     private Phone phone;
@@ -36,6 +37,7 @@ public class TutorBuilder {
         gender = new Gender(DEFAULT_GENDER);
         qualification = new Qualification(DEFAULT_QUALIFICATION);
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_TAG));
     }
 
     /**
