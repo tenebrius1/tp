@@ -66,12 +66,12 @@ public class AddCommandTest {
         ModelStub modelStubStudent = new ModelStubWithStudent(validStudent);
 
         // Check for duplicate tutor
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TUTOR,
-                () -> addCommandTutor.execute(modelStubTutor));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TUTOR, () ->
+                addCommandTutor.execute(modelStubTutor));
 
         // Check for duplicate student
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT,
-                () -> addCommandStudent.execute(modelStubStudent));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+                addCommandStudent.execute(modelStubStudent));
     }
 
     @Test

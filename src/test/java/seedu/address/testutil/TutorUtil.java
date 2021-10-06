@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Tutor;
-import seedu.address.model.tag.Tag;
-
-import java.util.Set;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Tutor.
@@ -35,7 +35,7 @@ public class TutorUtil extends PersonUtil {
         sb.append(PREFIX_GENDER + tutor.getGender().genderSymbol + " ");
         sb.append(PREFIX_QUALIFICATION + tutor.getQualification().index + " ");
         tutor.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

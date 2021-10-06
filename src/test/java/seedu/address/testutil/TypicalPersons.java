@@ -24,15 +24,9 @@ import seedu.address.model.person.Tutor;
 public class TypicalPersons {
 
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
-            .withGender("F")
-            .withPhone("94351253")
-            .withQualification("0")
-            .withTags("PM").build();
+            .withGender("F").withPhone("94351253").withQualification("0").withTags("PM").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
-            .withGender("M")
-            .withPhone("98765432")
-            .withQualification("1")
-            .withTags("SM", "SC").build();
+            .withGender("M").withPhone("98765432").withQualification("1").withTags("SM", "SC").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withGender("M").withQualification("2").withTags("TL", "TE").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -49,6 +43,18 @@ public class TypicalPersons {
             .withGender("M").withQualification("2").withTags("TG, TL").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withGender("F").withTag("PE").build();
+
+    // Manually added - Students with similar names
+    public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("9482423")
+            .withGender("M").withTag("SC").build();
+    public static final Student JOHN_P = new StudentBuilder().withName("Johnathan Prue")
+            .withPhone("9482452").withGender("M").withTag("TP").build();
+
+    // Manually added - Tutors with similar names
+    public static final Tutor DON_A = new TutorBuilder().withName("Don Archie").withPhone("95398563")
+            .withGender("M").withQualification("2").withTags("TL", "TE").build();
+    public static final Tutor DON_E = new TutorBuilder().withName("Don Ethel").withPhone("95462563")
+            .withGender("M").withQualification("3").withTags("TP", "SC").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -75,11 +81,33 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getTypicalAddressBookWithSimilarNames() {
+        AddressBook ab = new AddressBook();
+        for (Tutor tutor : getTutorsWithSimilarNames()) {
+            ab.addTutor(tutor);
+        }
+        for (Student student : getStudentsWithSimilarNames()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
     public static List<Tutor> getTypicalTutors() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL));
     }
 
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Tutor> getTutorsWithSimilarNames() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DON_A, DON_E));
+    }
+
+    public static List<Student> getStudentsWithSimilarNames() {
+        return new ArrayList<>(Arrays.asList(DANIEL, ELLE, FIONA, GEORGE, JOHN_P, JOHN_R));
     }
 }

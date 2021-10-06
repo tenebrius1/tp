@@ -7,9 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +23,14 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
+import seedu.address.testutil.TutorBuilder;
+import seedu.address.testutil.TutorUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +38,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Tutor tutor = new TutorBuilder().build();
+        Student student = new StudentBuilder().build();
+
+        AddCommand commandTutor = (AddCommand) parser.parseCommand(TutorUtil.getAddCommand(tutor));
+        AddCommand commandStudent = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+
+        assertEquals(new AddCommand(tutor, PersonType.TUTOR), commandTutor);
+        assertEquals(new AddCommand(student, PersonType.STUDENT), commandStudent);
     }
 
     @Test
@@ -48,9 +56,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteCommand commandTutor = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " t " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR), commandTutor);
+        DeleteCommand commandStudent = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " s " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT), commandStudent);
     }
 
     @Test
@@ -69,11 +80,33 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+    public void parseCommand_find_student() throws Exception {
+        List<String> keywords = List.of("foo");
+
+        // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + "s n/" + String.join(" ", keywords));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
+
+        // Test COMMAND_ALIAS
+        command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_ALIAS + "s n/" + String.join(" ", keywords));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
+    }
+
+    @Test
+    public void parseCommand_find_tutor() throws Exception {
+        List<String> keywords = List.of("foo");
+
+        // Test COMMAND_WORD
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + "t n/" + String.join(" ", keywords));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
+
+        // Test COMMAND_ALIAS
+        command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_ALIAS + "t n/" + String.join(" ", keywords));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
     }
 
     @Test
