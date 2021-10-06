@@ -37,8 +37,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added: %1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added: %1$s";
     public static final String MESSAGE_TOO_MANY_TAGS = "Students can only have 1 tag.";
-    public static final String MESSAGE_DUPLICATE_TUTOR = "This person already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
     private final Person toAdd;
     private final PersonType personType;
