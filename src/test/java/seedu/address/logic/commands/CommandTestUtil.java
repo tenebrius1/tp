@@ -22,7 +22,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.EditTutorDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_TP_UNCAPITALIZED = "tp";
     public static final PersonType VALID_TUTOR_TYPE = PersonType.TUTOR;
     public static final PersonType VALID_STUDENT_TYPE = PersonType.STUDENT;
+    public static final String VALID_STUDENT_LETTER = "s";
+    public static final String VALID_TUTOR_LETTER = "t";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,17 +66,20 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY;
+    public static final EditCommand.EditTutorDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        // Amy is a Student
+        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withGender(VALID_GENDER_AMY)
                 .withTags(VALID_TAG_PM).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        // Bob is a Tutor
+        DESC_BOB = new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB)
+                .withQualification(VALID_QUALIFICATION_BOB)
                 .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
     }
 

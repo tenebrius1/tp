@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
-    private Tag tag;
+    private final Tag tag;
 
     /**
      * Every field must be present and not null.

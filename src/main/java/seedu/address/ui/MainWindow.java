@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +18,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -112,7 +117,15 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         // Note: getFilteredPersonList() no longer exists.
         // TODO: Replace with getFilteredStudentList() or getFilteredTutorList() depending on which list you want.
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        // Lines below temporarily combines tutors and students into a single list for compilation
+        // Temp changes start
+        ObservableList<Tutor> tutorList = logic.getFilteredTutorList();
+        ObservableList<Student> studentList = logic.getFilteredStudentList();
+        ObservableList<Person> tempList = FXCollections.observableArrayList();
+        tempList.addAll(studentList);
+        tempList.addAll(tutorList);
+        personListPanel = new PersonListPanel(tempList); // this line's original argument was replaced with tempList
+        // Temp changes end
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

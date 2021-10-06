@@ -15,18 +15,18 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.EditTutorDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 import seedu.address.testutil.TutorBuilder;
@@ -66,11 +66,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        Tutor tutor = new TutorBuilder().build();
+        Student student = new StudentBuilder().build();
+
+        EditTutorDescriptor tutorDescriptor = new EditTutorDescriptorBuilder(tutor).build();
+        EditStudentDescriptor studentDescriptor = new EditStudentDescriptorBuilder(student).build();
+
+        EditCommand commandTutor = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " t "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + TutorUtil.getEditTutorDescriptorDetails(tutorDescriptor));
+        EditCommand commandStudent = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " s "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(studentDescriptor));
+
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, tutorDescriptor, PersonType.TUTOR), commandTutor);
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, studentDescriptor, PersonType.STUDENT), commandStudent);
     }
 
     @Test
