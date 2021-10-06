@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
@@ -9,13 +7,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
@@ -83,5 +82,4 @@ public class StudentTest {
         editedDaniel = new StudentBuilder(DANIEL).withTag(VALID_TAG_PM).build();
         assertFalse(DANIEL.equals(editedDaniel));
     }
-    
 }
