@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -36,13 +38,16 @@ public class CommandTestUtil {
     public static final String VALID_QUALIFICATION_BOB = "0";
     public static final String VALID_TAG_PM = "PM";
     public static final String VALID_TAG_TP = "TP";
+    public static final PersonType VALID_TUTOR_TYPE = PersonType.TUTOR;
+    public static final PersonType VALID_STUDENT_TYPE = PersonType.STUDENT;
 
-    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
-    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
+    public static final String QUALIFICATION_DESC_BOB = " " + PREFIX_QUALIFICATION + VALID_QUALIFICATION_BOB;
     public static final String TAG_DESC_PM = " " + PREFIX_TAG + VALID_TAG_PM;
     public static final String TAG_DESC_TP = " " + PREFIX_TAG + VALID_TAG_TP;
 
