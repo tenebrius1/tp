@@ -1,26 +1,104 @@
-# {{CLI}}Tutors User Guide
+---
+layout: page
+title: User Guide
+---
 
-**`{{CLI}}Tutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `{{CLI}}Tutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
-The application supports matching the following levels of education:
+The application supports the following level of education and subjects as shown in table below.
 
-- **P**rimary
-- **S**econdary
-- **T**ertiary
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Education Level</th>
+            <th style="text-align:center">Subjects</th>
+            <th style="text-align:center">Tag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=3><b>P</b>rimary</td>
+            <td><b>E</b>nglish</td>
+            <td style="text-align:center"><b>PE</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>PM</b></td>
+        </tr>
+        <tr>
+            <td><b>S</b>cience</td>
+            <td style="text-align:center"><b>PS</b></td>
+        </tr>
+        <tr>
+        <td rowspan=8><b>S</b>econdary</td>
+            <td><b>B</b>iology</td>
+            <td style="text-align:center"><b>SB</b></td>
+        </tr>
+        <tr>
+            <td><b>C</b>hemistry</td>
+            <td style="text-align:center"><b>SC</b></td>
+        </tr>
+        <tr>
+            <td><b>E</b>nglish</td>
+            <td style="text-align:center"><b>SE</b></td>
+        </tr>
+        <tr>
+            <td><b>G</b>eography</td>
+            <td style="text-align:center"><b>SG</b></td>
+        </tr>
+        <tr>
+            <td><b>H</b>istory</td>
+            <td style="text-align:center"><b>SH</b></td>
+        </tr>
+        <tr>
+            <td><b>L</b>iterature</td>
+            <td style="text-align:center"><b>SL</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>SM</b></td>
+        </tr>
+        <tr>
+            <td><b>P</b>hysics</td>
+            <td style="text-align:center"><b>SP</b></td>
+        </tr>
+        <tr>
+            <td rowspan=8><b>T</b>ertiary</td>
+            <td><b>B</b>iology</td>
+            <td style="text-align:center"><b>TB</b></td>
+        </tr>
+        <tr>
+            <td><b>C</b>hemistry</td>
+            <td style="text-align:center"><b>TC</b></td>
+        </tr>
+        <tr>
+            <td><b>E</b>conomics</td>
+            <td style="text-align:center"><b>TE</b></td>
+        </tr>
+        <tr>
+            <td><b>G</b>eography</td>
+            <td style="text-align:center"><b>TG</b></td>
+        </tr>
+        <tr>
+            <td><b>H</b>istory</td>
+            <td style="text-align:center"><b>TH</b></td>
+        </tr>
+        <tr>
+            <td><b>L</b>iterature</td>
+            <td style="text-align:center"><b>TL</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>TM</b></td>
+        </tr>
+        <tr>
+            <td><b>P</b>hysics</td>
+            <td style="text-align:center"><b>TP</b></td>
+        </tr>
+    </tbody>
+</table>
 
-And the following subjects:
-
-- Math and Sciences
-    - **P**hysics
-    - **C**hemistry
-    - **B**iology
-    - **M**athematics
-
-- Humanities
-    - **H**istory
-    - **G**eography
-    - **L**iterature
-    - **E**conomics
+`Tag` is dervived from [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.
 
 Here are the possible categories of qualifications for tutors:
 
@@ -31,26 +109,13 @@ Here are the possible categories of qualifications for tutors:
     - `3`: MOE-Trained
 
 ## Table of Contents
-- [Quick Start](#Quick-Start)
-- [Features](#Features)
-    - [Viewing help: `help`](#Viewing-help-help)
-    - [Getting interactive help: `ihelp`](#Getting-interactive-help-ihelp)
-    - [Adding a tutor/student: `add`](#Adding-a-tutorstudent-add)
-    - [Deleting a tutor/student: `delete`](#Deleting-a-tutorstudent-delete)
-    - [Editing a tutor/student's particulars: `edit`](#Editing-a-tutorstudent%E2%80%99s-particulars-edit)
-    - [Listing all tutors/students: `list`](#Listing-all-tutorsstudents-list)
-    - [Finding a tutor/student: `find`](#Finding-a-tutorstudent-find)
-    - [Clearing all entries: `clear`](#Clearing-all-entries-clear)
-    - [Exiting the program: `exit`](#Exiting-the-program-exit)
-    - [Saving the data](#Saving-the-data)
-    - [Editing the data file](#Editing-the-data-file)
-- [Command summary](#Command-summary)
-<!-- - [FAQ](#FAQ) -->
+* Table of Contents
+{:toc}
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `{{CLI}}Tutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
+2. Download the latest `CLITutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
@@ -89,17 +154,19 @@ Here are the possible categories of qualifications for tutors:
 - Tags are denoted by `t/[Level][Subject]`. <br>
   e.g. The tag t/PM stands for Primary Math.
 
+- Editing information of any `Person` will override the current information stored about the specified `Person`.
+
 - Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
   e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 </div>
 
 ### Viewing help: `help`
 
-Shows a message with all the commands available to use on `{{CLI}}Tutors`.
+Shows a message with all the commands available to use on `CLITutors`.
 
 ### Getting interactive help: `ihelp`
 
-Starts the interactive tutorial done by Zi Hao to introduce new users to `{{CLI}}Tutors`.
+Starts the interactive tutorial done by Zi Hao to introduce new users to `CLITutors`.
 
 ### Adding a tutor/student: `add`
 
@@ -134,10 +201,11 @@ Examples:<br>
 Edits a tutor/student's personal particulars from the data.
 
 Format:<br>
-`edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`<br>
+`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`
 
 Example:<br>
-`edit 0 n/Karina Nabay g/F`
+`edit s 0 n/Karina Nabay g/F` to edit student.
 
 ### Listing all tutors/students: `list`
 
@@ -147,12 +215,23 @@ Format: <br>`list`
 
 ### Finding a tutor/student: `find`
 
-Finds a tutor/student whose names or contact numbers contain any of the given keywords.
+Find a tutor/student by name.
 
-Format: <br>`find KEYWORD`
+Format: <br>
+`find t n/NAME` <br>
+`find s n/NAME`
 
 Example:<br>
-`find Cheese`
+`find t n/John Cheese`
+
+### Matching a student to tutor(s): `match`
+
+Find tutor(s) who teaches the subject that the student wants.
+
+Format: <br>`match INDEX`
+
+Example:<br>
+`match 1`
 
 ### Clearing all entries: `clear`
 
@@ -168,14 +247,14 @@ Format: <br>`exit`
 
 ### Saving the data
 
-`{{CLI}}Tutors` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+`CLITutors` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-`{{CLI}}Tutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`CLITutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-❗<b>Caution:</b> If your changes to the data file makes its format invalid, `{{CLI}}Tutors` will discard all data and start with an empty data file at the next run.
+❗<b>Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
 </div>
 
 ## Command summary
@@ -185,9 +264,10 @@ Format: <br>`exit`
 |  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br> e.g. `edit 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list`           |
-|  **Find**  | `find KEYWORD` <br> e.g. `find John`  |
+|  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
+| **Match**  | `match INDEX` <br> e.g. `match 1`          |
 | **Clear**  | `clear`          |
 |  **Exit**  | `exit`           |
 
