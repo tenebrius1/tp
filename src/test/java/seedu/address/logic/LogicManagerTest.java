@@ -11,8 +11,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM_LABEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP_LABEL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -89,8 +94,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + QUALIFICATION_DESC_BOB + TAG_DESC_PM + TAG_DESC_TP;
-        Tutor expectedTutor = new TutorBuilder().withTags(TAG_DESC_PM, TAG_DESC_TP).build();
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+        Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTutor(expectedTutor);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
