@@ -30,15 +30,11 @@ public class ParserUtil {
      */
     public static PersonType parsePersonType(String args) throws ParseException {
         // Allows for command to be valid even with multiple whitespaces within the command.
-        // For e.g. "add      t   n/..." will be a valid command read as "add t n/...".
+        // For e.g. "add    t   n/..." will be a valid command read as "add t n/...".
         String formattedString = args.replaceAll("\\s{2,}", " ").trim();
         String[] parsedString = formattedString.split(" ");
         String personType = (String) Array.get(parsedString, 1);
-        try (PersonType.detectPersonType(personType)) {
-            return detectPersonType(personType);
-        } catch (ParseException e) {
-            throw e;
-        }
+        return PersonType.detectPersonType(personType);
     }
 
     /**
@@ -139,19 +135,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses {@code String args} and extracts out the type of Person (Tutor/Student).
-     *
-     * @return Returns the string at the index of args.
-     */
-    public static PersonType parsePersonType(String args) throws ParseException {
-        // Allows for command to be valid even with multiple whitespaces within the command.
-        // For e.g. "add    t   n/..." will be a valid command read as "add t n/...".
-        String formattedString = args.replaceAll("\\s{2,}", " ").trim();
-        String[] parsedString = formattedString.split(" ");
-        String personType = (String) Array.get(parsedString, 1);
-        return PersonType.detectPersonType(personType);
     }
 }

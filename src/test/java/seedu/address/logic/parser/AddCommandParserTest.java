@@ -11,17 +11,17 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -81,7 +81,7 @@ public class AddCommandParserTest {
                 + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple genders - last gender accepted
-        assertParseSuccess(parser,  VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
                 + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // one tag - accepted

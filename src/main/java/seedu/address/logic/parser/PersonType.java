@@ -19,7 +19,7 @@ public enum PersonType {
      * @return The appropriate PersonType.
      * @throws ParseException If personType != "s" or "t" (Case-insensitive)
      */
-    public PersonType detectPersonType(String personType) throws ParseException {
+    public static PersonType detectPersonType(String personType) throws ParseException {
         personType = personType.toLowerCase();
         if (personType.equals("t")) {
             return PersonType.TUTOR;

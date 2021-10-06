@@ -33,23 +33,44 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the person in the {@code model}'s person list.
+     * Returns the middle index of the person in the {@code model}'s student list.
      */
-    public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+    public static Index getStudentMidIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredStudentList().size() / 2);
     }
 
     /**
-     * Returns the last index of the person in the {@code model}'s person list.
+     * Returns the middle index of the person in the {@code model}'s tutor list.
      */
-    public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+    public static Index getTutorMidIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredTutorList().size() / 2);
     }
 
     /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
+     * Returns the last index of the person in the {@code model}'s student list.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Index getStudentLastIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredStudentList().size());
+    }
+
+    /**
+     * Returns the last index of the person in the {@code model}'s tutor list.
+     */
+    public static Index getTutorLastIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredTutorList().size());
+    }
+
+    /**
+     * Returns the person in the {@code model}'s student list at {@code index}.
+     */
+    public static Person getStudent(Model model, Index index) {
+        return model.getFilteredStudentList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the person in the {@code model}'s tutor list at {@code index}.
+     */
+    public static Person getTutor(Model model, Index index) {
+        return model.getFilteredTutorList().get(index.getZeroBased());
     }
 }

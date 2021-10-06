@@ -23,8 +23,14 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
+import seedu.address.testutil.TutorBuilder;
+import seedu.address.testutil.TutorUtil;
 
 public class AddressBookParserTest {
 
@@ -32,9 +38,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Tutor tutor = new TutorBuilder().build();
+        Student student = new StudentBuilder().build();
+
+        AddCommand commandTutor = (AddCommand) parser.parseCommand(TutorUtil.getAddCommand(tutor, PersonType.TUTOR));
+        AddCommand commandStudent = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(tutor,
+                PersonType.STUDENT));
+
+        assertEquals(new AddCommand(tutor, PersonType.TUTOR), commandTutor);
+        assertEquals(new AddCommand(tutor, PersonType.STUDENT), commandStudent);
     }
 
     @Test
@@ -45,9 +57,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteCommand commandTutor = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " t " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR), commandTutor);
+        DeleteCommand commandStudent = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " s " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT), commandStudent);
     }
 
     @Test
