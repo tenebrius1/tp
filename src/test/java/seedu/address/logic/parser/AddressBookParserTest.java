@@ -41,10 +41,8 @@ public class AddressBookParserTest {
         Tutor tutor = new TutorBuilder().build();
         Student student = new StudentBuilder().build();
 
-        AddCommand commandTutor = (AddCommand) parser.parseCommand(TutorUtil.getAddCommand(tutor,
-                PersonType.TUTOR));
-        AddCommand commandStudent = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student,
-                PersonType.STUDENT));
+        AddCommand commandTutor = (AddCommand) parser.parseCommand(TutorUtil.getAddCommand(tutor));
+        AddCommand commandStudent = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
 
         assertEquals(new AddCommand(tutor, PersonType.TUTOR), commandTutor);
         assertEquals(new AddCommand(student, PersonType.STUDENT), commandStudent);

@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.parser.PersonType;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -22,7 +21,7 @@ public class TutorUtil extends PersonUtil {
     /**
      * Returns an add command string for adding the {@code tutor}.
      */
-    public static String getAddCommand(Tutor tutor, PersonType personType) {
+    public static String getAddCommand(Tutor tutor) {
         return AddCommand.COMMAND_WORD + " " + getTutorDetails(tutor);
     }
 
