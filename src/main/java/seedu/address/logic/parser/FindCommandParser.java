@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Extracts the name to search for in FindCommand.
      *
      * @return The extracted Name
-     * @throws ParseException If the {@code /n} token is missing
+     * @throws ParseException If the {@code n/} token is missing
      */
     private Name extractName(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
