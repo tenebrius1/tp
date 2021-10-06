@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         PersonType personType = ParserUtil.parsePersonType(args);
         switch (personType) {
-        case PersonType.TUTOR:
+        case TUTOR:
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                             PREFIX_QUALIFICATION, PREFIX_TAG);
@@ -54,8 +54,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Tutor tutor = new Tutor(name, phone, gender, qualification, tagList);
             return new AddCommand(tutor, PersonType.TUTOR);
-            break;
-        case PersonType.STUDENT:
+            // No break necessary due to return statement
+        case STUDENT:
             argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                     PREFIX_QUALIFICATION, PREFIX_TAG);
 
@@ -80,7 +80,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Student student = new Student(name, phone, gender, tag);
             return new AddCommand(student, PersonType.STUDENT);
-            break;
+            // No break necessary due to return statement
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
