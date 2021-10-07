@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.PersonType.STUDENT;
+import static seedu.address.logic.parser.PersonType.TUTOR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 
@@ -83,48 +85,71 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (personType.equals(PersonType.TUTOR)) {
-            List<Tutor> lastShownList = model.getFilteredTutorList();
+        switch(personType) {
+        case TUTOR:
+            return executeEditTutor(model);
+            // No break necessary due to return statement
+        case STUDENT:
+            return executeEditStudent(model);
+            // No break necessary due to return statement
+        default:
+            // Any invalid input would be handled by the EditCommandParser and will not reach here
+            throw new CommandException(MESSAGE_USAGE);
+        }
+    }
 
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
-            }
+    /**
+     * Executes an edit tutor command.
+     *
+     * @param model Model to edit tutor in.
+     * @return A successful CommandResult with the edited tutor.
+     * @throws CommandException An exception that occurs when editing tutors.
+     */
+    private CommandResult executeEditTutor(Model model) throws CommandException {
+        List<Tutor> lastShownList = model.getFilteredTutorList();
 
-            Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
-            Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
-
-            if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
-            }
-
-            model.setTutor(tutorToEdit, editedTutor);
-            model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
-
-            return new CommandResult(String.format(MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor));
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         }
 
-        if (personType.equals(PersonType.STUDENT)) {
-            List<Student> lastShownList = model.getFilteredStudentList();
+        Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
+        Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-            }
-
-            Student studentToEdit = lastShownList.get(index.getZeroBased());
-            Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
-
-            if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-            }
-
-            model.setStudent(studentToEdit, editedStudent);
-            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-
-            return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
         }
 
-        // Any invalid input would be handled by the EditCommandParser and will not reach here
-        throw new CommandException(MESSAGE_USAGE);
+        model.setTutor(tutorToEdit, editedTutor);
+        model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
+
+        return new CommandResult(String.format(MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor));
+    }
+
+    /**
+     * Executes an edit student command.
+     *
+     * @param model Model to edit student in.
+     * @return A successful CommandResult with the edited student.
+     * @throws CommandException An exception that occurs when editing students.
+     */
+    private CommandResult executeEditStudent(Model model) throws CommandException {
+        List<Student> lastShownList = model.getFilteredStudentList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
+
+        if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
+        model.setStudent(studentToEdit, editedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
     /**
