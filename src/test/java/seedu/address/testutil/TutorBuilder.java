@@ -46,6 +46,7 @@ public class TutorBuilder {
         name = tutorToCopy.getName();
         phone = tutorToCopy.getPhone();
         gender = tutorToCopy.getGender();
+        qualification = tutorToCopy.getQualification();
         tags = new HashSet<>(tutorToCopy.getTags());
     }
 
@@ -92,5 +93,4 @@ public class TutorBuilder {
     public Tutor build() {
         return new Tutor(name, phone, gender, qualification, tags);
     }
-
 }

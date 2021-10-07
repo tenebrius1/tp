@@ -20,7 +20,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.TutorBuilder;
 
 public class UniqueTutorListTest {
-
     private final UniqueTutorList uniqueTutorList = new UniqueTutorList();
 
     @Test
@@ -167,5 +166,4 @@ public class UniqueTutorListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueTutorList.asUnmodifiableObservableList().remove(0));
     }
-
 }
