@@ -36,6 +36,7 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_QUALIFICATION_BOB = "0";
+    public static final String VALID_QUALIFICATION_UNIVERSITY_STUDENT = "1";
     public static final String VALID_TAG_PM = "PM";
     public static final String VALID_TAG_TP = "TP";
     public static final String VALID_TAG_TP_UNCAPITALIZED = "tp";

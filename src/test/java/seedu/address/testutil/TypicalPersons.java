@@ -19,7 +19,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Tutor} and {@code Student} objects to be used in tests.
  */
 public class TypicalPersons {
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
@@ -55,7 +55,7 @@ public class TypicalPersons {
     public static final Tutor DON_E = new TutorBuilder().withName("Don Ethel").withPhone("95462563")
             .withGender("M").withQualification("3").withTags("TP", "SC").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Student/Tutor details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withGender(VALID_GENDER_AMY).withTag(VALID_TAG_TP).build();
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)

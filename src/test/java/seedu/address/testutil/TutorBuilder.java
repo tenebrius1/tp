@@ -93,5 +93,4 @@ public class TutorBuilder {
     public Tutor build() {
         return new Tutor(name, phone, gender, qualification, tags);
     }
-
 }

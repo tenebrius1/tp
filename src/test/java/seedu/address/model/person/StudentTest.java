@@ -54,8 +54,8 @@ public class StudentTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Student aliceCopy = new StudentBuilder(DANIEL).build();
-        assertEquals(DANIEL, aliceCopy);
+        Student danielCopy = new StudentBuilder(DANIEL).build();
+        assertEquals(DANIEL, danielCopy);
 
         // same object -> returns true
         assertEquals(DANIEL, DANIEL);
