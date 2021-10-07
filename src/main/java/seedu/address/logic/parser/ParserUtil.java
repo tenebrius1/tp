@@ -34,7 +34,7 @@ public class ParserUtil {
         // For e.g. "add    t   n/..." will be a valid command read as "add t n/...".
         String formattedString = args.replaceAll("\\s{2,}", " ").trim();
         String[] parsedString = formattedString.split(" ");
-        String personType = (String) Array.get(parsedString, 1);
+        String personType = (String) Array.get(parsedString, 0);
         return PersonType.detectPersonType(personType);
     }
 
