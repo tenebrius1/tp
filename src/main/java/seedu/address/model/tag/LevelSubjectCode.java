@@ -59,4 +59,19 @@ public enum LevelSubjectCode {
         }
         return INVALID.label;
     }
+
+    /**
+     * Returns subCode that corresponds to the Label given.
+     *
+     * @param label Tag name.
+     * @return SubCode corresponding to the Tag.
+     */
+    public static String getSubCode(String label) {
+        for (LevelSubjectCode x : values()) {
+            if (x.label.equalsIgnoreCase(label)) {
+                return x.subCode;
+            }
+        }
+        return INVALID.subCode;
+    }
 }

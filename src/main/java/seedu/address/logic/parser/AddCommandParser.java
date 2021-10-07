@@ -42,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                     PREFIX_QUALIFICATION, PREFIX_TAG)
-                    || !argMultimap.getPreamble().isEmpty()) {
+                    || argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
@@ -60,9 +60,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                     PREFIX_QUALIFICATION, PREFIX_TAG);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                    PREFIX_QUALIFICATION, PREFIX_TAG)
-                    || !argMultimap.getPreamble().isEmpty()) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG)
+                    || argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 

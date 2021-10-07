@@ -40,7 +40,7 @@ public class TypicalPersons {
 
     // Manually added
     public static final Tutor HOON = new TutorBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withGender("M").withQualification("2").withTags("TG, TL").build();
+            .withGender("M").withQualification("2").withTags("TG", "TL").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withGender("F").withTag("PE").build();
 

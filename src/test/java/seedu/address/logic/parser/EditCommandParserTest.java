@@ -27,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.PersonType.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -55,16 +56,17 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_STUDENT_LETTER + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " 1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " 1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, VALID_TUTOR_LETTER + "", MESSAGE_INVALID_FORMAT);
 
-        // no student or tutor letter specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        // no student or tutor letter specified, since the very first thing we check for Edit command is the
+        // type of person, Error message should correspond to error of invalid personType
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_PERSON_TYPE);
     }
 
     @Test

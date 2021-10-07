@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
 
@@ -12,7 +13,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        this.keywords = keywords.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
     }
 
     @Override
