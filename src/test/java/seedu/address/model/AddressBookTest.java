@@ -27,7 +27,6 @@ import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
 public class AddressBookTest {
-
     private final AddressBook addressBook = new AddressBook();
 
     @Test
@@ -140,5 +139,4 @@ public class AddressBookTest {
             return students;
         }
     }
-
 }

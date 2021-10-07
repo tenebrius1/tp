@@ -1,11 +1,14 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -52,34 +55,34 @@ public class StudentTest {
     public void equals() {
         // same values -> returns true
         Student aliceCopy = new StudentBuilder(DANIEL).build();
-        assertTrue(DANIEL.equals(aliceCopy));
+        assertEquals(DANIEL, aliceCopy);
 
         // same object -> returns true
-        assertTrue(DANIEL.equals(DANIEL));
+        assertEquals(DANIEL, DANIEL);
 
         // null -> returns false
-        assertFalse(DANIEL.equals(null));
+        assertNotEquals(null, DANIEL);
 
         // different type -> returns false
-        assertFalse(DANIEL.equals(5));
+        assertNotEquals(5, DANIEL);
 
         // different student -> returns false
-        assertFalse(DANIEL.equals(AMY));
+        assertNotEquals(DANIEL, AMY);
 
         // different name -> returns false
         Student editedDaniel = new StudentBuilder(DANIEL).withName(VALID_NAME_AMY).build();
-        assertFalse(DANIEL.equals(editedDaniel));
+        assertNotEquals(DANIEL, editedDaniel);
 
         // different phone -> returns false
         editedDaniel = new StudentBuilder(DANIEL).withPhone(VALID_PHONE_AMY).build();
-        assertFalse(DANIEL.equals(editedDaniel));
+        assertNotEquals(DANIEL, editedDaniel);
 
         // different gender -> returns false
         editedDaniel = new StudentBuilder(DANIEL).withGender(VALID_GENDER_AMY).build();
-        assertFalse(DANIEL.equals(editedDaniel));
+        assertNotEquals(DANIEL, editedDaniel);
 
         // different tags -> returns false
-        editedDaniel = new StudentBuilder(DANIEL).withTag(VALID_TAG_PM).build();
-        assertFalse(DANIEL.equals(editedDaniel));
+        editedDaniel = new StudentBuilder(DANIEL).withTag(VALID_TAG_TP).build();
+        assertNotEquals(DANIEL, editedDaniel);
     }
 }

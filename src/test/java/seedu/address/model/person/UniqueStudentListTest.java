@@ -20,7 +20,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.StudentBuilder;
 
 public class UniqueStudentListTest {
-
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
 
     @Test
