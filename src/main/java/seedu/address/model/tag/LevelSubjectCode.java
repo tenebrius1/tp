@@ -61,7 +61,7 @@ public enum LevelSubjectCode {
     }
 
     /**
-     * Returns subCode that corresponds to the Label given.
+     * Returns SubCode that corresponds to the Label given.
      *
      * @param label Tag name.
      * @return SubCode corresponding to the Tag.

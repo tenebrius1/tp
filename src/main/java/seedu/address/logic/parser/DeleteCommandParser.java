@@ -20,6 +20,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             String trimmed = args.trim();
             String[] split = trimmed.split(" ");
+            if (split.length > 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
             // If personType or index not given, it is an invalid command format. ArrayIndexOutOfBoundsException
             // will be thrown by these lines below but we catch it and throw a ParseException
             Index index = ParserUtil.parseIndex(split[1]);

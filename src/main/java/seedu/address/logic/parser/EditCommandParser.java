@@ -52,15 +52,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
     }
 
-    private EditCommand parsePerson(ArgumentMultimap argMultimap, EditCommand.EditPersonDescriptor editPersonDescriptor, PersonType personType) throws
-            ParseException {
+    private EditCommand parsePerson(ArgumentMultimap argMultimap, EditCommand.EditPersonDescriptor editPersonDescriptor,
+                                    PersonType personType) throws ParseException {
         Index personIndex;
 
         try {
             String trimmed = argMultimap.getPreamble().trim();
             String[] split = trimmed.split(" ", 3);
             // If personType or index not given, it is an invalid command format. ArrayIndexOutOfBoundsException
-            // will be thrown by these lines below but we catch it and throw a ParseException
+            // will be thrown by these lines below, but we catch it and throw a ParseException
             if (split.length != 3) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
@@ -78,7 +78,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
-        if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent() && personType.equals(PersonType.TUTOR)) {
+        if (personType.equals(PersonType.TUTOR) && argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
             EditTutorDescriptor x = (EditTutorDescriptor) editPersonDescriptor;
             x.setQualification(ParserUtil.parseQualification(
                     argMultimap.getValue(PREFIX_QUALIFICATION).get()));

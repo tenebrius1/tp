@@ -71,31 +71,32 @@ public class AddCommandParserTest {
 
         // Check that tags are case-insensitive
         assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
+                + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tag prefixes - tags in latest tag prefix accepted
         Person expectedTutorMultipleTagPrefixes = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
         assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTagPrefixes, VALID_TUTOR_TYPE));
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM + TAG_DESC_TP,
+                new AddCommand(expectedTutorMultipleTagPrefixes, VALID_TUTOR_TYPE));
 
         // multiple tag arguments - all arguments for tag prefix accepted
         Person expectedTutorMultipleTags = new TutorBuilder(BOB).withTags(VALID_TAG_TP, VALID_TAG_PM)
                 .build();
         assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
+                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
 
         //Tests for students
         // multiple names - last name accepted
         assertParseSuccess(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+                + GENDER_DESC_AMY + TAG_DESC_PM, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+                + GENDER_DESC_AMY + TAG_DESC_PM, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
+                + GENDER_DESC_AMY + TAG_DESC_PM, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // one tag - accepted
         Student expectedStudentOneTag = new StudentBuilder(AMY).withTag(VALID_TAG_TP).build();
