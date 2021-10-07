@@ -1,10 +1,14 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -14,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.TutorBuilder;
 
 public class TutorTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Tutor tutor = new TutorBuilder().build();
@@ -50,6 +53,8 @@ public class TutorTest {
 
     @Test
     public void equals() {
+        String alternateQualification = "1";
+
         // same values -> returns true
         Tutor aliceCopy = new TutorBuilder(ALICE).build();
         assertEquals(ALICE, aliceCopy);
@@ -79,11 +84,11 @@ public class TutorTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different qualification -> returns false
-        // editedAlice = new TutorBuilder(ALICE).withQualification(VALID_QUALIFICATION_BOB).build();
-        // assertNotEquals(ALICE, editedAlice);
+        editedAlice = new TutorBuilder(ALICE).withQualification(alternateQualification).build();
+        assertNotEquals(ALICE, editedAlice);
 
         // different tags -> returns false
-        // editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_PM).build();
-        // assertNotEquals(ALICE, editedAlice);
+        editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_TP).build();
+        assertNotEquals(ALICE, editedAlice);
     }
 }
