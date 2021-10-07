@@ -11,17 +11,19 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UNCAPITALIZED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -65,11 +67,20 @@ public class AddCommandParserTest {
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
                 + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
-        // multiple tags - all accepted
+        // Check that tags are case-insensitive
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
+
+        // multiple tag prefixes - tags in latest tag prefix accepted
+        Person expectedTutorMultipleTagPrefixes = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
+        assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTagPrefixes, VALID_TUTOR_TYPE));
+
+        // multiple tag arguments - all arguments for tag prefix accepted
         Person expectedTutorMultipleTags = new TutorBuilder(BOB).withTags(VALID_TAG_TP, VALID_TAG_PM)
                 .build();
         assertParseSuccess(parser, VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
+                + TAG_DESC_PM_TP, new AddCommand(expectedTutorMultipleTags, VALID_TUTOR_TYPE));
 
         //Tests for students
         // multiple names - last name accepted
@@ -81,14 +92,18 @@ public class AddCommandParserTest {
                 + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // multiple genders - last gender accepted
-        assertParseSuccess(parser,  VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
                 + GENDER_DESC_AMY + TAG_DESC_TP, new AddCommand(expectedStudent, VALID_STUDENT_TYPE));
 
         // one tag - accepted
-        Student expectedStudentOneTag = new StudentBuilder(AMY).withTag(VALID_TAG_TP)
-                .build();
-        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        Student expectedStudentOneTag = new StudentBuilder(AMY).withTag(VALID_TAG_TP).build();
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
                 + TAG_DESC_TP, new AddCommand(expectedStudentOneTag, VALID_STUDENT_TYPE));
+
+        // multiple tag prefixes - tags in latest tag prefix accepted
+        Student expectedStudentMultipleTagPrefix = new StudentBuilder(AMY).withTag(VALID_TAG_TP).build();
+        assertParseSuccess(parser, VALID_STUDENT_TYPE + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + TAG_DESC_PM + TAG_DESC_TP, new AddCommand(expectedStudentMultipleTagPrefix, VALID_STUDENT_TYPE));
     }
 
     @Test
@@ -97,8 +112,13 @@ public class AddCommandParserTest {
         String expectedMultipleTagsStudentMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddCommand.MESSAGE_TOO_MANY_TAGS);
 
+        // Too many tag arguments - fail
         assertParseFailure(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_TP, expectedMultipleTagsStudentMessage);
+                + TAG_DESC_PM_TP, expectedMultipleTagsStudentMessage);
+
+        // Multiple tag prefixes, latest one with too many tags argument taken - fail
+        assertParseFailure(parser, VALID_STUDENT_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_PM + TAG_DESC_PM_TP, expectedMultipleTagsStudentMessage);
     }
 
     @Test

@@ -22,7 +22,7 @@ public class JsonAdaptedTutorTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_GENDER = " ";
     private static final String INVALID_QUALIFICATION = "4";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "ABCDE";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();

@@ -23,12 +23,18 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor or student to the database. "
             + "Parameters: "
-            + "t "
+            + "<s "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TAG + "TAG>"
+            + "or <t "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_GENDER + "GENDER "
+            + PREFIX_QUALIFICATION + "QUALIFICATION "
+            + PREFIX_TAG + "TAG...>\n"
+            + "Example: " + COMMAND_WORD + " t "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
@@ -76,7 +82,7 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, student));
         }
 
-        //Any invalid input would be handled by the AddCommandParser and will not reach here
+        // Any invalid input would be handled by the AddCommandParser and will not reach here
         throw new CommandException(MESSAGE_USAGE);
     }
 

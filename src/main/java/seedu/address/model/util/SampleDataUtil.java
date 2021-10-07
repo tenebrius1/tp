@@ -31,11 +31,11 @@ public class SampleDataUtil {
 
     public static Student[] getSampleStudents() {
         return new Student[] {
-                new Student(new Name("David Li"), new Phone("91031282"), new Gender("M"),
+            new Student(new Name("David Li"), new Phone("91031282"), new Gender("M"),
                         new Tag("PM")),
-                new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("M"),
+            new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("M"),
                         new Tag("SC")),
-                new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("M"),
+            new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("M"),
                         new Tag("TG"))
         };
     }

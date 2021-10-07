@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.person.Student;
 
 /**
@@ -11,7 +13,7 @@ public class StudentUtil extends PersonUtil {
      * Returns an add command string for adding the {@code student}.
      */
     public static String getAddCommand(Student student) {
-        return PersonUtil.getAddCommand(student);
+        return AddCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**
@@ -19,5 +21,12 @@ public class StudentUtil extends PersonUtil {
      */
     public static String getStudentDetails(Student student) {
         return PersonUtil.getPersonDetails(student);
+    }
+
+    /**
+     * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
+     */
+    public static String getEditStudentDescriptorDetails(EditStudentDescriptor descriptor) {
+        return getEditPersonDescriptorDetails(descriptor);
     }
 }

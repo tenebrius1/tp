@@ -1,45 +1,62 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all students or tutors in address book whose name contains the argument keyword.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_ALIAS = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all student/tutor whose names contain "
+            + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: s/t KEYWORD\n"
+            + "Example: " + COMMAND_WORD + " t n/charlie";
 
     private final NameContainsKeywordsPredicate predicate;
+    private final PersonType personType;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    /** Creates a FindCommand to search for the specified {@code Person} */
+    public FindCommand(NameContainsKeywordsPredicate predicate, PersonType personType) {
+        requireNonNull(predicate);
+        requireNonNull(personType);
         this.predicate = predicate;
+        this.personType = personType;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // Added both statements below for build
-        // TODO: Split into if/else or switch/case statements depending on "find t" or "find s"
-        model.updateFilteredTutorList(predicate);
-        model.updateFilteredStudentList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+        if (personType == PersonType.TUTOR) {
+            model.updateFilteredTutorList(predicate);
+            return new CommandResult(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW,
+                    model.getFilteredTutorList().size()));
+        } else if (personType == PersonType.STUDENT) {
+            model.updateFilteredStudentList(predicate);
+            return new CommandResult(String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                    model.getFilteredStudentList().size()));
+        } else {
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                && predicate.equals(((FindCommand) other).predicate)) // state check
+                && personType == ((FindCommand) other).personType; // type check
     }
 }

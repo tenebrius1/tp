@@ -10,7 +10,6 @@ import seedu.address.model.tag.Tag;
  * A utility class to help with building Student objects.
  */
 public class StudentBuilder {
-
     public static final String DEFAULT_GENDER = "M";
     public static final String DEFAULT_NAME = "Danny Phantom";
     public static final String DEFAULT_PHONE = "91122334";
