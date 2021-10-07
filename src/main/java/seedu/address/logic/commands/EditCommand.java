@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.PersonType.STUDENT;
-import static seedu.address.logic.parser.PersonType.TUTOR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 
@@ -229,7 +227,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, gender, tags);
         }
 
         public void setName(Name name) {
@@ -313,6 +311,11 @@ public class EditCommand extends Command {
         public EditTutorDescriptor(EditTutorDescriptor toCopy) {
             super(toCopy);
             setQualification(toCopy.qualification);
+        }
+
+        @Override
+        public boolean isAnyFieldEdited() {
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(qualification);
         }
 
         public void setQualification(Qualification qualification) {
