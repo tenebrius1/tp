@@ -62,6 +62,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE"; //  invalid tag, does not correspond with LevelSubjectCode
     public static final String INVALID_PREAMBLE = "A"; // only 't' or 's' allowed
+    public static final String INVALID_ZERO_INDEX = "0";
+    public static final String INVALID_INDEX = "-69";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
 

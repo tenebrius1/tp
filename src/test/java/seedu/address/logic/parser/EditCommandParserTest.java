@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -61,7 +63,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " 1", MESSAGE_NOT_EDITED);
+        Index targetIndex = INDEX_SECOND_PERSON;
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + targetIndex.getOneBased(), MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, VALID_TUTOR_LETTER + "", MESSAGE_INVALID_FORMAT);
@@ -74,36 +77,43 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " -5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INDEX + NAME_DESC_AMY,
+                MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " 0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " "  + INVALID_ZERO_INDEX + NAME_DESC_AMY,
+                MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1 some random string", MESSAGE_INVALID_FORMAT);
+        Index targetIndex = INDEX_SECOND_PERSON;
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + targetIndex.getOneBased()
+                + " some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + targetIndex.getOneBased()
+                + " i/string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1"
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String validIndex = " " + targetIndex.getZeroBased();
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
             + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " 1"
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1"
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
             + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG); // invalid tag
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1"
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
                 + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG); // invalid tag argument ahead of valid tag
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " 1" + PHONE_DESC_BOB
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + PHONE_DESC_BOB
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, VALID_TUTOR_LETTER + " 1" + INVALID_NAME_DESC + INVALID_PHONE_DESC,
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex + INVALID_NAME_DESC + INVALID_PHONE_DESC,
             Name.MESSAGE_CONSTRAINTS);
     }
 
