@@ -8,7 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidQualification(String)}
  */
 public class Qualification {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Qualification should be '0', '1', '2' or '3'";
     public static final String VALIDATION_REGEX = "[0123]";
