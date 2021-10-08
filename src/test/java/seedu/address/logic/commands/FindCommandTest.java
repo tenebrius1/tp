@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
@@ -73,37 +74,22 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noStudentFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = null;
-        try {
-            predicate = preparePredicate("n/ ");
-        } catch (ParseException e) {
-            fail();
-        }
-        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
-        expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+    public void execute_zeroKeywordsTutor_throwsParseException() {
+        assertThrows(ParseException.class, () -> {
+            new FindCommand(preparePredicate("n/ "), PersonType.TUTOR);
+        });
     }
 
     @Test
-    public void execute_zeroKeywords_noTutorFound() {
-        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = null;
-        try {
-            predicate = preparePredicate("n/ ");
-        } catch (ParseException e) {
-            fail();
-        }
-        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
-        expectedModel.updateFilteredTutorList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredTutorList());
+    public void execute_zeroKeywordsStudent_throwsParseException() {
+        assertThrows(ParseException.class, () -> {
+            new FindCommand(preparePredicate("n/ "), PersonType.STUDENT);
+        });
     }
 
+    // Todo: The following 2 test cases are not resolved
     @Test
-    public void execute_multipleStudentsFound() {
+    public void execute_multipleStudentsFound_success() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         try {
             NameContainsKeywordsPredicate predicate = preparePredicate("n/john");
@@ -117,7 +103,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleTutorsFound() {
+    public void execute_multipleTutorsFound_success() {
         String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 2);
         try {
             NameContainsKeywordsPredicate predicate = preparePredicate("n/Don");

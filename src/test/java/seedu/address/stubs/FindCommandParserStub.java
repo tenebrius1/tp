@@ -2,6 +2,7 @@ package seedu.address.stubs;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
@@ -17,6 +18,7 @@ public class FindCommandParserStub {
      */
     public static Name extractName(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow(
+                () -> new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT)));
     }
 }
