@@ -177,7 +177,8 @@ public class AddCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
 
         // Invalid personType (not "t" or "s")
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertParseFailure(parser, INVALID_PREAMBLE + VALID_TUTOR_TYPE + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, PersonType.MESSAGE_INVALID_PERSON_TYPE);
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, expectedMessage);
     }
 }

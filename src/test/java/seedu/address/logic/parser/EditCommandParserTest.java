@@ -31,7 +31,6 @@ import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.PersonType.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -69,9 +68,7 @@ public class EditCommandParserTest {
         // no index and no field specified
         assertParseFailure(parser, VALID_TUTOR_LETTER + "", MESSAGE_INVALID_FORMAT);
 
-        // no student or tutor letter specified, since the very first thing we check for Edit command is the
-        // type of person, Error message should correspond to error of invalid personType
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_PERSON_TYPE);
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -81,7 +78,7 @@ public class EditCommandParserTest {
                 MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " "  + INVALID_ZERO_INDEX + NAME_DESC_AMY,
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_ZERO_INDEX + NAME_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
@@ -97,7 +94,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String validIndex = " " + targetIndex.getZeroBased();
+        String validIndex = " " + targetIndex.getOneBased();
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
             + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex

@@ -33,7 +33,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        PersonType personType = ParserUtil.parsePersonType(args);
+        PersonType personType;
+        try {
+            personType = ParserUtil.parsePersonType(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), pe);
+        }
         switch (personType) {
         case TUTOR:
             ArgumentMultimap argMultimap =

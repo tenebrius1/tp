@@ -29,7 +29,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        PersonType personType = ParserUtil.parsePersonType(trimmedArgs);
+        PersonType personType;
+        try {
+            personType = ParserUtil.parsePersonType(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
+        }
 
         Name name = extractName(trimmedArgs);
         String[] nameList = new String[] {name.toString()};
