@@ -52,7 +52,7 @@ public class CommandTestUtil {
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String QUALIFICATION_DESC_BOB = " " + PREFIX_QUALIFICATION + VALID_QUALIFICATION_BOB;
-    public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + VALID_TAG_TP;
+    public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + " " + VALID_TAG_TP;
     public static final String TAG_DESC_PM = " " + PREFIX_TAG + VALID_TAG_PM;
     public static final String TAG_DESC_TP = " " + PREFIX_TAG + VALID_TAG_TP;
     public static final String TAG_DESC_UNCAPITALIZED = " " + PREFIX_TAG + VALID_TAG_TP_UNCAPITALIZED;
@@ -60,11 +60,13 @@ public class CommandTestUtil {
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Z"; // 'Z' not allowed in gender
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    //  invalid tag, does not correspond with LevelSubjectCode
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE";
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE"; //  invalid tag argument
+    public static final String INVALID_PREAMBLE = "A"; // only 't' or 's' allowed
+    public static final String INVALID_TAG = "ABCDE";
+    public static final String INVALID_ZERO_INDEX = "0";
+    public static final String INVALID_INDEX = "-69";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditTutorDescriptor DESC_BOB;

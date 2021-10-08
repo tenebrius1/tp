@@ -15,7 +15,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -31,99 +30,79 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        PersonType personType = ParserUtil.parsePersonType(args);
+        PersonType personType;
+        try {
+            personType = ParserUtil.parsePersonType(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
         switch (personType) {
         case TUTOR:
-            return parseTutor(args);
+            return handleTutor(args);
             // No break necessary due to return statement
         case STUDENT:
-            return parseStudent(args);
+            return handleStudent(args);
             // No break necessary due to return statement
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
     }
 
-    /**
-     * Parses an edit tutor command into an EditCommand.
-     *
-     * @param args User input.
-     * @return An EditCommand that edits a tutor.
-     * @throws ParseException An exception that occurs when parsing the command to edit a tutor.
-     */
-    private EditCommand parseTutor(String args) throws ParseException {
+    private EditCommand handleTutor(String args) throws ParseException {
         ArgumentMultimap tutorArgMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                         PREFIX_QUALIFICATION, PREFIX_TAG);
 
-        Index tutorIndex;
-
-        try {
-            tutorIndex = ParserUtil.parseIndex(tutorArgMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
         EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
-        if (tutorArgMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editTutorDescriptor.setName(ParserUtil.parseName(tutorArgMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (tutorArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editTutorDescriptor.setPhone(ParserUtil.parsePhone(tutorArgMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (tutorArgMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            editTutorDescriptor.setGender(ParserUtil.parseGender(tutorArgMultimap.getValue(PREFIX_GENDER).get()));
-        }
-        if (tutorArgMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
-            editTutorDescriptor.setQualification(ParserUtil.parseQualification(
-                    tutorArgMultimap.getValue(PREFIX_QUALIFICATION).get()));
-        }
-        parseTagsForEdit(tutorArgMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTutorDescriptor::setTags);
-
-        if (!editTutorDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditCommand(tutorIndex, editTutorDescriptor, PersonType.TUTOR);
+        return parsePerson(tutorArgMultimap, editTutorDescriptor, PersonType.TUTOR);
     }
 
-    /**
-     * Parses an edit student command into an EditCommand.
-     *
-     * @param args User input.
-     * @return An EditCommand that edits a student.
-     * @throws ParseException An exception that occurs when parsing the command to edit a student.
-     */
-    private EditCommand parseStudent(String args) throws ParseException {
-        ArgumentMultimap studentArgMultimap =
+    private EditCommand handleStudent(String args) throws ParseException {
+        ArgumentMultimap studentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG);
 
-        Index studentIndex;
+        EditTutorDescriptor editStudentDescriptor = new EditTutorDescriptor();
+        return parsePerson(studentMultimap, editStudentDescriptor, PersonType.STUDENT);
+    }
+
+    private EditCommand parsePerson(ArgumentMultimap argMultimap, EditCommand.EditPersonDescriptor editPersonDescriptor,
+                                    PersonType personType) throws ParseException {
+        Index personIndex;
 
         try {
-            studentIndex = ParserUtil.parseIndex(studentArgMultimap.getPreamble());
+            String trimmed = argMultimap.getPreamble().trim();
+            String[] split = trimmed.split(" ", 2);
+            // Preamble should only have personType and Index
+            if (split.length != 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+            // If personType or index not given, it is an invalid command format. ArrayIndexOutOfBoundsException
+            // will be thrown by these lines below, but we catch it and throw a ParseException
+            personIndex = ParserUtil.parseIndex(split[1]);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
-        if (studentArgMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editStudentDescriptor.setName(ParserUtil.parseName(studentArgMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (studentArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editStudentDescriptor.setPhone(ParserUtil.parsePhone(studentArgMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
-        if (studentArgMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            editStudentDescriptor.setGender(ParserUtil.parseGender(
-                    studentArgMultimap.getValue(PREFIX_GENDER).get()));
+        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
-        parseTagsForEdit(studentArgMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
+        if (personType.equals(PersonType.TUTOR) && argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
+            EditTutorDescriptor x = (EditTutorDescriptor) editPersonDescriptor;
+            x.setQualification(ParserUtil.parseQualification(
+                    argMultimap.getValue(PREFIX_QUALIFICATION).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editStudentDescriptor.isAnyFieldEdited()) {
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(studentIndex, editStudentDescriptor, PersonType.STUDENT);
+        return new EditCommand(personIndex, editPersonDescriptor, personType);
     }
 
     /**
