@@ -38,23 +38,31 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         switch (personType) {
         case TUTOR:
-            ArgumentMultimap tutorArgMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                            PREFIX_QUALIFICATION, PREFIX_TAG);
-
-            EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
-            return parsePerson(tutorArgMultimap, editTutorDescriptor, personType);
+            return handleTutor(args);
             // No break necessary due to return statement
         case STUDENT:
-            ArgumentMultimap studentMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG);
-
-            EditTutorDescriptor editStudentDescriptor = new EditTutorDescriptor();
-            return parsePerson(studentMultimap, editStudentDescriptor, personType);
+            return handleStudent(args);
             // No break necessary due to return statement
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+    }
+
+    private EditCommand handleTutor(String args) throws ParseException {
+        ArgumentMultimap tutorArgMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
+                        PREFIX_QUALIFICATION, PREFIX_TAG);
+
+        EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
+        return parsePerson(tutorArgMultimap, editTutorDescriptor, PersonType.TUTOR);
+    }
+
+    private EditCommand handleStudent(String args) throws ParseException {
+        ArgumentMultimap studentMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG);
+
+        EditTutorDescriptor editStudentDescriptor = new EditTutorDescriptor();
+        return parsePerson(studentMultimap, editStudentDescriptor, PersonType.STUDENT);
     }
 
     private EditCommand parsePerson(ArgumentMultimap argMultimap, EditCommand.EditPersonDescriptor editPersonDescriptor,
