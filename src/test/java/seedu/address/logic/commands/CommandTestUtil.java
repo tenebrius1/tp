@@ -52,7 +52,7 @@ public class CommandTestUtil {
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String QUALIFICATION_DESC_BOB = " " + PREFIX_QUALIFICATION + VALID_QUALIFICATION_BOB;
-    public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + VALID_TAG_TP;
+    public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + " " + VALID_TAG_TP;
     public static final String TAG_DESC_PM = " " + PREFIX_TAG + VALID_TAG_PM;
     public static final String TAG_DESC_TP = " " + PREFIX_TAG + VALID_TAG_TP;
     public static final String TAG_DESC_UNCAPITALIZED = " " + PREFIX_TAG + VALID_TAG_TP_UNCAPITALIZED;

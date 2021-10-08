@@ -71,7 +71,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_storageThrowsIoExceptionTutor_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
@@ -81,7 +81,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        String addCommand = AddCommand.COMMAND_WORD + " t" + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
         Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
@@ -89,6 +89,8 @@ public class LogicManagerTest {
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    // Todo: make execute_storageThrowsIoExceptionStudent_throwsCommandException() test
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
