@@ -33,8 +33,7 @@ public class StudentUtil extends PersonUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_GENDER + student.getGender().genderSymbol + " ");
-        student.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + LevelSubjectCode.getSubCode(s.tagName) + " ")
+        student.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + LevelSubjectCode.getSubCode(s.tagName) + " ")
         );
         return sb.toString();
     }

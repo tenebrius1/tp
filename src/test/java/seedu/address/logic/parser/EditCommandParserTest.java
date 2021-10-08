@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -95,14 +96,25 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String validIndex = " " + targetIndex.getOneBased();
+
+        // invalid name
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
-            + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+            + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
         assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
-            + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+            + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
-            + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG); // invalid tag
+            + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid tag argument ahead of valid tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
-                + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG); // invalid tag argument ahead of valid tag
+                + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG);
+
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + TAG_DESC_PM + " " + INVALID_TAG , Tag.MESSAGE_INVALID_TAG);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
