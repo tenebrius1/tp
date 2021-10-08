@@ -9,7 +9,7 @@ public enum PersonType {
     STUDENT,
     TUTOR;
 
-    private static final String MESSAGE_INVALID_PERSON_TYPE = "The given person type is not t or s.";
+    public static final String MESSAGE_INVALID_PERSON_TYPE = "The given person type is not t or s.";
 
     /**
      * Returns the appropriate PersonType entered by the user.

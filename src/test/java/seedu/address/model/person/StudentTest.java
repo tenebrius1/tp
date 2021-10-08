@@ -43,7 +43,7 @@ public class StudentTest {
 
         // name differs in case, all other attributes same -> returns false
         Student editedAmy = new StudentBuilder(AMY).withName(VALID_NAME_AMY.toLowerCase()).build();
-        assertFalse(AMY.isSamePerson(editedAmy));
+        assertTrue(AMY.isSamePerson(editedAmy));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_AMY + " ";

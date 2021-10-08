@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,7 +23,7 @@ public class TutorUtil extends PersonUtil {
      * Returns an add command string for adding the {@code tutor}.
      */
     public static String getAddCommand(Tutor tutor) {
-        return AddCommand.COMMAND_WORD + " " + getTutorDetails(tutor);
+        return AddCommand.COMMAND_WORD + " t " + getTutorDetails(tutor);
     }
 
     /**
@@ -35,7 +36,7 @@ public class TutorUtil extends PersonUtil {
         sb.append(PREFIX_GENDER + tutor.getGender().genderSymbol + " ");
         sb.append(PREFIX_QUALIFICATION + tutor.getQualification().index + " ");
         tutor.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + LevelSubjectCode.getSubCode(s.tagName) + " ")
         );
         return sb.toString();
     }
@@ -55,7 +56,7 @@ public class TutorUtil extends PersonUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(LevelSubjectCode.getSubCode(s.tagName)).append(" "));
             }
         }
         return sb.toString();

@@ -93,12 +93,12 @@ public class AddressBookParserTest {
 
         // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + "s n/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " s n/" + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
 
         // Test COMMAND_ALIAS
         command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_ALIAS + "s n/" + String.join(" ", keywords));
+                FindCommand.COMMAND_ALIAS + " s n/" + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
     }
 
@@ -108,12 +108,12 @@ public class AddressBookParserTest {
 
         // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + "t n/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " t n/" + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
 
         // Test COMMAND_ALIAS
         command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_ALIAS + "t n/" + String.join(" ", keywords));
+                FindCommand.COMMAND_ALIAS + " t n/" + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
     }
 
