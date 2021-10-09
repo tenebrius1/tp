@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.DON_A;
 import static seedu.address.testutil.TypicalPersons.DON_E;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -74,53 +76,29 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywordsTutor_throwsParseException() {
-        assertThrows(ParseException.class, () -> {
-            new FindCommand(preparePredicate("n/ "), PersonType.TUTOR);
-        });
-    }
-
-    @Test
-    public void execute_zeroKeywordsStudent_throwsParseException() {
-        assertThrows(ParseException.class, () -> {
-            new FindCommand(preparePredicate("n/ "), PersonType.STUDENT);
-        });
-    }
-
-    // Todo: The following 2 test cases are not resolved
-    @Test
     public void execute_multipleStudentsFound_success() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        try {
-            NameContainsKeywordsPredicate predicate = preparePredicate("n/john");
-            FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
-            expectedSimilarNamesModel.updateFilteredStudentList(predicate);
-            assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
-            assertEquals(Arrays.asList(JOHN_P, JOHN_R), similarNamesModel.getFilteredStudentList());
-        } catch (ParseException e) {
-            fail();
-        }
+        NameContainsKeywordsPredicate predicate = preparePredicate("john");
+        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
+        expectedSimilarNamesModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(Arrays.asList(JOHN_P, JOHN_R), similarNamesModel.getFilteredStudentList());
     }
 
     @Test
     public void execute_multipleTutorsFound_success() {
         String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 2);
-        try {
-            NameContainsKeywordsPredicate predicate = preparePredicate("n/Don");
-            FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
-            expectedSimilarNamesModel.updateFilteredTutorList(predicate);
-            assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
-            assertEquals(Arrays.asList(DON_A, DON_E), model.getFilteredTutorList());
-        } catch (ParseException e) {
-            fail();
-        }
+        NameContainsKeywordsPredicate predicate = preparePredicate("Don");
+        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
+        expectedSimilarNamesModel.updateFilteredTutorList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(Arrays.asList(DON_A, DON_E), similarNamesModel.getFilteredTutorList());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) throws ParseException {
-        Name name = FindCommandParserStub.extractName(userInput);
-        return new NameContainsKeywordsPredicate(List.of(name.toString()));
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
