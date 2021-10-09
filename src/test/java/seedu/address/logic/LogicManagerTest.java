@@ -3,10 +3,14 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
@@ -28,10 +32,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
 public class LogicManagerTest {
@@ -81,7 +87,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + " t" + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        String addCommand = AddCommand.COMMAND_WORD + " s" + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
         Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
@@ -90,8 +96,25 @@ public class LogicManagerTest {
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
-    // Todo: make execute_storageThrowsIoExceptionStudent_throwsCommandException() test
+    @Test
+    public void execute_storageThrowsIoExceptionStudent_throwsCommandException() {
+        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        logic = new LogicManager(model, storage);
 
+        // Execute add command
+        String addCommand = AddCommand.COMMAND_WORD + " s" + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + TAG_DESC_PM;
+        Student expectedStudent = new StudentBuilder().build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addStudent(expectedStudent);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTutorList().remove(0));
