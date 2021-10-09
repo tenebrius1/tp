@@ -18,7 +18,7 @@ public class FindCommandParserStub {
      */
     public static Name extractName(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow(
-                () -> new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT)));
+        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)
+                .orElseThrow(() -> new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT)));
     }
 }
