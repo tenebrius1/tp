@@ -81,7 +81,7 @@ public class AddCommandTest {
 
         Student studentCharlie = new StudentBuilder().withName("Charlie").build();
 
-        AddCommand addAliceCommand = new AddCommand(tutorAlice, PersonType.STUDENT);
+        AddCommand addAliceCommand = new AddCommand(tutorAlice, PersonType.TUTOR);
         AddCommand addBobCommand = new AddCommand(tutorBob, PersonType.TUTOR);
         AddCommand addCharlieCommand = new AddCommand(studentCharlie, PersonType.STUDENT);
 
