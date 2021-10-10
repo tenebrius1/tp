@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.LETTER_DESC_TUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -23,7 +24,7 @@ public class TutorUtil extends PersonUtil {
      * Returns an add command string for adding the {@code tutor}.
      */
     public static String getAddCommand(Tutor tutor) {
-        return AddCommand.COMMAND_WORD + " t " + getTutorDetails(tutor);
+        return AddCommand.COMMAND_WORD + LETTER_DESC_TUTOR + " " + getTutorDetails(tutor);
     }
 
     /**
