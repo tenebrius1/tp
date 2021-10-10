@@ -89,8 +89,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_TUTOR + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_TUTOR + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
         Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTutor(expectedTutor);
@@ -109,8 +109,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_STUDENT + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + TAG_DESC_PM;
+        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_STUDENT + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + TAG_DESC_PM;
         Student expectedStudent = new StudentBuilder().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +53,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateTutor_throwsCommandException() {
-        Tutor tutorInList = model.getAddressBook().getTutorList().get(0);
+        Tutor tutorInList = model.getAddressBook().getTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(tutorInList, PersonType.TUTOR),
                 model, AddCommand.MESSAGE_DUPLICATE_TUTOR);
@@ -60,7 +61,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
-        Student studentInList = model.getAddressBook().getStudentList().get(0);
+        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(studentInList, PersonType.STUDENT),
                 model, AddCommand.MESSAGE_DUPLICATE_STUDENT);
