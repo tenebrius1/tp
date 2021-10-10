@@ -38,7 +38,7 @@ public enum LevelSubjectCode {
      */
     public static boolean isValidTag(String subCode) {
         for (LevelSubjectCode x : values()) {
-            if (x.subCode.equalsIgnoreCase(subCode)) {
+            if (x.subCode.equalsIgnoreCase(subCode) && !subCode.equalsIgnoreCase(INVALID.subCode)) {
                 return true;
             }
         }

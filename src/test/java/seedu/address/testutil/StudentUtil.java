@@ -11,7 +11,6 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.person.Student;
-import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +33,7 @@ public class StudentUtil extends PersonUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_GENDER + student.getGender().genderSymbol + " ");
-        student.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + LevelSubjectCode.getSubCode(s.tagName) + " ")
+        student.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }
@@ -52,7 +51,7 @@ public class StudentUtil extends PersonUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(LevelSubjectCode.getSubCode(s.tagName)).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
         return sb.toString();
