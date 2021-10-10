@@ -16,6 +16,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedTutorTest {
     private static final String INVALID_NAME = "R@chel";
@@ -23,6 +24,7 @@ public class JsonAdaptedTutorTest {
     private static final String INVALID_GENDER = " ";
     private static final String INVALID_QUALIFICATION = "4";
     private static final String INVALID_TAG = "ABCDE";
+    private static final String INVALID_TAG_NON_ALPHANUMERIC = "T+";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -103,11 +105,21 @@ public class JsonAdaptedTutorTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
+    public void toModelType_invalidTagsNonAlphaNumeric_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG_NON_ALPHANUMERIC));
+        JsonAdaptedTutor tutor =
+                new JsonAdaptedTutor(VALID_NAME, VALID_PHONE, VALID_GENDER, VALID_QUALIFICATION, invalidTags);
+        String expectedMessage = Tag.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, tutor::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTagName_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedTutor tutor =
                 new JsonAdaptedTutor(VALID_NAME, VALID_PHONE, VALID_GENDER, VALID_QUALIFICATION, invalidTags);
-        assertThrows(IllegalValueException.class, tutor::toModelType);
+        assertThrows(IllegalArgumentException.class, tutor::toModelType);
     }
 }

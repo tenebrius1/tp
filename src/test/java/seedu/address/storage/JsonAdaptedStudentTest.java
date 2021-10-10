@@ -11,12 +11,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_GENDER = " ";
     private static final JsonAdaptedTag INVALID_TAG = new JsonAdaptedTag("PME");
+    private static final JsonAdaptedTag INVALID_TAG_NON_ALPHANUMERIC = new JsonAdaptedTag("@!M");
 
     private static final String VALID_NAME = ELLE.getName().toString();
     private static final String VALID_PHONE = ELLE.getPhone().toString();
@@ -75,9 +77,17 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_invalidTag_throwsIllegalValueException() {
+    public void toModelType_invalidTagName_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, INVALID_TAG);
-        assertThrows(IllegalValueException.class, student::toModelType);
+        assertThrows(IllegalArgumentException.class, student::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTagNonAlphanumeric_throwsIllegalValueException() {
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, INVALID_TAG_NON_ALPHANUMERIC);
+        String expectedMessage = Tag.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 }
