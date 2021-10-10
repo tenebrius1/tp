@@ -44,6 +44,8 @@ public class CommandTestUtil {
     public static final PersonType VALID_STUDENT_TYPE = PersonType.STUDENT;
     public static final String VALID_STUDENT_LETTER = "s";
     public static final String VALID_TUTOR_LETTER = "t";
+    public static final String LETTER_DESC_STUDENT = " " + VALID_STUDENT_LETTER;
+    public static final String LETTER_DESC_TUTOR = " " + VALID_TUTOR_LETTER;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
