@@ -46,7 +46,7 @@ public class TypicalPersons {
     // Manually added - Students with similar names
     public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("9482423")
             .withGender("M").withTag("SC").build();
-    public static final Student JOHN_P = new StudentBuilder().withName("Johnathan Prue")
+    public static final Student JOHN_P = new StudentBuilder().withName("John Prue")
             .withPhone("9482452").withGender("M").withTag("TP").build();
 
     // Manually added - Tutors with similar names

@@ -14,7 +14,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -110,5 +109,4 @@ public abstract class Person {
         }
         return builder.toString();
     }
-
 }
