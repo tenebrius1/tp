@@ -66,15 +66,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> studentTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : super.getTags()) {
-            studentTags.add(tag.toModelType());
-        }
-
-        if (studentTags.size() != 1) {
-            throw new IllegalValueException(Student.MESSAGE_TOO_MANY_TAGS);
-        }
-
         if (super.getName() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -99,9 +90,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(super.getGender());
 
-
         final Tag modelTag = super.getTags().get(0).toModelType();
         return new Student(modelName, modelPhone, modelGender, modelTag);
     }
-
 }

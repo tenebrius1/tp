@@ -84,7 +84,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidTagName_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAG);
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, invalidTags);
@@ -93,7 +93,7 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidTagNonAlphanumeric_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAG);
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG_NON_ALPHANUMERIC));
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, invalidTags);
