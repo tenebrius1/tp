@@ -68,10 +68,10 @@ public class AddCommandParserTest {
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
                 + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
-        // TODO: Allow for case-insensitive input
-//        // Check that tags are case-insensitive
-//        assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-//                + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
+        //TODO: Allow for case-insensitive input
+        //Check that tags are case-insensitive
+        //assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        //+ QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tag prefixes - tags in latest tag prefix accepted
         Person expectedTutorMultipleTagPrefixes = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
