@@ -22,12 +22,15 @@ import seedu.address.model.person.Tutor;
  * A utility class containing a list of {@code Tutor} and {@code Student} objects to be used in tests.
  */
 public class TypicalPersons {
+    // Tutors
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
             .withGender("F").withPhone("94351253").withQualification("0").withTags("PM").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
             .withGender("M").withPhone("98765432").withQualification("1").withTags("SM", "SC").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withGender("M").withQualification("2").withTags("TL", "TE").build();
+
+    // Students
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGender("M").withTag("PM").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")

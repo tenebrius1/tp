@@ -78,7 +78,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             //Check if tagList has more than one tag for students
             if (tagList.size() != 1) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_TOO_MANY_TAGS));
+                        Student.MESSAGE_TOO_MANY_TAGS));
             }
 
             Tag tag = tagList.iterator().next();
