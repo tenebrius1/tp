@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Tutor> filteredTutors;
     private final FilteredList<Student> filteredStudents;
+    private FilteredList<Tutor> matchedTutors;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        this.matchedTutors = null;
     }
 
     public ModelManager() {
@@ -170,6 +172,20 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    //=========== Matched Tutor List Accessors =============================================================
+
+    @Override
+    public void updateMatchedTutor(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        this.matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
+        matchedTutors.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tutor> getMatchedTutorList() {
+        return matchedTutors;
     }
 
     @Override
