@@ -28,7 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Hyperlink helpMessage;
+    private Hyperlink helpLink;
 
     /**
      * Creates a new HelpWindow.
@@ -37,7 +37,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpLink.setText(HELP_MESSAGE);
     }
 
     /**
