@@ -7,8 +7,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Jackson-friendly version of {@link Tag}.
  */
