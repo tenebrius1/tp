@@ -13,17 +13,23 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_GENDER = " ";
-    private static final JsonAdaptedTag INVALID_TAG = new JsonAdaptedTag("PME");
-    private static final JsonAdaptedTag INVALID_TAG_NON_ALPHANUMERIC = new JsonAdaptedTag("@!M");
+    private static final String INVALID_TAG = "PME";
+    private static final String INVALID_TAG_NON_ALPHANUMERIC = "@!M";
 
     private static final String VALID_NAME = ELLE.getName().toString();
     private static final String VALID_PHONE = ELLE.getPhone().toString();
     private static final String VALID_GENDER = ELLE.getGender().toString();
-    private static final JsonAdaptedTag VALID_TAG = new JsonAdaptedTag(ELLE.getTag());
+    private static final List<JsonAdaptedTag> VALID_TAG = ELLE.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
@@ -78,15 +84,19 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidTagName_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAG);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, INVALID_TAG);
-        assertThrows(IllegalArgumentException.class, student::toModelType);
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, invalidTags);
+        assertThrows(IllegalValueException.class, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidTagNonAlphanumeric_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAG);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG_NON_ALPHANUMERIC));
         JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, INVALID_TAG_NON_ALPHANUMERIC);
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_GENDER, invalidTags);
         String expectedMessage = Tag.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

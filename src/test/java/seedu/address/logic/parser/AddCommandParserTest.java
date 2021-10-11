@@ -113,7 +113,7 @@ public class AddCommandParserTest {
     public void parse_studentTooManyTags_failure() {
         // multiple tags - not accepted
         String expectedMultipleTagsStudentMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddCommand.MESSAGE_TOO_MANY_TAGS);
+                Student.MESSAGE_TOO_MANY_TAGS);
 
         // Too many tag arguments - fail
         assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB

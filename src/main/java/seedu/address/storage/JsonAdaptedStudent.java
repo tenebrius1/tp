@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,8 +24,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("gender") String gender,
-                             @JsonProperty("tagged") JsonAdaptedTag tag) {
-        super(name, phone, gender, wrapTag(tag));
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        super(name, phone, gender, tagged);
     }
 
     /**
@@ -66,6 +68,15 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
+        final List<Tag> studentTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : super.getTags()) {
+            studentTags.add(tag.toModelType());
+        }
+
+        if (studentTags.size() != 1) {
+            throw new IllegalValueException(Student.MESSAGE_TOO_MANY_TAGS);
+        }
+
         if (super.getName() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -89,6 +100,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
         final Gender modelGender = new Gender(super.getGender());
+
 
         final Tag modelTag = super.getTags().get(0).toModelType();
         return new Student(modelName, modelPhone, modelGender, modelTag);

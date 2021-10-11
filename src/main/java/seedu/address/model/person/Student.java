@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
     private final Tag tag;
+    public static final String MESSAGE_TOO_MANY_TAGS = "Students can only have 1 tag.";
 
     /**
      * Every field must be present and not null.
