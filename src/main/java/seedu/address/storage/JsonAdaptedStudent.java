@@ -22,8 +22,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("gender") String gender,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        super(name, phone, gender, tagged);
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tag) {
+        super(name, phone, gender, tag);
     }
 
     /**

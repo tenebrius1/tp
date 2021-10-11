@@ -24,26 +24,26 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         // Throws error if getLabel returns an "Invalid" label
         checkArgument(!LevelSubjectCode.getLabel(tagName).equals("Invalid"), MESSAGE_INVALID_TAG);
-        this.tagName = LevelSubjectCode.getLabel(tagName);
+        this.tagName = tagName;
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && LevelSubjectCode.isValidTag(test);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && tagName.equalsIgnoreCase(((Tag) other).tagName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toUpperCase().hashCode();
     }
 
     /**

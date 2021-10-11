@@ -43,10 +43,6 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        // if getSubCode returns "Invalid" subCode, throw IllegalValueException
-        if (!LevelSubjectCode.isValidTag(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_INVALID_TAG);
-        }
         return new Tag(tagName);
     }
 
