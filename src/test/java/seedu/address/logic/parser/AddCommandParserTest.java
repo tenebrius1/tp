@@ -1,7 +1,32 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UNCAPITALIZED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -46,7 +71,7 @@ public class AddCommandParserTest {
 
         //Check that tags are case-insensitive
         assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-        + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
+                + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tag prefixes - tags in latest tag prefix accepted
         Person expectedTutorMultipleTagPrefixes = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
