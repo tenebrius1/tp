@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BO
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UNCAPITALIZED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -68,10 +69,9 @@ public class AddCommandParserTest {
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB
                 + TAG_DESC_TP, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
-        // TODO: Allow for case-insensitive input
-//        // Check that tags are case-insensitive
-//        assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-//                + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
+        //Check that tags are case-insensitive
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + TAG_DESC_UNCAPITALIZED, new AddCommand(expectedTutor, VALID_TUTOR_TYPE));
 
         // multiple tag prefixes - tags in latest tag prefix accepted
         Person expectedTutorMultipleTagPrefixes = new TutorBuilder(BOB).withTags(VALID_TAG_TP).build();
@@ -113,7 +113,7 @@ public class AddCommandParserTest {
     public void parse_studentTooManyTags_failure() {
         // multiple tags - not accepted
         String expectedMultipleTagsStudentMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddCommand.MESSAGE_TOO_MANY_TAGS);
+                Student.MESSAGE_TOO_MANY_TAGS);
 
         // Too many tag arguments - fail
         assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
