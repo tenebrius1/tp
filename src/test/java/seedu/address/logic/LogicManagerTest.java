@@ -117,6 +117,22 @@ public class LogicManagerTest {
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void getFilteredTutorList_success() {
+        assertEquals(logic.getFilteredTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getFilteredStudentList_success() {
+        assertEquals(logic.getFilteredStudentList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getMatchedTutorList_success() {
+        assertEquals(logic.getMatchedTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
     @Test
     public void getFilteredTutorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTutorList().remove(0));
