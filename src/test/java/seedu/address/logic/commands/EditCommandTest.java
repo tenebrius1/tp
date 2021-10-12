@@ -141,7 +141,7 @@ public class EditCommandTest {
         Tutor tutorInFilteredList = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         Tutor editedTutor = new TutorBuilder(tutorInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-            new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
+            new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
@@ -294,8 +294,8 @@ public class EditCommandTest {
         assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY, PersonType.STUDENT)));
 
         // different descriptor -> returns false
-        assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.TUTOR)));
-        assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.STUDENT)));
+        assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.TUTOR)));
+        assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.STUDENT)));
     }
 
 }

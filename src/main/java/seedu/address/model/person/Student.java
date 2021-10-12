@@ -12,6 +12,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student extends Person {
+    public static final String MESSAGE_TOO_MANY_TAGS = "Students can only have 1 tag.";
 
     private final Tag tag;
 

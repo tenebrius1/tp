@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_TAG + "TAG>"
-            + "or <t "
+            + " or <t "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
@@ -38,11 +38,10 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
-            + PREFIX_QUALIFICATION + "2"
+            + PREFIX_QUALIFICATION + "2 "
             + PREFIX_TAG + "PM";
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added: %1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added: %1$s";
-    public static final String MESSAGE_TOO_MANY_TAGS = "Students can only have 1 tag.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
@@ -90,6 +89,7 @@ public class AddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                && toAdd.equals(((AddCommand) other).toAdd)
+                && personType.equals(((AddCommand) other).personType));
     }
 }

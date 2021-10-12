@@ -22,8 +22,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("gender") String gender,
-                             @JsonProperty("tagged") JsonAdaptedTag tag) {
-        super(name, phone, gender, wrapTag(tag));
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tag) {
+        super(name, phone, gender, tag);
     }
 
     /**
@@ -93,5 +93,4 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         final Tag modelTag = super.getTags().get(0).toModelType();
         return new Student(modelName, modelPhone, modelGender, modelTag);
     }
-
 }

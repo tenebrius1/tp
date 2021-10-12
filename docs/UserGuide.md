@@ -176,6 +176,24 @@ Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `add s n/Mary Sue p/98765432 g/F t/PM`
 
+### Editing a tutor/student: `edit`
+
+Edits an existing tutor/student in the data.
+
+Format:<br>
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG]...`
+`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`
+
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the displayed tutor/student list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
+* You must specify at least one tag when editing the tags with `t/`.
+
+Examples:<br>
+`edit t n/John Doe q/2 t/PM TE TM TL`<br>
+`edit s n/Mary Sue p/98765432`
+
 ### Deleting a tutor/student: `delete`
 
 Deletes the specified tutor/student from the data.
@@ -189,8 +207,8 @@ Format:<br>
 - The index **must be a positive integer**, eg. `1`, `2`, `3`, ...
 
 Examples:<br>
-`delete t 0`<br>
-`delete s 5`
+`list` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
+`find n/Betsy` followed by `delete t 1` deletes the 1st person in the results of the find command for the tutor list.
 
 ### Editing a tutor/student's particulars: `edit`
 
@@ -216,6 +234,9 @@ Find a tutor/student by name.
 Format: <br>
 `find t n/NAME` <br>
 `find s n/NAME`
+- The search is case-insensitive. e.g. `n/hans` will match `Hans`
+- Only the last name given is searched. e.g. `find t n/John n/Amy` will find names that match `Amy`
+- Only full words will be matched e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`
 
 Example:<br>
 `find t n/John Cheese`
