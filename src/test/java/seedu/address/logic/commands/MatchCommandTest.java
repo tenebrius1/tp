@@ -53,9 +53,9 @@ public class MatchCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredListStudent_throwsCommandException() {
         Index outOfBoundIndexStudent = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        MatchCommand MatchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
+        MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
 
-        assertCommandFailure(MatchCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(matchCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class MatchCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MatchCommand MatchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
+        MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
         String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
 
@@ -72,7 +72,7 @@ public class MatchCommandTest {
         expectedModelStudent.updateMatchedTutor(
                 new TagsContainTagPredicate(Collections.singletonList(studentToMatch.getTag())));
 
-        assertCommandSuccess(MatchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
+        assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
 
     @Test
@@ -96,9 +96,9 @@ public class MatchCommandTest {
         // ensures that outOfBoundIndexStudent is still in bounds of address book list
         assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        MatchCommand MatchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
+        MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
 
-        assertCommandFailure(MatchCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(matchCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test

@@ -118,6 +118,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getMatchedTutorList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withTutor(ALICE).withStudent(DANIEL).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -143,6 +148,13 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = BENSON.getName().fullName.split("\\s+");
         modelManager.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        modelManager.updateMatchedTutor(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
