@@ -6,16 +6,23 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import org.junit.jupiter.api.Test;
 
 class LevelSubjectCodeTest {
-
     @Test
     public void testIsValidTag() {
         assertEquals(true, LevelSubjectCode.isValidTag(VALID_TAG_PM));
         assertEquals(false, LevelSubjectCode.isValidTag("ABCDE"));
+        assertEquals(false, LevelSubjectCode.isValidTag("Invalid"));
     }
 
     @Test
     public void testGetLabel() {
         assertEquals("PriMath", LevelSubjectCode.getLabel(VALID_TAG_PM));
         assertEquals("Invalid", LevelSubjectCode.getLabel("FailTest"));
+    }
+
+    @Test
+    public void testgetSubCode() {
+        assertEquals("pm", LevelSubjectCode.getSubCode("PriMath"));
+        assertEquals("sc", LevelSubjectCode.getSubCode("SecChem"));
+        assertEquals("Invalid", LevelSubjectCode.getSubCode("asdas"));
     }
 }

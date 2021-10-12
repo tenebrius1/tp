@@ -16,7 +16,6 @@ import seedu.address.model.person.UniqueTutorList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
 

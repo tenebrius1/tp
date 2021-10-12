@@ -15,7 +15,6 @@ import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
-
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
@@ -32,18 +31,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(Student source) {
         super(source.getName().fullName, source.getPhone().value,
                 source.getGender().genderSymbol, getAddedTags(source));
-    }
-
-    /**
-     * Wraps given tag in a List.
-     *
-     * @param tag The given tag to wrap.
-     * @return A List containing only the given tag.
-     */
-    private static List<JsonAdaptedTag> wrapTag(JsonAdaptedTag tag) {
-        List<JsonAdaptedTag> list = new ArrayList<>();
-        list.add(tag);
-        return list;
     }
 
     /**

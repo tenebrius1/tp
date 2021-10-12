@@ -22,8 +22,6 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        // Throws error if getLabel returns an "Invalid" label
-        checkArgument(!LevelSubjectCode.getLabel(tagName).equals("Invalid"), MESSAGE_INVALID_TAG);
         this.tagName = tagName;
     }
 
