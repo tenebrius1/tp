@@ -1,6 +1,7 @@
 # CLITutors
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-T17-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T17-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T17-2/tp/branch/master/graph/badge.svg?token=LZ0GGNJ35I)](https://codecov.io/gh/AY2122S1-CS2103T-T17-2/tp)
 
 ![Ui](docs/images/Ui.png)
 
