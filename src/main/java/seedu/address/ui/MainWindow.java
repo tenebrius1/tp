@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private PersonListPanel tutorListPanel;
     private PersonListPanel studentListPanel;
+    private PersonListPanel matchedTutorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -52,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane matchListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -118,11 +122,16 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         ObservableList<Tutor> tutorList = logic.getFilteredTutorList();
         ObservableList<Student> studentList = logic.getFilteredStudentList();
+        ObservableList<Tutor> matchedTutorList = logic.getMatchedTutorList();
+
         tutorListPanel = new PersonListPanel<>(tutorList);
         tutorListPanelPlaceholder.getChildren().add((Node) tutorListPanel.getRoot());
 
         studentListPanel = new PersonListPanel<>(studentList);
         studentListPanelPlaceholder.getChildren().add((Node) studentListPanel.getRoot());
+
+        matchedTutorListPanel = new PersonListPanel<>(matchedTutorList);
+        matchListPanelPlaceholder.getChildren().add((Node) matchedTutorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
