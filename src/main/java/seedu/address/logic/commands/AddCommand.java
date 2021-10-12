@@ -20,6 +20,7 @@ import seedu.address.model.person.Tutor;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor or student to the database. "
             + "Parameters: "
