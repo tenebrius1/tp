@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -9,16 +12,18 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FIND_COMMAND_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", MESSAGE_INVALID_FIND_COMMAND_FORMAT);
     }
 
     @Test
@@ -45,6 +50,19 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "s \n n/Daniel", expectedStudentFindCommand);
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        // invalid preamble
+        assertParseFailure(parser, INVALID_PREAMBLE, MESSAGE_INVALID_FIND_COMMAND_FORMAT);
+
+        // invalid name
+        assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // blank name
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " n/", Name.MESSAGE_CONSTRAINTS);
+
     }
 
 }
