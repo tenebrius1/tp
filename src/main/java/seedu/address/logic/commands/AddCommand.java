@@ -20,6 +20,7 @@ import seedu.address.model.person.Tutor;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor or student to the database. "
             + "Parameters: "
@@ -42,7 +43,6 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "PM";
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added: %1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added: %1$s";
-    public static final String MESSAGE_TOO_MANY_TAGS = "Students can only have 1 tag.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 

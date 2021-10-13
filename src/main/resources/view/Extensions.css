@@ -18,3 +18,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.menu-bar {
+    -fx-background-color: #5857A5;
+}

@@ -93,5 +93,4 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         final Tag modelTag = super.getTags().get(0).toModelType();
         return new Student(modelName, modelPhone, modelGender, modelTag);
     }
-
 }

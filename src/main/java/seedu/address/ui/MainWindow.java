@@ -2,10 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -18,7 +18,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
@@ -36,7 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel; // Probably have to split into TutorListPanel and StudentListPanel
+    private PersonListPanel personListPanel;
+    private PersonListPanel tutorListPanel;
+    private PersonListPanel studentListPanel;
+    private PersonListPanel matchedTutorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,13 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane tutorListPanelPlaceholder;
+
+    @FXML
+    private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane matchListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -115,24 +120,21 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        // Note: getFilteredPersonList() no longer exists.
-        // TODO: Replace with getFilteredStudentList() or getFilteredTutorList() depending on which list you want.
-        // Lines below temporarily combines tutors and students into a single list for compilation
-        // Temp changes start
         ObservableList<Tutor> tutorList = logic.getFilteredTutorList();
         ObservableList<Student> studentList = logic.getFilteredStudentList();
-        ObservableList<Person> tempList = FXCollections.observableArrayList();
-        tempList.addAll(studentList);
-        tempList.addAll(tutorList);
-        personListPanel = new PersonListPanel(tempList); // this line's original argument was replaced with tempList
-        // Temp changes end
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        ObservableList<Tutor> matchedTutorList = logic.getMatchedTutorList();
+
+        tutorListPanel = new PersonListPanel<>(tutorList);
+        tutorListPanelPlaceholder.getChildren().add((Node) tutorListPanel.getRoot());
+
+        studentListPanel = new PersonListPanel<>(studentList);
+        studentListPanelPlaceholder.getChildren().add((Node) studentListPanel.getRoot());
+
+        matchedTutorListPanel = new PersonListPanel<>(matchedTutorList);
+        matchListPanelPlaceholder.getChildren().add((Node) matchedTutorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

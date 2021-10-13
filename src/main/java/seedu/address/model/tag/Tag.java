@@ -43,7 +43,7 @@ public class Tag {
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toUpperCase().hashCode();
     }
 
     /**
