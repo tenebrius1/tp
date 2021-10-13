@@ -17,6 +17,12 @@ public class TagsContainTagPredicate implements Predicate<Person> {
         this.tags = tags;
     }
 
+    /**
+     * Returns True if person we are testing with have the same tag.
+     *
+     * @param person Person in the list to test.
+     * @return True if person contains the tag in the list of tags, False otherwise.
+     */
     @Override
     public boolean test(Person person) {
         return tags.stream()

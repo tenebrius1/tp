@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -21,10 +20,11 @@ import seedu.address.model.tag.Tag;
 public class MatchCommand extends Command {
 
     public static final String COMMAND_WORD = "match";
+    public static final String COMMAND_ALIAS = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Matches Student identified by the index number used in the displayed student list with Tutors "
-            + " who teach the subjects the Student wants.\n"
+            + "who teach the subjects the Student wants.\n"
             + "Parameters: s/t INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -36,7 +36,7 @@ public class MatchCommand extends Command {
     /**
      * Creates a MatchCommand to match the specified student to tutors.
      *
-     * @param index of the person in the filtered student list to match
+     * @param Index of the person in the filtered student list to match.
      */
     public MatchCommand(Index index) {
         requireAllNonNull(index);
@@ -54,7 +54,7 @@ public class MatchCommand extends Command {
      *
      * @param model Model to match tutor with.
      * @return A successful CommandResult with the students matched to tutors.
-     * @throws CommandException An exception that occurs when mapping students.
+     * @throws CommandException An exception that occurs when matching students.
      */
     private CommandResult executeMatch(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();

@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_TUTORS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -114,17 +115,20 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredTutorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTutorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTutorList().remove(
+                INDEX_FIRST_PERSON.getZeroBased()));
     }
 
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(
+                INDEX_FIRST_PERSON.getZeroBased()));
     }
 
     @Test
     public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getMatchedTutorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getMatchedTutorList().remove(
+                INDEX_FIRST_PERSON.getZeroBased()));
     }
 
     @Test

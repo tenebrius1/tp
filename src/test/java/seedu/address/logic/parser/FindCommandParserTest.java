@@ -17,13 +17,13 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
-    private static final String MESSAGE_INVALID_FORMAT =
+    private static final String MESSAGE_INVALID_FIND_COMMAND_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "     ", MESSAGE_INVALID_FIND_COMMAND_FORMAT);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // invalid preamble
-        assertParseFailure(parser, INVALID_PREAMBLE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, INVALID_PREAMBLE, MESSAGE_INVALID_FIND_COMMAND_FORMAT);
 
         // invalid name
         assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);

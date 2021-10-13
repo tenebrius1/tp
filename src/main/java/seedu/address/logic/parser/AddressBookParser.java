@@ -70,6 +70,8 @@ public class AddressBookParser {
             return new ExitCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case MatchCommand.COMMAND_ALIAS:
+            // Fallthrough
         case MatchCommand.COMMAND_WORD:
             return new MatchCommandParser().parse(arguments);
         default:

@@ -17,27 +17,27 @@ import seedu.address.testutil.TutorBuilder;
 public class TagsContainTagPredicateTest {
     @Test
     public void equals() {
-        List<Tag> firstPredicateKeywordList = Collections.singletonList(new Tag(VALID_TAG_PM));
-        List<Tag> secondPredicateKeywordList = Arrays.asList(new Tag(VALID_TAG_PM), new Tag(VALID_TAG_TP));
+        List<Tag> oneTagList = Collections.singletonList(new Tag(VALID_TAG_PM));
+        List<Tag> twoTagsList = Arrays.asList(new Tag(VALID_TAG_PM), new Tag(VALID_TAG_TP));
 
-        TagsContainTagPredicate firstPredicate = new TagsContainTagPredicate(firstPredicateKeywordList);
-        TagsContainTagPredicate secondPredicate = new TagsContainTagPredicate(secondPredicateKeywordList);
+        TagsContainTagPredicate oneTagPredicate = new TagsContainTagPredicate(oneTagList);
+        TagsContainTagPredicate twoTagsPredicate = new TagsContainTagPredicate(twoTagsList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertTrue(oneTagPredicate.equals(oneTagPredicate));
 
         // same values -> returns true
-        TagsContainTagPredicate firstPredicateCopy = new TagsContainTagPredicate(firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        TagsContainTagPredicate firstPredicateCopy = new TagsContainTagPredicate(oneTagList);
+        assertTrue(oneTagPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertFalse(oneTagPredicate.equals(1));
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertFalse(oneTagPredicate.equals(null));
 
         // different person -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertFalse(oneTagPredicate.equals(twoTagsPredicate));
     }
 
     @Test
