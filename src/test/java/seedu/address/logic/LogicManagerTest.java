@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -119,13 +120,35 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredTutorList_success() {
+        assertEquals(logic.getFilteredTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getFilteredStudentList_success() {
+        assertEquals(logic.getFilteredStudentList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getMatchedTutorList_success() {
+        assertEquals(logic.getMatchedTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
     public void getFilteredTutorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTutorList().remove(0));
     }
 
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                logic.getFilteredStudentList().remove(INDEX_FIRST_PERSON.getZeroBased()));
+    }
+
+    @Test
+    public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                logic.getMatchedTutorList().remove(INDEX_FIRST_PERSON.getZeroBased()));
     }
 
     /**

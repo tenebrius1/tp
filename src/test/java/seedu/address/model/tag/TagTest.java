@@ -2,14 +2,13 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class TagTest {
-    final String validTagName = "PM";
-    final String validTagName2 = "SM";
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tag(null));
@@ -29,9 +28,9 @@ public class TagTest {
 
     @Test
     public void equals() {
-        Tag tag = new Tag(validTagName);
-        Tag tagCopy = new Tag(validTagName);
-        Tag differentTag = new Tag(validTagName2);
+        Tag tag = new Tag(VALID_TAG_PM);
+        Tag tagCopy = new Tag(VALID_TAG_PM);
+        Tag differentTag = new Tag(VALID_TAG_TP);
 
         // same object -> return true
         assertTrue(tag.equals(tag));
