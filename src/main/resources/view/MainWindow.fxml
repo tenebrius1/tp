@@ -43,32 +43,32 @@
           <HBox prefWidth="${screen.visualBounds.width}">
 
             <!-- Tutor List -->
-            <VBox fx:id="tutorList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.3}"
+            <VBox fx:id="tutorList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.33}"
                   prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
-              <TextField text="🎓 Tutors" editable="false" styleClass="list-header" focusTraversable="false" />
+              <TextField id="tutorHeader" text="   Tutors" editable="false" styleClass="list-header" focusTraversable="false" />
               <StackPane fx:id="tutorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
 
             <!-- Student List -->
-            <VBox fx:id="studentList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.3}"
+            <VBox fx:id="studentList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.33}"
                   prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
-              <TextField text="👨 Students" editable="false" styleClass="list-header" focusTraversable="false" />
+              <TextField id="studentHeader" text="   Students" editable="false" styleClass="list-header" focusTraversable="false" />
               <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
 
             <!-- Match List -->
-            <VBox fx:id="matchList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.4}"
+            <VBox fx:id="matchList" styleClass="pane-with-border" prefWidth="${screen.visualBounds.width*0.34}"
                   prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
-              <TextField text="📃 Match List" editable="false" styleClass="list-header" focusTraversable="false" />
+              <TextField id="matchHeader" text="   Match List" editable="false" styleClass="list-header" focusTraversable="false" />
               <StackPane fx:id="matchListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
           </HBox>
