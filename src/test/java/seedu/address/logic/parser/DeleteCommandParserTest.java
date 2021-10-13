@@ -21,13 +21,12 @@ import seedu.address.logic.commands.DeleteCommand;
  * therefore should be covered by the ParserUtilTest.
  */
 public class DeleteCommandParserTest {
-
     private DeleteCommandParser parser = new DeleteCommandParser();
+    private Index targetIndex = INDEX_FIRST_PERSON;
+    private String validIndex = " " + targetIndex.getOneBased();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String validIndex = " " + targetIndex.getOneBased();
         assertParseSuccess(parser, VALID_TUTOR_LETTER + validIndex,
                 new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR));
         assertParseSuccess(parser, VALID_STUDENT_LETTER + validIndex,
@@ -37,6 +36,13 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, INVALID_PREAMBLE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidNumberOfArgs_throwsParseException() {
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + validIndex,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
 }

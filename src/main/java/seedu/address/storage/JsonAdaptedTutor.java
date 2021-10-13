@@ -18,7 +18,6 @@ import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedTutor extends JsonAdaptedPerson {
-
     private final String qualification;
 
     /**

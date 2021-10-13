@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_B
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -23,6 +25,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
@@ -115,6 +118,35 @@ public class AddressBookTest {
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        addressBook.addTutor(ALICE);
+        addressBook.addStudent(DANIEL);
+        AddressBook addressBookWithDifferentTutor =
+                new AddressBookBuilder().withTutor(BENSON).withStudent(DANIEL).build();
+        AddressBook addressBookWithDifferentStudent =
+                new AddressBookBuilder().withTutor(ALICE).withStudent(IDA).build();
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // same values -> returns true
+        AddressBook addressBookCopy = new AddressBook(addressBook);
+        assertTrue(addressBook.equals(addressBookCopy));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different types -> returns false
+        assertFalse(addressBook.equals(5));
+
+        // different students -> return false
+        assertFalse(addressBook.equals(addressBookWithDifferentStudent));
+
+        // different tutors -> return false
+        assertFalse(addressBook.equals(addressBookWithDifferentTutor));
     }
 
     /**
