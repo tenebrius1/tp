@@ -1,13 +1,13 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class VersionTest {
-
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
         verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
@@ -126,6 +126,15 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+    }
+
+    @Test
+    public void versionComparable_validVersion_equalIsWrong() {
+        Version one;
+
+        one = new Version(0, 0, 0, false);
+        assertFalse(one.equals(null));
+        assertFalse(one.equals(5));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

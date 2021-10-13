@@ -208,5 +208,4 @@ public class ModelManager implements Model {
                 && filteredStudents.equals(other.filteredStudents)
                 && matchedTutors.equals(other.matchedTutors);
     }
-
 }
