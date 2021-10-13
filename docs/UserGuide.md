@@ -223,7 +223,7 @@ Example:<br>
 
 ### Listing all tutors/students: `list`
 
-Shows the list of all tutors.
+Shows the list of all tutors/students.
 
 Format: <br>`list`
 
