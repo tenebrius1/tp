@@ -191,8 +191,8 @@ Format:<br>
 * You must specify at least one tag when editing the tags with `t/`.
 
 Examples:<br>
-`edit t n/John Doe q/2 t/PM TE TM TL`<br>
-`edit s n/Mary Sue p/98765432`
+`edit t 6 n/John Doe q/2 t/PM TE TM TL`<br>
+`edit s 9 n/Mary Sue p/98765432`
 
 ### Deleting a tutor/student: `delete`
 
@@ -268,7 +268,7 @@ Format: <br>`exit`
 
 ### Editing the data file
 
-`CLITutors` data is saved as 2 JSON files `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`CLITutors` data is saved as 1 JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 ❗<b>Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
