@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +12,6 @@ import seedu.address.model.person.Person;
  * Jackson-friendly version of {@link Person}.
  */
 abstract class JsonAdaptedPerson {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
@@ -36,18 +34,6 @@ abstract class JsonAdaptedPerson {
         }
     }
 
-    /**
-     * Converts a given {@code Person} into this class for Jackson use.
-     */
-    public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        gender = source.getGender().genderSymbol;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
-    }
-
     public String getName() {
         return name;
     }
@@ -63,5 +49,4 @@ abstract class JsonAdaptedPerson {
     public List<JsonAdaptedTag> getTags() {
         return tagged;
     }
-
 }
