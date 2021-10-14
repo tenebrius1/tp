@@ -191,8 +191,8 @@ Format:<br>
 * You must specify at least one tag when editing the tags with `t/`.
 
 Examples:<br>
-`edit t n/John Doe q/2 t/PM TE TM TL`<br>
-`edit s n/Mary Sue p/98765432`
+`edit t 6 n/John Doe q/2 t/PM TE TM TL`<br>
+`edit s 9 n/Mary Sue p/98765432`
 
 ### Deleting a tutor/student: `delete`
 
