@@ -152,9 +152,10 @@
 
 .pane-with-border {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-radius: 10;
     -fx-border-color: derive(#1d1d1d, 10%);
     -fx-border-top-width: 1px;
-    -fx-border-radius: 18;
+    -fx-border-radius: 10;
 }
 
 .status-bar {
@@ -297,11 +298,14 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-pref-width: 10px;
+    -fx-background-radius: 10px;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#8D85F1, 20%);
+    -fx-background-color: #8d85f1;
+    -fx-opacity: 30%;
     -fx-background-insets: 3;
 }
 
