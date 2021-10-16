@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 
 /**
@@ -17,16 +21,28 @@ import seedu.address.logic.commands.DeleteCommand;
  * therefore should be covered by the ParserUtilTest.
  */
 public class DeleteCommandParserTest {
-
     private DeleteCommandParser parser = new DeleteCommandParser();
+    private Index targetIndex = INDEX_FIRST_PERSON;
+    private String validIndex = " " + targetIndex.getOneBased();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + validIndex,
+                new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR));
+        assertParseSuccess(parser, VALID_STUDENT_LETTER + validIndex,
+                new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, INVALID_PREAMBLE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidNumberOfArgs_throwsParseException() {
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + validIndex,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 }

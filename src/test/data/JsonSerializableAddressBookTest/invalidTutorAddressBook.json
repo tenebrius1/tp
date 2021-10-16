@@ -1,0 +1,15 @@
+{
+  "tutors": [ {
+    "name": "Hans Muster",
+    "phone" : "94351253",
+    "gender" : "F",
+    "qualification" : "4",
+    "tagged" : [ "PM" ]
+  } ],
+  "students": [ {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "gender" : "M",
+    "tagged" : [ "PM" ]
+  } ]
+}

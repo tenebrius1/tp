@@ -5,25 +5,100 @@ title: User Guide
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
-The application supports matching the following levels of education:
+The application supports the following level of education and subjects as shown in table below.
 
-- **P**rimary
-- **S**econdary
-- **T**ertiary
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Education Level</th>
+            <th style="text-align:center">Subjects</th>
+            <th style="text-align:center">Tag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=3><b>P</b>rimary</td>
+            <td><b>E</b>nglish</td>
+            <td style="text-align:center"><b>PE</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>PM</b></td>
+        </tr>
+        <tr>
+            <td><b>S</b>cience</td>
+            <td style="text-align:center"><b>PS</b></td>
+        </tr>
+        <tr>
+        <td rowspan=8><b>S</b>econdary</td>
+            <td><b>B</b>iology</td>
+            <td style="text-align:center"><b>SB</b></td>
+        </tr>
+        <tr>
+            <td><b>C</b>hemistry</td>
+            <td style="text-align:center"><b>SC</b></td>
+        </tr>
+        <tr>
+            <td><b>E</b>nglish</td>
+            <td style="text-align:center"><b>SE</b></td>
+        </tr>
+        <tr>
+            <td><b>G</b>eography</td>
+            <td style="text-align:center"><b>SG</b></td>
+        </tr>
+        <tr>
+            <td><b>H</b>istory</td>
+            <td style="text-align:center"><b>SH</b></td>
+        </tr>
+        <tr>
+            <td><b>L</b>iterature</td>
+            <td style="text-align:center"><b>SL</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>SM</b></td>
+        </tr>
+        <tr>
+            <td><b>P</b>hysics</td>
+            <td style="text-align:center"><b>SP</b></td>
+        </tr>
+        <tr>
+            <td rowspan=8><b>T</b>ertiary</td>
+            <td><b>B</b>iology</td>
+            <td style="text-align:center"><b>TB</b></td>
+        </tr>
+        <tr>
+            <td><b>C</b>hemistry</td>
+            <td style="text-align:center"><b>TC</b></td>
+        </tr>
+        <tr>
+            <td><b>E</b>conomics</td>
+            <td style="text-align:center"><b>TE</b></td>
+        </tr>
+        <tr>
+            <td><b>G</b>eography</td>
+            <td style="text-align:center"><b>TG</b></td>
+        </tr>
+        <tr>
+            <td><b>H</b>istory</td>
+            <td style="text-align:center"><b>TH</b></td>
+        </tr>
+        <tr>
+            <td><b>L</b>iterature</td>
+            <td style="text-align:center"><b>TL</b></td>
+        </tr>
+        <tr>
+            <td><b>M</b>ath</td>
+            <td style="text-align:center"><b>TM</b></td>
+        </tr>
+        <tr>
+            <td><b>P</b>hysics</td>
+            <td style="text-align:center"><b>TP</b></td>
+        </tr>
+    </tbody>
+</table>
 
-And the following subjects:
-
-- Math and Sciences
-    - **P**hysics
-    - **C**hemistry
-    - **B**iology
-    - **M**athematics
-
-- Humanities
-    - **H**istory
-    - **G**eography
-    - **L**iterature
-    - **E**conomics
+`Tag` is dervived from [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.
 
 Here are the possible categories of qualifications for tutors:
 
@@ -67,7 +142,7 @@ Here are the possible categories of qualifications for tutors:
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…` after them can be used multiple times.<br>
+- Items with `…` after them can have multiple arguments in them.<br>
   e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM PC PB` etc.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -89,10 +164,6 @@ Here are the possible categories of qualifications for tutors:
 
 Shows a message with all the commands available to use on `CLITutors`.
 
-### Getting interactive help: `ihelp`
-
-Starts the interactive tutorial done by Zi Hao to introduce new users to `CLITutors`.
-
 ### Adding a tutor/student: `add`
 
 Adds a tutor/student to the data.
@@ -104,6 +175,24 @@ Format:<br>
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `add s n/Mary Sue p/98765432 g/F t/PM`
+
+### Editing a tutor/student: `edit`
+
+Edits an existing tutor/student in the data.
+
+Format:<br>
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG]...`
+`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`
+
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the displayed tutor/student list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
+* You must specify at least one tag when editing the tags with `t/`.
+
+Examples:<br>
+`edit t n/John Doe q/2 t/PM TE TM TL`<br>
+`edit s n/Mary Sue p/98765432`
 
 ### Deleting a tutor/student: `delete`
 
@@ -118,8 +207,8 @@ Format:<br>
 - The index **must be a positive integer**, eg. `1`, `2`, `3`, ...
 
 Examples:<br>
-`delete t 0`<br>
-`delete s 5`
+`list` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
+`find n/Betsy` followed by `delete t 1` deletes the 1st person in the results of the find command for the tutor list.
 
 ### Editing a tutor/student's particulars: `edit`
 
@@ -134,18 +223,23 @@ Example:<br>
 
 ### Listing all tutors/students: `list`
 
-Shows the list of all tutors.
+Shows the list of all tutors/students.
 
 Format: <br>`list`
 
 ### Finding a tutor/student: `find`
 
-Finds a tutor/student whose names or contact numbers contain any of the given keywords.
+Find a tutor/student by name.
 
-Format: <br>`find KEYWORD`
+Format: <br>
+`find t n/NAME` <br>
+`find s n/NAME`
+- The search is case-insensitive. e.g. `n/hans` will match `Hans`
+- Only the last name given is searched. e.g. `find t n/John n/Amy` will find names that match `Amy`
+- Only full words will be matched e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`
 
 Example:<br>
-`find Cheese`
+`find t n/John Cheese`
 
 ### Matching a student to tutor(s): `match`
 
@@ -189,7 +283,7 @@ Format: <br>`exit`
 |  **Help**  | `help`           |
 |  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list`           |
-|  **Find**  | `find KEYWORD` <br> e.g. `find John`  |
+|  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
 | **Clear**  | `clear`          |
 |  **Exit**  | `exit`           |

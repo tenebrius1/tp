@@ -1,11 +1,14 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class UserPrefsTest {
+import seedu.address.commons.core.GuiSettings;
 
+public class UserPrefsTest {
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         UserPrefs userPref = new UserPrefs();
@@ -18,4 +21,26 @@ public class UserPrefsTest {
         assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
     }
 
+    @Test
+    public void equals() {
+        UserPrefs userPrefs = new UserPrefs();
+        UserPrefs userPrefsCopy = new UserPrefs();
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setGuiSettings(new GuiSettings(600, 750, 0 , 0));
+
+        // same values -> returns true
+        assertTrue(userPrefs.equals(userPrefsCopy));
+
+        // null -> returns false
+        assertFalse(userPrefs.equals(null));
+
+        // same object -> returns true
+        assertTrue(userPrefs.equals(userPrefs));
+
+        // different type -> returns false
+        assertFalse(userPrefs.equals(5));
+
+        // different GUISetting -> returns false
+        assertFalse(userPrefs.equals(differentUserPrefs));
+    }
 }
