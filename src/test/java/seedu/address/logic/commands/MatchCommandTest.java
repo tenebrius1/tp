@@ -10,7 +10,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
+import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -33,8 +36,8 @@ public class MatchCommandTest {
         String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
 
         ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModelStudent.updateMatchedTutor(
-                new TagsContainTagPredicate(Collections.singletonList(studentToMatch.getTag())));
+
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -69,8 +72,7 @@ public class MatchCommandTest {
 
         Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
-        expectedModelStudent.updateMatchedTutor(
-                new TagsContainTagPredicate(Collections.singletonList(studentToMatch.getTag())));
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -120,5 +122,12 @@ public class MatchCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new MatchCommand(INDEX_SECOND_PERSON)));
+    }
+
+    private List<Tag> getStudentTagList(Student student) {
+        Set<Tag> studentTag = student.getTags();
+        ArrayList<Tag> ls = new ArrayList<>();
+        studentTag.stream().forEach(tag -> ls.add(tag));
+        return ls;
     }
 }

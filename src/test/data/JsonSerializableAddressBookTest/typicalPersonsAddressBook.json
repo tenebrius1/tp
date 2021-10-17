@@ -23,12 +23,12 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
-    "tagged" : [ "PM" ]
+    "tagged" : [ "PM", "PE" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "gender" : "F",
-    "tagged" : [ "SC" ]
+    "tagged" : [ "SC", "SB", "SM" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",

@@ -32,9 +32,9 @@ public class TypicalPersons {
 
     // Students
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withGender("M").withTag("PM").build();
+            .withGender("M").withTag("PM", "PE").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withGender("F").withTag("SC").build();
+            .withGender("F").withTag("SC", "SB", "SM").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withGender("F").withTag("TG").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
