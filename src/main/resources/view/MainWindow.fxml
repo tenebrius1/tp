@@ -19,7 +19,7 @@
         <Screen fx:factory="getPrimary" fx:id="screen"/>
     </fx:define>
     <icons>
-        <Image url="@/images/address_book_32.png"/>
+        <Image url="@/images/cli_icon.png"/>
     </icons>
     <scene>
         <Scene>
