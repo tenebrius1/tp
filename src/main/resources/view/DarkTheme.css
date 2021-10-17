@@ -110,12 +110,12 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #4C4B98;
+    -fx-background-color: #504EA8;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: white;
-    -fx-border-width: 3px;
+    -fx-border-color: #EDEDED;
+    -fx-border-width: 1px;
     -fx-border-radius: 20px;
 }
 
@@ -129,7 +129,7 @@
 
 .list-header {
     -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Open Sans Extra Bold";
     -fx-font-size: 17pt;
     -fx-text-fill: white;
 }
@@ -152,9 +152,10 @@
 
 .pane-with-border {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-radius: 10;
     -fx-border-color: derive(#1d1d1d, 10%);
     -fx-border-top-width: 1px;
-    -fx-border-radius: 18;
+    -fx-border-radius: 10;
 }
 
 .status-bar {
@@ -164,7 +165,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: white;
 }
 
@@ -212,8 +213,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -297,11 +298,14 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-pref-width: 10px;
+    -fx-background-radius: 10px;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#8D85F1, 20%);
+    -fx-background-color: #8d85f1;
+    -fx-opacity: 30%;
     -fx-background-insets: 3;
 }
 
@@ -336,11 +340,11 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #797979 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: white;
 }
 
@@ -371,19 +375,19 @@
     -fx-background-image:url('../images/school.png');
     -fx-background-repeat: no-repeat;
     -fx-background-position: left center;
-    -fx-font-size: 20;
+    -fx-font-size: 18;
 }
 
 #studentHeader {
     -fx-background-image:url('../images/child_care.png');
     -fx-background-repeat: no-repeat;
     -fx-background-position: left center;
-    -fx-font-size: 20;
+    -fx-font-size: 18;
 }
 
 #matchHeader {
     -fx-background-image:url('../images/list_alt.png');
     -fx-background-repeat: no-repeat;
     -fx-background-position: left center;
-    -fx-font-size: 20;
+    -fx-font-size: 18;
 }
