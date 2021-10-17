@@ -61,11 +61,10 @@
                             <padding>
                                 <Insets top="10" right="10" bottom="10" left="10"/>
                             </padding>
-                            <TextField id="tutorHeader" text="   Tutors" editable="false" styleClass="list-header"
+                            <TextField id="tutorHeader" text="    Tutors" editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
                             <StackPane fx:id="tutorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                         </VBox>
-
 
                         <VBox style="-fx-background-color: #1d1d1d;">
                             <padding>
@@ -80,7 +79,7 @@
                             <padding>
                                 <Insets top="10" right="10" bottom="10" left="10"/>
                             </padding>
-                            <TextField id="studentHeader" text="   Students" editable="false" styleClass="list-header"
+                            <TextField id="studentHeader" text="    Students" editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
                             <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                         </VBox>
@@ -98,7 +97,7 @@
                             <padding>
                                 <Insets top="10" right="10" bottom="10" left="10"/>
                             </padding>
-                            <TextField id="matchHeader" text="   Match List" editable="false" styleClass="list-header"
+                            <TextField id="matchHeader" text="    Match List" editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
                             <StackPane fx:id="matchListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                         </VBox>
