@@ -36,7 +36,7 @@ public class MatchCommand extends Command {
     /**
      * Creates a MatchCommand to match the specified student to tutors.
      *
-     * @param Index of the person in the filtered student list to match.
+     * @param index Index of the person in the filtered student list to match.
      */
     public MatchCommand(Index index) {
         requireAllNonNull(index);
@@ -70,6 +70,7 @@ public class MatchCommand extends Command {
         model.updateMatchedTutor(new TagsContainTagPredicate(ls));
 
         if (model.getMatchedTutorList().isEmpty()) {
+            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_TUTORS);
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
         }
 
