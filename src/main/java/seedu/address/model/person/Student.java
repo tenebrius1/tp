@@ -40,4 +40,9 @@ public class Student extends Person {
     public Tag getTag() {
         return tag;
     }
+
+    @Override
+    public Qualification getQualification() {
+        return null;
+    }
 }

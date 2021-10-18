@@ -20,7 +20,7 @@ public class Qualification {
     public Qualification(String qualification) {
         requireNonNull(qualification);
         checkArgument(isValidQualification(qualification), MESSAGE_CONSTRAINTS);
-        index = qualification;
+        this.index = qualification;
     }
 
     /**

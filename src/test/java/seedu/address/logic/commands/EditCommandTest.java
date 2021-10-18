@@ -37,7 +37,6 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -297,5 +296,4 @@ public class EditCommandTest {
         assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.TUTOR)));
         assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.STUDENT)));
     }
-
 }

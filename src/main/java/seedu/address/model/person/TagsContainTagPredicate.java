@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Person}'s {@code Tag} matches the Tags given.
+ */
 public class TagsContainTagPredicate implements Predicate<Person> {
     private final List<Tag> tags;
 
