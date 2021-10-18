@@ -19,16 +19,18 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Tutor} and {@code Student} objects to be used in tests.
  */
 public class TypicalPersons {
-
+    // Tutors
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
             .withGender("F").withPhone("94351253").withQualification("0").withTags("PM").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
             .withGender("M").withPhone("98765432").withQualification("1").withTags("SM", "SC").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withGender("M").withQualification("2").withTags("TL", "TE").build();
+
+    // Students
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGender("M").withTag("PM").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -40,14 +42,14 @@ public class TypicalPersons {
 
     // Manually added
     public static final Tutor HOON = new TutorBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withGender("M").withQualification("2").withTags("TG, TL").build();
+            .withGender("M").withQualification("2").withTags("TG", "TL").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withGender("F").withTag("PE").build();
 
     // Manually added - Students with similar names
     public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("9482423")
             .withGender("M").withTag("SC").build();
-    public static final Student JOHN_P = new StudentBuilder().withName("Johnathan Prue")
+    public static final Student JOHN_P = new StudentBuilder().withName("John Prue")
             .withPhone("9482452").withGender("M").withTag("TP").build();
 
     // Manually added - Tutors with similar names
@@ -56,7 +58,7 @@ public class TypicalPersons {
     public static final Tutor DON_E = new TutorBuilder().withName("Don Ethel").withPhone("95462563")
             .withGender("M").withQualification("3").withTags("TP", "SC").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Student/Tutor details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withGender(VALID_GENDER_AMY).withTag(VALID_TAG_TP).build();
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)

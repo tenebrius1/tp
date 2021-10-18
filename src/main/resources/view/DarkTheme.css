@@ -56,11 +56,7 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -91,32 +87,50 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-radius: 18;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
+    -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-radius: 20px;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #CACEF2;
+    -fx-border-style: solid;
+    -fx-border-radius: 20px;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #b6bbed;
+    -fx-border-style: solid;
+    -fx-border-radius: 20px;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #504EA8;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: #EDEDED;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px;
+}
+
+.list-cell:filled:selected .label {
+    -fx-text-fill: white;
 }
 
 .list-cell .label {
+    -fx-text-fill: black;
+}
+
+.list-header {
+    -fx-background-color: transparent;
+    -fx-font-family: "Open Sans Extra Bold";
+    -fx-font-size: 17pt;
     -fx-text-fill: white;
 }
 
@@ -133,13 +147,15 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-radius: 10;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10;
 }
 
 .status-bar {
@@ -149,7 +165,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: white;
 }
 
@@ -197,8 +213,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -229,8 +245,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -282,11 +298,14 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-pref-width: 10px;
+    -fx-background-radius: 10px;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #8d85f1;
+    -fx-opacity: 30%;
     -fx-background-insets: 3;
 }
 
@@ -310,6 +329,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+    -fx-border-radius: 18;
 }
 
 #commandTypeLabel {
@@ -320,11 +340,11 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #797979 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: white;
 }
 
@@ -349,4 +369,25 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#tutorHeader {
+    -fx-background-image:url('../images/school.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-font-size: 18;
+}
+
+#studentHeader {
+    -fx-background-image:url('../images/child_care.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-font-size: 18;
+}
+
+#matchHeader {
+    -fx-background-image:url('../images/list_alt.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-font-size: 18;
 }

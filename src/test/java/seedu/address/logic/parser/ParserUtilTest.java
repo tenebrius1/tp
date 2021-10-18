@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -21,7 +22,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_TAG = "abcdefg";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -51,8 +51,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    public void parseName_null_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName((String) null));
     }
 
     @Test
@@ -74,8 +74,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parsePhone_null_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone((String) null));
     }
 
     @Test
@@ -97,8 +97,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseTag_null_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(null));
     }
 
     @Test
@@ -120,8 +120,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseTags_null_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(null));
     }
 
     @Test

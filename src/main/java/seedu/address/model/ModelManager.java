@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Tutor> filteredTutors;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Tutor> matchedTutors;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
+        matchedTutors.setPredicate(PREDICATE_SHOW_NO_TUTORS);
     }
 
     public ModelManager() {
@@ -172,6 +175,19 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
+    //=========== Matched Tutor List Accessors =============================================================
+
+    @Override
+    public void updateMatchedTutor(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        matchedTutors.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tutor> getMatchedTutorList() {
+        return matchedTutors;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -189,7 +205,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTutors.equals(other.filteredTutors)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && matchedTutors.equals(other.matchedTutors);
     }
-
 }

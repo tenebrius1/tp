@@ -16,7 +16,6 @@ import seedu.address.model.person.UniqueTutorList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
 
@@ -92,16 +91,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a tutor to the address book.
      * The tutor must not already exist in the address book.
      */
-    public void addTutor(Tutor p) {
-        tutors.add(p);
+    public void addTutor(Tutor tutor) {
+        tutors.add(tutor);
     }
 
     /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**

@@ -18,7 +18,6 @@ import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedTutor extends JsonAdaptedPerson {
-
     private final String qualification;
 
     /**
@@ -61,9 +60,9 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutor.
      */
     public Tutor toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> tutorTags = new ArrayList<>();
         for (JsonAdaptedTag tag : super.getTags()) {
-            personTags.add(tag.toModelType());
+            tutorTags.add(tag.toModelType());
         }
 
         if (super.getName() == null) {
@@ -99,7 +98,7 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
         }
         final Qualification modelQualification = new Qualification(qualification);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(tutorTags);
         return new Tutor(modelName, modelPhone, modelGender, modelQualification, modelTags);
     }
 }

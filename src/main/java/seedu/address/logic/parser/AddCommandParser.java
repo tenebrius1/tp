@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -31,7 +32,13 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        PersonType personType = ParserUtil.parsePersonType(args);
+        requireNonNull(args);
+        PersonType personType;
+        try {
+            personType = ParserUtil.parsePersonType(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), pe);
+        }
         switch (personType) {
         case TUTOR:
             ArgumentMultimap argMultimap =
@@ -40,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                     PREFIX_QUALIFICATION, PREFIX_TAG)
-                    || !argMultimap.getPreamble().isEmpty()) {
+                    || argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
@@ -58,9 +65,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
                     PREFIX_QUALIFICATION, PREFIX_TAG);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                    PREFIX_QUALIFICATION, PREFIX_TAG)
-                    || !argMultimap.getPreamble().isEmpty()) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG)
+                    || argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
@@ -72,7 +78,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             //Check if tagList has more than one tag for students
             if (tagList.size() != 1) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_TOO_MANY_TAGS));
+                        Student.MESSAGE_TOO_MANY_TAGS));
             }
 
             Tag tag = tagList.iterator().next();

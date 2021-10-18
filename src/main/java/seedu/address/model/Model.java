@@ -16,6 +16,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_TUTORS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Person> PREDICATE_SHOW_NO_TUTORS = unused -> false;
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
@@ -123,4 +126,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the matched tutors list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateMatchedTutor(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the matched tutor list */
+    ObservableList<Tutor> getMatchedTutorList();
 }

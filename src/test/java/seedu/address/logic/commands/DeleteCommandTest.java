@@ -26,90 +26,101 @@ import seedu.address.model.person.Tutor;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredListTutor_success() {
         Tutor tutorToDelete = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
         DeleteCommand deleteCommandTutor = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR);
-        DeleteCommand deleteCommandStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
-
         String expectedMessageTutor = String.format(DeleteCommand.MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete);
-        String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
-
         ModelManager expectedModelTutor = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
-
         expectedModelTutor.deleteTutor(tutorToDelete);
+
+        assertCommandSuccess(deleteCommandTutor, model, expectedMessageTutor, expectedModelTutor);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListStudent_success() {
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommandStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
+        String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+        ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModelStudent.deleteStudent(studentToDelete);
 
-        // Successfully deleting a tutor for valid index for an unfiltered list
-        assertCommandSuccess(deleteCommandTutor, model, expectedMessageTutor, expectedModelTutor);
-        // Successfully deleting a student for valid index for an unfiltered list
         assertCommandSuccess(deleteCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredListTutor_throwsCommandException() {
         Index outOfBoundIndexTutor = Index.fromOneBased(model.getFilteredTutorList().size() + 1);
-        Index outOfBoundIndexStudent = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-
         DeleteCommand deleteCommandTutor = new DeleteCommand(outOfBoundIndexTutor, PersonType.TUTOR);
+
+        assertCommandFailure(deleteCommandTutor, model, Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredListStudent_throwsCommandException() {
+        Index outOfBoundIndexStudent = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteCommand deleteCommandStudent = new DeleteCommand(outOfBoundIndexStudent, PersonType.STUDENT);
 
-        // Fail at deleting a tutor for invalid index for an unfiltered list
-        assertCommandFailure(deleteCommandTutor, model, Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
-        // Fail at deleting a student for invalid index for an unfiltered list
         assertCommandFailure(deleteCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredListTutor_success() {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
-        showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         Tutor tutorToDelete = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommandTutor = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR);
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommandStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
 
         String expectedMessageTutor = String.format(DeleteCommand.MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete);
-        String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
 
         Model expectedModelTutor = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModelTutor.deleteTutor(tutorToDelete);
         showNoTutor(expectedModelTutor);
+
+        assertCommandSuccess(deleteCommandTutor, model, expectedMessageTutor, expectedModelTutor);
+    }
+
+    @Test
+    public void execute_validIndexFilteredListStudent_success() {
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
+
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommandStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
+
+        String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+
         Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModelStudent.deleteStudent(studentToDelete);
         showNoStudent(expectedModelStudent);
 
-        // Successfully deleting a tutor for valid index for a filtered list
-        assertCommandSuccess(deleteCommandTutor, model, expectedMessageTutor, expectedModelTutor);
-        // Successfully deleting a student for valid index for a filtered list
         assertCommandSuccess(deleteCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredListTutor_throwsCommandException() {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
-        showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndexTutor = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexTutor is still in bounds of address book list
         assertTrue(outOfBoundIndexTutor.getZeroBased() < model.getAddressBook().getTutorList().size());
+
+        DeleteCommand deleteCommandTutor = new DeleteCommand(outOfBoundIndexTutor, PersonType.TUTOR);
+
+        assertCommandFailure(deleteCommandTutor, model, Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredListStudent_throwsCommandException() {
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
+
         Index outOfBoundIndexStudent = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexStudent is still in bounds of address book list
         assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        DeleteCommand deleteCommandTutor = new DeleteCommand(outOfBoundIndexTutor, PersonType.TUTOR);
         DeleteCommand deleteCommandStudent = new DeleteCommand(outOfBoundIndexStudent, PersonType.STUDENT);
 
-        // Fail at deleting a tutor for invalid index for a filtered list
-        assertCommandFailure(deleteCommandTutor, model, Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
-        // Fail at deleting a student for invalid index for a filtered list
         assertCommandFailure(deleteCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 

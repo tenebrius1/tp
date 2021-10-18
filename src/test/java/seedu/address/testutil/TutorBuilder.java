@@ -15,10 +15,10 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Tutor objects.
  */
 public class TutorBuilder {
-    public static final String DEFAULT_GENDER = "F";
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_QUALIFICATION = "3";
+    public static final String DEFAULT_GENDER = "M";
+    public static final String DEFAULT_NAME = "Bob Choo";
+    public static final String DEFAULT_PHONE = "22222222";
+    public static final String DEFAULT_QUALIFICATION = "0";
     public static final String DEFAULT_TAG = "PM";
 
     private Name name;
@@ -46,6 +46,7 @@ public class TutorBuilder {
         name = tutorToCopy.getName();
         phone = tutorToCopy.getPhone();
         gender = tutorToCopy.getGender();
+        qualification = tutorToCopy.getQualification();
         tags = new HashSet<>(tutorToCopy.getTags());
     }
 
@@ -92,5 +93,4 @@ public class TutorBuilder {
     public Tutor build() {
         return new Tutor(name, phone, gender, qualification, tags);
     }
-
 }

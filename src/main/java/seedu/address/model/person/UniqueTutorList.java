@@ -23,7 +23,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * @see Person#isSamePerson(Person)
  */
 public class UniqueTutorList implements Iterable<Tutor> {
-
     private final ObservableList<Tutor> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tutor> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -134,5 +133,4 @@ public class UniqueTutorList implements Iterable<Tutor> {
         }
         return true;
     }
-
 }

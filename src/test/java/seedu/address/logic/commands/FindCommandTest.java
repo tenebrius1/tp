@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -13,20 +12,19 @@ import static seedu.address.testutil.TypicalPersons.JOHN_R;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithSimilarNames;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.PersonType;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.stubs.FindCommandParserStub;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -38,6 +36,46 @@ public class FindCommandTest {
             new UserPrefs());
     private Model expectedSimilarNamesModel = new ModelManager(getTypicalAddressBookWithSimilarNames(),
             new UserPrefs());
+
+    @Test
+    public void execute_multipleStudentsFound_success() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("john");
+        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
+        expectedSimilarNamesModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(Arrays.asList(JOHN_P, JOHN_R), similarNamesModel.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_multipleTutorsFound_success() {
+        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Don");
+        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
+        expectedSimilarNamesModel.updateFilteredTutorList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(Arrays.asList(DON_A, DON_E), similarNamesModel.getFilteredTutorList());
+    }
+
+    @Test
+    public void execute_noTutorsFound_success() {
+        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Yi Guan");
+        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
+        expectedSimilarNamesModel.updateFilteredTutorList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(new ArrayList<Tutor>(), similarNamesModel.getFilteredTutorList());
+    }
+
+    @Test
+    public void execute_noStudentsFound_success() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Xin Yan");
+        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
+        expectedSimilarNamesModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
+        assertEquals(new ArrayList<Student>(), similarNamesModel.getFilteredStudentList());
+    }
 
     @Test
     public void equals() {
@@ -72,69 +110,10 @@ public class FindCommandTest {
         assertNotEquals(findFirstCommand, findThirdCommand);
     }
 
-    @Test
-    public void execute_zeroKeywords_noStudentFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = null;
-        try {
-            predicate = preparePredicate("n/ ");
-        } catch (ParseException e) {
-            fail();
-        }
-        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
-        expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
-    }
-
-    @Test
-    public void execute_zeroKeywords_noTutorFound() {
-        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = null;
-        try {
-            predicate = preparePredicate("n/ ");
-        } catch (ParseException e) {
-            fail();
-        }
-        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
-        expectedModel.updateFilteredTutorList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredTutorList());
-    }
-
-    @Test
-    public void execute_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        try {
-            NameContainsKeywordsPredicate predicate = preparePredicate("n/john");
-            FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
-            expectedSimilarNamesModel.updateFilteredStudentList(predicate);
-            assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
-            assertEquals(Arrays.asList(JOHN_P, JOHN_R), similarNamesModel.getFilteredStudentList());
-        } catch (ParseException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void execute_multipleTutorsFound() {
-        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 2);
-        try {
-            NameContainsKeywordsPredicate predicate = preparePredicate("n/Don");
-            FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
-            expectedSimilarNamesModel.updateFilteredTutorList(predicate);
-            assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
-            assertEquals(Arrays.asList(DON_A, DON_E), model.getFilteredTutorList());
-        } catch (ParseException e) {
-            fail();
-        }
-    }
-
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) throws ParseException {
-        Name name = FindCommandParserStub.extractName(userInput);
-        return new NameContainsKeywordsPredicate(List.of(name.toString()));
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
