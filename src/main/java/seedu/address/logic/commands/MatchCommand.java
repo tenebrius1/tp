@@ -71,6 +71,7 @@ public class MatchCommand extends Command {
         model.updateMatchedTutor(new TagsContainTagPredicate(ls));
 
         if (model.getMatchedTutorList().isEmpty()) {
+            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_TUTORS);
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
         }
 
