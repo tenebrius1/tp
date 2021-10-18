@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -53,6 +55,11 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
+        final List<Tag> studentTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : super.getTags()) {
+            studentTags.add(tag.toModelType());
+        }
+
         if (super.getName() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -77,7 +84,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(super.getGender());
 
-        final Tag modelTag = super.getTags().get(0).toModelType();
-        return new Student(modelName, modelPhone, modelGender, modelTag);
+        final Set<Tag> modelTags = new HashSet<>(studentTags);
+        return new Student(modelName, modelPhone, modelGender, modelTags);
     }
 }
