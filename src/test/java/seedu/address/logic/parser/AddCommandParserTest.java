@@ -110,21 +110,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_studentTooManyTags_failure() {
-        // multiple tags - not accepted
-        String expectedMultipleTagsStudentMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                Student.MESSAGE_TOO_MANY_TAGS);
-
-        // Too many tag arguments - fail
-        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM_TP, expectedMultipleTagsStudentMessage);
-
-        // Multiple tag prefixes, latest one with too many tags argument taken - fail
-        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_PM + TAG_DESC_PM_TP, expectedMultipleTagsStudentMessage);
-    }
-
-    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
