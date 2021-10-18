@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -87,6 +88,8 @@ public class EditCommandTest {
         expectedModel.setTutor(lastTutor, editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+
     }
 
     @Test
@@ -96,10 +99,10 @@ public class EditCommandTest {
 
         StudentBuilder personInList = new StudentBuilder(lastStudent);
         Student editedStudent = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTag(VALID_TAG_PM).build();
+                .withTag(VALID_TAG_PM, VALID_TAG_TP).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PM).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor, PersonType.STUDENT);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);

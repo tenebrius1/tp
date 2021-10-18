@@ -75,15 +75,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            //Check if tagList has more than one tag for students
-            if (tagList.size() != 1) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        Student.MESSAGE_TOO_MANY_TAGS));
-            }
-
-            Tag tag = tagList.iterator().next();
-
-            Student student = new Student(name, phone, gender, tag);
+            Student student = new Student(name, phone, gender, tagList);
             return new AddCommand(student, PersonType.STUDENT);
             // No break necessary due to return statement
         default:
