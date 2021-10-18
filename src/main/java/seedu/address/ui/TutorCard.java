@@ -7,13 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Qualification.Qualifications;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.LevelSubjectCode;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code tutor}.
  */
-public class PersonCard extends UiPart<Region> {
+public class TutorCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -25,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Tutor tutor;
 
     @FXML
     private HBox cardPane;
@@ -38,19 +39,24 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label gender;
     @FXML
+    private Label qualification;
+    @FXML
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code tutorCode} with the given {@code tutor} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public TutorCard(Tutor tutor, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.tutor = tutor;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText("Contact: " + person.getPhone().value);
-        gender.setText("Gender: " + person.getGender().genderSymbol);
-        person.getTags().stream()
+        name.setText(tutor.getName().fullName);
+        phone.setText("Contact: " + tutor.getPhone().value);
+        gender.setText("Gender: " + tutor.getGender().genderSymbol);
+        if (tutor instanceof Tutor) {
+            qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
+        }
+        tutor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(LevelSubjectCode.getLabel(tag.tagName))));
     }
@@ -63,13 +69,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof TutorCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        TutorCard card = (TutorCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && tutor.equals(card.tutor);
     }
 }
