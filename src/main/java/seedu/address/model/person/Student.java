@@ -18,4 +18,9 @@ public class Student extends Person {
         super(name, phone, gender, tags);
         requireAllNonNull(name, phone, gender, tags);
     }
+
+    @Override
+    public Qualification getQualification() {
+        return null;
+    }
 }

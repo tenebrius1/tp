@@ -3,18 +3,19 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all students or tutors in address book whose name contains the argument keyword.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
     public static final String COMMAND_ALIAS = "f";
 
@@ -23,11 +24,11 @@ public class FindCommand extends Command {
             + "Parameters: s/t KEYWORD\n"
             + "Example: " + COMMAND_WORD + " t n/charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
     private final PersonType personType;
 
     /** Creates a FindCommand to search for the specified {@code Person} */
-    public FindCommand(NameContainsKeywordsPredicate predicate, PersonType personType) {
+    public FindCommand(Predicate<Person> predicate, PersonType personType) {
         requireNonNull(predicate);
         requireNonNull(personType);
         this.predicate = predicate;
@@ -56,7 +57,7 @@ public class FindCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)) // state check
-                && personType == ((FindCommand) other).personType; // type check
+                && predicate.equals(((FindCommand) other).predicate) // state check
+                && personType == ((FindCommand) other).personType); // type check
     }
 }
