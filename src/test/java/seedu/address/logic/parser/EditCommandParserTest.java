@@ -49,7 +49,6 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTutorDescriptorBuilder;
 
 public class EditCommandParserTest {
-
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
