@@ -9,14 +9,14 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears all tutor or student data in CLITutors.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears all entries of tutors/students from the database. "
+            + ": Clears all entries of tutors or students from the database. "
             + "Parameters: "
             + "s/t";
 
@@ -25,6 +25,7 @@ public class ClearCommand extends Command {
 
     private PersonType personType;
 
+    // Used as a stub for testing purposes
     public ClearCommand() {
     }
 
