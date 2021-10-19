@@ -66,47 +66,68 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private Predicate<Person> generatePredicate(String args, PersonType personType) throws ParseException {
         Predicate<Person> predicate = x -> true;
-        Name name;
-        Gender gender;
-        Qualification qualification;
-        List<Tag> tags;
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
                 PREFIX_QUALIFICATION, PREFIX_GENDER);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            String[] nameList = new String[] {name.toString()};
-            predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameList)));
-            builder.setName(name);
+            predicate = handleName(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-            Gender[] genderList = new Gender[] {gender};
-            predicate = predicate.and(new GenderContainsGenderPredicate(Arrays.asList(genderList)));
-            builder.setGender(gender);
+            predicate = handleGender(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
-            // Guard clause in case user searches student using qualification
-            if (personType == PersonType.STUDENT) {
-                throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
-            }
-
-            qualification =
-                    ParserUtil.parseQualification(argMultimap.getValue(PREFIX_QUALIFICATION).get());
-            Qualification[] qualificationList = new Qualification[] {qualification};
-            predicate =
-                    predicate.and(new QualificationContainsQualificationPredicate(Arrays.asList(qualificationList)));
-            builder.setQualification(qualification);
+            predicate = handleQualification(personType, predicate, builder, argMultimap);
         }
         if (parseTags(argMultimap.getAllValues(PREFIX_TAG)).isPresent()) {
-            tags = parseTags(argMultimap.getAllValues(PREFIX_TAG)).get();
-            predicate = predicate.and(new TagsContainTagPredicate(tags));
-            builder.setTags(tags);
+            predicate = handleTags(predicate, builder, argMultimap);
         }
 
         return builder.setPredicate(predicate).build();
+    }
+
+    private Predicate<Person> handleTags(Predicate<Person> predicate, ChainedPredicate.Builder builder,
+                                         ArgumentMultimap argMultimap) throws ParseException {
+        List<Tag> tags = parseTags(argMultimap.getAllValues(PREFIX_TAG)).get();
+        predicate = predicate.and(new TagsContainTagPredicate(tags));
+        builder.setTags(tags);
+        return predicate;
+    }
+
+    private Predicate<Person> handleQualification(PersonType personType, Predicate<Person> predicate,
+                                                  ChainedPredicate.Builder builder,
+                                                  ArgumentMultimap argMultimap) throws ParseException {
+        // Guard clause in case user searches student using qualification
+        if (personType == PersonType.STUDENT) {
+            throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
+        }
+
+        Qualification qualification =
+                ParserUtil.parseQualification(argMultimap.getValue(PREFIX_QUALIFICATION).get());
+        Qualification[] qualificationList = new Qualification[] {qualification};
+        predicate =
+                predicate.and(new QualificationContainsQualificationPredicate(Arrays.asList(qualificationList)));
+        builder.setQualification(qualification);
+        return predicate;
+    }
+
+    private Predicate<Person> handleGender(Predicate<Person> predicate, ChainedPredicate.Builder builder,
+                                           ArgumentMultimap argMultimap) throws ParseException {
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        Gender[] genderList = new Gender[] {gender};
+        predicate = predicate.and(new GenderContainsGenderPredicate(Arrays.asList(genderList)));
+        builder.setGender(gender);
+        return predicate;
+    }
+
+    private Predicate<Person> handleName(Predicate<Person> predicate, ChainedPredicate.Builder builder,
+                                         ArgumentMultimap argMultimap) throws ParseException {
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        String[] nameList = new String[] {name.toString()};
+        predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameList)));
+        builder.setName(name);
+        return predicate;
     }
 
     /**
@@ -121,7 +142,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             return Optional.empty();
         }
 
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(List.copyOf(ParserUtil.parseTags(tagSet)));
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") // check for empty tags
+                ? Collections.emptySet() // return empty set if there are no tags
+                : tags; // else return the tags
+        return Optional.of(List.copyOf(ParserUtil.parseTags(tagSet))); // convert set to List<Tags>
     }
 }
