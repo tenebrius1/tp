@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
     public static final String MESSAGE_CONSTRAINTS = "Gender should be 'M' or 'F'";
-    public static final String VALIDATION_REGEX = "[MF]";
+    public static final String VALIDATION_REGEX = "[MmFf]";
     public final String genderSymbol;
 
     /**
