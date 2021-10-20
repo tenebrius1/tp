@@ -1,6 +1,6 @@
 ---
 layout: page
-title: CLITutors Developer Guide
+title: Developer Guide
 nav-text: Developer Guide
 ---
 
@@ -23,6 +23,7 @@ nav-text: Developer Guide
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Navigating this Developer Guide**
 Before diving into the rest of the contents in our developer guide, the following are a few important syntaxes to take note of to facilitate your reading:
 
@@ -34,14 +35,17 @@ Before diving into the rest of the contents in our developer guide, the followin
 
 <div style="page-break-after: always;"></div>
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 We would like to thank Jun Xiong and Damith for supervising our project.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Design**
 
 <div markdown="span" class="alert alert-info"> :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T17-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -169,10 +173,12 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -181,6 +187,7 @@ This section describes some noteworthy details on how certain features are imple
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+--------------------------------------------------------------------------------------------------------------------
 ## Appendix: Requirements
 
 ### Product scope
