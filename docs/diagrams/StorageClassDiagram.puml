@@ -41,4 +41,5 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" Person
 Person --> "*" JsonAdaptedTag
+
 @enduml
