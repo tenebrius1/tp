@@ -141,7 +141,7 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code><p>
+<p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -166,7 +166,7 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>delete t 2</code><p>
+<p>Command Executed: <code>delete t 2</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -182,7 +182,7 @@ Format: <br>`list t` <br> `list s`
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>list t</code><p>
+<p>Command Executed: <code>list t</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -212,7 +212,7 @@ Example:<br>
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>find t n/Yu t/SC</code><p>
+<p>Command Executed: <code>find t n/Yu t/SC</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -231,7 +231,7 @@ Example:<br>
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>match 1</code><p>
+<p>Command Executed: <code>match 1</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -247,7 +247,7 @@ Format: <br>`clear t` <br> `clear s`
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>clear t</code><p>
+<p>Command Executed: <code>clear t</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
