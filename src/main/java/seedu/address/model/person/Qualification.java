@@ -12,6 +12,37 @@ public class Qualification {
     public static final String VALIDATION_REGEX = "[0123]";
     public final String index;
 
+    enum Qualifications {
+        PREUNI("0", "Pre-University"),
+        UNI("1", "University"),
+        POSTGRAD("2", "Post-Graduate"),
+        MOE("3", "MOE-Trained"),
+        INVALID("Invalid", "Invalid");
+
+        public final String qualificationCode;
+        public final String label;
+
+        Qualifications(String qualificationCode, String label) {
+            this.qualificationCode = qualificationCode;
+            this.label = label;
+        }
+
+        /**
+         * Returns label that corresponds to the qualificationCode user has given.
+         *
+         * @param qualificationCode qualificationCode from user input.
+         * @return Label corresponding to the qualificationCode.
+         */
+        public static String getLabel(String qualificationCode) {
+            for (Qualifications x : values()) {
+                if (x.qualificationCode.equalsIgnoreCase(qualificationCode)) {
+                    return x.label;
+                }
+            }
+            return INVALID.label;
+        }
+    }
+
     /**
      * Constructs a {@code Qualification}.
      *
@@ -20,7 +51,7 @@ public class Qualification {
     public Qualification(String qualification) {
         requireNonNull(qualification);
         checkArgument(isValidQualification(qualification), MESSAGE_CONSTRAINTS);
-        index = qualification;
+        this.index = qualification;
     }
 
     /**

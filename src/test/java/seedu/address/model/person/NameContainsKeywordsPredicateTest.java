@@ -13,7 +13,6 @@ import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
 public class NameContainsKeywordsPredicateTest {
-
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
