@@ -69,7 +69,7 @@ For your convenience, a list of all parameters along with their prefixes have be
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
 
 - Items with `…` after them can have multiple arguments in them.<br>
-  e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM PC PB` etc.
+  e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM SC TB` etc.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -78,7 +78,7 @@ For your convenience, a list of all parameters along with their prefixes have be
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - Tags are denoted by `t/[Level][Subject]`. <br>
-  e.g. The tag t/PM stands for Primary Math.
+  e.g. the tag `t/PM` stands for Primary Math.
 
 - Editing information of any `Person` will override the current information stored about the specified `Person`.
 
@@ -197,11 +197,14 @@ Find a tutor/student.
 Format: <br>
 `find t [n/NAME] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
 `find s [n/NAME] [g/GENDER] [t/TAG...]`
-- The search is case-insensitive. <br> e.g. `n/hans` will match `Hans`
-- Only the last name given is searched. <br> e.g. `find t n/John n/Amy` will find names that match `Amy`
-- Only full words will be matched <br> e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`
-- At least one of the optional fields **must** be provided
-- You must specify at least one tag when finding tags with `t/`
+- The search is case-insensitive. <br>
+  e.g. `n/hans` will match `Hans`.
+- Only the last name given is searched. <br>
+  e.g. `find t n/John n/Amy` will find names that match `Amy`.
+- Only full words will be matched. <br>
+  e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
+- At least one of the optional fields **must** be provided.
+- You must specify at least one tag when finding tags with `t/`.
 
 Example:<br>
 `find t n/Yu t/SC`<br>
