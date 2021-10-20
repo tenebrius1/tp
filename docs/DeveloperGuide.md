@@ -15,8 +15,8 @@ nav-text: Developer Guide
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents {:.no_toc}
-Table of Contents {:toc}
+## Table of Contents
+* Table of Contents {:toc}
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
