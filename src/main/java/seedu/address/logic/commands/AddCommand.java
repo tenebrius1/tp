@@ -62,7 +62,9 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (personType.equals(PersonType.TUTOR)) {
+
+        switch (personType) {
+        case TUTOR:
             Tutor tutor = (Tutor) toAdd;
             if (model.hasTutor(tutor)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
@@ -70,9 +72,8 @@ public class AddCommand extends Command {
 
             model.addTutor(tutor);
             return new CommandResult(String.format(MESSAGE_SUCCESS_TUTOR, tutor));
-        }
-
-        if (personType.equals(PersonType.STUDENT)) {
+            // No break necessary due to return statement
+        case STUDENT:
             Student student = (Student) toAdd;
             if (model.hasStudent(student)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -80,10 +81,11 @@ public class AddCommand extends Command {
 
             model.addStudent(student);
             return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, student));
+            // No break necessary due to return statement
+        default:
+            // Any invalid input would be handled by the AddCommandParser and will not reach here
+            throw new CommandException(MESSAGE_USAGE);
         }
-
-        // Any invalid input would be handled by the AddCommandParser and will not reach here
-        throw new CommandException(MESSAGE_USAGE);
     }
 
     @Override
