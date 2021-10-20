@@ -45,6 +45,8 @@ public abstract class Person {
         return gender;
     }
 
+    public abstract Qualification getQualification();
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

@@ -1,25 +1,25 @@
 ---
 layout: page
-title: User Guide
+title: CLITutors User Guide (v1.3)
 ---
 ![](https://i.imgur.com/dLt7IDY.png)
-# CLITutors User Guide (v1.3)
+
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
-## Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
+--------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `CLITutors.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-2/tp).
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+4. Double-click the file to start the app. A GUI similar to one the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 5. Type the command in the command box and press `Enter` to execute it. Here are example commands you can try:
     - `add`: add a tutor/student to the program
-    - `list`: lists all tutors and students
+    - `list`: lists all tutors/students
     - `help`: shows all commands available
     - `exit`: exits the program
 6. Refer to the [Features](#Features) below for details of each command.
@@ -50,6 +50,8 @@ For your convenience, a list of all parameters along with their prefixes have be
 |    q/     | Qualifications | Should be an Integer from `0`-`3`                                |
 |    t/     | Tags           | Tags names should be alphanumeric                      |
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -66,7 +68,7 @@ For your convenience, a list of all parameters along with their prefixes have be
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - Tags are denoted by `t/[Level][Subject]`. <br>
@@ -137,11 +139,11 @@ Examples:<br>
 
 ### Listing all tutors/students: `list`
 
-Shows the list of all tutors/students.
+Shows the list of all tutors or students.
 
 **Alias:** `l`
 
-Format: <br>`list`
+Format: <br>`list t` <br> `list s`
 
 ### Finding a tutor/student: `find`
 
@@ -172,9 +174,9 @@ Example:<br>
 
 ### Clearing all entries: `clear`
 
-Clears all entries from storage.
+Clears all entries of tutors or students from storage.
 
-Format: <br>`clear`
+Format: <br>`clear t` <br> `clear s`
 
 ### Exiting the program: `exit`
 
@@ -194,6 +196,7 @@ Format: <br>`exit`
 ❗<b>Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?
@@ -204,7 +207,8 @@ Format: <br>`exit`
 
 **A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and a command execution) of a fresh installation.
 
-## Command summary
+--------------------------------------------------------------------------------------------------------------------
+## Command Summary
 
 |   Action   | Format, Examples |
 |:----------:|:---------------- |
@@ -212,12 +216,13 @@ Format: <br>`exit`
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
 |  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
-|  **List**  | `list`           |
+|  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
-| **Clear**  | `clear`          |
+| **Clear**  | `clear t` <br> `clear s`          |
 |  **Exit**  | `exit`           |
 
+--------------------------------------------------------------------------------------------------------------------
 ## Appendix
 
 The application supports the following level of education and subjects as shown in table below.

@@ -44,10 +44,40 @@ public class AddressBookTest {
     }
 
     @Test
+    public void resetTutorData_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.resetTutorData(null));
+    }
+
+    @Test
+    public void resetStudentData_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.resetStudentData(null));
+    }
+
+    @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void resetTutorData_withValidReadOnlyAddressBook_replacesTutorDataOnly() {
+        AddressBook newData = getTypicalAddressBook();
+        ObservableList<Student> expectedStudentList = addressBook.getStudentList();
+        addressBook.resetTutorData(newData);
+
+        assertEquals(newData.getTutorList(), addressBook.getTutorList());
+        assertEquals(expectedStudentList, addressBook.getStudentList());
+    }
+
+    @Test
+    public void resetStudentData_withValidReadOnlyAddressBook_replacesStudentDataOnly() {
+        AddressBook newData = getTypicalAddressBook();
+        ObservableList<Tutor> expectedTutorList = addressBook.getTutorList();
+        addressBook.resetStudentData(newData);
+
+        assertEquals(newData.getStudentList(), addressBook.getStudentList());
+        assertEquals(expectedTutorList, addressBook.getTutorList());
     }
 
     @Test
