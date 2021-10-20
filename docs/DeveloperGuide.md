@@ -48,9 +48,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 </div>
 
 ### Architecture
-<p align="center">
-  <img src="images/ArchitectureDiagram.png" />
-</p>
+
+![Architecture Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -78,7 +77,6 @@ Each of the four components,
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
-
 ![LogicClassDiagram](images/LogicClassDiagram.png)
 
 <div style="page-break-after: always;"></div>
@@ -87,7 +85,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete s 1`.
 
-![](images/ArchitectureSequenceDiagram.png)
+![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
 The sections on the next few pages will give more details of each component.
 
