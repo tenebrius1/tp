@@ -16,7 +16,7 @@ import seedu.address.model.tag.LevelSubjectCode;
  */
 public class TutorCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TutorListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
