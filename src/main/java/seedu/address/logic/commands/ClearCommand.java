@@ -51,7 +51,6 @@ public class ClearCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
             // No break necessary due to return statement
         default:
-            model.setAddressBook(new AddressBook());
             // Any invalid input would be handled by the ClearCommandParser and will not reach here
             throw new CommandException(MESSAGE_USAGE);
         }
