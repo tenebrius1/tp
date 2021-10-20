@@ -111,7 +111,7 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code><p>
+<p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
