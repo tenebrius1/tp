@@ -1,9 +1,98 @@
 ---
 layout: page
 title: Developer Guide
+nav-text: Developer Guide
 ---
-* Table of Contents
-{:toc}
+<p align="center">
+  <img src="https://i.imgur.com/dLt7IDY.png" />
+</p>
+
+<p align="center">
+  <img src="https://i.imgur.com/FKI1H1U.png" width="300"/>
+</p>
+
+# CLITutors Developer Guide (v1.3)
+
+<div style="page-break-after: always;"></div>
+
+## Table of Contents {:.no_toc}
+Table of Contents {:toc}
+
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+
+## **Navigating this Developer Guide**
+Before diving into the rest of the contents in our developer guide, the following are a few important syntaxes to take note of to facilitate your reading:
+
+| Syntax                                                                  | Description                                         |
+| ----------------------------------------------------------------------- | --------------------------------------------------- |
+| `Markdown`                                                              | Denotes distinct classes, their methods or examples |
+| <div markdown="span" class="alert alert-info">:information_source: Note</div> | Important things to take note of                    |
+| <kbd>Keyboard</kbd>                                                     | Keyboard actions                                    |
+
+<div style="page-break-after: always;"></div>
+
+## **Acknowledgements**
+
+We would like to thank Jun Xiong and Damith for supervising our project.
+
+## **Setting up, getting started**
+
+Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+## **Design**
+
+<div markdown="span" class="alert alert-info"> :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T17-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+</div>
+
+### Architecture
+
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" />
+</p>
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#Common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#UI-component): The UI of the App.
+* [**`Logic`**](#Logic-component): The command executor.
+* [**`Model`**](#Model-component): Holds the data of the App in memory.
+* [**`Storage`**](#Storage-component): Reads data from, and writes data to, the hard disk.
+
+Each of the four components,
+
+* defines its *API* in an `interface` with the same name as the Component.
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
+
+<p align="center">
+  <img src="images/LogicClassDiagram.png" />
+</p>
+
+<div style="page-break-after: always;"></div>
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete s 1`.
+
+<p align="center">
+  <img src="images/ArchitectureSequenceDiagram.png" />
+</p>
+
+The sections on the next few pages will give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Requirements
 
