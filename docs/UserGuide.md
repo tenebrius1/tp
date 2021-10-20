@@ -111,7 +111,11 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Add.png">
 </details>
 
@@ -123,7 +127,7 @@ Format:<br>
 `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG...]`
 
-* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the displayed tutor/student list. The index **must be a positive integer** 1, 2, 3...
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the displayed tutor/student list. The index **must be a positive integer**, i.e 1, 2, 3...
 * At least one of the optional fields **must** be provided.
 * Existing values will be updated to the input values.
 * You must specify at least one tag when editing the tags with `t/`.
@@ -137,7 +141,11 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Edit.png">
 </details>
 
@@ -150,7 +158,7 @@ Format:<br>
 `delete s INDEX`
 
 - The `INDEX` refers to the index number shown on the tutor/student list.
-- The `INDEX` **must be a positive integer**, eg. `1`, `2`, `3`, ...
+- The `INDEX` **must be a positive integer** <br> eg. `1`, `2`, `3`, ...
 
 Examples:<br>
 `list` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
@@ -158,7 +166,11 @@ Examples:<br>
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>delete t 2</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Delete.png">
 </details>
 
@@ -170,7 +182,11 @@ Format: <br>`list t` <br> `list s`
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>list t</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/List.png">
 </details>
 
@@ -181,11 +197,11 @@ Find a tutor/student.
 Format: <br>
 `find t [n/NAME] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
 `find s [n/NAME] [g/GENDER] [t/TAG...]`
-- The search is case-insensitive. e.g. `n/hans` will match `Hans`
-- Only the last name given is searched. e.g. `find t n/John n/Amy` will find names that match `Amy`
-- Only full words will be matched e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`
-- At least one of the optional fields **must** be provided.
-- You must specify at least one tag when finding tags with `t/`.
+- The search is case-insensitive. <br> e.g. `n/hans` will match `Hans`
+- Only the last name given is searched. <br> e.g. `find t n/John n/Amy` will find names that match `Amy`
+- Only full words will be matched <br> e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`
+- At least one of the optional fields **must** be provided
+- You must specify at least one tag when finding tags with `t/`
 
 Example:<br>
 `find t n/Yu t/SC`<br>
@@ -193,7 +209,11 @@ Example:<br>
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>find t n/Yu t/SC</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Find.png">
 </details>
 
@@ -208,7 +228,11 @@ Example:<br>
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>match 1</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Match.png">
 </details>
 
@@ -220,7 +244,11 @@ Format: <br>`clear t` <br> `clear s`
 
 <details>
 <summary>Expected outcome:</summary>
+<p>Command Executed: <code>clear t</code><p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
 <br>
+<p>After:</p>
 <img src="images/screenshots/Clear.png">
 </details>
 
