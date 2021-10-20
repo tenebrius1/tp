@@ -12,8 +12,8 @@ Class JsonUserPrefsStorage
 }
 
 Interface Storage <<Interface>>
-Class StorageManager
 
+Class StorageManager
 package "AddressBook Storage" #F4F6F6{
 Interface AddressBookStorage <<Interface>>
 Class JsonAddressBookStorage
