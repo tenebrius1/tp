@@ -24,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * among constructors.
      */
     {
         tutors = new UniqueTutorList();
@@ -66,6 +66,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setTutors(newData.getTutorList());
+        setStudents(newData.getStudentList());
+    }
+
+    /**
+     * Resets the existing tutor data of this {@code AddressBook} with that in {@code newData}.
+     */
+    public void resetTutorData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setTutors(newData.getTutorList());
+    }
+
+    /**
+     * Resets the existing student data of this {@code AddressBook} with that in {@code newData}.
+     */
+    public void resetStudentData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
         setStudents(newData.getStudentList());
     }
 

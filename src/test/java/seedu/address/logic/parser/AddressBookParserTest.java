@@ -10,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ChainedPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -36,7 +40,6 @@ import seedu.address.testutil.TutorBuilder;
 import seedu.address.testutil.TutorUtil;
 
 public class AddressBookParserTest {
-
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
@@ -53,8 +56,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + LETTER_DESC_TUTOR) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + LETTER_DESC_STUDENT) instanceof ClearCommand);
     }
 
     @Test
@@ -95,31 +98,39 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find_student() throws Exception {
         List<String> keywords = List.of("foo");
+        Predicate<Person> predicate = x -> true;
+        predicate = predicate.and(new NameContainsKeywordsPredicate(keywords));
+        ChainedPredicate chainedPredicate = new ChainedPredicate.Builder().setName(new Name("foo"))
+                .setPredicate(predicate).build();
 
         // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + LETTER_DESC_STUDENT + " n/" + String.join(" ", keywords));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
+        assertTrue(new FindCommand(chainedPredicate, PersonType.STUDENT).equals(command));
 
         // Test COMMAND_ALIAS
         command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_ALIAS + LETTER_DESC_STUDENT + " n/" + String.join(" ", keywords));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.STUDENT), command);
+        assertTrue(new FindCommand(chainedPredicate, PersonType.STUDENT).equals(command));
     }
 
     @Test
     public void parseCommand_find_tutor() throws Exception {
         List<String> keywords = List.of("foo");
+        Predicate<Person> predicate = x -> true;
+        predicate = predicate.and(new NameContainsKeywordsPredicate(keywords));
+        ChainedPredicate chainedPredicate = new ChainedPredicate.Builder().setName(new Name("foo"))
+                .setPredicate(predicate).build();
 
         // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + LETTER_DESC_TUTOR + " n/" + String.join(" ", keywords));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
+        assertEquals(new FindCommand(chainedPredicate, PersonType.TUTOR), command);
 
         // Test COMMAND_ALIAS
         command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_ALIAS + LETTER_DESC_TUTOR + " n/" + String.join(" ", keywords));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.TUTOR), command);
+        assertEquals(new FindCommand(chainedPredicate, PersonType.TUTOR), command);
     }
 
     @Test
@@ -130,8 +141,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + LETTER_DESC_TUTOR) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + LETTER_DESC_STUDENT) instanceof ListCommand);
     }
 
     @Test
