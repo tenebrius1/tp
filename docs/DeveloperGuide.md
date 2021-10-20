@@ -16,9 +16,9 @@ nav-text: Developer Guide
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents 
+## Table of Contents
 {: .no_toc}
-1. Table of Contents 
+1. Table of Contents
 {:toc}
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
@@ -52,8 +52,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ![Structure of the UI Component](images/UiClassDiagram.png)
 **API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. 
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
 between classes that represent parts of the visible GUI. `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 3 lists: Tutor List, Student List, and Matchlist.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
@@ -121,7 +121,7 @@ This section describes some noteworthy details on how certain features are imple
 
 * Has a need to manage a significant number of private tutors and students
 * Likes a lightweight tutor management application to reduce *bloatware*
-* Wants to have a platform to match students to private tutors 
+* Wants to have a platform to match students to private tutors
 * Prefers desktop app over other platforms
 * Can type fast
 * Prefers typing to mouse interactions
@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |:----------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
-| **Mainstream OS** | Windows, macOS, Linux   
+| **Mainstream OS** | Windows, macOS, Linux
 | **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …​                                                        |
 | **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
 | **Tag**           | Subjects each Tutors teach are saved under tags as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math. |
