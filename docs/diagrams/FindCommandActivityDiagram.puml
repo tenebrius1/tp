@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes find command;
+:Parse command arguments;
+
+if () then ([Invalid input/s])
+    :Throw \nParseException;
+else ([Valid input/s])
+    :Create and chain predicate related
+    to prefix/s specified in input;
+
+endif
+    :Execute Find command;
+    :Update student list in Model;
+    :Return CommandResult;
+stop
+@enduml

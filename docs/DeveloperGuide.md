@@ -203,8 +203,31 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation details
 
 ### Find feature
+
 #### What it is
+
+Searches and displays all tutors or students that matches the parameters specified. The `find` command must have at least one parameter specified to be valid (i.e `find s blah` will **not** work).
+
 #### Implementation details
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `find` command implementation behaves at each step:
+
+1. The user input (for e.g `"find s n/David"`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser`'s `parseCommand()` method which in turns creates a new `FindCommandParser`.
+3. The `FindCommandParser` calls its own `parse()` method which will return a new `FindCommand` if the input is valid.
+4. `FindCommand` will then update the student list in the `Model` class.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `find` implementation works:
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+Given below is an activity diagram to show how the `find` command works:
+
+![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
 
 ### Match feature
 #### What it is
