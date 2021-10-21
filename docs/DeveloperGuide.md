@@ -1,6 +1,6 @@
 ---
 layout: page
-title: CLITutors Developer Guide
+title: Developer Guide
 nav-text: Developer Guide
 ---
 
@@ -17,10 +17,13 @@ nav-text: Developer Guide
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
-* Table of Contents {:toc}
+{: .no_toc}
+1. Table of Contents
+{:toc}
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Navigating this Developer Guide**
 Before diving into the rest of the contents in our developer guide, the following are a few important syntaxes to take note of to facilitate your reading:
 
@@ -32,23 +35,25 @@ Before diving into the rest of the contents in our developer guide, the followin
 
 <div style="page-break-after: always;"></div>
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 We would like to thank Jun Xiong and Damith for supervising our project.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Design**
 
 <div markdown="span" class="alert alert-info"> :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T17-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
-<p align="center">
-  <img src="images/ArchitectureDiagram.png" />
-</p>
+
+![Architecture Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -76,9 +81,7 @@ Each of the four components,
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
-<p align="center">
-  <img src="images/LogicClassDiagram.png" />
-</p>
+![LogicClassDiagram](images/LogicClassDiagram.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -86,9 +89,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete s 1`.
 
-<p align="center">
-  <img src="images/ArchitectureSequenceDiagram.png" />
-</p>
+![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
 The sections on the next few pages will give more details of each component.
 
@@ -100,7 +101,8 @@ The sections on the next few pages will give more details of each component.
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
-between classes that represent parts of the visible GUI. `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 3 lists: Tutor List, Student List, and Matchlist.
+between classes that represent parts of the visible GUI.
+The `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 3 lists: Tutor List, Student List, and Match List (containing Tutor entries only).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -112,6 +114,33 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
+
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+
+Here's a (partial) class diagram of the `Logic` component:
+
+![Logic Class Diagram](images/LogicClassDiagram.png)
+
+How the `Logic` component works:
+1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete s 1")` API call.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Taking a deeper look into the classes in `Logic` that are used for parsing a user command:
+
+![Insert class diagram for Parser component](images/ParserClasses.png)
+
+How the parsing works:
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -134,7 +163,7 @@ The `Model` component,
 ### Storage component
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-![Insert class diagram for Storage component](images/StorageClassDiagram.png)
+![Storage component diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -145,11 +174,12 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-
+--------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -158,7 +188,8 @@ This section describes some noteworthy details on how certain features are imple
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
-## Appendix: Requirements
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Requirements**
 
 ### Product scope
 
@@ -208,17 +239,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-(For all use cases below, the System is the `CLITutorsBook` and the Actor is the user, unless otherwise specified)
+(For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
 
 #### Use case (UC01): Add a Tutor
 
-##### MSS
+**MSS**
 
 1. User keys in the tutor's details
 2. Tutor is added to the database
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
@@ -226,13 +257,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC02): Add a Student
 
-##### MSS
+**MSS**
 
 1. User keys in the student's details
 2. Tutor is added to the database
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
@@ -240,13 +271,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC03): Edit a Student name
 
-##### MSS
+**MSS**
 
 1. User enters the command to edit the name of Student A
 2. System replies with a confirmation message that the edit is successful
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User wants to <ins>edit the phone number (UC04)</ins> of Student A.
   Use case ends.
@@ -256,13 +287,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC04): Edit a Student phone number
 
-##### MSS
+**MSS**
 
 1. User enters the command to edit the phone number of Student B
 2. System replies with a confirmation message that the edit is successful
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User wants to <ins>edit the name (UC03)</ins> of Student B.
   Use case ends.
@@ -272,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC05): Delete a Tutor
 
-##### MSS
+**MSS**
 
 1. User requests to list tutors
 2. `CLITutorsBook` shows a list of tutors
@@ -290,15 +321,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC06): Delete a Student
 
-##### MSS
+**MSS**
 
 1. User requests to list students
-2. CLITutorsBook shows a list of students
+2. `CLITutorsBook` shows a list of students
 3. User requests to delete a specific student in the list
-4. CLITutorsBook deletes the student
+4. `CLITutorsBook` deletes the student
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 2a. The list is empty.
   Use case ends.
@@ -308,13 +339,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC07): Finding a Tutor
 
-##### MSS
+**MSS**
 
 1. User requests to find a tutor using his/her name
 2. `CLITutorsBook` shows all tutors that contains that specific name
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. The list is empty.
   Use case ends.
@@ -323,13 +354,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC08): Finding a Student
 
-##### MSS
+**MSS**
 
 1. User requests to find a student using his/her name
 2. `CLITutorsBook` shows all students that contains that specific name
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. The list is empty.
   Use case ends.
@@ -338,13 +369,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC09): Matching a student with the tutors
 
-##### MSS
+**MSS**
 
 1. User requests to match a student with tutors with the required qualifications
 2. `CLITutorsBook` shows the tutors that are able to match with the specified student in a window
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. There are no tutors that match the requirements of the student.
   Use case ends.
@@ -368,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |:----------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
-| **Mainstream OS** | Windows, macOS, Linux   
+| **Mainstream OS** | Windows, macOS, Linux
 | **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …​                                                        |
 | **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
 | **Tag**           | Subjects each Tutors teach are saved under tags as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math. |

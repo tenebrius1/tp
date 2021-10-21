@@ -6,11 +6,22 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
 
+package Parser {
+Interface Parser <<Interface>>
 Class AddressBookParser
+Class XYZCommandParser
+Class CliSyntax
+Class ParserUtil
+Class ArgumentMultimap
+Class ArgumentTokenizer
+Class Prefix
+}
+
+package Command {
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
-
+}
 
 Interface Logic <<Interface>>
 Class LogicManager
@@ -21,15 +32,26 @@ Class HiddenModel #FFFFFF
 }
 
 package Storage{
+Class HiddenModel #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager .up.|> Logic
+LogicManager -->"1" AddressBookParser
+AddressBookParser .left.> XYZCommandParser: creates >
 
+XYZCommandParser ..> XYZCommand : creates >
+XYZCommandParser .left.|> Parser
+XYZCommandParser ..> ArgumentMultimap
+XYZCommandParser ..> ArgumentTokenizer
+ArgumentTokenizer .left.> ArgumentMultimap
+XYZCommandParser ..> CliSyntax
+CliSyntax .down.> Prefix
+XYZCommandParser ..> ParserUtil
+ParserUtil .down.> Prefix
+ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
@@ -42,5 +64,6 @@ note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : produces >
+Command .up.> CommandResult
+CommandResult -[hidden]-> Parser
 @enduml

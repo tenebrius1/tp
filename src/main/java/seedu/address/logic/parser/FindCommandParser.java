@@ -71,6 +71,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
                 PREFIX_QUALIFICATION, PREFIX_GENDER);
 
+        String trimmed = argMultimap.getPreamble().trim();
+
+        if (trimmed.length() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             predicate = handleName(predicate, builder, argMultimap);
         }
