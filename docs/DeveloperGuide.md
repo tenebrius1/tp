@@ -229,6 +229,18 @@ Given below is an activity diagram to show how the `find` command works:
 
 ![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
 
+#### Design Considerations:
+
+##### Aspect: How `find` executes
+
+- **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
+  - Pros: It allows the User to find a specific type of student or tutor more easily .
+ <br>(for e.g they can find all tutors who are women and teaches Primary Math)
+  - Cons: `FindCommandParser` would be more complex since it has to parse for multiple tags and chain predicates together depending on the User input. The higher complexity may lead to a higher chance of creating bugs.
+- **Alternative 2**: User can only `find` using one prefix at a time.
+  - Pros: Simpler to implement since there are less use cases to consider and hence less likely to create bugs.
+  - Cons: Quite a significant impact on the overall user experience since finding using only one prefix may still generate a large list if the User used the app for a prolonged period of time and have a large database of student or tutors.
+
 ### Match feature
 #### What it is
 #### Implementation details
