@@ -96,8 +96,11 @@ The sections on the next few pages will give more details of each component.
 <div style="page-break-after: always;"></div>
 
 ### UI component
-![Structure of the UI Component](images/UiClassDiagram.png)
 **API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+
+Here's a class diagram of the `UI` component:
+
+![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
@@ -145,6 +148,8 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+Here's a class diagram of the `Model` component:
+
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
 The `Model` component,
@@ -162,6 +167,8 @@ The `Model` component,
 
 ### Storage component
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+
+Here's a class diagram of the `Storage` component:
 
 ![Storage component diagram](images/StorageClassDiagram.png)
 
@@ -241,7 +248,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
 
-#### Use case (UC01): Add a Tutor
+***Use case (UC01): Add a Tutor***
 
 **MSS**
 
@@ -255,7 +262,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-#### Use case (UC02): Add a Student
+***Use case (UC02): Add a Student***
 
 **MSS**
 
@@ -269,7 +276,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-#### Use case (UC03): Edit a Student name
+***Use case (UC03): Edit a Student name***
 
 **MSS**
 
@@ -285,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-#### Use case (UC04): Edit a Student phone number
+***Use case (UC04): Edit a Student phone number***
 
 **MSS**
 
@@ -301,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-#### Use case (UC05): Delete a Tutor
+***Use case (UC05): Delete a Tutor***
 
 **MSS**
 
@@ -319,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. `CLITutorsBook` shows an error message.
       <br>Use case resumes at step 2.
 
-#### Use case (UC06): Delete a Student
+***Use case (UC06): Delete a Student***
 
 **MSS**
 
@@ -337,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. `CLITutorsBook` shows an error message.
       <br>Use case resumes at step 2.
 
-#### Use case (UC07): Find a Tutor
+***Use case (UC07): Find a Tutor***
 
 **MSS**
 
@@ -352,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   <br>Use case ends.
 
-#### Use case (UC08): Find a Student
+***Use case (UC08): Find a Student***
 
 **MSS**
 
@@ -367,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   <br>Use case ends.
 
-#### Use case (UC09): Match a student with the tutors
+***Use case (UC09): Match a student with the tutors***
 
 **MSS**
 
