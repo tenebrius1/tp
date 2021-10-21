@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should not be blank";
+            "Remarks should not only contain whitespaces";
 
     public static final String VALIDATION_REGEX = "^$|.*\\S.*";
 

@@ -36,12 +36,14 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_QUALIFICATION + "QUALIFICATION "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + PREFIX_TAG + "TAG...>\n"
             + "Example: " + COMMAND_WORD + " t "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
             + PREFIX_QUALIFICATION + "2 "
+            + PREFIX_REMARK + "This is a remark "
             + PREFIX_TAG + "PM";
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added: %1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added: %1$s";
