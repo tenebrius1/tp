@@ -41,6 +41,8 @@ public class TutorCard extends UiPart<Region> {
     @FXML
     private Label qualification;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -56,6 +58,7 @@ public class TutorCard extends UiPart<Region> {
         if (tutor instanceof Tutor) {
             qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
         }
+        remark.setText("Remark: " + tutor.getRemark().description);
         tutor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(LevelSubjectCode.getLabel(tag.tagName))));

@@ -24,7 +24,7 @@ public class SampleDataUtil {
             new Tutor(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("M"),
                 new Qualification("0"), new Remark("Wants high ability students"), getTagSet("PM")),
             new Tutor(new Name("Bernice Yu"), new Phone("99272758"), new Gender("F"),
-                new Qualification("1"), null, getTagSet("SP", "SC")),
+                new Qualification("1"), new Remark(), getTagSet("SP", "SC")),
             new Tutor(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("F"),
                 new Qualification("2"), new Remark("Only does remote tuition"), getTagSet("TE", "TL"))
         };
@@ -35,7 +35,7 @@ public class SampleDataUtil {
             new Student(new Name("David Li"), new Phone("91031282"), new Gender("M"),
                     new Remark("Wants experienced tutor"), getTagSet("PM")),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("M"),
-                    null, getTagSet("SC")),
+                    new Remark(), getTagSet("SC")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("M"),
                     new Remark("Prefers lessons in public spaces"), getTagSet("TG", "TB"))
         };
