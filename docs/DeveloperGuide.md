@@ -186,6 +186,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<<<<<<< Updated upstream
 ### Add feature
 #### What it is
 #### Implementation details
@@ -206,9 +207,57 @@ This section describes some noteworthy details on how certain features are imple
 #### What it is
 #### Implementation details
 
-### Match feature
+### Matching Feature
+
 #### What it is
+
+The Matching features involve taking a `Student` specified by the user through a `MatchCommand` (eg. `match 1`, matches the first student on `Student` list),
+and matches them to a `Tutor` who has one or more matching `Tag` with the `Student`. It automatically sorts the `matchedTutorList`
+according to the number of matching `Tag` that a `Tutor` object have with a `Student` object.
+
 #### Implementation details
+Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created.
+`MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `execute` method
+of the abstract `Command` class. Upon execution, the `Student` is identified via the index given by the user and
+a `TagsContainTagPredicate` object is created with the `tags` of the identified `Student`. This `TagsContainTagPredicate` object
+is used to determine if the `tags` of the `Tutor` stored contains one or more `Tag` that the `Student` has. It will then update
+the `matchedTutorList` in the model with the filtered `Tutor` list. The `matchedTutorList` is then sorted such that `Tutor` 
+with more matching `Tag` is at the front of the list.
+
+Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
+
+**Prerequisite**: There are `Students` in the student list and there are `Tutor` objects which have `tags` that the `Student` have (i.e. there are matches available for `Student`).
+
+Steps:
+1. The user executes `"match 1` to match the first `Student` on the student list.
+2. `LogicManager` calls on `AddressBookParser#parseCommand` which in turns creates a new `MatchCommandParser` object.
+3. The `MatchCommandParser` object call `MatchCommandParser#parse` which will validate the user input and return a new `MatchCommand` if the input is valid.
+4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
+5. `MatchCommand` will find the first `Student` in the student list and a `TagsContainTagPredicate` object is created.
+6. The `matchTutorList` in the `Model` will then be updated via `Model#updateMatchedTutor`.
+7. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager` and the `Ui` is updated with the `matchTutorList`.
+
+The following sequence diagram shows how the `match` command for the example above works:
+
+![MatchCommandSequenceDiagram](images/MatchCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `MatchCommandParser` and `MatchCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a **valid** `match` command:
+
+![MatchCommandActivityDiagram](images/MatchCommandActivityDiagram.png)
+
+#### Design Considerations:
+
+##### Aspect: How `match` executes
+{:.no_toc}
+- **Alternative 1 (current choice)**: We made use of a `TagsContainTagPredicate` to help us find `Tutor` objects in the tutor list that has the `Tag` we are finding.
+    - Pros: Pros: By abstracting out the `Predicate`, the predicates can be used elsewhere or in other match commands.
+    - Cons: Extra layer of abstractions which may potentially introduce undesired bugs in the code.
+- **Alternative 2**: Directly filter the `matchedTutorList` in `MatchCommand#execute` without the use of predicate.
+    - Pros: Easier to understand the code for potential developers since the whole implementation is done within `MatchCommand`.
+    - Cons: There is a lack of abstraction. It would be harder to scale up the application as it becomes more complex.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -293,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User keys in the student's details
-2. Tutor is added to the database
+2. Student is added to the database
    <br>Use case ends.
 
 **Extensions**

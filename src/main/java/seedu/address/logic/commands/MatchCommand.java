@@ -44,12 +44,6 @@ public class MatchCommand extends Command {
         this.index = index;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        return executeMatch(model);
-    }
-
     /**
      * Executes a Match command.
      *
@@ -57,7 +51,9 @@ public class MatchCommand extends Command {
      * @return A successful CommandResult with the students matched to tutors.
      * @throws CommandException An exception that occurs when matching students.
      */
-    private CommandResult executeMatch(Model model) throws CommandException {
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
