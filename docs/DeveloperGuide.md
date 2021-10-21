@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. `CLITutorsBook` shows an error message.
       Use case resumes at step 2.
 
-#### Use case (UC07): Finding a Tutor
+#### Use case (UC07): Find a Tutor
 
 **MSS**
 
@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   Use case ends.
 
-#### Use case (UC08): Finding a Student
+#### Use case (UC08): Find a Student
 
 **MSS**
 
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   Use case ends.
 
-#### Use case (UC09): Matching a student with the tutors
+#### Use case (UC09): Match a student with the tutors
 
 **MSS**
 
