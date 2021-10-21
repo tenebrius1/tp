@@ -235,7 +235,7 @@ Given below is an activity diagram to show how the `add` command works:
 ### List feature
 #### What it is
 
-Lists all tutors or students in the list. The `list` command only accepts `s` or `t` as a parameter 
+Lists all tutors or students in the list. The `list` command only accepts `s` or `t` as a parameter
 #### Implementation details
 
 ##### Sequence of action
