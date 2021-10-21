@@ -186,6 +186,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add/Delete feature
+#### What it is
+#### Implementation details
+
+### Edit feature
+#### What it is
+#### Implementation details
+
+### List feature
+#### What it is
+#### Implementation details
+
+### Find feature
+#### What it is
+#### Implementation details
+
+### Match feature
+#### What it is
+#### Implementation details
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 
