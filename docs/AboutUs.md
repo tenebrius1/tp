@@ -12,8 +12,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/zihaooo9)]
 [[portfolio](team/zihao.md)]
 
-* Role: Placeholder guy
-* Responsibilities: I identify as a placeholder
+* Role: Developer
+* Responsibilities: 
 
 
 ### Liaw Xin Yan
