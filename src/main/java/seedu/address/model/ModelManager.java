@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
@@ -191,6 +192,18 @@ public class ModelManager implements Model {
     public void updateMatchedTutor(Predicate<Person> predicate) {
         requireNonNull(predicate);
         matchedTutors.setPredicate(predicate);
+    }
+
+    @Override
+    public void filterMatchedTutor(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        matchedTutors.setPredicate(predicate);
+
+//        @SuppressWarnings("unchecked")
+//        Predicate<Person> matchingPredicate = (Predicate<Person>) matchedTutors.getPredicate();
+//        Predicate<Person> resPredicate = predicate.and(matchingPredicate);
+//        ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
+//        matchedTutors.setPredicate(builder.setPredicate(resPredicate).build());
     }
 
     @Override

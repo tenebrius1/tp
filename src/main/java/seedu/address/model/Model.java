@@ -143,6 +143,12 @@ public interface Model {
      */
     void updateMatchedTutor(Predicate<Person> predicate);
 
+    /**
+     * Updates the filter of the matched tutors list by additionally filtering by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void filterMatchedTutor(Predicate<Person> predicate);
+
     /** Returns an unmodifiable view of the matched tutor list */
     ObservableList<Tutor> getMatchedTutorList();
 }

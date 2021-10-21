@@ -62,7 +62,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
-                PREFIX_QUALIFICATION, PREFIX_GENDER);
+                PREFIX_QUALIFICATION, PREFIX_GENDER, PREFIX_TAG);
+
+        System.out.println(argMultimap.getValue(PREFIX_NAME).isPresent());
+        System.out.println(argMultimap.getValue(PREFIX_QUALIFICATION).isPresent());
+        System.out.println(argMultimap.getValue(PREFIX_GENDER).isPresent());
+        System.out.println(argMultimap.getValue(PREFIX_TAG).isPresent());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             predicate = handleName(predicate, builder, argMultimap);
