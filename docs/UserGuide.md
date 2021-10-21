@@ -15,7 +15,7 @@ nav-text: User Guide
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
 2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.2) the latest `CLITutors.jar`.
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:
@@ -27,7 +27,7 @@ nav-text: User Guide
     - `list`: lists all tutors/students
     - `help`: shows all commands available
     - `exit`: exits the program
-6. Refer to the [Features](#Features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ## Command Syntax
 Before diving into the details, let us first look at what makes up a command:
@@ -35,7 +35,7 @@ Before diving into the details, let us first look at what makes up a command:
 | Component    | Description                                                                |
 |:------------ |:-------------------------------------------------------------------------- |
 | Command Word | The keyword representing the action of the command                         |
-| Preamble     | The keyword representing `PersonType` and/or`INDEX`                        |
+| Preamble     | The keyword representing `PersonType` and/or `INDEX`                        |
 | Prefix       | The keyword to recognise the parameters                                    |
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
 
@@ -45,7 +45,7 @@ An example of a basic command to add a tutor could look like the following:
 
 In the example above, `add` is the **command word** and `t` is the **preamble** representing tutor. `n/`, `g/`, `p/`, `q/` and `t/` are the **prefixes** and `John Doe`, `M`, `98765432`, `2`, `TE TM TL` are the **parameters**.
 
-For your convenience, a list of all parameters along with their prefixes have been included in the table below.
+For your convenience, a list of all parameters along with their prefixes has been included in the table below.
 
 | Parameter | Description    | Type Requirements                                      |
 |:---------:|:-------------- | ------------------------------------------------------ |
@@ -63,7 +63,7 @@ For your convenience, a list of all parameters along with their prefixes have be
 <b>:information_source: Notes about the command format:</b><br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
@@ -278,11 +278,11 @@ Format: <br>`exit`
 
 **Q**: How do I transfer my data to another Computer?
 
-**A**: Install the application in the other computer and place your current data folder in the same directory as the newly installed application (overwrite the data folder of the new application if applicable).
+**A**: Install the application on the other computer and place your current data folder in the same directory as the newly installed application (overwrite the data folder of the new application if applicable).
 
 **Q**: Where is the data of CLITutors saved?
 
-**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and a command execution) of a fresh installation.
+**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -304,7 +304,7 @@ Format: <br>`exit`
 
 ### Valid Tags
 
-The application supports the following level of education and subjects as shown in table below.
+The application supports the following level of education and subjects as shown in the table below.
 
 <table>
     <thead>
