@@ -101,7 +101,8 @@ The sections on the next few pages will give more details of each component.
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
-between classes that represent parts of the visible GUI. `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 3 lists: Tutor List, Student List, and Matchlist.
+between classes that represent parts of the visible GUI.
+The `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 3 lists: Tutor List, Student List, and Match List (containing Tutor entries only).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -188,7 +189,7 @@ This section describes some noteworthy details on how certain features are imple
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-## Appendix: Requirements
+## **Appendix: Requirements**
 
 ### Product scope
 
@@ -238,17 +239,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-(For all use cases below, the System is the `CLITutorsBook` and the Actor is the user, unless otherwise specified)
+(For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
 
 #### Use case (UC01): Add a Tutor
 
-##### MSS
+**MSS**
 
 1. User keys in the tutor's details
 2. Tutor is added to the database
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
@@ -256,13 +257,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC02): Add a Student
 
-##### MSS
+**MSS**
 
 1. User keys in the student's details
 2. Tutor is added to the database
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
@@ -270,13 +271,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC03): Edit a Student name
 
-##### MSS
+**MSS**
 
 1. User enters the command to edit the name of Student A
 2. System replies with a confirmation message that the edit is successful
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User wants to <ins>edit the phone number (UC04)</ins> of Student A.
   Use case ends.
@@ -286,13 +287,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC04): Edit a Student phone number
 
-##### MSS
+**MSS**
 
 1. User enters the command to edit the phone number of Student B
 2. System replies with a confirmation message that the edit is successful
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. User wants to <ins>edit the name (UC03)</ins> of Student B.
   Use case ends.
@@ -302,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC05): Delete a Tutor
 
-##### MSS
+**MSS**
 
 1. User requests to list tutors
 2. `CLITutorsBook` shows a list of tutors
@@ -320,15 +321,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC06): Delete a Student
 
-##### MSS
+**MSS**
 
 1. User requests to list students
-2. CLITutorsBook shows a list of students
+2. `CLITutorsBook` shows a list of students
 3. User requests to delete a specific student in the list
-4. CLITutorsBook deletes the student
+4. `CLITutorsBook` deletes the student
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 2a. The list is empty.
   Use case ends.
@@ -338,13 +339,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC07): Finding a Tutor
 
-##### MSS
+**MSS**
 
 1. User requests to find a tutor using his/her name
 2. `CLITutorsBook` shows all tutors that contains that specific name
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. The list is empty.
   Use case ends.
@@ -353,13 +354,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC08): Finding a Student
 
-##### MSS
+**MSS**
 
 1. User requests to find a student using his/her name
 2. `CLITutorsBook` shows all students that contains that specific name
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. The list is empty.
   Use case ends.
@@ -368,13 +369,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case (UC09): Matching a student with the tutors
 
-##### MSS
+**MSS**
 
 1. User requests to match a student with tutors with the required qualifications
 2. `CLITutorsBook` shows the tutors that are able to match with the specified student in a window
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 1a. There are no tutors that match the requirements of the student.
   Use case ends.
