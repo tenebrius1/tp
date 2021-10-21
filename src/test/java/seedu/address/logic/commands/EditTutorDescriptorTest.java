@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,10 @@ public class EditTutorDescriptorTest {
         editedBob =
                 new EditTutorDescriptorBuilder(DESC_BOB)
                         .withQualification(VALID_QUALIFICATION_UNIVERSITY_STUDENT).build();
+        assertNotEquals(DESC_BOB, editedBob);
+
+        // different remark -> returns false
+        editedBob = new EditTutorDescriptorBuilder(DESC_BOB).withRemark(VALID_REMARK_AMY).build();
         assertNotEquals(DESC_BOB, editedBob);
 
         // different tags -> returns false

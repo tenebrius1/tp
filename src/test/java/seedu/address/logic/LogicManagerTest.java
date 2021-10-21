@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -92,7 +94,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_TUTOR + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP;
         Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTutor(expectedTutor);
@@ -112,7 +114,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_STUDENT + NAME_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_PM;
+                + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_PM;
         Student expectedStudent = new StudentBuilder().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);

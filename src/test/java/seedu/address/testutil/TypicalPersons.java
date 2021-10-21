@@ -26,7 +26,8 @@ public class TypicalPersons {
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
             .withGender("F").withPhone("94351253").withQualification("0").withTags("PM").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
-            .withGender("M").withPhone("98765432").withQualification("1").withTags("SM", "SC").build();
+            .withGender("M").withPhone("98765432").withQualification("1")
+            .withRemark("Wants student in Ang Mo Kio").withTags("SM", "SC").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withGender("M").withQualification("2").withTags("TL", "TE").build();
 
@@ -34,7 +35,7 @@ public class TypicalPersons {
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGender("M").withTag("PM", "PE").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withGender("F").withTag("SC", "SB", "SM").build();
+            .withGender("F").withRemark("Wants tutor in Bishan").withTag("SC", "SB", "SM").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withGender("F").withTag("TG").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")

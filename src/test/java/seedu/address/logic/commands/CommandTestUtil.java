@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
+    public static final String VALID_REMARK_AMY = "Prefers home-based lessons";
+    public static final String VALID_REMARK_BOB = "Wants students in Bishan";
     public static final String VALID_QUALIFICATION_BOB = "0";
     public static final String VALID_QUALIFICATION_UNIVERSITY_STUDENT = "1";
     public static final String VALID_TAG_PM = "PM";
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String QUALIFICATION_DESC_BOB = " " + PREFIX_QUALIFICATION + VALID_QUALIFICATION_BOB;
     public static final String TAG_DESC_PM_TP = " " + PREFIX_TAG + VALID_TAG_PM + " " + VALID_TAG_TP;
     public static final String TAG_DESC_PM = " " + PREFIX_TAG + VALID_TAG_PM;
@@ -62,6 +67,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_UNCAPITALIZED = " " + PREFIX_TAG + VALID_TAG_TP_UNCAPITALIZED;
 
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Z"; // 'Z' not allowed in gender
+    public static final String INVALID_QUALIFICATION_DESC = " " + PREFIX_QUALIFICATION + "4"; // invalid qualification
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // ' ' not allowed in remark
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE"; //  invalid tag argument
@@ -80,12 +87,14 @@ public class CommandTestUtil {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withGender(VALID_GENDER_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_PM).build();
         // Bob is a Tutor
         DESC_BOB = new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB)
                 .withQualification(VALID_QUALIFICATION_BOB)
+                .withRemark(VALID_REMARK_BOB)
                 .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
     }
 
