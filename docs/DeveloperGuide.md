@@ -272,7 +272,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
 
-***Use case (UC01): Add a Tutor***
+#### Use case (UC01): Add a Tutor
+{:.no_toc}
 
 **MSS**
 
@@ -286,7 +287,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-***Use case (UC02): Add a Student***
+#### Use case (UC02): Add a Student
+{:.no_toc}
 
 **MSS**
 
@@ -300,7 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-***Use case (UC03): Edit a Student name***
+#### Use case (UC03): Edit a Student name
+{:.no_toc}
 
 **MSS**
 
@@ -316,7 +319,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-***Use case (UC04): Edit a Student phone number***
+#### Use case (UC04): Edit a Student phone number
+{:.no_toc}
 
 **MSS**
 
@@ -332,7 +336,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays an error message to tell the user about the format error.
       <br>Use case ends.
 
-***Use case (UC05): Delete a Tutor***
+#### Use case (UC05): Delete a Tutor
+{:.no_toc}
 
 **MSS**
 
@@ -350,7 +355,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. `CLITutorsBook` shows an error message.
       <br>Use case resumes at step 2.
 
-***Use case (UC06): Delete a Student***
+#### Use case (UC06): Delete a Student
+{:.no_toc}
 
 **MSS**
 
@@ -368,7 +374,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. `CLITutorsBook` shows an error message.
       <br>Use case resumes at step 2.
 
-***Use case (UC07): Find a Tutor***
+#### Use case (UC07): Find a Tutor
+{:.no_toc}
 
 **MSS**
 
@@ -383,7 +390,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   <br>Use case ends.
 
-***Use case (UC08): Find a Student***
+#### Use case (UC08): Find a Student
+{:.no_toc}
 
 **MSS**
 
@@ -398,7 +406,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. There is no one with that specific name.
   <br>Use case ends.
 
-***Use case (UC09): Match a student with the tutors***
+#### Use case (UC09): Match a student with the tutors
+{:.no_toc}
 
 **MSS**
 
