@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 
@@ -61,9 +63,9 @@ public class TypicalPersons {
 
     // Manually added - Student/Tutor details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withGender(VALID_GENDER_AMY).withTag(VALID_TAG_TP).build();
+            .withGender(VALID_GENDER_AMY).withRemark(VALID_REMARK_AMY).withTag(VALID_TAG_TP).build();
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withGender(VALID_GENDER_BOB).withQualification(VALID_QUALIFICATION_BOB)
+            .withGender(VALID_GENDER_BOB).withQualification(VALID_QUALIFICATION_BOB).withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

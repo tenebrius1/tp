@@ -15,7 +15,7 @@ public class RemarkTest {
 
     @Test
     public void constructor_invalidRemark_throwsIllegalArgumentException() {
-        String invalidRemark = "";
+        String invalidRemark = " ";
         assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
     }
 
@@ -25,8 +25,8 @@ public class RemarkTest {
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
         // invalid remark
-        assertFalse(Remark.isValidRemark("")); // empty string
-        assertFalse(Remark.isValidRemark("   ")); // spaces only
+        assertFalse(Remark.isValidRemark(" ")); // one space only
+        assertFalse(Remark.isValidRemark("   ")); // multiple spaces only
 
         // valid remark
         assertTrue(Remark.isValidRemark("prefers small groups")); // alphabets only

@@ -58,7 +58,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
             Qualification qualification = ParserUtil.parseQualification(
                     argMultimap.getValue(PREFIX_QUALIFICATION).get());
-            Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            Remark remark;
+            if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
+                remark = new Remark();
+            } else {
+                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            }
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Tutor tutor = new Tutor(name, phone, gender, qualification, remark, tagList);
@@ -76,7 +81,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
+                remark = new Remark();
+            } else {
+                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            }
+
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Student student = new Student(name, phone, gender, remark, tagList);

@@ -10,13 +10,13 @@ public class Remark {
     public static final String MESSAGE_CONSTRAINTS =
             "Remarks should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = ".*\\S.*";
+    public static final String VALIDATION_REGEX = "^$|.*\\S.*";
 
     public final String description;
+
+    public Remark() {
+        description = "";
+    }
 
     /**
      * Constructs a {@code Name}.
