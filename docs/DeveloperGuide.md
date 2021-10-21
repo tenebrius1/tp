@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. `CLITutorsBook` deletes the tutor
    Use case ends.
 
-##### Extensions
+**Extensions**
 
 * 2a. The list is empty.
   Use case ends.
