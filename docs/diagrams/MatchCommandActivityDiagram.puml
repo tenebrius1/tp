@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes match command;
+:Parse command arguments;
+:Executes MatchCommand;
+:Update matchedTutorList in Model with all matches;
+if () then ([matchedTutorList.isEmpty()])
+  :Throw CommandException;
+  :GUI shows failure to match message;
+    stop
+else ([else])
+  :Return CommandResult;
+endif
+
+:GUI displays matchedTutorList and success message;
+
+stop
+
+@enduml
