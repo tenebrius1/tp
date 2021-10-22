@@ -41,7 +41,7 @@ public class ModelManager implements Model {
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
-        matchedTutors.setPredicate(PREDICATE_SHOW_NO_TUTORS);
+        matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
     }
 
     public ModelManager() {

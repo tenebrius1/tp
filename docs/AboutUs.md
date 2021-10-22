@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/zihao.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities:
 
 
 ### Liaw Xin Yan

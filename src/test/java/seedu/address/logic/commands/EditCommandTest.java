@@ -265,6 +265,24 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_emptyStudentList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.STUDENT);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+    }
+
+    @Test
+    public void execute_emptyTutorList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
+        model.updateFilteredTutorList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardTutorCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.TUTOR);
         final EditCommand standardStudentCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.STUDENT);

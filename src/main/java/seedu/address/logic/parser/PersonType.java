@@ -29,4 +29,10 @@ public enum PersonType {
             throw new ParseException(MESSAGE_INVALID_PERSON_TYPE);
         }
     }
+
+    @Override
+    public String toString() {
+        String personType = super.toString().toLowerCase();
+        return personType.substring(0, 1).toUpperCase() + personType.substring(1).toLowerCase();
+    }
 }

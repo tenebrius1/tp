@@ -36,11 +36,6 @@ Before diving into the rest of the contents in our developer guide, the followin
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
-## **Acknowledgements**
-
-We would like to thank Jun Xiong and Damith for supervising our project.
-
---------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -96,8 +91,11 @@ The sections on the next few pages will give more details of each component.
 <div style="page-break-after: always;"></div>
 
 ### UI component
-![Structure of the UI Component](images/UiClassDiagram.png)
 **API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+
+Here's a class diagram of the `UI` component:
+
+![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
@@ -145,6 +143,8 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+Here's a class diagram of the `Model` component:
+
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
 The `Model` component,
@@ -163,6 +163,8 @@ The `Model` component,
 ### Storage component
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
+Here's a class diagram of the `Storage` component:
+
 ![Storage component diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
@@ -178,6 +180,250 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add feature
+
+#### What it is
+
+Adds a tutor or student to the tutor or student list respectively. The `add` command must have all the fields required for student and tutor.
+#### Implementation details
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `add` command implementation behaves at each step:
+
+1. The user input (for e.g `"add t n/Jonathan Chan p/92102339 g/M q/2 t/PM SM"`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser`'s `parseCommand()` method which in turns creates a new `AddCommandParser`.
+3. The `AddCommandParser` calls its own `parse()` method which will return a new `AddCommand` if the input is valid.
+4. `AddCommand` will then update the tutor list using the method `model#addTutor()` in the `Model` class.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `add` implementation works:
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
+Given below is an activity diagram to show how the `add` command works:
+
+![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
+
+#### Design Considerations:
+
+##### Aspect: How `add` executes
+
+- **Alternative 1 (current choice)**: User must `add` using all the required prefixes.
+    - Pros: It prevents the potential matching of tutors and students to have missing fields that are required when matching.
+    - Cons: It is troublesome to type everything in at once.
+- **Alternative 2**: User can add the tutor/student in multiple increments.
+    - Pros: Simpler for the user to add details to the tutor or student.
+    - Cons: Will cause many potential errors if there are missing fields required when matching them.
+
+### Delete feature
+#### What it is
+Deletes the tutor or student at the specified `INDEX` from the displayed tutor/student list.
+
+#### Implementation details
+Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `Command` class. The actual execution of the `delete` command is similar to that of the `add` command, except the `delete` command decides on the tutor/student to delete based on the `INDEX` of the tutor/student displayed on the `filteredTutors` list or the `filteredStudents` list of the `ModelManager` class.
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `delete` command implementation behaves at each step:
+
+1. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
+2. The `AddressBookParser` identifies the user command (`delete`) and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
+3. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
+4. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `delete` implementation works for a **valid** `delete` tutor input:
+
+![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Given below is an activity diagram to show how the `delete` command works for a **valid** `delete` tutor input:
+
+![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
+
+#### Design Considerations
+##### Aspect: How `delete` is executed
+{:.no_toc}
+
+- **Alternative 1 (current choice)**: User can `delete` only one tutor/student at a time.
+    - Pros: Reduces the lack of potential errors due to the decreased complexity of the code. It is also easier to implement since there are lesser use cases to consider.
+    - Cons: It is less intuitive for the user as they are now limited by having to `delete` each tutor/student one by one.
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, Users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command.
+</div>
+
+- **Alternative 2**: User can `delete` multiple tutors/students using the command at the same time.
+    - Pros: Allows the user more flexibility in deleting tutors/students instead of just deleting them one by one.
+      For example, users can choose to `delete` one or many tutors/students, depending on their command input.
+    - Cons: This will cause the code to become more complex in dealing with many possible inputs and scenarios, leading to a higher amount of potential errors.
+
+### Edit feature
+#### What it is
+Edits a tutor or student in the tutor list or student list respectively. All fields are optional in the `edit` command, but at least one field must be specified for the command to execute successfully.
+
+#### Implementation details
+##### Sequence of action
+{: .no_toc}
+
+Given below is an example usage scenario and how the `edit` command implementation behaves at each step:
+
+1. The user input (for e.g `edit t 1 p/94203825`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser`'s `parseCommand()` method which in turns creates a new `EditCommandParser`.
+3. The `EditCommandParser` calls its own `parse()` method which will return a new `EditCommand` if the input is valid.
+4. `EditCommand` will then update the tutor list in the `Model` class by replacing the existing tutor (to be edited) with the edited tutor.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `edit` implementation works:
+
+![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
+
+Given below is an activity diagram to show how the `edit` command works:
+
+![EditCommandActivityDiagram](images/EditCommandActivityDiagram.png)
+
+#### Design Considerations
+##### Aspect: How `edit` executes
+{: .no_toc}
+
+- **Alternative 1 (current choice)**: `edit` is handled separately for tutors and students via `EditTutorDescriptor` and `EditStudentDescriptor` respectively.
+    - Pros: It allows the User to edit the details of tutors and students even if they have different fields.
+    - Cons: `EditCommandParser` would be more complex since it has to handle edits for tutors and students separately due to differing requirements. The higher complexity may lead to a higher chance of creating bugs.
+- **Alternative 2**: `edit` is handled using `EditPersonDescriptor` for both tutors and students.
+    - Pros: Simpler to implement and maintain since changes to `EditPersonDescriptor` will be propagated to both tutors and students when editing them.
+    - Cons: Prevents custom fields that a `Tutor` should have but a `Student` should not, or vice-versa. A `Tutor` and `Student` must have the same attributes for this implementation to work, and is hence not extensible should `Tutor` and `Student` be required to contain a different set of attributes.
+
+### List feature
+#### What it is
+
+Lists all tutors or students in the list. The `list` command only accepts `s` or `t` as a parameter
+#### Implementation details
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `list` command implementation behaves at each step:
+
+1. The user input (for e.g `"list s"`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser`'s `parseCommand()` method which in turns creates a new `ListCommandParser`.
+3. The `ListCommandParser` calls its own `parse()` method which will return a new `ListCommand` if the input is valid.
+4. `ListCommand` will then show all students in the student list in the `Model` class.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `list` implementation works:
+
+![ListCommandSequenceDiagram](images/ListCommandSequenceDiagram.png)
+
+Given below is an activity diagram to show how the `list` command works:
+
+![ListCommandActivityDiagram](images/ListCommandActivityDiagram.png)
+
+#### Design Considerations:
+
+##### Aspect: How `list` executes
+
+- **Alternative 1 (current choice)**: User must specify which list that they would like to see.
+    - Pros: It allows the user to not remove any filters they have on the other list.
+    - Cons: It is troublesome to type the command twice if the user wanted to view all the tutors and students.
+- **Alternative 2**: User inputs `list` and all tutors and student are shown.
+    - Pros: Simpler for the user to input.
+    - Cons: Will remove any filters they had on a list that they did not want to remove and show all the students/tutors.
+
+### Find feature
+
+#### What it is
+
+Searches and displays all tutors or students that matches the parameters specified. The `find` command must have at least one parameter specified to be valid (i.e `find s blah` will **not** work).
+
+#### Implementation details
+
+A noteworthy change in implementation of our `FindCommand` from the standard AB3 `FindCommand` is in `FindCommandParser`. We expanded on the `FindCommand` functionality such that it can find for students or tutors  multiple attributes. Because of this, we opted to create a new `ChainedPredicate` class that encapsulates the idea of chaining multiple predicates together. Each attribute specified by the user creates its own predicate which is then chained together using the `Predicate#and` method and the resulting predicate is then stored in the `ChainedPredicate` class.
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `find` command implementation behaves at each step:
+
+1. The user input (for e.g `find s n/David`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser#parseCommand` method which creates a new `FindCommandParser`.
+3. The `FindCommandParser` then calls its own `parse()` method which will return a new `FindCommand` if the input is valid.
+4. `LogicManager` will execute the `FindCommand` through `FindCommand#execute`.
+5. `FindCommand` will then search and update the student list in the `Model` class using the `Model#updateFilteredStudentList` method.
+6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager` and the `Ui` will be updated with the filtered.
+
+Given below is a sequence diagram to show how the `find` implementation works for a **valid** `find` student input:
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+> **Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Given below is an activity diagram to show how the `find` implementation works for a **valid** `find` student input:
+
+![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect: How `find` is executed
+{:.no_toc}
+
+- **Alternative 1 (current choice)**: user can `find` using multiple prefixes at once.
+  - Pros: It allows the user to find a specific type of student or tutor more easily.
+ <br>(for e.g they can find all tutors who are women and teaches Primary Math)
+  - Cons: `FindCommandParser` would be more complex since it has to parse for multiple tags and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
+- **Alternative 2**: user can only `find` using one prefix at a time.
+  - Pros: Simpler to implement since there are lesser use cases to consider and hence, making the code less prone to bugs.
+  - Cons: Significant impact on the overall user experience since finding a `Person` with only one prefix may generate a large list if there are many `Tutor` or `Student` stored. user may not be able to find what he/she specifically wants.
+
+### Match feature
+
+#### What it is
+
+The Match feature involves taking a `Student` specified by the user through a `MatchCommand` (eg. `match 1`, matches the first student on `Student` list), and matches them to a `Tutor` who has one or more matching `Tag` with the `Student`. It automatically sorts the `matchedTutorList` according to the number of matching `Tag` that a `Tutor` has with the specified `Student`.
+
+#### Implementation details
+Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created. `MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `execute` method of the abstract `Command` class. Upon execution, the `Student` is identified via the index given by the user and a `TagsContainTagPredicate` object is created with the `tags` of the identified `Student`. This `TagsContainTagPredicate` object will be used to determine if the `tags` of the `Tutor` stored contains one or more `Tag` that the `Student` has. It will then update the `matchedTutorList` in the model with the filtered `Tutor` list. The `matchedTutorList` is then sorted such that `Tutor` with more matching `Tag` is at the front of the list.
+
+##### Sequence of action
+{:.no_toc}
+Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
+
+**Prerequisite**: There are `Students` in the student list and there are `Tutor` objects which have `tags` that the `Student` have (i.e. there are matches available for `Student`).
+
+Steps:
+1. The user executes `match 1` to match the first `Student` on the student list.
+2. `LogicManager` calls on `AddressBookParser#parseCommand` which in turns creates a new `MatchCommandParser` object.
+3. The `MatchCommandParser` object calls `MatchCommandParser#parse` which will validate the user input and return a new `MatchCommand` if the input is valid.
+4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
+5. `MatchCommand` will find the first `Student` in the student list and a `TagsContainTagPredicate` object is created.
+6. The `matchTutorList` in the `Model` will then be updated via `Model#updateMatchedTutor`.
+7. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager` and the `Ui` is updated with the `matchTutorList`.
+
+The following sequence diagram shows how the `match` command for the example above works:
+
+![MatchCommandSequenceDiagram](images/MatchCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `MatchCommandParser` and `MatchCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a **valid** `match` command:
+
+![MatchCommandActivityDiagram](images/MatchCommandActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect: How `match` is executed
+{:.no_toc}
+- **Alternative 1 (current choice)**: We made use of a `TagsContainTagPredicate` to help us find `Tutor` objects in the tutor list that has the `Tag` we are finding.
+    - Pros: Pros: By abstracting out the `Predicate`, the predicates can be used elsewhere or in other match commands.
+    - Cons: Extra layer of abstractions which may potentially introduce undesired bugs in the code.
+- **Alternative 2**: Directly filter the `matchedTutorList` in `MatchCommand#execute` without the use of predicate.
+    - Pros: Easier to understand the code for potential developers since the whole implementation is done within `MatchCommand`.
+    - Cons: There is a lack of abstraction. It would be harder to scale up the application as it becomes more complex.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -242,66 +488,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
 
 #### Use case (UC01): Add a Tutor
+{:.no_toc}
 
 **MSS**
 
 1. User keys in the tutor's details
 2. Tutor is added to the database
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case (UC02): Add a Student
+{:.no_toc}
 
 **MSS**
 
 1. User keys in the student's details
-2. Tutor is added to the database
-   Use case ends.
+2. Student is added to the database
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. User keys in an incorrect format.
     * 1a1. System displays an error message to tell the user about the format error.
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case (UC03): Edit a Student name
+{:.no_toc}
 
 **MSS**
 
 1. User enters the command to edit the name of Student A
 2. System replies with a confirmation message that the edit is successful
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. User wants to <ins>edit the phone number (UC04)</ins> of Student A.
-  Use case ends.
+  <br>Use case ends.
 * 2a. User keys in an incorrect prefix for editing name.
     * 2a1. System displays an error message to tell the user about the format error.
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case (UC04): Edit a Student phone number
+{:.no_toc}
 
 **MSS**
 
 1. User enters the command to edit the phone number of Student B
 2. System replies with a confirmation message that the edit is successful
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. User wants to <ins>edit the name (UC03)</ins> of Student B.
-  Use case ends.
+  <br>Use case ends.
 * 2a. User keys in an incorrect prefix for editing the phone number.
     * 2a1. System displays an error message to tell the user about the format error.
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case (UC05): Delete a Tutor
+{:.no_toc}
 
 **MSS**
 
@@ -309,17 +560,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. `CLITutorsBook` shows a list of tutors
 3. User requests to delete a specific tutor in the list
 4. `CLITutorsBook` deletes the tutor
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  Use case ends.
+  <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. `CLITutorsBook` shows an error message.
-      Use case resumes at step 2.
+      <br>Use case resumes at step 2.
 
 #### Use case (UC06): Delete a Student
+{:.no_toc}
 
 **MSS**
 
@@ -327,58 +579,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. `CLITutorsBook` shows a list of students
 3. User requests to delete a specific student from the list
 4. `CLITutorsBook` deletes the student
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  Use case ends.
+  <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. `CLITutorsBook` shows an error message.
-      Use case resumes at step 2.
+      <br>Use case resumes at step 2.
 
 #### Use case (UC07): Find a Tutor
+{:.no_toc}
 
 **MSS**
 
 1. User requests to find a tutor using his/her name
 2. `CLITutorsBook` shows all tutors that contain that specific name
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
-  Use case ends.
+  <br>Use case ends.
 * 1b. There is no one with that specific name.
-  Use case ends.
+  <br>Use case ends.
 
 #### Use case (UC08): Find a Student
+{:.no_toc}
 
 **MSS**
 
 1. User requests to find a student using his/her name
 2. `CLITutorsBook` shows all students that contain that specific name
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
-  Use case ends.
+  <br>Use case ends.
 * 1b. There is no one with that specific name.
-  Use case ends.
+  <br>Use case ends.
 
 #### Use case (UC09): Match a student with the tutors
+{:.no_toc}
 
 **MSS**
 
 1. User requests to match a student with tutors with the required qualifications
 2. `CLITutorsBook` shows the tutors that are able to match with the specified student in a window
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. There are no tutors that match the requirements of the student.
-  Use case ends.
+  <br>Use case ends.
 
 ### Non-Functional Requirements
 
