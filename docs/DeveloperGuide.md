@@ -234,9 +234,9 @@ Given below is an activity diagram to show how the `find` implementation works f
 
 ![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
 
-#### Design Considerations:
+#### Design Considerations
 
-##### Aspect: How `find` executes
+##### Aspect: How `find` is executed
 {:.no_toc}
 
 - **Alternative 1 (current choice)**: user can `find` using multiple prefixes at once.
