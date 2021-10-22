@@ -125,11 +125,11 @@ How the `Logic` component works:
 3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete s 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete t 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/tracing/LogicSequenceDiagram.png)
+![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Taking a deeper look into the classes in `Logic` that are used for parsing a user command:
@@ -230,11 +230,12 @@ Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `
 
 Given below is an example usage scenario and how the `delete` command implementation behaves at each step:
 
-1. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
-2. The `AddressBookParser` identifies the user command (`delete`) and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
-3. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
-4. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
-5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+1. The user input `delete t 1` is passed to `LogicManager` to be executed.
+2. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
+3. The `AddressBookParser` identifies the `delete` command and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
+4. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
+5. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
+6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `delete` implementation works for a **valid** `delete` tutor input:
 
@@ -243,7 +244,7 @@ Given below is a sequence diagram to show how the `delete` implementation works 
 <div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Given below is an activity diagram to show how the `delete` command works for a **valid** `delete` tutor input:
+Given below is an activity diagram to show how the `delete` command works for a `delete` tutor input:
 
 ![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
 
@@ -253,9 +254,9 @@ Given below is an activity diagram to show how the `delete` command works for a 
 
 - **Alternative 1 (current choice)**: User can `delete` only one tutor/student at a time.
     - Pros: Reduces the lack of potential errors due to the decreased complexity of the code. It is also easier to implement since there are lesser use cases to consider.
-    - Cons: It is less intuitive for the user as they are now limited by having to `delete` each tutor/student one by one.
+    - Cons: It is more troublesome for the user if they want to delete a range of tutors/students as they are now limited by having to `delete` each tutor/student one by one.
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, Users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command.
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command.
 </div>
 
 - **Alternative 2**: User can `delete` multiple tutors/students using the command at the same time.
