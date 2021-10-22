@@ -206,7 +206,7 @@ This section describes some noteworthy details on how certain features are imple
 #### What it is
 #### Implementation details
 
-### Match Feature
+### Match feature
 
 #### What it is
 

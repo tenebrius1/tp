@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
-import static seedu.address.model.Model.PREDICATE_SHOW_NO_TUTORS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -168,7 +168,7 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_TUTORS);
+        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_PERSON);
 
         Set<Tag> studentTag = DANIEL.getTags();
         List<Tag> ls = new ArrayList<>();
@@ -179,7 +179,7 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_TUTORS);
+        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_PERSON);
 
 
         // different userPrefs -> returns false

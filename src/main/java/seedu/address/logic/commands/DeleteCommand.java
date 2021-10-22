@@ -55,6 +55,10 @@ public class DeleteCommand extends Command {
         case TUTOR:
             List<Tutor> lastShownTutorList = model.getFilteredTutorList();
 
+            if (lastShownTutorList.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+            }
+
             if (targetIndex.getZeroBased() >= lastShownTutorList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
             }
@@ -65,6 +69,10 @@ public class DeleteCommand extends Command {
             // No break necessary due to return statement
         case STUDENT:
             List<Student> lastShownStudentList = model.getFilteredStudentList();
+
+            if (lastShownStudentList.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+            }
 
             if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);

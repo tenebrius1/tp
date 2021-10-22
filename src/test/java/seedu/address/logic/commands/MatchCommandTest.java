@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -101,6 +102,16 @@ public class MatchCommandTest {
         MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
 
         assertCommandFailure(matchCommandStudent, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_emptyListStudent_throwsCommandException() {
+        Index outOfBoundIndexStudent = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(matchCommandStudent, model, String.format(Messages.MESSAGE_EMPTY_LIST,
+                PersonType.STUDENT));
     }
 
     @Test
