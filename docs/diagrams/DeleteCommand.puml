@@ -1,0 +1,36 @@
+@startuml
+start
+:User executes delete command;
+:Parse command arguments;
+
+if () then ([input is valid])
+    if () then([preamble is tutor])
+        :Create delete command;
+        :Execute delete command;
+        if () then ([else])
+            :Throw CommandException;
+            stop
+        else ([tutor index is valid])
+            : Get tutor to be deleted at
+            index in displayed tutor list;
+            : Delete specified tutor;
+        endif
+    else ([preamble is student])
+        :Create delete command;
+        :Execute delete command;
+        if () then([student index is valid])
+            : Get student to be deleted at
+            index in displayed student list;
+            : Delete specified student;
+        else ([else])
+            :Throw CommandException;
+            stop
+        endif
+    endif
+    :Display success message;
+    stop
+else ([else])
+    :Throw ParseException;
+    stop
+endif
+@enduml
