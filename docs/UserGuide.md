@@ -27,6 +27,7 @@ nav-text: User Guide
 6. Refer to the [Features](#features) below for details of each command.
 
 ---
+
 ## Command Syntax
 Before diving into the details, let us first look at what makes up a command:
 
