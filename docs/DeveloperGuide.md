@@ -218,7 +218,7 @@ Given below is an activity diagram to show how the `edit` command works:
 
 ![EditCommandActivityDiagram](images/EditCommandActivityDiagram.png)
 
-#### Design Considerations:
+#### Design Considerations
 ##### Aspect: How `edit` executes
 {: .no_toc}
 - **Alternative 1 (current choice)**: `edit` is handled separately for tutors and students via `EditTutorDescriptor` and `EditStudentDescriptor` respectively.
