@@ -5,7 +5,7 @@ nav-text: User Guide
 ---
 ![](https://i.imgur.com/dLt7IDY.png)
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a tuition agency with a **big list of tutors to manage**, `CLITutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
 ## Table of Contents
 {: .no_toc}
@@ -33,9 +33,14 @@ Before diving into the details, let us first look at what makes up a command:
 | Component    | Description                                                                |
 |:------------ |:-------------------------------------------------------------------------- |
 | Command Word | The keyword representing the action of the command                         |
-| Preamble     | The keyword representing `PersonType` and/or `INDEX`                        |
+| Preamble     | The keyword representing `Person` and/or `INDEX`                       |
 | Prefix       | The keyword to recognise the parameters                                    |
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
+
+<div markdown="block" class="alert alert-info">
+<b>:information_source: There are **two** main `Person` type in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. </b><br>
+
+</div>
 
 An example of a basic command to add a tutor could look like the following:
 
