@@ -178,7 +178,7 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Gender updatedGender = editStudentDescriptor.getGender().orElse(studentToEdit.getGender());
-        Tag updatedTag = editStudentDescriptor.getTag().orElse(studentToEdit.getTag());
+        Set<Tag> updatedTag = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
         return new Student(updatedName, updatedPhone, updatedGender, updatedTag);
     }
@@ -365,11 +365,6 @@ public class EditCommand extends Command {
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             super(toCopy);
-        }
-
-        public Optional<Tag> getTag() {
-            Optional<Set<Tag>> tags = getTags();
-            return tags.flatMap(set -> set.stream().findFirst());
         }
     }
 }

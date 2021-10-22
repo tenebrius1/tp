@@ -91,6 +91,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setTutorData(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetTutorData(addressBook);
+    }
+
+    @Override
+    public void setStudentData(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetStudentData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }

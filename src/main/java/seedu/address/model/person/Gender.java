@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
     public static final String MESSAGE_CONSTRAINTS = "Gender should be 'M' or 'F'";
-    public static final String VALIDATION_REGEX = "[MF]";
+    public static final String VALIDATION_REGEX = "[MmFf]";
     public final String genderSymbol;
 
     /**
@@ -20,7 +20,7 @@ public class Gender {
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        genderSymbol = gender;
+        genderSymbol = gender.toUpperCase();
     }
 
     /**
@@ -39,11 +39,11 @@ public class Gender {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Gender // instanceof handles nulls
-                && genderSymbol.equals(((Gender) other).genderSymbol)); // state check
+                && genderSymbol.equalsIgnoreCase(((Gender) other).genderSymbol)); // state check
     }
 
     @Override
     public int hashCode() {
-        return genderSymbol.hashCode();
+        return genderSymbol.toUpperCase().hashCode();
     }
 }

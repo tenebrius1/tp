@@ -57,6 +57,16 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces tutor data with the tutor data in {@code addressBook}.
+     */
+    void setTutorData(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Replaces student data with the student data in {@code addressBook}.
+     */
+    void setStudentData(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

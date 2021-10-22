@@ -1,25 +1,67 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.ChainedPredicate;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.GenderContainsGenderPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Qualification;
+import seedu.address.model.person.QualificationContainsQualificationPredicate;
+import seedu.address.model.person.TagsContainTagPredicate;
+import seedu.address.model.tag.Tag;
 
 public class FindCommandParserTest {
-
     private static final String MESSAGE_INVALID_FIND_COMMAND_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
+
+    // Valid Name
+    private final Name alice = new Name("ALice");
+    private final Name daniel = new Name("Daniel");
+
+    // Valid Gender
+    private final Gender male = new Gender("M");
+    private final Gender female = new Gender("F");
+
+    // Valid Qualification
+    private final Qualification validQualification = new Qualification("0");
+
+    // Valid Tags
+    private final Tag tag = new Tag("PM");
+
+    // Predicates
+    private final Predicate<Person> namePredicateDaniel = new NameContainsKeywordsPredicate(
+            Collections.singletonList("Daniel"));
+    private final Predicate<Person> namePredicateAlice = new NameContainsKeywordsPredicate(
+            Collections.singletonList("Alice"));
+    private final Predicate<Person> qualificationPredicate = new QualificationContainsQualificationPredicate(
+            Collections.singletonList(validQualification));
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -27,29 +69,108 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedTutorFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")),
-                        PersonType.TUTOR);
+    public void parse_oneTutorFieldSpecified_success() {
+        // Setup
+        Predicate<Person> predicate = x -> true;
+        Predicate<Person> tutorPredicate = predicate.and(namePredicateAlice);
+        ChainedPredicate tutorTestPredicate =
+                new ChainedPredicate.Builder().setName(alice).setPredicate(tutorPredicate).build();
+        FindCommand expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
+
+        // Valid name test
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + " n/alice", expectedTutorFindCommand);
+
+        tutorPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(female)));
+        tutorTestPredicate =
+                new ChainedPredicate.Builder().setGender(female).setPredicate(tutorPredicate).build();
+        expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
+
+        // Valid Gender test
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + GENDER_DESC_AMY, expectedTutorFindCommand);
+
+        tutorPredicate = predicate.and(new TagsContainTagPredicate(List.of(tag)));
+        tutorTestPredicate = new ChainedPredicate.Builder().setTags(List.of(tag))
+                        .setPredicate(tutorPredicate).build();
+        expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
+
+        // Valid tag test
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + TAG_DESC_PM, expectedTutorFindCommand);
+
+        tutorPredicate =
+                predicate.and(new QualificationContainsQualificationPredicate(List.of(validQualification)));
+        tutorTestPredicate = new ChainedPredicate.Builder().setQualification(validQualification)
+                        .setPredicate(tutorPredicate).build();
+        expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
+
+        // Valid qualification test
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + QUALIFICATION_DESC_BOB, expectedTutorFindCommand);
+    }
+
+    @Test
+    public void parse_oneStudentFieldSpecified_success() {
+        // Setup
+        Predicate<Person> predicate = x -> true;
+        Predicate<Person> studentPredicate =
+                predicate.and(namePredicateDaniel);
+        ChainedPredicate studentTestPredicate =
+                new ChainedPredicate.Builder().setName(daniel).setPredicate(studentPredicate).build();
         FindCommand expectedStudentFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Collections.singletonList("Daniel")),
-                        PersonType.STUDENT);
-        assertParseSuccess(parser, "t n/Alice", expectedTutorFindCommand);
+                new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        // check for lowercase
-        assertParseSuccess(parser, "t n/alice", expectedTutorFindCommand);
+        // Valid name
+        assertParseSuccess(parser, VALID_STUDENT_LETTER + " n/Daniel", expectedStudentFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "t \n n/Alice", expectedTutorFindCommand);
+        studentPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(male)));
+        studentTestPredicate =
+                new ChainedPredicate.Builder().setGender(male).setPredicate(studentPredicate).build();
+        expectedStudentFindCommand = new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        assertParseSuccess(parser, "s n/Daniel", expectedStudentFindCommand);
+        // Valid Gender
+        assertParseSuccess(parser, VALID_STUDENT_LETTER + GENDER_DESC_BOB, expectedStudentFindCommand);
 
-        // check for lowercase
-        assertParseSuccess(parser, "s n/daniel", expectedStudentFindCommand);
+        studentPredicate = predicate.and(new TagsContainTagPredicate(List.of(tag)));
+        studentTestPredicate =
+                new ChainedPredicate.Builder().setTags(List.of(tag))
+                        .setPredicate(studentPredicate).build();
+        expectedStudentFindCommand = new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "s \n n/Daniel", expectedStudentFindCommand);
+        // Valid Tag
+        assertParseSuccess(parser, VALID_STUDENT_LETTER + TAG_DESC_PM, expectedStudentFindCommand);
+    }
+
+    @Test
+    public void parse_someTutorFieldsSpecified_success() {
+        // Setup
+        Predicate<Person> predicate = x -> true;
+        predicate = predicate.and(namePredicateAlice);
+        predicate = predicate.and(qualificationPredicate);
+        ChainedPredicate chainedPredicate =
+                new ChainedPredicate.Builder().setName(alice)
+                        .setQualification(validQualification).setPredicate(predicate).build();
+        FindCommand expectedTutorFindCommand = new FindCommand(chainedPredicate, PersonType.TUTOR);
+
+        assertParseSuccess(parser, VALID_TUTOR_LETTER + NAME_DESC_ALICE + QUALIFICATION_DESC_BOB,
+                expectedTutorFindCommand);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        // invalid name
+        assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid tag
+        assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid tag argument ahead of valid tag
+        assertParseFailure(parser, VALID_TUTOR_LETTER
+                + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG);
+
+        assertParseFailure(parser, VALID_TUTOR_LETTER
+                + TAG_DESC_PM + " " + INVALID_TAG , Tag.MESSAGE_INVALID_TAG);
+
+        // multiple invalid values, but only the first invalid value is captured
+        assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC + INVALID_PHONE_DESC,
+                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -63,6 +184,8 @@ public class FindCommandParserTest {
         // blank name
         assertParseFailure(parser, VALID_STUDENT_LETTER + " n/", Name.MESSAGE_CONSTRAINTS);
 
+        // Find qualification for student
+        assertParseFailure(parser, VALID_STUDENT_LETTER + QUALIFICATION_DESC_BOB,
+                MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
     }
-
 }

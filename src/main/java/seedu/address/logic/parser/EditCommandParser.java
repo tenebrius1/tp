@@ -15,6 +15,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -61,11 +63,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap studentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG);
 
-        EditTutorDescriptor editStudentDescriptor = new EditTutorDescriptor();
+        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         return parsePerson(studentMultimap, editStudentDescriptor, PersonType.STUDENT);
     }
 
-    private EditCommand parsePerson(ArgumentMultimap argMultimap, EditCommand.EditPersonDescriptor editPersonDescriptor,
+    private EditCommand parsePerson(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor,
                                     PersonType personType) throws ParseException {
         Index personIndex;
 

@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Student objects.
@@ -18,7 +22,7 @@ public class StudentBuilder {
     private Name name;
     private Phone phone;
     private Gender gender;
-    private Tag tag;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -27,7 +31,8 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         gender = new Gender(DEFAULT_GENDER);
-        tag = new Tag(DEFAULT_TAG);
+        tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_TAG));
     }
 
     /**
@@ -37,7 +42,7 @@ public class StudentBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         gender = personToCopy.getGender();
-        tag = personToCopy.getTag();
+        tags = personToCopy.getTags();
     }
 
     /**
@@ -59,8 +64,8 @@ public class StudentBuilder {
     /**
      * Sets the {@code Tag} of the {@code Student} that we are building.
      */
-    public StudentBuilder withTag(String tag) {
-        this.tag = new Tag(tag);
+    public StudentBuilder withTag(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -73,6 +78,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, gender, tag);
+        return new Student(name, phone, gender, tags);
     }
 }
