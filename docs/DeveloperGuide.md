@@ -221,6 +221,7 @@ Given below is an activity diagram to show how the `edit` command works:
 #### Design Considerations
 ##### Aspect: How `edit` executes
 {: .no_toc}
+
 - **Alternative 1 (current choice)**: `edit` is handled separately for tutors and students via `EditTutorDescriptor` and `EditStudentDescriptor` respectively.
     - Pros: It allows the User to edit the details of tutors and students even if they have different fields.
     - Cons: `EditCommandParser` would be more complex since it has to handle edits for tutors and students separately due to differing requirements. The higher complexity may lead to a higher chance of creating bugs.
