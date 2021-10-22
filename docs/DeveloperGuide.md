@@ -338,31 +338,29 @@ Given below is an activity diagram to show how the `list` command works:
 
 #### What it is
 
-Searches and displays all tutors or students that matches the parameters specified. The `find` command must have at least one parameter specified to be valid (i.e `find s blah` will **not** work).
+Searches and displays all tutors/students that matches the parameters specified. The `find` command must have **at least one parameter** specified to be valid (i.e. `find s NOT_A_PARAMETER` will **not** work).
 
 #### Implementation details
 
-A noteworthy change in implementation of our `FindCommand` from the standard AB3 `FindCommand` is in `FindCommandParser`. We expanded on the `FindCommand` functionality such that it can find for students or tutors  multiple attributes. Because of this, we opted to create a new `ChainedPredicate` class that encapsulates the idea of chaining multiple predicates together. Each attribute specified by the user creates its own predicate which is then chained together using the `Predicate#and` method and the resulting predicate is then stored in the `ChainedPredicate` class.
+A noteworthy change in implementation of our `FindCommand` from the standard AB3 `FindCommand` is in `FindCommandParser`. We expanded on the `FindCommand` functionality such that it can find for students/tutors  multiple attributes. Because of this, we opted to create a new `ChainedPredicate` class that encapsulates the idea of chaining multiple predicates together. Each attribute specified by the user creates its own predicate which is then chained together using the `Predicate#and` method and the resulting predicate is then stored in the `ChainedPredicate` class.
 
 ##### Sequence of action
 {:.no_toc}
 
 Given below is an example usage scenario and how the `find` command implementation behaves at each step:
 
-1. The user input (for e.g `find s n/David`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
+1. The user input `find s n/David` is passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `AddressBookParser#parseCommand` method which creates a new `FindCommandParser`.
 3. The `FindCommandParser` then calls its own `parse()` method which will return a new `FindCommand` if the input is valid.
 4. `LogicManager` will execute the `FindCommand` through `FindCommand#execute`.
 5. `FindCommand` will then search and update the student list in the `Model` class using the `Model#updateFilteredStudentList` method.
-6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager` and the `Ui` will be updated with the filtered.
+6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
-Given below is a sequence diagram to show how the `find` implementation works for a **valid** `find` student input:
+Given below is a sequence diagram to show how a **valid** `find` implementation works for a `find` student input:
 
 ![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
 
-> **Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-Given below is an activity diagram to show how the `find` implementation works for a **valid** `find` student input:
+Given below is an activity diagram to show how a `find` implementation works for a `find` student input:
 
 ![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
 
@@ -371,13 +369,13 @@ Given below is an activity diagram to show how the `find` implementation works f
 ##### Aspect: How `find` is executed
 {:.no_toc}
 
-- **Alternative 1 (current choice)**: user can `find` using multiple prefixes at once.
-  - Pros: It allows the user to find a specific type of student or tutor more easily.
- <br>(for e.g they can find all tutors who are women and teaches Primary Math)
-  - Cons: `FindCommandParser` would be more complex since it has to parse for multiple tags and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
-- **Alternative 2**: user can only `find` using one prefix at a time.
+- **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
+  - Pros: It allows the user to find tutor/student more easily by their fields.
+ <br>(for e.g. they can find all tutors who are women and teaches Primary Math)
+  - Cons: It would be more complex since it has to parse for multiple tags and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
+- **Alternative 2**: User can only `find` using one prefix at a time.
   - Pros: Simpler to implement since there are lesser use cases to consider and hence, making the code less prone to bugs.
-  - Cons: Significant impact on the overall user experience since finding a `Person` with only one prefix may generate a large list if there are many `Tutor` or `Student` stored. user may not be able to find what he/she specifically wants.
+  - Cons: Significant impact on the overall user experience since finding a person with only one prefix may generate a large list if there are many tutors/students stored. user may not be able to find what he/she specifically wants.
 
 ### Match feature
 
