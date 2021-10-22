@@ -194,7 +194,6 @@ Adds a tutor or student to the tutor or student list respectively. The `add` com
 #### Implementation details
 
 ##### Sequence of action
-
 {:.no_toc}
 
 Given below is an example usage scenario and how the `add` command implementation behaves at each step:
@@ -202,7 +201,7 @@ Given below is an example usage scenario and how the `add` command implementatio
 1. The user input (for e.g `"add t n/Jonathan Chan p/92102339 g/M q/2 t/PM SM"`) is handled by the `CommandBox` class in the Ui component, before being passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `AddressBookParser`'s `parseCommand()` method which in turns creates a new `AddCommandParser`.
 3. The `AddCommandParser` calls its own `parse()` method which will return a new `AddCommand` if the input is valid.
-4. `AddCommand` will then update the tutor list in the `Model` class.
+4. `AddCommand` will then update the tutor list using the method `model#addTutor()` in the `Model` class.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `add` implementation works:
@@ -239,7 +238,6 @@ Lists all tutors or students in the list. The `list` command only accepts `s` or
 #### Implementation details
 
 ##### Sequence of action
-
 {:.no_toc}
 
 Given below is an example usage scenario and how the `list` command implementation behaves at each step:
