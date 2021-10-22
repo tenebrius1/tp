@@ -36,11 +36,6 @@ Before diving into the rest of the contents in our developer guide, the followin
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
-## **Acknowledgements**
-
-We would like to thank Jun Xiong and Damith for supervising our project.
-
---------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -225,7 +220,48 @@ Given below is an activity diagram to show how the `add` command works:
 
 ### Delete feature
 #### What it is
+Deletes the tutor or student at the specified `INDEX` from the displayed tutor/student list.
+
 #### Implementation details
+Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `Command` class. The actual execution of the `delete` command is similar to that of the `add` command, except the `delete` command decides on the tutor/student to delete based on the `INDEX` of the tutor/student displayed on the `filteredTutors` list or the `filteredStudents` list of the `ModelManager` class.
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `delete` command implementation behaves at each step:
+
+1. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
+2. The `AddressBookParser` identifies the user command (`delete`) and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
+3. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
+4. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
+5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how the `delete` implementation works for a **valid** `delete` tutor input:
+
+![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Given below is an activity diagram to show how the `delete` command works for a **valid** `delete` tutor input:
+
+![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
+
+#### Design Considerations
+##### Aspect: How `delete` is executed
+{:.no_toc}
+
+- **Alternative 1 (current choice)**: User can `delete` only one tutor/student at a time.
+    - Pros: Reduces the lack of potential errors due to the decreased complexity of the code. It is also easier to implement since there are lesser use cases to consider.
+    - Cons: It is less intuitive for the user as they are now limited by having to `delete` each tutor/student one by one.
+
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, Users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command.
+</div>
+
+- **Alternative 2**: User can `delete` multiple tutors/students using the command at the same time.
+    - Pros: Allows the user more flexibility in deleting tutors/students instead of just deleting them one by one.
+      For example, users can choose to `delete` one or many tutors/students, depending on their command input.
+    - Cons: This will cause the code to become more complex in dealing with many possible inputs and scenarios, leading to a higher amount of potential errors.
 
 ### Edit feature
 #### What it is
