@@ -111,6 +111,10 @@ public class EditCommand extends Command {
     private CommandResult executeEditTutor(Model model) throws CommandException {
         List<Tutor> lastShownList = model.getFilteredTutorList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         }
@@ -137,6 +141,10 @@ public class EditCommand extends Command {
      */
     private CommandResult executeEditStudent(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);

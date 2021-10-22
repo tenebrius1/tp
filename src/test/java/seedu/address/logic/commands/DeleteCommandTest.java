@@ -67,6 +67,25 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_emptyListTutor_throwsCommandException() {
+        Index outOfBoundIndexTutor = Index.fromOneBased(model.getFilteredTutorList().size() + 1);
+        DeleteCommand deleteCommandTutor = new DeleteCommand(outOfBoundIndexTutor, PersonType.TUTOR);
+        model.updateFilteredTutorList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(deleteCommandTutor, model, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
+    }
+
+    @Test
+    public void execute_emptyListStudent_throwsCommandException() {
+        Index outOfBoundIndexStudent = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        DeleteCommand deleteCommandStudent = new DeleteCommand(outOfBoundIndexStudent, PersonType.STUDENT);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(deleteCommandStudent, model, String.format(Messages.MESSAGE_EMPTY_LIST,
+                PersonType.STUDENT));
+    }
+
+    @Test
     public void execute_validIndexFilteredListTutor_success() {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
 
