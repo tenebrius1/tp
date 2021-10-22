@@ -197,7 +197,7 @@ Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `
 
 Given below is an example usage scenario and how the `delete` command implementation behaves at each step:
 
-1. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input. 
+1. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
 2. The `AddressBookParser` identifies the user command (`delete`) and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
 3. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
 4. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
@@ -222,7 +222,7 @@ Given below is an activity diagram to show how the `delete` command works for a 
     - Pros: Reduces the lack of potential errors due to the decreased complexity of the code. It is also easier to implement since there are lesser use cases to consider.
     - Cons: It is less intuitive for the user as they are now limited by having to `delete` each tutor/student one by one.
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, Users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command. 
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** In our current implementation, Users can delete all tutors/students from their respective lists using the `clear` command. This is to make the app more intuitive for users with clear goals on the command they want to execute while reducing any unnecessary complexity in our `delete` command.
 </div>
 
 - **Alternative 2**: User can `delete` multiple tutors/students using the command at the same time.
