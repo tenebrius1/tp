@@ -3,12 +3,12 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Screen?>
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
-
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
          title="CLITutors" minWidth="450" minHeight="600"
@@ -177,8 +177,14 @@
                         </padding>
                     </VBox>
                     <Button fx:id="sendButton" styleClass="sendButton"
-                            maxWidth="${screen.visualBounds.width}"
-                            minHeight="${screen.visualBounds.height*0.045}">
+                            prefHeight="${screen.visualBounds.width*0.045}"
+                            prefWidth="${screen.visualBounds.width*0.05}"
+                            onMouseClicked="#handleCommandEntered">
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../images/Vector.png"/>
+                            </ImageView>
+                        </graphic>
                     </Button>
                     <VBox>
                         <padding>
