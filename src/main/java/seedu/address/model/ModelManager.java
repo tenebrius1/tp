@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.concurrent.CompletableFuture;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -27,6 +28,9 @@ public class ModelManager implements Model {
     private final FilteredList<Tutor> filteredTutors;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Tutor> matchedTutors;
+    private final FilteredList<Tutor> filteredMatchedTutors;
+
+    private boolean isShowingMatchedTutors;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,12 +41,16 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        isShowingMatchedTutors = true;
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
+        filteredMatchedTutors = new FilteredList<>(this.addressBook.getTutorList());
         matchedTutors.setPredicate(PREDICATE_SHOW_NO_TUTORS);
+        filteredMatchedTutors.setPredicate(PREDICATE_SHOW_NO_TUTORS);
     }
 
     public ModelManager() {
@@ -192,23 +200,35 @@ public class ModelManager implements Model {
     public void updateMatchedTutor(Predicate<Person> predicate) {
         requireNonNull(predicate);
         matchedTutors.setPredicate(predicate);
+        isShowingMatchedTutors = true;
+
+        System.out.println("i fucking hate hate hateeeeeeeee coding");
+        System.out.println(isShowingMatchedTutors);
     }
 
     @Override
     public void filterMatchedTutor(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        matchedTutors.setPredicate(predicate);
+        isShowingMatchedTutors = false;
 
-//        @SuppressWarnings("unchecked")
-//        Predicate<Person> matchingPredicate = (Predicate<Person>) matchedTutors.getPredicate();
-//        Predicate<Person> resPredicate = predicate.and(matchingPredicate);
-//        ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
-//        matchedTutors.setPredicate(builder.setPredicate(resPredicate).build());
+        @SuppressWarnings("unchecked")
+        Predicate<Person> matchingPredicate = (Predicate<Person>) matchedTutors.getPredicate();
+        Predicate<Person> resPredicate = predicate.and(matchingPredicate);
+        ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
+        filteredMatchedTutors.setPredicate(builder.setPredicate(resPredicate).build());
+
+        System.out.println("i fucking hate coding");
+        System.out.println(isShowingMatchedTutors);
     }
 
     @Override
     public ObservableList<Tutor> getMatchedTutorList() {
-        return matchedTutors;
+        if (isShowingMatchedTutors) {
+            return matchedTutors;
+        } else {
+            System.out.println("hehe");
+            return filteredMatchedTutors;
+        }
     }
 
     @Override

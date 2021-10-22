@@ -58,6 +58,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return The Predicate used to filter the match list
      */
     private Predicate<Person> generatePredicate(String args) throws ParseException {
+        args = " " + args;
         Predicate<Person> predicate = x -> true;
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
 
