@@ -326,6 +326,20 @@
     -fx-padding: 8 1 8 1;
 }
 
+.sendButton, .sendButton:hover {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #454393;
+    -fx-background-color: #454393;
+}
+
+.sendButton:pressed {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #b6bbed;
+    -fx-background-color: #b6bbed;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;

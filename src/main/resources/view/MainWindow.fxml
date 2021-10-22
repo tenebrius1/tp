@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Screen?>
 <?import javafx.stage.Stage?>
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="CLITutors" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<?import java.net.URL?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1"
+         title="CLITutors" minWidth="450" minHeight="600"
+         onCloseRequest="#handleExit">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen"/>
     </fx:define>
@@ -32,10 +30,12 @@
             <VBox style="-fx-background-color: #1d1d1d">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
-                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit"
+                                  text="Exit"/>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Help">
-                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
+                                  onAction="#handleHelp" text="Help"/>
                     </Menu>
                 </MenuBar>
 
@@ -47,7 +47,6 @@
                     </VBox>
 
                     <HBox prefWidth="${screen.visualBounds.width}">
-
                         <VBox style="-fx-background-color: #1d1d1d;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
@@ -57,13 +56,17 @@
                         <!-- Tutor List -->
                         <VBox fx:id="tutorList" styleClass="pane-with-border"
                               prefWidth="${screen.visualBounds.width*0.33}"
-                              prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
+                              prefHeight="${screen.visualBounds.height}"
+                              VBox.vgrow="ALWAYS">
                             <padding>
-                                <Insets top="10" right="10" bottom="10" left="10"/>
+                                <Insets top="10" right="10" bottom="10"
+                                        left="10"/>
                             </padding>
-                            <TextField id="tutorHeader" text="    Tutors" editable="false" styleClass="list-header"
+                            <TextField id="tutorHeader" text="    Tutors"
+                                       editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
-                            <StackPane fx:id="tutorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                            <StackPane fx:id="tutorListPanelPlaceholder"
+                                       VBox.vgrow="ALWAYS"/>
                         </VBox>
 
                         <VBox style="-fx-background-color: #1d1d1d;">
@@ -75,13 +78,17 @@
                         <!-- Student List -->
                         <VBox fx:id="studentList" styleClass="pane-with-border"
                               prefWidth="${screen.visualBounds.width*0.33}"
-                              prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
+                              prefHeight="${screen.visualBounds.height}"
+                              VBox.vgrow="ALWAYS">
                             <padding>
-                                <Insets top="10" right="10" bottom="10" left="10"/>
+                                <Insets top="10" right="10" bottom="10"
+                                        left="10"/>
                             </padding>
-                            <TextField id="studentHeader" text="    Students" editable="false" styleClass="list-header"
+                            <TextField id="studentHeader" text="    Students"
+                                       editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
-                            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                            <StackPane fx:id="studentListPanelPlaceholder"
+                                       VBox.vgrow="ALWAYS"/>
                         </VBox>
 
                         <VBox style="-fx-background-color: #1d1d1d;">
@@ -93,13 +100,17 @@
                         <!-- Match List -->
                         <VBox fx:id="matchList" styleClass="pane-with-border"
                               prefWidth="${screen.visualBounds.width*0.34}"
-                              prefHeight="${screen.visualBounds.height}" VBox.vgrow="ALWAYS">
+                              prefHeight="${screen.visualBounds.height}"
+                              VBox.vgrow="ALWAYS">
                             <padding>
-                                <Insets top="10" right="10" bottom="10" left="10"/>
+                                <Insets top="10" right="10" bottom="10"
+                                        left="10"/>
                             </padding>
-                            <TextField id="matchHeader" text="    Match List" editable="false" styleClass="list-header"
+                            <TextField id="matchHeader" text="    Match List"
+                                       editable="false" styleClass="list-header"
                                        focusTraversable="false"/>
-                            <StackPane fx:id="matchListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                            <StackPane fx:id="matchListPanelPlaceholder"
+                                       VBox.vgrow="ALWAYS"/>
                         </VBox>
 
                         <VBox style="-fx-background-color: #1d1d1d;">
@@ -122,8 +133,11 @@
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
                         </VBox>
-                        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                                   minHeight="100" prefHeight="100" maxHeight="100"
+                        <StackPane VBox.vgrow="NEVER"
+                                   fx:id="resultDisplayPlaceholder"
+                                   styleClass="pane-with-border"
+                                   minHeight="100" prefHeight="100"
+                                   maxHeight="100"
                                    prefWidth="${screen.visualBounds.width}">
                             <padding>
                                 <Insets top="5" right="10" bottom="5" left="5"/>
@@ -150,20 +164,28 @@
                             <Insets top="5" right="5" bottom="5" left="5"/>
                         </padding>
                     </VBox>
-                    <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border"
-                               prefWidth="${screen.visualBounds.width}">
+                    <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder"
+                               styleClass="pane-with-border"
+                               prefWidth="${screen.visualBounds.width*0.92}">
                         <padding>
                             <Insets top="5" right="10" bottom="5" left="10"/>
                         </padding>
                     </StackPane>
-
+                    <VBox>
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+                    </VBox>
+                    <Button fx:id="sendButton" styleClass="sendButton"
+                            maxWidth="${screen.visualBounds.width}"
+                            minHeight="${screen.visualBounds.height*0.045}">
+                    </Button>
                     <VBox>
                         <padding>
                             <Insets top="5" right="5" bottom="5" left="5"/>
                         </padding>
                     </VBox>
                 </HBox>
-
                 <VBox>
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
