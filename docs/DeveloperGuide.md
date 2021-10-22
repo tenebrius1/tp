@@ -18,10 +18,20 @@ nav-text: Developer Guide
 
 ## Table of Contents
 {: .no_toc}
-1. Table of Contents
+* Table of Contents
 {:toc}
 
 **`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Introduction**
+
+CLITutors is a desktop application for managers to manage private tutoring jobs, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). CLITutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
+
+This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to CLITutors, a [glossary](#glossary) has been provided for readers.
+
+Readers are also advised to [download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases) our latest releases from our main website in order to test out the application.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Navigating this Developer Guide**
@@ -31,7 +41,7 @@ Before diving into the rest of the contents in our developer guide, the followin
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | `Markdown`                                                              | Denotes distinct classes, their methods or examples |
 | <div markdown="span" class="alert alert-info">:information_source: Note</div> | Important things to take note of                    |
-| <kbd>Keyboard</kbd>                                                     | Keyboard actions                                    |
+
 
 <div style="page-break-after: always;"></div>
 
