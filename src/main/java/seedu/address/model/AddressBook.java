@@ -10,6 +10,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniqueStudentList;
 import seedu.address.model.person.UniqueTutorList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -158,6 +159,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student student) {
         students.remove(student);
+    }
+
+    /**
+     * Sorts tutors based on number of matching tags with ls in descending order.
+     * @param studentTagList List of Tags used to compare with each tutor.
+     */
+    public void sortMatchedTutorList(List<Tag> studentTagList) {
+        requireNonNull(studentTagList);
+        tutors.sortTutors(studentTagList);
     }
 
     //// util methods

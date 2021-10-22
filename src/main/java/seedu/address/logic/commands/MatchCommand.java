@@ -69,10 +69,10 @@ public class MatchCommand extends Command {
         Set<Tag> studentTag = studentToMatch.getTags();
         ArrayList<Tag> ls = new ArrayList<>();
         studentTag.stream().forEach(tag -> ls.add(tag));
-        model.updateMatchedTutor(new TagsContainTagPredicate(ls));
+        model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls);
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON);
+            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
         }
 

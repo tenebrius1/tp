@@ -9,10 +9,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,10 +28,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.person.UniqueTutorList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class AddressBookTest {
     private final AddressBook addressBook = new AddressBook();
@@ -148,6 +155,35 @@ public class AddressBookTest {
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+    }
+
+    @Test
+    public void sortMatchedTutorList_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.sortMatchedTutorList(null));
+    }
+
+    @Test
+    public void sortMatchedTutorList_validInputModifyTutorList_success() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> addressBook.addTutor(tutor));
+        List<Tag> studentTagList = new ArrayList<>();
+        studentTagList.addAll(ELLE.getTags());
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        expectedUniqueTutorList.add(BENSON);
+        expectedUniqueTutorList.add(CARL);
+        expectedUniqueTutorList.add(ALICE);
+        addressBook.sortMatchedTutorList(studentTagList);
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getTutorList());
+    }
+
+    @Test
+    public void sortMatchedTutorList_validInputNoModification_success() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> addressBook.addTutor(tutor));
+        // Student chosen has no matching tags with any tutor
+        List<Tag> studentTagList = new ArrayList<>();
+        studentTagList.addAll(GEORGE.getTags());
+        ObservableList<Tutor> expectedUniqueTutorList = addressBook.getTutorList();
+        addressBook.sortMatchedTutorList(studentTagList);
+        assertEquals(expectedUniqueTutorList, addressBook.getTutorList());
     }
 
     @Test

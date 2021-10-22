@@ -38,7 +38,10 @@ public class MatchCommandTest {
 
         ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -73,7 +76,12 @@ public class MatchCommandTest {
 
         Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
+
+
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
