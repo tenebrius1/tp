@@ -249,14 +249,6 @@
     -fx-text-fill: #1d1d1d;
 }
 
-.button:focused {
-    -fx-border-color: white, white;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: #1d1d1d;
@@ -324,6 +316,20 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+
+.sendButton, .sendButton:hover {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #454393;
+    -fx-background-color: #454393;
+}
+
+.sendButton:pressed {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #b6bbed;
+    -fx-background-color: #b6bbed;
 }
 
 #cardPane {
