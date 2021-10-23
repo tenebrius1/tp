@@ -18,7 +18,7 @@ if () then ([input is valid])
             :Throw CommandException;
             stop
         endif
-    else ([Empty student list or invalid index])
+    else ([empty student list or invalid index])
         :Throw CommandException;
         stop
     endif
