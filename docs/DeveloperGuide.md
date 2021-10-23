@@ -388,9 +388,9 @@ Given below is an example valid usage scenario and how the `match` command imple
 **Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 
 Steps:
-1. The user input `match 1` (i.e. match the first student on the student list) is passed to `LogicManager` to be executed.
+1. The user input `match 1` (i.e. match the first student in the student list) is passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `AddressBookParser#parseCommand`, which creates a new `MatchCommandParser` object.
-3. The `MatchCommandParser` object calls `MatchCommandParser#parse` which will validate the user input and return a new `MatchCommand` if the input is valid.
+3. The `MatchCommandParser` object calls on its own parse() method which will validate the user input and return a new `MatchCommand`.
 4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
 5. `MatchCommand` will find the first student in the student list and a `TagsContainTagPredicate` object is created.
 6. The `matchTutorList` in the `Model` will then be updated via `Model#updateMatchedTutor`.
