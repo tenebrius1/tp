@@ -265,7 +265,7 @@ Given below is an activity diagram to show how the `delete` command works for a 
 
 ### Edit feature
 #### What it is
-Edits a tutor/student in the tutor list/student list respectively. All fields are **optional** in the `edit` command, but **at least one field** must be specified for the command to execute successfully.
+Edits a tutor/student in the tutor/student list respectively. All fields are **optional** in the `edit` command, but **at least one field** must be specified for the command to execute successfully.
 
 #### Implementation details
 ##### Sequence of action
