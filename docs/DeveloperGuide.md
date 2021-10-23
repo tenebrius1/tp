@@ -241,9 +241,6 @@ Given below is a sequence diagram to show how the `delete` implementation works 
 
 ![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 Given below is an activity diagram to show how the `delete` command works for a `delete` tutor input:
 
 ![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
