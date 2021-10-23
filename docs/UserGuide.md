@@ -39,7 +39,7 @@ Before diving into the details, let us first look at what makes up a command:
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source: There are **two** main `Person` type in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. </b><br>
+<b>:information_source: </b>There are **two** main `Person` type in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
 
 </div>
 

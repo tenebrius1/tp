@@ -376,34 +376,31 @@ Given below is an activity diagram to show how a `find` implementation works for
 
 #### What it is
 
-The Match feature involves taking a `Student` specified by the user through a `MatchCommand` (eg. `match 1`, matches the first student on `Student` list), and matches them to a `Tutor` who has one or more matching `Tag` with the `Student`. It automatically sorts the `matchedTutorList` according to the number of matching `Tag` that a `Tutor` has with the specified `Student`.
+The Match feature involves taking a student specified by the user and matching the student with tutors who have **one or more** matching tags with the identified student. It automatically sorts the `matchedTutorList` according to the number of matching tags that a tutor has with the student.
 
 #### Implementation details
-Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created. `MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `execute` method of the abstract `Command` class. Upon execution, the `Student` is identified via the index given by the user and a `TagsContainTagPredicate` object is created with the `tags` of the identified `Student`. This `TagsContainTagPredicate` object will be used to determine if the `tags` of the `Tutor` stored contains one or more `Tag` that the `Student` has. It will then update the `matchedTutorList` in the model with the filtered `Tutor` list. The `matchedTutorList` is then sorted such that `Tutor` with more matching `Tag` is at the front of the list.
+Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created. `MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `execute()` method. Upon execution, the student is identified via the `INDEX` given by the user and a `TagsContainTagPredicate` object is created, which will be used to determine if the `tags` of the tutor contains one or more `Tag` that the student has. It will then update and sort the `matchedTutorList` such that the tutor with more matching `Tag` is at the front of the list.
 
 ##### Sequence of action
 {:.no_toc}
 Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
 
-**Prerequisite**: There are `Students` in the student list and there are `Tutor` objects which have `tags` that the `Student` have (i.e. there are matches available for `Student`).
+**Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 
 Steps:
-1. The user executes `match 1` to match the first `Student` on the student list.
-2. `LogicManager` calls on `AddressBookParser#parseCommand` which in turns creates a new `MatchCommandParser` object.
-3. The `MatchCommandParser` object calls `MatchCommandParser#parse` which will validate the user input and return a new `MatchCommand` if the input is valid.
+1. The user input `match 1` (i.e. match the first student in the student list) is passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser#parseCommand`, which creates a new `MatchCommandParser` object.
+3. The `MatchCommandParser` object calls on its own parse() method which will validate the user input and return a new `MatchCommand`.
 4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
-5. `MatchCommand` will find the first `Student` in the student list and a `TagsContainTagPredicate` object is created.
+5. `MatchCommand` will find the first student in the student list and a `TagsContainTagPredicate` object is created.
 6. The `matchTutorList` in the `Model` will then be updated via `Model#updateMatchedTutor`.
-7. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager` and the `Ui` is updated with the `matchTutorList`.
+7. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
-The following sequence diagram shows how the `match` command for the example above works:
+Given below is a sequence diagram to show how the `match` implementation works for a **valid** `match` input:
 
 ![MatchCommandSequenceDiagram](images/MatchCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `MatchCommandParser` and `MatchCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
-The following activity diagram summarizes what happens when a user executes a **valid** `match` command:
+Given below is an activity diagram to show how the `match` command works for a `match` input:
 
 ![MatchCommandActivityDiagram](images/MatchCommandActivityDiagram.png)
 
@@ -411,12 +408,12 @@ The following activity diagram summarizes what happens when a user executes a **
 
 ##### Aspect: How `match` is executed
 {:.no_toc}
-- **Alternative 1 (current choice)**: We made use of a `TagsContainTagPredicate` to help us find `Tutor` objects in the tutor list that has the `Tag` we are finding.
-    - Pros: Pros: By abstracting out the `Predicate`, the predicates can be used elsewhere or in other match commands.
-    - Cons: Extra layer of abstractions which may potentially introduce undesired bugs in the code.
-- **Alternative 2**: Directly filter the `matchedTutorList` in `MatchCommand#execute` without the use of predicate.
-    - Pros: Easier to understand the code for potential developers since the whole implementation is done within `MatchCommand`.
-    - Cons: There is a lack of abstraction. It would be harder to scale up the application as it becomes more complex.
+- **Alternative 1 (current choice)**: User can `match` students with multiple `tags` to tutors.
+    - Pros: It prevents the user from having to create one `Student` object for every subject that the student is looking for, which allows the database to store lesser unnecessary/duplicate information about the student, making it less prone to bugs.
+    - Cons: The code will become more complex as there is a need to create a `TagsContainTagPredicate` to assist in finding all the relevant matching tutors.
+- **Alternative 2**: User can `match` students with only one `Tag` to tutors.
+    - Pros: Simpler implementation which requires a less complex predicate, making it easier for developers to understand the code.
+    - Cons: Higher storage cost due to more `Student` objects being created if a specific student wants to learn multiple subjects as students are only limited to one `Tag`.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -652,3 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
 | **Tag**           | Subjects each Tutor teaches are saved under tags as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math.|
 | **Bloatware**     | Software that uses excessive memory and disk space, which makes the program run slow                                                              |
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Instructions for Manual Testing**
+
+to be added...
