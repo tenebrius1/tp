@@ -1,29 +1,18 @@
 @startuml
 start
-:User executes edit command;
-:EditCommandParser parses command arguments;
+:User enters edit tutor command;
+:Parse command arguments;
 
-if () then ([Valid input])
-    if () then([Edit tutor])
-        :Create EditTutorDescriptor;
-        :Populate EditTutorDescriptor
-        with edited details if present;
-        :Create edited Tutor
-        from EditTutorDescriptor;
-        :Replace edited
-        Tutor in Model;
-    else ([Edit student])
-        :Create EditStudentDescriptor;
-        :Populate EditStudentDescriptor
-        with edited details if present;
-        :Create edited Student
-        from EditStudentDescriptor;
-        :Replace edited
-        Student in Model;
-    endif
+if () then ([input is valid])
+    :Create new tutor and populate
+    with edited details if present;
+    :Replace original tutor in
+    tutor list with edited tutor;
+    :Display changes
+    to edited tutor;
+    stop
 else ([else])
     :Throw ParseException;
     stop
 endif
-stop
 @enduml
