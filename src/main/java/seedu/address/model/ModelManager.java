@@ -42,7 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
+        matchedTutors = new FilteredList<>(this.addressBook.getMatchedTutorList());
         matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
     }
 

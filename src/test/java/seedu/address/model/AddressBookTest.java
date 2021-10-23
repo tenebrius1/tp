@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.person.UniqueStudentList;
 import seedu.address.model.person.UniqueTutorList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -43,6 +44,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getTutorList());
         assertEquals(Collections.emptyList(), addressBook.getStudentList());
+        assertEquals(Collections.emptyList(), addressBook.getMatchedTutorList());
     }
 
     @Test
@@ -158,6 +160,50 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getMatchedTutorList().remove(0));
+    }
+
+    @Test
+    public void getTutorList_modifyList_success() {
+        addressBook.addTutor(ALICE);
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        expectedUniqueTutorList.add(ALICE);
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getTutorList());
+    }
+
+    @Test
+    public void getStudentList_modifyList_success() {
+        addressBook.addStudent(DANIEL);
+        UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
+        expectedUniqueStudentList.add(DANIEL);
+        assertEquals(expectedUniqueStudentList.asUnmodifiableObservableList(), addressBook.getStudentList());
+    }
+
+    @Test
+    public void getMatchedTutorList_modifyList_success() {
+        addressBook.addTutor(ALICE);
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        expectedUniqueTutorList.add(ALICE);
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
+    }
+
+    @Test
+    public void getMatchedTutorList_afterMatchCommand_success() {
+        addressBook.addTutor(ALICE);
+        addressBook.addTutor(BENSON);
+
+        List<Tag> studentTagList = new ArrayList<>();
+        studentTagList.addAll(ELLE.getTags());
+        addressBook.sortMatchedTutorList(studentTagList);
+
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        expectedUniqueTutorList.add(BENSON);
+        expectedUniqueTutorList.add(ALICE);
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
+    }
+
+    @Test
     public void sortMatchedTutorList_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.sortMatchedTutorList(null));
     }
@@ -172,7 +218,7 @@ public class AddressBookTest {
         expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
         addressBook.sortMatchedTutorList(studentTagList);
-        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getTutorList());
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
     }
 
     @Test
@@ -181,9 +227,9 @@ public class AddressBookTest {
         // Student chosen has no matching tags with any tutor
         List<Tag> studentTagList = new ArrayList<>();
         studentTagList.addAll(GEORGE.getTags());
-        ObservableList<Tutor> expectedUniqueTutorList = addressBook.getTutorList();
+        ObservableList<Tutor> expectedUniqueTutorList = addressBook.getMatchedTutorList();
         addressBook.sortMatchedTutorList(studentTagList);
-        assertEquals(expectedUniqueTutorList, addressBook.getTutorList());
+        assertEquals(expectedUniqueTutorList, addressBook.getMatchedTutorList());
     }
 
     @Test

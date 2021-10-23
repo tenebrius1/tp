@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
+    private final UniqueTutorList matchedTutors;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         tutors = new UniqueTutorList();
         students = new UniqueStudentList();
+        matchedTutors = new UniqueTutorList();
     }
 
     public AddressBook() {}
@@ -50,6 +52,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTutors(List<Tutor> tutors) {
         this.tutors.setTutors(tutors);
+        this.matchedTutors.setTutors(tutors);
     }
 
     /**
@@ -112,6 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTutor(Tutor tutor) {
         tutors.add(tutor);
+        matchedTutors.add(tutor);
     }
 
     /**
@@ -131,6 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedTutor);
 
         tutors.setTutor(target, editedTutor);
+        matchedTutors.setTutor(target, editedTutor);
     }
 
     /**
@@ -151,6 +156,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTutor(Tutor tutor) {
         tutors.remove(tutor);
+        matchedTutors.remove(tutor);
     }
 
     /**
@@ -167,7 +173,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void sortMatchedTutorList(List<Tag> studentTagList) {
         requireNonNull(studentTagList);
-        tutors.sortTutors(studentTagList);
+        matchedTutors.sortTutors(studentTagList);
     }
 
     //// util methods
@@ -189,12 +195,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Tutor> getMatchedTutorList() {
+        return matchedTutors.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && tutors.equals(((AddressBook) other).tutors)
-                && students.equals(((AddressBook) other).students));
+                && students.equals(((AddressBook) other).students))
+                && matchedTutors.equals(((AddressBook) other).matchedTutors);
     }
 
     @Override
