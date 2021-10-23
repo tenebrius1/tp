@@ -379,7 +379,7 @@ Given below is an activity diagram to show how a `find` implementation works for
 The Match feature involves taking a student specified by the user and matching the student with tutors who have **one or more** matching tags with the identified student. It automatically sorts the `matchedTutorList` according to the number of matching tags that a tutor has with the student.
 
 #### Implementation details
-Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created. `MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `MatchCommand#execute`. Upon execution, the student is identified via the `INDEX` given by the user and a `TagsContainTagPredicate` object is created, which will be used to determine if the `tags` of the tutor contains one or more `Tag` that the student has. It will then update and sort the `matchedTutorList` such that the tutor with more matching `Tag` is at the front of the list.
+Upon the user's entry of the command, the validity of the user's input is checked. If the input is valid, a `MatchCommand` object is created. `MatchCommand` is a class that extends the `Command` abstract class, with `MatchCommand` implementing the `execute()` method. Upon execution, the student is identified via the `INDEX` given by the user and a `TagsContainTagPredicate` object is created, which will be used to determine if the `tags` of the tutor contains one or more `Tag` that the student has. It will then update and sort the `matchedTutorList` such that the tutor with more matching `Tag` is at the front of the list.
 
 ##### Sequence of action
 {:.no_toc}
@@ -409,7 +409,7 @@ Given below is an activity diagram to show how the `match` command works for a `
 ##### Aspect: How `match` is executed
 {:.no_toc}
 - **Alternative 1 (current choice)**: User can `match` students with multiple `tags` to tutors.
-    - Pros: It prevents the user from having to create one `Student` object for every subject that the student is looking for, which allows the database to store lesser unnecessary/duplicate information about the student.
+    - Pros: It prevents the user from having to create one `Student` object for every subject that the student is looking for, which allows the database to store lesser unnecessary/duplicate information about the student, making it less prone to bugs.
     - Cons: The code will become more complex as there is a need to create a `TagsContainTagPredicate` to assist in finding all the relevant matching tutors.
 - **Alternative 2**: User can `match` students with only one `Tag` to tutors.
     - Pros: Simpler implementation which requires a less complex predicate, making it easier for developers to understand the code.
