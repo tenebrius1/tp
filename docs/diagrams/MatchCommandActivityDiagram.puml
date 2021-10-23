@@ -12,7 +12,7 @@ if () then ([input is valid])
         :Get student to match at index of displayed student list;
         :Update and sort matched tutor list with all matches;
         if () then ([else])
-            :Display sorted matched tutor list with success message;
+            :Display sorted matched tutor list;
             stop
         else ([matched tutor list empty])
             :Throw CommandException;
