@@ -129,9 +129,6 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 Taking a deeper look into the classes in `Logic` that are used for parsing a user command:
 
 ![Insert class diagram for Parser component](images/ParserClasses.png)
