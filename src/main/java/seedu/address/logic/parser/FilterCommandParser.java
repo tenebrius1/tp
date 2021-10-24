@@ -58,17 +58,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return The Predicate used to filter the match list
      */
     private Predicate<Person> generatePredicate(String args) throws ParseException {
-        args = " " + args;
         Predicate<Person> predicate = x -> true;
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
-                PREFIX_QUALIFICATION, PREFIX_GENDER, PREFIX_TAG);
+                PREFIX_QUALIFICATION, PREFIX_GENDER);
 
-        System.out.println(argMultimap.getValue(PREFIX_NAME).isPresent());
-        System.out.println(argMultimap.getValue(PREFIX_QUALIFICATION).isPresent());
-        System.out.println(argMultimap.getValue(PREFIX_GENDER).isPresent());
-        System.out.println(argMultimap.getValue(PREFIX_TAG).isPresent());
+        String trimmed = argMultimap.getPreamble().trim();
+
+        if (trimmed.length() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             predicate = handleName(predicate, builder, argMultimap);

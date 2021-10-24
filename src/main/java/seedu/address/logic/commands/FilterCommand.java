@@ -16,11 +16,11 @@ import seedu.address.model.person.Person;
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all the tutor names that contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all the tutor names that contain "
             + "the specified search parameters (case-insensitive) and displays them in the match list with "
             + "index numbers.\n"
             + "Parameters: [n/NAME] [p/PHONE] [g/GENDER] [q/QUALIFICATION] [t/TAG...]\n"
-            + "Example: " + COMMAND_WORD + " q/3";
+            + "Example: " + COMMAND_WORD + " t q/3";
 
     private final Predicate<Person> predicate;
 
