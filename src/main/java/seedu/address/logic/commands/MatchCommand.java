@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
@@ -44,12 +45,6 @@ public class MatchCommand extends Command {
         this.index = index;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        return executeMatch(model);
-    }
-
     /**
      * Executes a Match command.
      *
@@ -57,8 +52,14 @@ public class MatchCommand extends Command {
      * @return A successful CommandResult with the students matched to tutors.
      * @throws CommandException An exception that occurs when matching students.
      */
-    private CommandResult executeMatch(Model model) throws CommandException {
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -71,7 +72,7 @@ public class MatchCommand extends Command {
         model.updateMatchedTutor(new TagsContainTagPredicate(ls));
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_TUTORS);
+            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON);
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
         }
 

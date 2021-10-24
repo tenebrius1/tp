@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User input match command;
+:Parse command arguments;
+
+if () then ([input is valid])
+    :Create match command;
+    :Executes match command;
+    if () then ([else])
+        :Get student to match at index of displayed student list;
+        :Update and sort matched tutor list with all matches;
+        if () then ([else])
+            :Display sorted matched tutor list;
+            stop
+        else ([matched tutor list empty])
+            :Throw CommandException;
+            stop
+        endif
+    else ([empty student list or invalid index])
+        :Throw CommandException;
+        stop
+    endif
+else ([else])
+  : Throw ParseException;
+    stop
+
+
+endif
+
+@enduml

@@ -5,7 +5,7 @@ nav-text: User Guide
 ---
 ![](https://i.imgur.com/dLt7IDY.png)
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a tuition agency with a **big list of tutors to manage**, `CLITutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
 ## Table of Contents
 {: .no_toc}
@@ -15,19 +15,18 @@ nav-text: User Guide
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
 2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.2) the latest `CLITutors.jar`.
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:
-
-![Ui](images/Ui.png)
-
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data: <br> ![Ui](images/Ui.png)
 5. Type the command in the command box and press `Enter` to execute it. Here are example commands you can try:
     - `add`: add a tutor/student to the program
     - `list`: lists all tutors/students
     - `help`: shows all commands available
     - `exit`: exits the program
-6. Refer to the [Features](#Features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+---
 
 ## Command Syntax
 Before diving into the details, let us first look at what makes up a command:
@@ -35,9 +34,14 @@ Before diving into the details, let us first look at what makes up a command:
 | Component    | Description                                                                |
 |:------------ |:-------------------------------------------------------------------------- |
 | Command Word | The keyword representing the action of the command                         |
-| Preamble     | The keyword representing `PersonType` and/or`INDEX`                        |
+| Preamble     | The keyword representing `Person` and/or `INDEX`                       |
 | Prefix       | The keyword to recognise the parameters                                    |
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
+
+<div markdown="block" class="alert alert-info">
+<b>:information_source: </b>There are **two** main `Person` type in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
+
+</div>
 
 An example of a basic command to add a tutor could look like the following:
 
@@ -45,7 +49,7 @@ An example of a basic command to add a tutor could look like the following:
 
 In the example above, `add` is the **command word** and `t` is the **preamble** representing tutor. `n/`, `g/`, `p/`, `q/` and `t/` are the **prefixes** and `John Doe`, `M`, `98765432`, `2`, `TE TM TL` are the **parameters**.
 
-For your convenience, a list of all parameters along with their prefixes have been included in the table below.
+For your convenience, a list of all parameters along with their prefixes has been included in the table below.
 
 | Parameter | Description    | Type Requirements                                      |
 |:---------:|:-------------- | ------------------------------------------------------ |
@@ -62,8 +66,14 @@ For your convenience, a list of all parameters along with their prefixes have be
 <div markdown="block" class="alert alert-info">
 <b>:information_source: Notes about the command format:</b><br>
 
+- A whitespace must be included before every prefix. <br>
+  e.g. `edit t 1 n/Alex Yeo q/2` is acceptable but `edit t 1 n/Alex Yeoq/2` is not.
+
+- Parameters may be entered in any order.
+  e.g. Both `n/John q/1` and `q/1 n/John` are acceptable.
+
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add t n/NAME`, `NAME` is a parameter that can be used as `add t n/John Doe`.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
@@ -127,7 +137,7 @@ Format:<br>
 `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG...]`
 
-* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the displayed tutor/student list. The index **must be a positive integer**, i.e 1, 2, 3...
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e 1, 2, 3...
 * At least one of the optional fields **must** be provided.
 * Existing values will be updated to the input values.
 * You must specify at least one tag when editing the tags with `t/`.
@@ -157,7 +167,7 @@ Format:<br>
 `delete t INDEX`<br>
 `delete s INDEX`
 
-- The `INDEX` refers to the index number shown on the tutor/student list.
+- The `INDEX` refers to the index number shown on the **displayed tutor/student list**.
 - The `INDEX` **must be a positive integer** <br> eg. `1`, `2`, `3`, ...
 
 Examples:<br>
@@ -225,6 +235,8 @@ Example:<br>
 Find tutor(s) who teaches the subject that the student wants.
 
 Format: <br>`match INDEX`
+- The `INDEX` refers to the index number shown on the **displayed student list**.
+- The `INDEX` **must be a positive integer** <br> eg. `1`, `2`, `3`, ...
 
 Example:<br>
 `match 1`
@@ -278,11 +290,11 @@ Format: <br>`exit`
 
 **Q**: How do I transfer my data to another Computer?
 
-**A**: Install the application in the other computer and place your current data folder in the same directory as the newly installed application (overwrite the data folder of the new application if applicable).
+**A**: Install the application on the other computer and place your current data folder in the same directory as the newly installed application (overwrite the data folder of the new application if applicable).
 
 **Q**: Where is the data of CLITutors saved?
 
-**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and a command execution) of a fresh installation.
+**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -304,7 +316,7 @@ Format: <br>`exit`
 
 ### Valid Tags
 
-The application supports the following level of education and subjects as shown in table below.
+The application supports the following level of education and subjects as shown in the table below.
 
 <table>
     <thead>
