@@ -14,10 +14,10 @@ participant "p:ChainedPredicate" as ChainedPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute\n("find s n/David")
+[-> LogicManager : execute("find s n/David")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand\n("find s n/David")
+LogicManager -> AddressBookParser : parseCommand("find s n/David")
 activate AddressBookParser
 
 create FindCommandParser
@@ -38,7 +38,7 @@ ChainedPredicate --> FindCommandParser : p
 deactivate ChainedPredicate
 
 create FindCommand
-FindCommandParser -> FindCommand : p
+FindCommandParser -> FindCommand : FindCommand(p)
 activate FindCommand
 
 FindCommandParser <-- FindCommand : f
@@ -54,7 +54,7 @@ destroy FindCommandParser
 LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredStudentList(predicate)
+FindCommand -> Model : updateFilteredStudentList(p)
 activate Model
 FindCommand <-- Model
 deactivate Model
@@ -66,11 +66,11 @@ activate CommandResult
 CommandResult --> FindCommand
 deactivate CommandResult
 
-FindCommand --> LogicManager : commandResult
+FindCommand --> LogicManager : result
 deactivate FindCommand
 
-[<--LogicManager : commandResult
-FindCommand -[hidden]-> LogicManager
-destroy FindCommand
+[<--LogicManager
 deactivate LogicManager
+destroy FindCommand
+destroy ChainedPredicate
 @enduml

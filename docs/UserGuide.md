@@ -40,7 +40,6 @@ Before diving into the details, let us first look at what makes up a command:
 
 <div markdown="block" class="alert alert-info">
 <b>:information_source:</b> There are **two** main `Person` types in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
-
 </div>
 
 An example of a basic command to add a tutor could look like the following:
