@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "__:LogicManager__" as LogicManager LOGIC_COLOR
+participant "__:AddressBookParser__" as AddressBookParser LOGIC_COLOR
+participant "__:FilterCommandParser__" as FilterCommandParser LOGIC_COLOR
+participant "__f:FilterCommand__" as FilterCommand LOGIC_COLOR
+participant "__:CommandResult__" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "__:Model__" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter t q/3")
+activate LogicManager
+LogicManager -> AddressBookParser : parseCommand("filter t q/3")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser
+activate FilterCommandParser
+
+AddressBookParser <-- FilterCommandParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse(" t q/3")
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommandParser <-- FilterCommand : f
+deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser : f
+deactivate FilterCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+destroy FilterCommandParser
+
+LogicManager -> FilterCommand : execute(model)
+activate FilterCommand
+
+FilterCommand -> Model : updateMatchedTutor(p)
+activate Model
+Model --> FilterCommand
+deactivate Model
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterCommand
+deactivate CommandResult
+
+FilterCommand --> LogicManager : result
+deactivate FilterCommand
+
+[<--LogicManager
+deactivate LogicManager
+FilterCommand -[hidden]-> LogicManager
+destroy FilterCommand
+@enduml

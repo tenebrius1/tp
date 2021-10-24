@@ -415,6 +415,49 @@ Given below is an activity diagram to show how the `match` command works for a `
     - Pros: Simpler implementation which requires a less complex predicate, making it easier for developers to understand the code.
     - Cons: Higher storage cost due to more `Student` objects being created if a specific student wants to learn multiple subjects as students are only limited to one `Tag`.
 
+### Filter feature
+
+#### What it is
+
+Filters and displays all tutors for the match list that matches the parameters specified. The `filter` command must have **at least one parameter** specified to be valid (i.e. `filter t NOT_A_PARAMETER` will **not** work).
+
+#### Implementation details
+
+The `FilterCommand` just like the `FindCommand` makes use of the `ChainedPredicate` class to chain multiple predicates together to filter the list of matched tutors.
+
+##### Sequence of action
+{:.no_toc}
+
+Given below is an example usage scenario and how the `filter` command implementation behaves at each step:
+
+1. The user input `filter t q/3` is passed to `LogicManager` to be executed.
+2. `LogicManager` calls on `AddressBookParser#parseCommand` method which creates a new `FilterCommandParser`.
+3. The `FilterCommandParser` then calls its own `parse()` method which will return a new `FilterCommand` if the input is valid.
+4. `LogicManager` will execute the `FilterCommand` through `FilterCommand#execute`.
+5. The `matchTutorList` in the `Model` will be updated via `Model#updateMatchedTutor`.
+6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
+
+Given below is a sequence diagram to show how a **valid** `filter` implementation works for a `filter` input:
+
+![FilterCommandSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+
+Given below is an activity diagram to show how a `find` implementation works for a `filter` input:
+
+![FilterCommandActivityDiagram](images/FilterCommandActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect: How `find` is executed
+{:.no_toc}
+
+- **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
+    - Pros: It allows the user to find tutor/student more easily by their fields.
+      <br>(for e.g. they can find all tutors who are women and teaches Primary Math)
+    - Cons: It would be more complex since it has to parse multiple prefixes and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
+- **Alternative 2**: User can only `find` using one prefix at a time.
+    - Pros: Simpler to implement since there are lesser use cases to consider and hence, making the code less prone to bugs.
+    - Cons: Significant impact on the overall user experience since finding a person with only one prefix may generate a large list if there are many tutors/students stored. user may not be able to find what he/she specifically wants.
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 

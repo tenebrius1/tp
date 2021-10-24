@@ -1,0 +1,14 @@
+@startuml
+start
+:User executes filter command;
+:Parse command arguments;
+
+if () then ([Invalid input/s])
+    :Throw \nParseException;
+    stop
+else ([Valid input/s])
+    :Execute Filter command;
+    :Update matched tutor list;
+    :Display the list of filtered tutors;
+stop
+@enduml
