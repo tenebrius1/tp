@@ -206,13 +206,13 @@ Given below is an example usage scenario and how the `add` command implementatio
 
 1. The user input `add t n/Jonathan Chan p/92102339 g/M q/2 t/PM SM` is passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `AddressBookParser#parseCommand` method which in turn creates a new `AddCommandParser`.
-3. The method `AddCommandParser#parse` is then called which will return a new `AddCommand` if the input is valid.
-4. `AddCommand` will then update the tutor list using the method `model#addTutor` in the `Model` class.
+3. The `AddCommandParser#parse` method is then called which will return a new `AddCommand` if the input is valid.
+4. `AddCommand` will then update the tutor list using the `Model#addTutor` method.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `add` implementation works:
 
-`t n/Johnathan Chan \n p/92102339 g/M \n q/2 t/PM SM` is shortened to `John` in the diagram to prevent clutter.
+The string ` t n/Johnathan Chan \n p/92102339 g/M \n q/2 t/PM SM` is represented by a variable `John` in the sequence diagram to prevent clutter.
 
 ![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
@@ -323,7 +323,7 @@ Given below is an example usage scenario and how the `list` command implementati
 
 1. The user input `list s` is passed to LogicManager to be executed.
 2. `LogicManager` calls the `AddressBookParser#parseCommand` method which in turn creates a new `ListCommandParser`.
-3. The method `ListCommandParser#parse`is then called which will return a new `ListCommand` if the input is valid.
+3. The `ListCommandParser#parse` method is then called which will return a new `ListCommand` if the input is valid.
 4. `ListCommand` will then show all students in the student list in the `Model` class.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
@@ -345,7 +345,7 @@ Given below is an activity diagram to show how the `list s` command works:
     - Cons: It is troublesome to type the command twice if the user wanted to view all the tutors and students.
 - **Alternative 2**: User inputs `list` and all tutors and student are shown.
     - Pros: Simpler for the user to list all tutors and students.
-    - Cons: Will remove any filters they had on a list that they did not want to remove and show all the tutors/students.
+    - Cons: Will remove all filters applied to both the tutor and student lists and show all tutors and students. The user is unable to customise the view of tutor/student lists independently.
 
 ### Find feature
 

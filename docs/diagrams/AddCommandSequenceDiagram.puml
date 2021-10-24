@@ -13,9 +13,9 @@ box Model MODEL_COLOR_T1
 participant "__:Model__" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add John")
+[-> LogicManager : execute("add" + John)
 activate LogicManager
-LogicManager -> AddressBookParser : parseCommand("add John")
+LogicManager -> AddressBookParser : parseCommand("add" + John)
 activate AddressBookParser
 
 create AddCommandParser
@@ -25,7 +25,7 @@ activate AddCommandParser
 AddressBookParser <-- AddCommandParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse(" John")
+AddressBookParser -> AddCommandParser : parse(John)
 activate AddCommandParser
 
 create AddCommand
