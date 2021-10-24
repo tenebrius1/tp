@@ -45,7 +45,7 @@ destroy ListCommandParser
 LogicManager -> ListCommand : execute(model)
 activate ListCommand
 
-ListCommand -> Model : updateFilteredTutorList\n(PREDICATE_SHOW_ALL_TUTORS);
+ListCommand -> Model : List all students
 activate Model
 ListCommand <-- Model
 deactivate Model
@@ -57,11 +57,11 @@ activate CommandResult
 CommandResult --> ListCommand
 deactivate CommandResult
 
-ListCommand --> LogicManager : commandResult
+ListCommand --> LogicManager : result
 deactivate ListCommand
 
-[<--LogicManager : commandResult
+[<--LogicManager
+deactivate LogicManager
 ListCommand -[hidden]-> LogicManager
 destroy ListCommand
-deactivate LogicManager
 @enduml
