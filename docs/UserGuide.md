@@ -434,5 +434,5 @@ Here are the possible categories of qualifications for tutors:
 - Qualifications
     - `0`: Pre-University
     - `1`: University Student
-    - `2`: Graduates
+    - `2`: Graduate
     - `3`: MOE-Trained
