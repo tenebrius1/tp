@@ -298,7 +298,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accepts the tutor being added.
+     * A Model stub that always accepts the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();

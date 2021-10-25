@@ -65,6 +65,16 @@ public class TypicalPersons {
             .withGender(VALID_GENDER_BOB).withQualification(VALID_QUALIFICATION_BOB)
             .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
 
+    // Manually added - Testing FilterCommand
+    public static final Student JACKSON = new StudentBuilder().withName("Jackson King").withPhone("90909839")
+            .withGender("M").withTag("PS").build();
+    public static final Tutor ENZIO = new TutorBuilder().withName("Enzio Lee").withPhone("95092183")
+            .withGender("M").withQualification("2").withTags("TL", "TC").build();
+    public static final Tutor MICHAEL = new TutorBuilder().withName("Michael Chen").withPhone("89102932")
+            .withGender("M").withQualification("3").withTags("PM", "PS").build();
+    public static final Tutor ROXANNE = new TutorBuilder().withName("Roxanne Tan").withPhone("91119222")
+            .withGender("F").withQualification("2").withTags("PM", "SG").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -84,7 +94,7 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the persons with similar names.
      */
     public static AddressBook getTypicalAddressBookWithSimilarNames() {
         AddressBook ab = new AddressBook();
@@ -92,6 +102,20 @@ public class TypicalPersons {
             ab.addTutor(tutor);
         }
         for (Student student : getStudentsWithSimilarNames()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the persons for FilterCommand Test
+     */
+    public static AddressBook getTypicalAddressBookForFilterTest() {
+        AddressBook ab = new AddressBook();
+        for (Tutor tutor : getTutorsForFilterCommandTest()) {
+            ab.addTutor(tutor);
+        }
+        for (Student student : getStudentsForFilterCommandTest()) {
             ab.addStudent(student);
         }
         return ab;
@@ -111,5 +135,13 @@ public class TypicalPersons {
 
     public static List<Student> getStudentsWithSimilarNames() {
         return new ArrayList<>(Arrays.asList(DANIEL, ELLE, FIONA, GEORGE, JOHN_P, JOHN_R));
+    }
+
+    public static List<Tutor> getTutorsForFilterCommandTest() {
+        return new ArrayList<>(Arrays.asList(ENZIO, MICHAEL, ROXANNE));
+    }
+
+    public static List<Student> getStudentsForFilterCommandTest() {
+        return new ArrayList<>(Arrays.asList(JACKSON));
     }
 }
