@@ -7,8 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +22,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TutorBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class UniqueTutorListTest {
     private final UniqueTutorList uniqueTutorList = new UniqueTutorList();
@@ -102,6 +109,30 @@ public class UniqueTutorListTest {
     }
 
     @Test
+    public void sortTutor_validInputModifyTutorList_success() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
+        List<Tag> studentTagList = new ArrayList<>();
+        studentTagList.addAll(ELLE.getTags());
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        expectedUniqueTutorList.add(BENSON);
+        expectedUniqueTutorList.add(CARL);
+        expectedUniqueTutorList.add(ALICE);
+        uniqueTutorList.sortTutors(studentTagList);
+        assertEquals(expectedUniqueTutorList, uniqueTutorList);
+    }
+
+    @Test
+    public void sortTutor_validInputNoModification_success() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
+        // Student chosen has no matching tags with any tutor
+        List<Tag> studentTagList = new ArrayList<>();
+        studentTagList.addAll(GEORGE.getTags());
+        UniqueTutorList expectedUniqueTutorList = uniqueTutorList;
+        uniqueTutorList.sortTutors(studentTagList);
+        assertEquals(expectedUniqueTutorList, uniqueTutorList);
+    }
+
+    @Test
     public void setTutor_editedTutorHasNonUniqueIdentity_throwsDuplicateTutorException() {
         uniqueTutorList.add(ALICE);
         uniqueTutorList.add(BOB);
@@ -165,5 +196,10 @@ public class UniqueTutorListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueTutorList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void sortTutor_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTutorList.sortTutors(null));
     }
 }
