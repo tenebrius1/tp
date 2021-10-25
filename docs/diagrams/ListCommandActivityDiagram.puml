@@ -3,14 +3,12 @@ start
 :User executes list command for the student list;
 :Parse command arguments;
 
-if () then ([Invalid input/s])
-    :Throw \nParseException;
-    stop
-else ([Valid input/s])
+if () then ([input is valid])
     :Create a list command that\nshows the list of all students;
-
-endif
     :Execute List command;
-    :Return CommandResult;
+    :Displays all the students;
+    stop
+else ([else])
+    :Throw ParseException;
 stop
 @enduml
