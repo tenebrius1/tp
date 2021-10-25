@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -41,7 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        matchedTutors = new FilteredList<>(this.addressBook.getTutorList());
+        matchedTutors = new FilteredList<>(this.addressBook.getMatchedTutorList());
         matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
     }
 
@@ -189,9 +191,13 @@ public class ModelManager implements Model {
     //=========== Matched Tutor List Accessors =============================================================
 
     @Override
-    public void updateMatchedTutor(Predicate<Person> predicate) {
-        requireNonNull(predicate);
+    public void updateMatchedTutor(Predicate<Person> predicate, List<Tag> studentTagList) {
+        requireAllNonNull(predicate, studentTagList);
         matchedTutors.setPredicate(predicate);
+        if (!matchedTutors.isEmpty()) {
+            assert(!studentTagList.isEmpty()) : "studentTagList should not be empty at this point.";
+            addressBook.sortMatchedTutorList(studentTagList);
+        }
     }
 
     @Override

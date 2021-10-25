@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -141,7 +143,7 @@ public interface Model {
      * Updates the filter of the matched tutors list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateMatchedTutor(Predicate<Person> predicate);
+    void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls);
 
     /**
      * Updates the filter of the matched tutors list by additionally filtering by the given {@code predicate}.

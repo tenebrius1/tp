@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
@@ -220,7 +222,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateMatchedTutor(Predicate<Person> predicate) {
+        public void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls) {
             throw new AssertionError("This method should not be called.");
         }
 
