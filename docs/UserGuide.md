@@ -39,8 +39,7 @@ Before diving into the details, let us first look at what makes up a command:
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source: </b>There are **two** main `Person` type in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
-
+<b>:information_source:</b> There are **two** main `Person` types in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
 </div>
 
 An example of a basic command to add a tutor could look like the following:
@@ -69,14 +68,14 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - A whitespace must be included before every prefix. <br>
   e.g. `edit t 1 n/Alex Yeo q/2` is acceptable but `edit t 1 n/Alex Yeoq/2` is not.
 
-- Parameters may be entered in any order.
+- Parameters may be entered in any order. <br>
   e.g. Both `n/John q/1` and `q/1 n/John` are acceptable.
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add t n/NAME`, `NAME` is a parameter that can be used as `add t n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
 
 - Items with `…` after them can have multiple arguments in them.<br>
   e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM SC TB` etc.
@@ -90,11 +89,11 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - Tags are denoted by `t/[Level][Subject]`. <br>
   e.g. the tag `t/PM` stands for Primary Math.
 
-- Editing information of any `Person` will override the current information stored about the specified `Person`.
-
 - Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
-  e.g `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
+  e.g. `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 
+- For `Commands` with the format `Command Word/Alias`, the `Command Word` can be substituted for its `Alias`. <br>
+e.g. Both `delete t 1` and `d t 1` represent the same command.
 </div>
 
 ### Viewing help: `help`
@@ -142,7 +141,11 @@ Format:<br>
 * Existing values will be updated to the input values.
 * You must specify at least one tag when editing the tags with `t/`.
 <div markdown="span" class="alert alert-warning">
-❗<b>Caution:</b> When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative
+❗<b>Caution:</b> <br> 
+
+* Editing information of any `Person` will override the current information stored about the specified `Person`.
+
+* When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
 </div>
 
 Examples:<br>
@@ -168,7 +171,7 @@ Format:<br>
 `delete s INDEX`
 
 - The `INDEX` refers to the index number shown on the **displayed tutor/student list**.
-- The `INDEX` **must be a positive integer** <br> eg. `1`, `2`, `3`, ...
+- The `INDEX` **must be a positive integer**. <br> eg. `1`, `2`, `3`, ...
 
 Examples:<br>
 `list` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
@@ -186,7 +189,7 @@ Examples:<br>
 
 ### Listing all tutors or students: `list` / `l`
 
-Shows the list of all tutors or students.
+Shows the list of all tutors/students.
 
 Format: <br>`list t` <br> `list s`
 
@@ -282,7 +285,7 @@ Example:<br>
 
 ### Clearing all entries: `clear`
 
-Clears all entries of tutors or students from storage.
+Clears all entries of tutors/students from storage.
 
 Format: <br>`clear t` <br> `clear s`
 
