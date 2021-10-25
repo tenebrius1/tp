@@ -207,7 +207,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Tutor> getMatchedTutorList() {
-            return matchedTutors;
+        return matchedTutors;
     }
 
     @Override
