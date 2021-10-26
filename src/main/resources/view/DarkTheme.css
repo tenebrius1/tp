@@ -328,8 +328,8 @@
 .sendButton:pressed {
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-border-color: #b6bbed;
-    -fx-background-color: #b6bbed;
+    -fx-border-color: #272654;
+    -fx-background-color: #272654;
 }
 
 #cardPane {

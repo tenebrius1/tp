@@ -13,6 +13,19 @@ nav-text: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Navigating the User Guide
+Before going into the rest of the contents in our user guide, here are a few **important** syntax to take note of to facilitate your reading:
+
+| Syntax                                                                  | Description                                         |
+| ----------------------------------------------------------------------- | --------------------------------------------------- |
+| `Markdown`                                                              | Denotes distinct classes, their methods or examples |
+| <div markdown="span" class="alert alert-info">:information_source: Note</div> | Useful information/tips                    |
+| <div markdown="span" class="alert alert-warning">❗ Caution</div> | Important things to take note of                    |
+
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -38,7 +51,7 @@ Before diving into the details, let us first look at what makes up a command:
 | Parameter    | Argument given directly behind prefix and contains the corresponding value |
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source:</b> There are **two** main `Person` types in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively. <br>
+<b>:information_source: Note: </b> There are **two** main `Person` types in `CLITutors`, namely `Tutor` and `Student`, represented by `t` and `s` in the preamble respectively.
 </div>
 
 An example of a basic command to add a tutor could look like the following:
@@ -49,11 +62,11 @@ In the example above, `add` is the **command word** and `t` is the **preamble** 
 
 For your convenience, a list of all parameters along with their prefixes has been included in the table below.
 
-| Parameter | Description    | Type Requirements                                      |
+| Parameter | Description    | Argument Requirements                                      |
 |:---------:|:-------------- | ------------------------------------------------------ |
 |    n/     | Name           | Contains alphanumeric characters and spaces, not blank |
 |    p/     | Phone          | Contain numbers, and it should be 8 digits long        |
-|    g/     | Gender         | Must be `M` or `m` for Male, `F` or `f` for Female     |
+|    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
 |    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
 |    r/     | Remark         | Can contain any string but not only whitespaces        |
 |    t/     | Tags           | [Valid tags](#valid-tags)                              |
@@ -98,7 +111,7 @@ e.g. Both `delete t 1` and `d t 1` represent the same command.
 Shows a message with all the commands available to use on `CLITutors`.
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <br>
 <img src="images/screenshots/Help.png">
 </details>
@@ -116,7 +129,7 @@ Examples:<br>
 `add s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -140,9 +153,9 @@ Format:<br>
 <div markdown="span" class="alert alert-warning">
 ❗<b>Caution:</b> <br> 
 
-* Editing information of any `Person` will override the current information stored about the specified `Person`.
+- Editing information of any `Person` will override the current information stored about the specified `Person`.
 
-* When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
 </div>
 
 Examples:<br>
@@ -150,7 +163,7 @@ Examples:<br>
 `edit s 9 n/Mary Sue p/98765432`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -171,11 +184,11 @@ Format:<br>
 - The `INDEX` **must be a positive integer**. <br> eg. `1`, `2`, `3`, ...
 
 Examples:<br>
-`list` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
+`list t` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
 `find n/Betsy` followed by `delete t 1` deletes the 1st person in the results of the find command for the tutor list.
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>delete t 2</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -191,7 +204,7 @@ Shows the list of all tutors/students.
 Format: <br>`list t` <br> `list s`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>list t</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -221,7 +234,7 @@ Example:<br>
 `find s g/M t/PS`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>find t n/Yu t/SC</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -242,7 +255,7 @@ Example:<br>
 `match 1`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>match 1</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -258,7 +271,7 @@ Clears all entries of tutors/students from storage.
 Format: <br>`clear t` <br> `clear s`
 
 <details>
-<summary>Expected outcome:</summary>
+<summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>clear t</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
@@ -316,6 +329,7 @@ Format: <br>`exit`
 
 ### Valid Tags
 
+`Tag` is derived from [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.<br>
 The application supports the following level of education and subjects as shown in the table below.
 
 <table>
@@ -409,7 +423,9 @@ The application supports the following level of education and subjects as shown 
     </tbody>
 </table>
 
-`Tag` is derived from [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.
+<div markdown="block" class="alert alert-info">
+<b>:information_source: Note: </b> Tags are case insensitive.
+</div>
 
 ### Valid Qualifications
 
@@ -418,5 +434,5 @@ Here are the possible categories of qualifications for tutors:
 - Qualifications
     - `0`: Pre-University
     - `1`: University Student
-    - `2`: Post-Grad
+    - `2`: Graduate
     - `3`: MOE-Trained
