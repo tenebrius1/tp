@@ -15,7 +15,7 @@ public class Qualification {
     public enum Qualifications {
         PREUNI("0", "Pre-University"),
         UNI("1", "University"),
-        GRAD("2", "Graduate"),
+        POSTGRAD("2", "Graduate"),
         MOE("3", "MOE-Trained"),
         INVALID("Invalid", "Invalid");
 
