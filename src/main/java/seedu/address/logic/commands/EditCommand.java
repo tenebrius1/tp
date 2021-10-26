@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
@@ -25,6 +26,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]>\n"
             + "or <t "
             + "INDEX (must be a positive integer) "
@@ -52,6 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_QUALIFICATION + "QUALIFICATION] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG...]>\n"
             + "Example: " + COMMAND_WORD + " t 1 "
             + PREFIX_PHONE + "91234567 ";
@@ -171,9 +175,11 @@ public class EditCommand extends Command {
         Gender updatedGender = editTutorDescriptor.getGender().orElse(tutorToEdit.getGender());
         Qualification updatedQualification = editTutorDescriptor.getQualification()
             .orElse(tutorToEdit.getQualification());
+        Remark updatedRemark = editTutorDescriptor.getRemark().orElse(tutorToEdit.getRemark());
+
         Set<Tag> updatedTags = editTutorDescriptor.getTags().orElse(tutorToEdit.getTags());
 
-        return new Tutor(updatedName, updatedPhone, updatedGender, updatedQualification, updatedTags);
+        return new Tutor(updatedName, updatedPhone, updatedGender, updatedQualification, updatedRemark, updatedTags);
     }
 
     /**
@@ -186,9 +192,10 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Gender updatedGender = editStudentDescriptor.getGender().orElse(studentToEdit.getGender());
+        Remark updatedRemark = editStudentDescriptor.getRemark().orElse(studentToEdit.getRemark());
         Set<Tag> updatedTag = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedGender, updatedTag);
+        return new Student(updatedName, updatedPhone, updatedGender, updatedRemark, updatedTag);
     }
 
     @Override
@@ -217,6 +224,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Gender gender;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -229,6 +237,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -236,7 +245,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, gender, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, gender, remark, tags);
         }
 
         public void setName(Name name) {
@@ -261,6 +270,14 @@ public class EditCommand extends Command {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
@@ -298,6 +315,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getGender().equals(e.getGender())
+                    && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }
     }
@@ -354,6 +372,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getGender().equals(e.getGender())
                     && getQualification().equals(e.getQualification())
+                    && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }
     }

@@ -4,12 +4,14 @@
     "phone" : "94351253",
     "gender" : "F",
     "qualification" : "4",
+    "remark" : "",
     "tagged" : [ "PM" ]
   } ],
   "students": [ {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
+    "remark" : "",
     "tagged" : [ "PM" ]
   } ]
 }

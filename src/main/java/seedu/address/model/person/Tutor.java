@@ -17,9 +17,9 @@ public class Tutor extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Tutor(Name name, Phone phone, Gender gender, Qualification qualification, Set<Tag> tags) {
-        super(name, phone, gender, tags);
-        requireAllNonNull(name, phone, gender, tags);
+    public Tutor(Name name, Phone phone, Gender gender, Qualification qualification, Remark remark, Set<Tag> tags) {
+        super(name, phone, gender, remark, tags);
+        requireAllNonNull(name, phone, gender, remark, tags);
         this.qualification = qualification;
     }
 
@@ -46,13 +46,15 @@ public class Tutor extends Person {
                 && otherTutor.getPhone().equals(getPhone())
                 && otherTutor.getGender().equals(getGender())
                 && otherTutor.getQualification().equals(getQualification())
+                && otherTutor.getRemark().equals(getRemark())
                 && otherTutor.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(super.getName(), super.getPhone(), super.getGender(), qualification, super.getTags());
+        return Objects.hash(super.getName(), super.getPhone(), super.getGender(), qualification,
+                super.getRemark(), super.getTags());
     }
 
     @Override
@@ -64,7 +66,9 @@ public class Tutor extends Person {
                 .append("; Gender: ")
                 .append(super.getGender())
                 .append("; Qualification: ")
-                .append(getQualification());
+                .append(getQualification())
+                .append("; Remark: ")
+                .append(super.getRemark());
 
         Set<Tag> tags = super.getTags();
         if (!tags.isEmpty()) {

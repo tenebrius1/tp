@@ -24,6 +24,7 @@ Class Student
 Class Tutor
 Class Name
 Class Phone
+Class Remark
 Class Tag
 
 }
@@ -45,6 +46,7 @@ UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Gender
+Student *--> "0..1" Remark
 Student *-up-> "1..*" Tag
 
 AddressBook *--> "1" UniqueTutorList
@@ -53,6 +55,7 @@ Tutor *--> Name
 Tutor *--> Phone
 Tutor *--> Gender
 Tutor *--> Qualification
+Tutor *--> "0..1" Remark
 Tutor *-up-> "1..*" Tag
 
 Tutor -[hidden]right-> Student

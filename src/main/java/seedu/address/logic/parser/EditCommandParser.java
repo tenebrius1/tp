@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -53,7 +54,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     private EditCommand handleTutor(String args) throws ParseException {
         ArgumentMultimap tutorArgMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                        PREFIX_QUALIFICATION, PREFIX_TAG);
+                        PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
 
         EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
         return parsePerson(tutorArgMultimap, editTutorDescriptor, PersonType.TUTOR);
@@ -61,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private EditCommand handleStudent(String args) throws ParseException {
         ArgumentMultimap studentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_REMARK, PREFIX_TAG);
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         return parsePerson(studentMultimap, editStudentDescriptor, PersonType.STUDENT);
@@ -98,6 +99,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             EditTutorDescriptor x = (EditTutorDescriptor) editPersonDescriptor;
             x.setQualification(ParserUtil.parseQualification(
                     argMultimap.getValue(PREFIX_QUALIFICATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
