@@ -3,12 +3,12 @@ start
 :User executes filter command;
 :Parse command arguments;
 
-if () then ([Invalid input/s])
-    :Throw \nParseException;
-    stop
-else ([Valid input/s])
+if () then ([input is valid])
     :Execute Filter command;
     :Update matched tutor list;
     :Display the list of filtered tutors;
+    stop
+else ([else])
+    :Throw \nParseException;
 stop
 @enduml
