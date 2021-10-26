@@ -20,7 +20,7 @@ Before going into the rest of the contents in our user guide, here are a few **i
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | `Markdown`                                                              | Denotes distinct classes, their methods or examples |
 | <div markdown="span" class="alert alert-info">:information_source: Note</div> | Useful information/tips                    |
-| <div markdown="span" class="alert alert-warning">❗ Caution</div> | Important things to take note of                    |
+| <div markdown="span" class="alert alert-warning">:exclamation: Caution</div> | Important things to take note of                    |
 
 
 <div style="page-break-after: always;"></div>
