@@ -86,9 +86,6 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - Excess parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Tags are denoted by `t/[LEVEL][SUBJECT]`. <br>
-  e.g. the tag `t/PM` stands for Primary Math.
-
 - Commands with `t` modify attributes of tutors while commands with `s` modify attributes of students.<br>
   e.g. `delete t 1` stands for deleting the tutor at index `1` in the list of tutors.
 

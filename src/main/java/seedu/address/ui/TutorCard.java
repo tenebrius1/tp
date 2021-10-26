@@ -55,9 +55,7 @@ public class TutorCard extends UiPart<Region> {
         name.setText(tutor.getName().fullName);
         phone.setText("Contact: " + tutor.getPhone().value);
         gender.setText("Gender: " + tutor.getGender().genderSymbol);
-        if (tutor instanceof Tutor) {
-            qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
-        }
+        qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
         remark.setText("Remark: " + tutor.getRemark().description);
         tutor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

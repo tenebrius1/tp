@@ -22,7 +22,7 @@ public class SampleDataUtil {
     public static Tutor[] getSampleTutors() {
         return new Tutor[] {
             new Tutor(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("M"),
-                new Qualification("0"), new Remark("Wants high ability students"), getTagSet("PM")),
+                new Qualification("0"), new Remark("Prefers tutoring in the East"), getTagSet("PM")),
             new Tutor(new Name("Bernice Yu"), new Phone("99272758"), new Gender("F"),
                 new Qualification("1"), new Remark(), getTagSet("SP", "SC")),
             new Tutor(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("F"),
