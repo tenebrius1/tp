@@ -665,7 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **Mainstream OS** | Windows, macOS, Linux                                                                                                                             |
 | **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …                                                         |
 | **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Post-Grad<br>3.MOE-Trained              |
-| **Tag**           | Subjects each Tutor teaches are saved under [tags](https://ay2122s1-cs2103t-t17-2.github.io/tp/UserGuide.html#valid-qualifications) as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math.|
+| **Tag**           | Subjects each Tutor teaches are saved under [tags](https://ay2122s1-cs2103t-t17-2.github.io/tp/UserGuide.html#valid-tags) as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math.|
 | **Bloatware**     | Software that uses excessive memory and disk space, which makes the program run slow                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
