@@ -24,7 +24,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "91234567";
     private static final String VALID_TAG_1 = "PM";
     private static final String VALID_TAG_2 = "SM";
 
