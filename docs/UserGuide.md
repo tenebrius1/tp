@@ -39,8 +39,7 @@ Before going into the rest of the contents in our user guide, here are a few **i
     - `exit`: exits the program
 6. Refer to the [Features](#features) below for details of each command.
 
----
-
+--------------------------------------------------------------------------------------------------------------------
 ## Command Syntax
 Before diving into the details, let us first look at what makes up a command:
 
@@ -68,7 +67,8 @@ For your convenience, a list of all parameters along with their prefixes has bee
 |    n/     | Name           | Contains alphanumeric characters and spaces, not blank |
 |    p/     | Phone          | Contain numbers, and it should be 8 digits long        |
 |    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
-|    q/     | Qualifications | [Valid qualifications](#valid-qualifications)          |
+|    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
+|    r/     | Remark         | Can contain any string but not only whitespaces        |
 |    t/     | Tags           | [Valid tags](#valid-tags)                              |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -88,10 +88,10 @@ For your convenience, a list of all parameters along with their prefixes has bee
   e.g. in `add t n/NAME`, `NAME` is a parameter that can be used as `add t n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/TE` or as `n/John Doe`.
+  e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/This is a remark` or as `n/John Doe`.
 
 - Items with `…` after them can have multiple arguments in them.<br>
-  e.g. `[t/TAG...]` can be used as `t/PM` or `t/PM SC TB` etc.
+  e.g. `t/TAG...` can be used as `t/PM` or `t/PM SC TB` etc.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -121,12 +121,12 @@ Shows a message with all the commands available to use on `CLITutors`.
 Adds a tutor/student to the data.
 
 Format:<br>
-`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...`<br>
-`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG...`
+`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS [r/REMARK] t/TAG...`<br>
+`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
 
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
-`add s n/Mary Sue p/98765432 g/F t/PM PE`
+`add s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -143,8 +143,8 @@ Examples:<br>
 Edits an existing tutor/student in the data.
 
 Format:<br>
-`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
-`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG...]`
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [r/REMARK] [t/TAG...]` <br>
+`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`
 
 * Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e 1, 2, 3...
 * At least one of the optional fields **must** be provided.
@@ -314,10 +314,10 @@ Format: <br>`exit`
 
 |   Action   | Format, Examples |
 |:----------:|:---------------- |
-|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 t/PM`    |
+|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |

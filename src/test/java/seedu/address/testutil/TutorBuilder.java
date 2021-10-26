@@ -7,6 +7,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,6 +26,7 @@ public class TutorBuilder {
     private Phone phone;
     private Gender gender;
     private Qualification qualification;
+    private Remark remark;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +37,7 @@ public class TutorBuilder {
         phone = new Phone(DEFAULT_PHONE);
         gender = new Gender(DEFAULT_GENDER);
         qualification = new Qualification(DEFAULT_QUALIFICATION);
+        remark = new Remark();
         tags = new HashSet<>();
         tags.add(new Tag(DEFAULT_TAG));
     }
@@ -47,15 +50,8 @@ public class TutorBuilder {
         phone = tutorToCopy.getPhone();
         gender = tutorToCopy.getGender();
         qualification = tutorToCopy.getQualification();
+        remark = tutorToCopy.getRemark();
         tags = new HashSet<>(tutorToCopy.getTags());
-    }
-
-    /**
-     * Sets the {@code Gender} of the {@code Tutor} that we are building.
-     */
-    public TutorBuilder withGender(String gender) {
-        this.gender = new Gender(gender);
-        return this;
     }
 
     /**
@@ -90,7 +86,23 @@ public class TutorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Gender} of the {@code Tutor} that we are building.
+     */
+    public TutorBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Tutor} that we are building.
+     */
+    public TutorBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
     public Tutor build() {
-        return new Tutor(name, phone, gender, qualification, tags);
+        return new Tutor(name, phone, gender, qualification, remark, tags);
     }
 }

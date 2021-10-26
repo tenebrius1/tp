@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -35,6 +36,7 @@ public class TutorUtil extends PersonUtil {
         sb.append(PREFIX_PHONE + tutor.getPhone().value + " ");
         sb.append(PREFIX_GENDER + tutor.getGender().genderSymbol + " ");
         sb.append(PREFIX_QUALIFICATION + tutor.getQualification().index + " ");
+        sb.append(PREFIX_REMARK + tutor.getRemark().description + " ");
         tutor.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -51,6 +53,7 @@ public class TutorUtil extends PersonUtil {
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.genderSymbol).append(" "));
         descriptor.getQualification().ifPresent(qualification -> sb.append(PREFIX_QUALIFICATION)
                 .append(qualification.index).append(" "));
+        descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.description).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

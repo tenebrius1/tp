@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Qaulification} matches the qualification given.
+ * Tests that a {@code Person}'s {@code Qualification} matches the qualification given.
  */
 public class QualificationContainsQualificationPredicate implements Predicate<Person> {
     private final List<Qualification> qualification;
