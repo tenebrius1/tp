@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookForFilterTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +21,6 @@ import seedu.address.model.person.GenderContainsGenderPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.Student;
-import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,25 +28,6 @@ import seedu.address.model.tag.Tag;
  */
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookForFilterTest(), new UserPrefs());
-
-//    @Test
-//    public void execute_normalFilterCommand_success() {
-//        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-//
-//        String expectedMessage = String.format(MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
-//
-//        GenderContainsGenderPredicate predicate = preparePredicate("f");
-//        FilterCommand command = new FilterCommand(predicate);
-//
-//        List<Tag> ls = new ArrayList<>();
-//        ls.addAll(studentToMatch.getTags());
-//
-//        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
-//        expectedModel.filterMatchedTutor(predicate);
-//
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//    }
 
     /**
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
@@ -70,10 +46,10 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
-        Gender TEST_GENDER = new Gender("F");
-        Qualification TEST_QUALIFICATION = new Qualification("2");
-        builder.setGender(TEST_GENDER);
-        builder.setQualification(TEST_QUALIFICATION);
+        Gender gender = new Gender("F");
+        Qualification qualification = new Qualification("2");
+        builder.setGender(gender);
+        builder.setQualification(qualification);
         Predicate<Person> predicate = builder.build();
         final FilterCommand standardCommand = new FilterCommand(predicate);
 
