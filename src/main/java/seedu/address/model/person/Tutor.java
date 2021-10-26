@@ -58,17 +58,18 @@ public class Tutor extends Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.getName())
-                .append("; Phone: ")
+        builder.append("Name: ")
+                .append(super.getName())
+                .append(";\nPhone: ")
                 .append(super.getPhone())
-                .append("; Gender: ")
+                .append(";\nGender: ")
                 .append(super.getGender())
-                .append("; Qualification: ")
+                .append(";\nQualification: ")
                 .append(getQualification());
 
         Set<Tag> tags = super.getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append(";\nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();
