@@ -17,6 +17,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -77,8 +79,13 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand + LETTER_DESC_TUTOR, ListCommand.MESSAGE_EMPTY_LIST, model);
+        assertCommandSuccess(listCommand + LETTER_DESC_STUDENT, ListCommand.MESSAGE_EMPTY_LIST, model);
+        model.addTutor(ALICE);
+        model.addStudent(DANIEL);
         assertCommandSuccess(listCommand + LETTER_DESC_TUTOR, ListCommand.MESSAGE_SUCCESS_TUTOR, model);
-        assertCommandSuccess(listCommand + LETTER_DESC_STUDENT, ListCommand.MESSAGE_SUCCESS_STUDENT, model);
+        assertCommandSuccess(listCommand + LETTER_DESC_STUDENT, ListCommand.MESSAGE_SUCCESS_STUDENT,
+                model);
     }
 
     @Test
