@@ -671,4 +671,115 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for Manual Testing**
 
-to be added...
+Given below are instructions to test the app manually.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+</div>
+
+### Launch and shutdown
+{:.no_toc}
+
+1. Initial launch
+    1. Download the jar file and copy into an empty folder
+    1. Double-click the jar file <br>Expected: Shows the GUI with a set of sample data.
+1. Exiting the app
+    1. With the app still open, enter `exit` in the command box or click on the close window button.<br>
+       Expected: App closes.
+
+### Adding a Tutor/Student
+{:.no_toc}
+
+to be added.
+
+### Edit Tutor/Student list
+{:.no_toc}
+
+to be added.
+
+### Deleting a Tutor/Student
+{:.no_toc}
+
+1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+1. _{ more test cases …}_
+
+### Find Tutor/Student
+{:.no_toc}
+
+to be added.
+
+### Clear Tutor/Student list
+{:.no_toc}
+
+1. Clear all tutors from the tutor list
+    1. Prerequisites: None
+    1. Test case: `clear t`<br>
+       Expected: All tutors are cleared from the list.
+    1. Test case: `clear t 123`<br>
+       Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
+1. Clear all students from the student list
+    1. Prerequisites: None
+    1. Test case: `clear s`<br>
+       Expected: All students are cleared from the list.
+    1. Test case: `clear s 123`<br>
+       Expected: Student list not cleared with a result message `Invalid command format! ...`.
+
+### List all Tutor/Student
+{:.no_toc}
+
+1. List all tutor
+    1. Prerequisites: There are tutors are in the tutor list.
+    2. Test case: `list t`<br>
+       Expected: All stored tutors are shown in the tutor list, with a result message `Listed all tutors!`.
+2. List all tutors from the tutor list after a `find` command
+    3. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the tutor list shows less than actual number of tutors.
+    4. Test case: `list t`<br>
+       Expected: Filter from the `find` will be cleared and all tutors are shown in the endpoint list, with a result message `Listed all tutors!`.
+3. List all students
+    1. Prerequisites: All students are in the student list.
+    1. Test case: `list s`<br>
+       Expected: All students are shown in the student list, with a
+       result message `Listed all students!`.
+4. List all students from the student list after a `find` command
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the student list shows less than actual number of students.
+    2. Test case: `list s`<br>
+       Expected: Filter from the `find` will be cleared and all students are shown in the student list, with a result message `Listed all students!`.
+5. List all tutor from the tutor list after a `clear t` command
+    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `clear t` command such that all tutors are cleared from the tutor list.
+    2. Test case: `list t`<br>
+       Expected: No tutors are shown in the tutor list, with a result message saying `List is empty!`.
+6. List all students from the student list after a `clear s` command
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `clear s` command such that all students are cleared from the student list.
+    2. Test case: `list s`<br>
+       Expected: No students are shown in the student list, with a result message saying `List is empty!`.
+
+### Match Student
+{:.no_toc}
+
+to be added.
+
+### Filter matched Tutor list
+{:.no_toc}
+to be added.
+
+### Saving data
+{:.no_toc}
+
+1. Dealing with missing/corrupted data files
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. _{ more test cases …}_
+
+### Opening help window
+{:.no_toc}
+
+1. Opening help window
+    1. Test case: `help` <br>
+       Expected: Help window with command examples and link to User Guide appears.
+    1. Test case: `help Randomstring123` <br>
+       Expected: Help window with command examples and link to User Guide appears.
