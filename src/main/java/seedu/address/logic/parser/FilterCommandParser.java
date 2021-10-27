@@ -29,7 +29,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * and returns a FilterCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private static String PREAMBLE_TUTOR = "t";
 
     @Override
     public FilterCommand parse(String args) throws ParseException {
@@ -62,8 +61,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         System.out.println(ParserUtil.parsePersonType(argMultimap.getPreamble().trim()));
 
 
-        if (!ParserUtil.parsePersonType(argMultimap.getPreamble().trim()).toString().
-                equals(PersonType.TUTOR.toString())) {
+        if (!ParserUtil.parsePersonType(argMultimap.getPreamble().trim()).toString()
+                .equals(PersonType.TUTOR.toString())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 

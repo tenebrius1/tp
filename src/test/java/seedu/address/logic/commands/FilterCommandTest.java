@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookForFilterTest;
 
 import java.util.ArrayList;
@@ -12,15 +15,19 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.GenderContainsGenderPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.QualificationContainsQualificationPredicate;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,18 +36,84 @@ import seedu.address.model.tag.Tag;
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookForFilterTest(), new UserPrefs());
 
-    /**
-     * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
-     */
-    private GenderContainsGenderPredicate preparePredicate(String userInput) {
-        return new GenderContainsGenderPredicate(Arrays.asList(new Gender(userInput)));
+    @Test
+    public void execute_validFilterCommandGender_success() {
+        // Match the first student in the list
+        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        GenderContainsGenderPredicate predicate = prepareGenderPredicate("f");
+        expectedModel.filterMatchedTutor(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
 
-    private List<Tag> getStudentTagList(Student student) {
-        Set<Tag> studentTag = student.getTags();
-        ArrayList<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
-        return ls;
+    @Test
+    public void execute_validFilterCommandName_success() {
+        // Match the first student in the list
+        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("roxanne");
+        expectedModel.filterMatchedTutor(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validFilterCommandQualification_success() {
+        // Match the first student in the list
+        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        QualificationContainsQualificationPredicate predicate = prepareQualificationPredicate("3");
+        expectedModel.filterMatchedTutor(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyTutorList_throwsCommandException() {
+        Predicate<Person> predicate = prepareGenderPredicate("f");
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.filterMatchedTutor(predicate);
+
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_FAILED);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        assertCommandFailure(filterCommand, model, expectedMessage);
     }
 
     @Test
@@ -65,5 +138,33 @@ public class FilterCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+    }
+
+    private List<Tag> getStudentTagList(Student student) {
+        Set<Tag> studentTag = student.getTags();
+        ArrayList<Tag> ls = new ArrayList<>();
+        studentTag.stream().forEach(tag -> ls.add(tag));
+        return ls;
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code NameContainsNamePredicate}.
+     */
+    private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
+     */
+    private GenderContainsGenderPredicate prepareGenderPredicate(String userInput) {
+        return new GenderContainsGenderPredicate(Arrays.asList(new Gender(userInput)));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
+     */
+    private QualificationContainsQualificationPredicate prepareQualificationPredicate(String userInput) {
+        return new QualificationContainsQualificationPredicate(Arrays.asList(new Qualification(userInput)));
     }
 }

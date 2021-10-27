@@ -25,9 +25,9 @@ public class FilterCommand extends Command {
             + "Parameters: [n/NAME] [p/PHONE] [g/GENDER] [q/QUALIFICATION]\n"
             + "Example: " + COMMAND_WORD + " t q/3";
 
-    private final Predicate<Person> predicate;
-
     public static final String MESSAGE_FILTER_FAILED = "Failed to filter as no match command was given prior.";
+
+    private final Predicate<Person> predicate;
 
     /** Creates a FilterCommand to search for the specified {@code Tutor} */
     public FilterCommand(Predicate<Person> predicate) {

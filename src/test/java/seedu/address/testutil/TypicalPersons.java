@@ -67,9 +67,9 @@ public class TypicalPersons {
 
     // Manually added - Testing FilterCommand
     public static final Student JACKSON = new StudentBuilder().withName("Jackson King").withPhone("90909839")
-            .withGender("M").withTag("PS").build();
+            .withGender("M").withTag("PM").build();
     public static final Tutor ENZIO = new TutorBuilder().withName("Enzio Lee").withPhone("95092183")
-            .withGender("M").withQualification("2").withTags("TL", "TC").build();
+            .withGender("M").withQualification("2").withTags("PM", "TL", "TC").build();
     public static final Tutor MICHAEL = new TutorBuilder().withName("Michael Chen").withPhone("89102932")
             .withGender("M").withQualification("3").withTags("PM", "PS").build();
     public static final Tutor ROXANNE = new TutorBuilder().withName("Roxanne Tan").withPhone("91119222")
