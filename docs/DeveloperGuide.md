@@ -714,21 +714,25 @@ to be added.
 
 to be added.
 
-### Clear Tutor/Student list
+### Match Student
 {:.no_toc}
+// to update based on our sample data
+1. Match a student while all students are being shown
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list.
+    1. Test case: `match 1`<br>
+       Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
+    1. Test case: `match`<br>
+       Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
+    1. Test case: `match 0`<br>
+       Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
+       Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
+    1. Test case: `match 100` //some index to add later<br>
+       Expected: No endpoint is deleted. Error details shown in the result display, with a result message saying `Index provided is not within...`
+       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer
 
-1. Clear all tutors from the tutor list
-    1. Prerequisites: None
-    1. Test case: `clear t`<br>
-       Expected: All tutors are cleared from the list.
-    1. Test case: `clear t 123`<br>
-       Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
-1. Clear all students from the student list
-    1. Prerequisites: None
-    1. Test case: `clear s`<br>
-       Expected: All students are cleared from the list.
-    1. Test case: `clear s 123`<br>
-       Expected: Student list not cleared with a result message `Invalid command format! ...`.
+### Filter matched Tutor list
+{:.no_toc}
+to be added.
 
 ### List all Tutor/Student
 {:.no_toc}
@@ -759,14 +763,21 @@ to be added.
     2. Test case: `list s`<br>
        Expected: No students are shown in the student list, with a result message saying `List is empty!`.
 
-### Match Student
+### Clear Tutor/Student list
 {:.no_toc}
 
-to be added.
-
-### Filter matched Tutor list
-{:.no_toc}
-to be added.
+1. Clear all tutors from the tutor list
+    1. Prerequisites: None
+    1. Test case: `clear t`<br>
+       Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
+    1. Test case: `clear t 123`<br>
+       Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
+1. Clear all students from the student list
+    1. Prerequisites: None
+    1. Test case: `clear s`<br>
+       Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
+    1. Test case: `clear s 123`<br>
+       Expected: Student list not cleared with a result message `Invalid command format! ...`.
 
 ### Saving data
 {:.no_toc}
