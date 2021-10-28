@@ -245,7 +245,7 @@ Example:<br>
 
 ### Matching a student to tutor(s): `match` / `m`
 
-Find tutor(s) who teaches the subject that the student wants.
+Finds tutor(s) who teaches the subject that the student wants.
 
 Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed student list**.
@@ -267,35 +267,33 @@ Example:<br>
 
 ### Filtering tutors from the matched tutors: `filter`
 
-Filter tutor(s) from the list of matched tutors.
+Filters tutor(s) from the list of matched tutors.
 
-Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS]`
+Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
 - Only the last name given is searched. <br>
   e.g. `filter t n/John n/Amy` will find names that match `Amy`.
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
-- At least one of the optional fields **must** be provided.
+- **At least one** of the optional fields must be provided.
 
 Example:<br>
-`filter t q/3`
-
-**Need mac people to help w this ty**
+`filter t q/0`
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>filter t q/3 1</code></p>
+<p>Command Executed: <code>filter t q/0 1</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
 <p>After:</p>
-<img src="images/screenshots/Match.png">
+<img src="images/screenshots/Filter.png">
 </details>
 
 ### Clearing all entries: `clear`
 
-Clears all entries of tutors/students from storage.
+Clears all entries of tutors/students from CLITutors.
 
 Format: <br>`clear t` <br> `clear s`
 
@@ -321,10 +319,10 @@ Format: <br>`exit`
 
 ### Editing the data file
 
-`CLITutors` data is saved as 1 JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`CLITutors` data is saved as a JSON file `[JAR file location]/data/clitutors.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
-<b>:heavy_exclamation_mark: Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
+<b>:heavy_exclamation_mark: Caution:</b> If the data file's format is invalid after manual changes, `CLITutors` will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -336,7 +334,7 @@ Format: <br>`exit`
 
 **Q**: Where is the data of CLITutors saved?
 
-**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
+**A**: CLITutors' data is saved automatically after every command into a JSON file named clitutors.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -348,8 +346,9 @@ Format: <br>`exit`
 |  **Help**  | `help`           |
 |  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list t` <br> `list s`           |
-|  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
+|  **Find**  | `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br> `find s [n/NAME] [g/GENDER] [t/TAG...]` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
+| **Filter**  | `filter t [n/NAME] [g/GENDER] [q/QUALIFICATION]`     |
 | **Clear**  | `clear t` <br> `clear s`          |
 |  **Exit**  | `exit`           |
 
