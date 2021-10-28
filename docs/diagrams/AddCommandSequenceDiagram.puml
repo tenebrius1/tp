@@ -13,9 +13,9 @@ box Model MODEL_COLOR_T1
 participant "__:Model__" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute\n("add t n/Jonathan Chan \n p/92102339 g/M \n q/2 t/PM SM")
+[-> LogicManager : execute("add" + John)
 activate LogicManager
-LogicManager -> AddressBookParser : parseCommand\n("add t n/Jonathan Chan \n p/92102339 g/M \n q/2 t/PM SM")
+LogicManager -> AddressBookParser : parseCommand("add" + John)
 activate AddressBookParser
 
 create AddCommandParser
@@ -25,7 +25,7 @@ activate AddCommandParser
 AddressBookParser <-- AddCommandParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse(" t n/Jonathan Chan p/92102339 \n g/M q/2 t/PM SM")
+AddressBookParser -> AddCommandParser : parse(John)
 activate AddCommandParser
 
 create AddCommand
@@ -57,11 +57,11 @@ activate CommandResult
 CommandResult --> AddCommand
 deactivate CommandResult
 
-AddCommand --> LogicManager : commandResult
+AddCommand --> LogicManager : result
 deactivate AddCommand
 
-[<--LogicManager : commandResult
+[<--LogicManager
+deactivate LogicManager
 AddCommand -[hidden]-> LogicManager
 destroy AddCommand
-deactivate LogicManager
 @enduml

@@ -38,6 +38,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label gender;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -50,6 +52,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText("Contact: " + student.getPhone().value);
         gender.setText("Gender: " + student.getGender().genderSymbol);
+        remark.setText("Remark: " + student.getRemark().description);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(LevelSubjectCode.getLabel(tag.tagName))));

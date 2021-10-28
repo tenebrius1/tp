@@ -14,8 +14,8 @@ public class Student extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Gender gender, Set<Tag> tags) {
-        super(name, phone, gender, tags);
+    public Student(Name name, Phone phone, Gender gender, Remark remark, Set<Tag> tags) {
+        super(name, phone, gender, remark, tags);
         requireAllNonNull(name, phone, gender, tags);
     }
 

@@ -3,15 +3,12 @@ start
 :User executes add command for a tutor;
 :Parse command arguments;
 
-if () then ([Invalid input/s])
-    :Throw \nParseException;
-    stop
-else ([Valid input/s])
-    :Create a Tutor object as pass \n it as well as the PersonType \n into an Add command;
-
-endif
+if () then ([input is valid])
+:Create a Tutor object as pass \n it as well as the PersonType \n into an Add command;
     :Execute Add command;
-    :Update tutor list in Model;
-    :Return CommandResult;
+    :Update tutor list;
+    stop
+else ([else])
+:Throw \nParseException;
 stop
 @enduml
