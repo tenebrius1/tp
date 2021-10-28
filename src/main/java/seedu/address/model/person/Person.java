@@ -75,6 +75,13 @@ public abstract class Person {
     }
 
     /**
+     * Returns true if Remark is empty.
+     */
+    public boolean isRemarkEmpty() {
+        return remark.equals(new Remark());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -105,17 +112,21 @@ public abstract class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append("Name: ")
+                .append(getName())
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Gender: ")
-                .append(getGender())
-                .append("; Remark: ")
-                .append(getRemark());
+                .append("\nGender: ")
+                .append(getGender());
+
+        if (!getRemark().toString().equals("")) {
+            builder.append("\nRemark: ")
+                    .append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();

@@ -73,10 +73,10 @@ public class MatchCommand extends Command {
 
         if (model.getMatchedTutorList().isEmpty()) {
             model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
-            throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
+            throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch.getName()));
         }
 
-        return new CommandResult(String.format(MESSAGE_MATCHED_SUCCESS, studentToMatch));
+        return new CommandResult(String.format(MESSAGE_MATCHED_SUCCESS, studentToMatch.getName()));
     }
 
     @Override

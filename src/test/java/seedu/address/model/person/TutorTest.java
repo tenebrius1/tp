@@ -53,6 +53,19 @@ public class TutorTest {
     }
 
     @Test
+    public void isRemarkEmptyTest() {
+        String remark = "";
+        // empty remark
+        Tutor editedAlice = new TutorBuilder(ALICE).withRemark(remark).build();
+        assertTrue(editedAlice.isRemarkEmpty());
+
+        // valid remark
+        remark = "remark";
+        editedAlice = new TutorBuilder(ALICE).withRemark(remark).build();
+        assertFalse(editedAlice.isRemarkEmpty());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Tutor aliceCopy = new TutorBuilder(ALICE).build();
