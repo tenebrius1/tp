@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ROXANNE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_GRADUATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_MOE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -31,7 +35,7 @@ import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookForFilterTest(), new UserPrefs());
@@ -48,12 +52,12 @@ public class FilterCommandTest {
 
         model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
 
-        GenderContainsGenderPredicate predicate = prepareGenderPredicate("f");
+        GenderContainsGenderPredicate predicate = prepareGenderPredicate(VALID_GENDER_AMY);
         expectedModel.filterMatchedTutor(predicate);
 
         FilterCommand filterCommand = new FilterCommand(predicate);
 
-        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
@@ -70,7 +74,7 @@ public class FilterCommandTest {
 
         model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
 
-        NameContainsKeywordsPredicate predicate = prepareNamePredicate("roxanne");
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate(VALID_NAME_ROXANNE);
         expectedModel.filterMatchedTutor(predicate);
 
         FilterCommand filterCommand = new FilterCommand(predicate);
@@ -92,7 +96,7 @@ public class FilterCommandTest {
 
         model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
 
-        QualificationContainsQualificationPredicate predicate = prepareQualificationPredicate("3");
+        QualificationContainsQualificationPredicate predicate = prepareQualificationPredicate(VALID_QUALIFICATION_MOE);
         expectedModel.filterMatchedTutor(predicate);
 
         FilterCommand filterCommand = new FilterCommand(predicate);
@@ -104,7 +108,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_emptyTutorList_throwsCommandException() {
-        Predicate<Person> predicate = prepareGenderPredicate("f");
+        Predicate<Person> predicate = prepareGenderPredicate(VALID_GENDER_AMY);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.filterMatchedTutor(predicate);
@@ -119,8 +123,8 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
-        Gender gender = new Gender("F");
-        Qualification qualification = new Qualification("2");
+        Gender gender = new Gender(VALID_GENDER_AMY);
+        Qualification qualification = new Qualification(VALID_QUALIFICATION_GRADUATE);
         builder.setGender(gender);
         builder.setQualification(qualification);
         Predicate<Person> predicate = builder.build();

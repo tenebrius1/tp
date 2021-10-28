@@ -206,9 +206,9 @@ public class ModelManager implements Model {
 
         @SuppressWarnings("unchecked")
         Predicate<Person> matchingPredicate = (Predicate<Person>) matchedTutors.getPredicate();
-        Predicate<Person> resPredicate = predicate.and(matchingPredicate);
+        Predicate<Person> resultingPredicate = predicate.and(matchingPredicate);
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
-        matchedTutors.setPredicate(builder.setPredicate(resPredicate).build());
+        matchedTutors.setPredicate(builder.setPredicate(resultingPredicate).build());
     }
 
     @Override

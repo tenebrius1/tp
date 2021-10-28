@@ -23,7 +23,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.QualificationContainsQualificationPredicate;
-import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {
     private static final String MESSAGE_INVALID_FILTER_COMMAND_FORMAT =
@@ -31,7 +30,7 @@ public class FilterCommandParserTest {
     private final FilterCommandParser parser = new FilterCommandParser();
 
     // Valid Name
-    private final Name alice = new Name("ALice");
+    private final Name alice = new Name("Alice");
     private final Name daniel = new Name("Daniel");
 
     // Valid Gender
@@ -40,9 +39,6 @@ public class FilterCommandParserTest {
 
     // Valid Qualification
     private final Qualification validQualification = new Qualification("0");
-
-    // Valid Tags
-    private final Tag tag = new Tag("PM");
 
     // Predicates
     private final Predicate<Person> namePredicateDaniel = new NameContainsKeywordsPredicate(
@@ -66,7 +62,7 @@ public class FilterCommandParserTest {
                 new ChainedPredicate.Builder().setName(alice).setPredicate(tutorPredicate).build();
         FilterCommand expectedFilterCommand = new FilterCommand(tutorTestPredicate);
 
-        // Valid name test
+        // Valid Name test
         assertParseSuccess(parser, VALID_TUTOR_LETTER + " n/alice", expectedFilterCommand);
 
         tutorPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(female)));
@@ -83,13 +79,13 @@ public class FilterCommandParserTest {
                 .setPredicate(tutorPredicate).build();
         expectedFilterCommand = new FilterCommand(tutorTestPredicate);
 
-        // Valid qualification test
+        // Valid Qualification test
         assertParseSuccess(parser, VALID_TUTOR_LETTER + QUALIFICATION_DESC_BOB, expectedFilterCommand);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
+        // Invalid Name
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
     }
 }

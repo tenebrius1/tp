@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
 /**
- * Finds and lists all students or tutors in address book whose name contains the argument keyword.
+ * Filters specific tutors from the match list according to certain parameters.
  * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
@@ -22,7 +22,7 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all the tutor names that contain "
             + "the specified search parameters (case-insensitive) and displays them in the matched tutors list."
-            + "Parameters: [n/NAME] [p/PHONE] [g/GENDER] [q/QUALIFICATION]\n"
+            + "Parameters: [n/NAME] [g/GENDER] [q/QUALIFICATION]\n"
             + "Example: " + COMMAND_WORD + " t q/3";
 
     public static final String MESSAGE_FILTER_FAILED = "Failed to filter as no match command was given prior.";
