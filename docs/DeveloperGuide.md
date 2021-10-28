@@ -680,7 +680,7 @@ Given below are instructions to test the app manually.
 {:.no_toc}
 
 1. Initial launch
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
     1. Double-click the jar file <br>Expected: Shows the GUI with a set of sample data.
 1. Exiting the app
     1. With the app still open, enter `exit` in the command box or click on the close window button.<br>
