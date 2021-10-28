@@ -75,20 +75,23 @@ public class HelpWindow extends UiPart<Stage> {
 
     // Data to populate the commands table
     private ObservableList<CommandListModel> commandListModels = FXCollections.observableArrayList(
-            new CommandListModel("Add", "add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS t/TAG..."
-                    + "\nadd s n/NAME p/PHONE_NUMBER g/GENDER t/TAG"
+            new CommandListModel("Add", "add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION "
+                    + "[r/REMARK] t/TAG..."
+                    + "\nadd s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG..."
                     + "\ne.g. add t n/John Doe p/98765432 g/M q/3 t/PM"),
-            new CommandListModel("Delete", "delete t INDEX" + "\ndelete t INDEX" + "\ne.g. delete s 3"),
+            new CommandListModel("Delete", "delete t INDEX" + "\ndelete s INDEX" + "\ne.g. delete s 3"),
             new CommandListModel("Help", "help"),
             new CommandListModel("Edit",
-                    "edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]"
-                    + "\nedit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [t/TAG]"
+                    "edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]"
+                    + "\nedit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]"
                     + "\ne.g. edit t 2 n/John Doe q/1"),
-            new CommandListModel("List", "list"),
-            new CommandListModel("Find", "find t n/NAME" + "\nfind s n/NAME" + "\ne.g. find s n/John"),
+            new CommandListModel("List", "list t \nlist s"),
+            new CommandListModel("Find", "find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]"
+                    + "\nfind s [n/NAME] [g/GENDER] [t/TAG...]" + "\ne.g. find s n/John"),
             new CommandListModel("Match", "match INDEX" + "\ne.g. match 1"),
-            new CommandListModel("Filter", "filter t q/QUALIFICATION" + "\ne.g. filter t q/3"),
-            new CommandListModel("Clear", "clear"),
+            new CommandListModel("Filter", "filter t [n/NAME] [g/GENDER] [q/QUALIFICATION]"
+                    + "\ne.g. filter t q/3"),
+            new CommandListModel("Clear", "clear t \nclear s"),
             new CommandListModel("Exit", "exit")
     );
 
