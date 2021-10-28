@@ -27,9 +27,9 @@ nav-text: Developer Guide
 
 ## **Introduction**
 
-CLITutors is a desktop application for managers to manage private tutoring jobs, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). CLITutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
+`CLITutors` is a desktop application for managers to manage private tutoring jobs, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). CLITutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
 
-This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to CLITutors, a [glossary](#glossary) has been provided for readers.
+This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to `CLITutors`, a [glossary](#glossary) has been provided for readers.
 
 Readers are also advised to [download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases) our latest releases from our main website in order to test out the application.
 
@@ -39,7 +39,7 @@ Before diving into the rest of the contents in our developer guide, the followin
 
 | Syntax                                                                  | Description                                         |
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
-| `Markdown`                                                              | Denotes distinct classes, their methods or examples |
+| `Codeblock`                                                              | Denotes distinct classes, their methods or examples |
 | <div markdown="span" class="alert alert-info">:information_source: Note</div> | Important things to take note of                    |
 
 
@@ -79,10 +79,10 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from and writes data to the hard disk.
 
-Each of the four components,
+Each of the four components:
 
-* defines its *API* in an `interface` with the same name as the Component.
-* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+* defines its *API* in an interface with the same name as the Component.
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
@@ -114,12 +114,12 @@ The `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI a
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` objects residing in the `Model`.
 
 ### Logic component
 
@@ -156,7 +156,7 @@ Here's a class diagram of the `Model` component:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Tutor` and `Student` objects (which are contained in a `UniqueTutorList` and `UniqueStudentList` object respectively).
+* stores the CLITutors data i.e., all `Tutor` and `Student` objects (which are contained in a `UniqueTutorList` and `UniqueStudentList` object respectively).
 * stores the currently 'selected' `Tutor` and `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Tutor>` and `ObservableList<Student>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -175,20 +175,20 @@ Here's a class diagram of the `Storage` component:
 ![Storage component diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
-* can save both clitutors data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CLITutors data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `CliTutorsStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifelines for `Parser`s and `Command`s in the sequence diagrams should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reach the end of diagram.
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** The lifelines for `Parser` and `Command` classes in the sequence diagrams should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reach the end of diagram.
 </div>
 
 ### Add feature
@@ -343,7 +343,7 @@ Given below is an activity diagram to show how the `list s` command works:
 - **Alternative 1 (current choice)**: User must specify which list that they would like to see.
     - Pros: It allows the user to act on each list independently.
     - Cons: It is troublesome to type the command twice if the user wanted to view all the tutors and students.
-- **Alternative 2**: User inputs `list` and all tutors and student are shown.
+- **Alternative 2**: User inputs `list` and all tutors and students are shown.
     - Pros: Simpler for the user to list all tutors and students.
     - Cons: Will remove all filters applied to both the tutor and student lists and show all tutors and students. The user is unable to customise the view of tutor/student lists independently.
 
@@ -355,7 +355,7 @@ Searches and displays all tutors/students that matches the parameters specified.
 
 #### Implementation details
 
-A noteworthy change in implementation of our `FindCommand` from the standard AB3 `FindCommand` is in `FindCommandParser`. We expanded on the `FindCommand` functionality such that it can find for students/tutors  multiple attributes. Because of this, we opted to create a new `ChainedPredicate` class that encapsulates the idea of chaining multiple predicates together. Each attribute specified by the user creates its own predicate which is then chained together using the `Predicate#and` method and the resulting predicate is then stored in the `ChainedPredicate` class.
+A noteworthy change in the implementation of our `FindCommand` from the standard AB3 `FindCommand` is in `FindCommandParser`. We expanded on the `FindCommand` functionality such that it can find multiple attributes for tutors/students. Because of this, we opted to create a new `ChainedPredicate` class that encapsulates the idea of chaining multiple predicates together. Each attribute specified by the user creates its own predicate which is then chained together using the `Predicate#and` method and the resulting predicate is then stored in the `ChainedPredicate` class.
 
 ##### Sequence of action
 {:.no_toc}
@@ -383,7 +383,7 @@ Given below is an activity diagram to show how a `find` implementation works for
 {:.no_toc}
 
 - **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
-  - Pros: It allows the user to find tutor/student more easily by their fields.
+  - Pros: It allows the user to find tutors/students more easily by their fields.
  <br>(for e.g. they can find all tutors who are women and teaches Primary Math)
   - Cons: It would be more complex since it has to parse multiple prefixes and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
 - **Alternative 2**: User can only `find` using one prefix at a time.
@@ -493,7 +493,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-(For all use cases below, the System is the `CLITutorsBook` and the Actor is the User, unless otherwise specified)
+(For all use cases below, the System is `CliTutors` and the Actor is the user, unless otherwise specified)
 
 #### Use case (UC01): Add a Tutor
 {:.no_toc}
@@ -680,8 +680,8 @@ Given below are instructions to test the app manually.
 {:.no_toc}
 
 1. Initial launch
-    1. Download the jar file and copy into an empty folder.
-    1. Double-click the jar file <br>Expected: Shows the GUI with a set of sample data.
+    1. Download the JAR file and copy it into an empty folder.
+    1. Double-click the JAR file <br>Expected: Shows the GUI with a set of sample data.
 1. Exiting the app
     1. With the app still open, enter `exit` in the command box or click on the close window button.<br>
        Expected: App closes.

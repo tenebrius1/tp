@@ -77,7 +77,7 @@ public class FindCommandParserTest {
                 new ChainedPredicate.Builder().setName(alice).setPredicate(tutorPredicate).build();
         FindCommand expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
 
-        // Valid name test
+        // Valid Name test
         assertParseSuccess(parser, VALID_TUTOR_LETTER + " n/alice", expectedTutorFindCommand);
 
         tutorPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(female)));
@@ -93,7 +93,7 @@ public class FindCommandParserTest {
                         .setPredicate(tutorPredicate).build();
         expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
 
-        // Valid tag test
+        // Valid Tag test
         assertParseSuccess(parser, VALID_TUTOR_LETTER + TAG_DESC_PM, expectedTutorFindCommand);
 
         tutorPredicate =
@@ -102,7 +102,7 @@ public class FindCommandParserTest {
                         .setPredicate(tutorPredicate).build();
         expectedTutorFindCommand = new FindCommand(tutorTestPredicate, PersonType.TUTOR);
 
-        // Valid qualification test
+        // Valid Qualification test
         assertParseSuccess(parser, VALID_TUTOR_LETTER + QUALIFICATION_DESC_BOB, expectedTutorFindCommand);
     }
 
@@ -117,7 +117,7 @@ public class FindCommandParserTest {
         FindCommand expectedStudentFindCommand =
                 new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        // Valid name
+        // Valid Name test
         assertParseSuccess(parser, VALID_STUDENT_LETTER + " n/Daniel", expectedStudentFindCommand);
 
         studentPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(male)));
@@ -125,7 +125,7 @@ public class FindCommandParserTest {
                 new ChainedPredicate.Builder().setGender(male).setPredicate(studentPredicate).build();
         expectedStudentFindCommand = new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        // Valid Gender
+        // Valid Gender test
         assertParseSuccess(parser, VALID_STUDENT_LETTER + GENDER_DESC_BOB, expectedStudentFindCommand);
 
         studentPredicate = predicate.and(new TagsContainTagPredicate(List.of(tag)));
@@ -134,7 +134,7 @@ public class FindCommandParserTest {
                         .setPredicate(studentPredicate).build();
         expectedStudentFindCommand = new FindCommand(studentTestPredicate, PersonType.STUDENT);
 
-        // Valid Tag
+        // Valid Tag test
         assertParseSuccess(parser, VALID_STUDENT_LETTER + TAG_DESC_PM, expectedStudentFindCommand);
     }
 
@@ -155,36 +155,36 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
+        // Invalid Name Test
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // Invalid Tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
 
-        // invalid tag argument ahead of valid tag
+        // Invalid Tag argument ahead of valid Tag
         assertParseFailure(parser, VALID_TUTOR_LETTER
                 + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG);
 
         assertParseFailure(parser, VALID_TUTOR_LETTER
                 + TAG_DESC_PM + " " + INVALID_TAG , Tag.MESSAGE_INVALID_TAG);
 
-        // multiple invalid values, but only the first invalid value is captured
+        // Multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC + INVALID_PHONE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // invalid preamble
+        // Invalid preamble
         assertParseFailure(parser, INVALID_PREAMBLE, MESSAGE_INVALID_FIND_COMMAND_FORMAT);
 
-        // invalid name
+        // Invalid Name
         assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
-        // blank name
+        // Blank Name
         assertParseFailure(parser, VALID_STUDENT_LETTER + " n/", Name.MESSAGE_CONSTRAINTS);
 
-        // Find qualification for student
+        // Find Qualification for Student
         assertParseFailure(parser, VALID_STUDENT_LETTER + QUALIFICATION_DESC_BOB,
                 MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
     }
