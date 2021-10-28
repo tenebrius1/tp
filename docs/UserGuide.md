@@ -268,7 +268,7 @@ Example:<br>
 
 Filter tutor(s) from the list of matched tutors.
 
-Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
+Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
 - Only the last name given is searched. <br>
@@ -276,7 +276,6 @@ Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]`
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
 - At least one of the optional fields **must** be provided.
-- You must specify at least one tag when finding tags with `t/`.
 
 Example:<br>
 `filter t q/3`
