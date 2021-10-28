@@ -14,6 +14,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -24,10 +25,13 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedTutor} with the given tutor details.
      */
     @JsonCreator
-    public JsonAdaptedTutor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("gender") String gender, @JsonProperty("qualification") String qualification,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        super(name, phone, gender, tagged);
+    public JsonAdaptedTutor(@JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone,
+                            @JsonProperty("gender") String gender,
+                            @JsonProperty("qualification") String qualification,
+                            @JsonProperty("remark") String remark,
+                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        super(name, phone, gender, remark, tagged);
         this.qualification = qualification;
     }
 
@@ -36,7 +40,7 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
      */
     public JsonAdaptedTutor(Tutor source) {
         super(source.getName().fullName, source.getPhone().value,
-                source.getGender().genderSymbol, getAddedTags(source));
+                source.getGender().genderSymbol, source.getRemark().description, getAddedTags(source));
         qualification = source.getQualification().index;
     }
 
@@ -89,6 +93,14 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(super.getGender());
 
+        if (super.getRemark() == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(super.getRemark())) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(super.getRemark());
+
         if (qualification == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Qualification.class.getSimpleName()));
@@ -99,6 +111,6 @@ public class JsonAdaptedTutor extends JsonAdaptedPerson {
         final Qualification modelQualification = new Qualification(qualification);
 
         final Set<Tag> modelTags = new HashSet<>(tutorTags);
-        return new Tutor(modelName, modelPhone, modelGender, modelQualification, modelTags);
+        return new Tutor(modelName, modelPhone, modelGender, modelQualification, modelRemark, modelTags);
     }
 }
