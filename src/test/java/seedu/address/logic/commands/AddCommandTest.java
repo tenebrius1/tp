@@ -227,6 +227,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void filterMatchedTutor(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Tutor> getMatchedTutorList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -293,7 +298,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accepts the tutor being added.
+     * A Model stub that always accepts the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();

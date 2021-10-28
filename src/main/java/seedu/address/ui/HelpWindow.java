@@ -87,6 +87,7 @@ public class HelpWindow extends UiPart<Stage> {
             new CommandListModel("List", "list"),
             new CommandListModel("Find", "find t n/NAME" + "\nfind s n/NAME" + "\ne.g. find s n/John"),
             new CommandListModel("Match", "match INDEX" + "\ne.g. match 1"),
+            new CommandListModel("Filter", "filter t q/QUALIFICATION" + "\ne.g. filter t q/3"),
             new CommandListModel("Clear", "clear"),
             new CommandListModel("Exit", "exit")
     );

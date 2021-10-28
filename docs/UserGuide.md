@@ -264,6 +264,34 @@ Example:<br>
 <img src="images/screenshots/Match.png">
 </details>
 
+### Filtering tutors from the matched tutors: `filter`
+
+Filter tutor(s) from the list of matched tutors.
+
+Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS]`
+- The search is case-insensitive. <br>
+  e.g. `n/hans` will match `Hans`.
+- Only the last name given is searched. <br>
+  e.g. `filter t n/John n/Amy` will find names that match `Amy`.
+- Only full words will be matched. <br>
+  e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
+- At least one of the optional fields **must** be provided.
+
+Example:<br>
+`filter t q/3`
+
+**Need mac people to help w this ty**
+
+<details>
+<summary>Expected outcome:</summary>
+<p>Command Executed: <code>filter t q/3 1</code></p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
+<br>
+<p>After:</p>
+<img src="images/screenshots/Match.png">
+</details>
+
 ### Clearing all entries: `clear`
 
 Clears all entries of tutors/students from storage.
