@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showTutorAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,14 +26,14 @@ import seedu.address.model.person.Tutor;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredListTutor_success() {
         Tutor tutorToDelete = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommandTutor = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR);
         String expectedMessageTutor = String.format(DeleteCommand.MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete);
-        ModelManager expectedModelTutor = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModelTutor = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelTutor.deleteTutor(tutorToDelete);
 
         assertCommandSuccess(deleteCommandTutor, model, expectedMessageTutor, expectedModelTutor);
@@ -44,7 +44,7 @@ public class DeleteCommandTest {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommandStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
         String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
-        ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelStudent.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommandStudent, model, expectedMessageStudent, expectedModelStudent);
@@ -94,7 +94,7 @@ public class DeleteCommandTest {
 
         String expectedMessageTutor = String.format(DeleteCommand.MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete);
 
-        Model expectedModelTutor = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelTutor = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelTutor.deleteTutor(tutorToDelete);
         showNoTutor(expectedModelTutor);
 
@@ -110,7 +110,7 @@ public class DeleteCommandTest {
 
         String expectedMessageStudent = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
 
-        Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelStudent.deleteStudent(studentToDelete);
         showNoStudent(expectedModelStudent);
 
@@ -123,7 +123,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndexTutor = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexTutor is still in bounds of address book list
-        assertTrue(outOfBoundIndexTutor.getZeroBased() < model.getAddressBook().getTutorList().size());
+        assertTrue(outOfBoundIndexTutor.getZeroBased() < model.getCliTutors().getTutorList().size());
 
         DeleteCommand deleteCommandTutor = new DeleteCommand(outOfBoundIndexTutor, PersonType.TUTOR);
 
@@ -136,7 +136,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndexStudent = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexStudent is still in bounds of address book list
-        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getCliTutors().getStudentList().size());
 
         DeleteCommand deleteCommandStudent = new DeleteCommand(outOfBoundIndexStudent, PersonType.STUDENT);
 

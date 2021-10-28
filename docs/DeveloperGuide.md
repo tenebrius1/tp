@@ -130,7 +130,7 @@ Here's a (partial) class diagram of the `Logic` component:
 ![Logic Class Diagram](images/LogicClassDiagram.png)
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `CliTutorsParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -144,7 +144,7 @@ Taking a deeper look into the classes in `Logic` that are used for parsing a use
 ![Insert class diagram for Parser component](images/ParserClasses.png)
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `CliTutorsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `CliTutorsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -161,7 +161,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Tutor` and `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Tutor` and `Student` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CliTutors`, which `Tutor` and `Student` references. This allows `CliTutors` to only require one `Tag` object per unique tag, instead of each `Tutor` and `Student` needing their own `Tag` objects.<br>
 
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
@@ -175,13 +175,13 @@ Here's a class diagram of the `Storage` component:
 ![Storage component diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both clitutors data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `CliTutorsStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.clitutors.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
@@ -205,7 +205,7 @@ Adds a tutor/student to the tutor/student list respectively. The `add` command m
 Given below is an example usage scenario and how the `add` command implementation behaves at each step:
 
 1. The user input `add t n/Jonathan Chan p/92102339 g/M q/2 t/PM SM` is passed to `LogicManager` to be executed.
-2. `LogicManager` calls on `AddressBookParser#parseCommand` method which in turn creates a new `AddCommandParser`.
+2. `LogicManager` calls on `CliTutorsParser#parseCommand` method which in turn creates a new `AddCommandParser`.
 3. The `AddCommandParser#parse` method is then called which will return a new `AddCommand` if the input is valid.
 4. `AddCommand` will then update the tutor list using the `Model#addTutor` method.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
@@ -245,8 +245,8 @@ Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `
 Given below is an example usage scenario and how the `delete` command implementation behaves at each step:
 
 1. The user input `delete t 1` is passed to `LogicManager` to be executed.
-2. The `LogicManager` calls `AddressBookParser#parseCommand` to parse the given user input.
-3. The `AddressBookParser` identifies the `delete` command and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
+2. The `LogicManager` calls `CliTutorsParser#parseCommand` to parse the given user input.
+3. The `CliTutorsParser` identifies the `delete` command and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
 4. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
 5. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
 6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
@@ -286,7 +286,7 @@ Edits a tutor/student in the tutor/student list respectively. All fields are **o
 Given below is an example usage scenario and how the `edit` command implementation behaves at each step:
 
 1. The user input `edit t 1 p/94203825` is passed to `LogicManager` to be executed.
-2. `LogicManager` calls `AddressBookParser#parseCommand` which in turn creates a new `EditCommandParser`.
+2. `LogicManager` calls `CliTutorsParser#parseCommand` which in turn creates a new `EditCommandParser`.
 3. The `EditCommandParser` calls its own `parse()` method which will return a new `EditCommand` if the input is valid.
 4. `EditCommand` will then update the tutor list in the `Model` class by replacing the existing tutor (to be edited) with the edited tutor.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
@@ -322,7 +322,7 @@ Lists all tutors/students in the list. The `list` command only accepts `s` or `t
 Given below is an example usage scenario and how the `list` command implementation behaves at each step:
 
 1. The user input `list s` is passed to LogicManager to be executed.
-2. `LogicManager` calls the `AddressBookParser#parseCommand` method which in turn creates a new `ListCommandParser`.
+2. `LogicManager` calls the `CliTutorsParser#parseCommand` method which in turn creates a new `ListCommandParser`.
 3. The `ListCommandParser#parse` method is then called which will return a new `ListCommand` if the input is valid.
 4. `ListCommand` will then show all students in the student list in the `Model` class.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
@@ -363,7 +363,7 @@ A noteworthy change in implementation of our `FindCommand` from the standard AB3
 Given below is an example usage scenario and how the `find` command implementation behaves at each step:
 
 1. The user input `find s n/David` is passed to `LogicManager` to be executed.
-2. `LogicManager` calls on `AddressBookParser#parseCommand` method which creates a new `FindCommandParser`.
+2. `LogicManager` calls on `CliTutorsParser#parseCommand` method which creates a new `FindCommandParser`.
 3. The `FindCommandParser` then calls its own `parse()` method which will return a new `FindCommand` if the input is valid.
 4. `LogicManager` will execute the `FindCommand` through `FindCommand#execute`.
 5. `FindCommand` will then search and update the student list in the `Model` class using the `Model#updateFilteredStudentList` method.
@@ -407,7 +407,7 @@ Given below is an example valid usage scenario and how the `match` command imple
 
 Steps:
 1. The user input `match 1` (i.e. match the first student in the student list) is passed to `LogicManager` to be executed.
-2. `LogicManager` calls on `AddressBookParser#parseCommand`, which creates a new `MatchCommandParser` object.
+2. `LogicManager` calls on `CliTutorsParser#parseCommand`, which creates a new `MatchCommandParser` object.
 3. The `MatchCommandParser` object calls on its own parse() method which will validate the user input and return a new `MatchCommand`.
 4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
 5. `MatchCommand` will find the first student in the student list and a `TagsContainTagPredicate` object is created.

@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.CliTutors;
+import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable CliTutors that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "clitutors")
+class JsonSerializableCliTutors {
 
     public static final String MESSAGE_DUPLICATE_TUTOR = "Tutors list contains duplicate tutor(s).";
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
@@ -27,49 +27,49 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableCliTutors} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("tutors") List<JsonAdaptedTutor> tutors,
+    public JsonSerializableCliTutors(@JsonProperty("tutors") List<JsonAdaptedTutor> tutors,
                                        @JsonProperty("students") List<JsonAdaptedStudent> students) {
         this.tutors.addAll(tutors);
         this.students.addAll(students);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyCliTutors} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableCliTutors}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableCliTutors(ReadOnlyCliTutors source) {
         tutors.addAll(source.getTutorList().stream().map(JsonAdaptedTutor::new).collect(Collectors.toList()));
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code CliTutors} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
-        // Add tutors to addressBook
+    public CliTutors toModelType() throws IllegalValueException {
+        CliTutors cliTutors = new CliTutors();
+        // Add tutors to cliTutors
         for (JsonAdaptedTutor jsonAdaptedTutor : tutors) {
             Tutor tutor = jsonAdaptedTutor.toModelType();
-            if (addressBook.hasTutor(tutor)) {
+            if (cliTutors.hasTutor(tutor)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTOR);
             }
-            addressBook.addTutor(tutor);
+            cliTutors.addTutor(tutor);
         }
-        // Add students to addressBook
+        // Add students to cliTutors
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
-            if (addressBook.hasStudent(student)) {
+            if (cliTutors.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            addressBook.addStudent(student);
+            cliTutors.addStudent(student);
         }
-        return addressBook;
+        return cliTutors;
     }
 
 }

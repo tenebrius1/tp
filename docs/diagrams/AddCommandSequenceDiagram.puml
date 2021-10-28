@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant "__:LogicManager__" as LogicManager LOGIC_COLOR
-participant "__:AddressBookParser__" as AddressBookParser LOGIC_COLOR
+participant "__:CliTutorsParser__" as CliTutorsParser LOGIC_COLOR
 participant "__:AddCommandParser__" as AddCommandParser LOGIC_COLOR
 participant "__a:AddCommand__" as AddCommand LOGIC_COLOR
 participant "__:CommandResult__" as CommandResult LOGIC_COLOR
@@ -15,17 +15,17 @@ end box
 
 [-> LogicManager : execute("add" + John)
 activate LogicManager
-LogicManager -> AddressBookParser : parseCommand("add" + John)
-activate AddressBookParser
+LogicManager -> CliTutorsParser : parseCommand("add" + John)
+activate CliTutorsParser
 
 create AddCommandParser
-AddressBookParser -> AddCommandParser
+CliTutorsParser -> AddCommandParser
 activate AddCommandParser
 
-AddressBookParser <-- AddCommandParser
+CliTutorsParser <-- AddCommandParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse(John)
+CliTutorsParser -> AddCommandParser : parse(John)
 activate AddCommandParser
 
 create AddCommand
@@ -35,11 +35,11 @@ activate AddCommand
 AddCommandParser <-- AddCommand : a
 deactivate AddCommand
 
-AddCommandParser --> AddressBookParser : a
+AddCommandParser --> CliTutorsParser : a
 deactivate AddCommandParser
 
-AddressBookParser --> LogicManager : a
-deactivate AddressBookParser
+CliTutorsParser --> LogicManager : a
+deactivate CliTutorsParser
 destroy AddCommandParser
 
 LogicManager -> AddCommand : execute(model)

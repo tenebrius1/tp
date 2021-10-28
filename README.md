@@ -14,4 +14,4 @@ The User Guide can be accessed [here](https://github.com/AY2122S1-CS2103T-T17-2/
 The Developer Guide can be accessed [here](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/docs/DeveloperGuide.md).
 
 ## Acknowledgements
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the CliTutors-Level3 project created by the [SE-EDU initiative](https://se-education.org).

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
@@ -36,7 +36,7 @@ public class MatchCommandTest {
 
         String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
-        ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
 
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
@@ -74,7 +74,7 @@ public class MatchCommandTest {
 
         String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
-        Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
 
 
@@ -105,7 +105,7 @@ public class MatchCommandTest {
 
         Index outOfBoundIndexStudent = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexStudent is still in bounds of address book list
-        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getCliTutors().getStudentList().size());
 
         MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
 

@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,61 +32,61 @@ import seedu.address.model.person.UniqueStudentList;
 import seedu.address.model.person.UniqueTutorList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.CliTutorsBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 import seedu.address.testutil.TypicalPersons;
 
-public class AddressBookTest {
-    private final AddressBook addressBook = new AddressBook();
+public class CliTutorsTest {
+    private final CliTutors cliTutors = new CliTutors();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTutorList());
-        assertEquals(Collections.emptyList(), addressBook.getStudentList());
-        assertEquals(Collections.emptyList(), addressBook.getMatchedTutorList());
+        assertEquals(Collections.emptyList(), cliTutors.getTutorList());
+        assertEquals(Collections.emptyList(), cliTutors.getStudentList());
+        assertEquals(Collections.emptyList(), cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.resetData(null));
     }
 
     @Test
     public void resetTutorData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetTutorData(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.resetTutorData(null));
     }
 
     @Test
     public void resetStudentData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetStudentData(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.resetStudentData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyCliTutors_replacesData() {
+        CliTutors newData = getTypicalCliTutors();
+        cliTutors.resetData(newData);
+        assertEquals(newData, cliTutors);
     }
 
     @Test
-    public void resetTutorData_withValidReadOnlyAddressBook_replacesTutorDataOnly() {
-        AddressBook newData = getTypicalAddressBook();
-        ObservableList<Student> expectedStudentList = addressBook.getStudentList();
-        addressBook.resetTutorData(newData);
+    public void resetTutorData_withValidReadOnlyCliTutors_replacesTutorDataOnly() {
+        CliTutors newData = getTypicalCliTutors();
+        ObservableList<Student> expectedStudentList = cliTutors.getStudentList();
+        cliTutors.resetTutorData(newData);
 
-        assertEquals(newData.getTutorList(), addressBook.getTutorList());
-        assertEquals(expectedStudentList, addressBook.getStudentList());
+        assertEquals(newData.getTutorList(), cliTutors.getTutorList());
+        assertEquals(expectedStudentList, cliTutors.getStudentList());
     }
 
     @Test
-    public void resetStudentData_withValidReadOnlyAddressBook_replacesStudentDataOnly() {
-        AddressBook newData = getTypicalAddressBook();
-        ObservableList<Tutor> expectedTutorList = addressBook.getTutorList();
-        addressBook.resetStudentData(newData);
+    public void resetStudentData_withValidReadOnlyCliTutors_replacesStudentDataOnly() {
+        CliTutors newData = getTypicalCliTutors();
+        ObservableList<Tutor> expectedTutorList = cliTutors.getTutorList();
+        cliTutors.resetStudentData(newData);
 
-        assertEquals(newData.getStudentList(), addressBook.getStudentList());
-        assertEquals(expectedTutorList, addressBook.getTutorList());
+        assertEquals(newData.getStudentList(), cliTutors.getStudentList());
+        assertEquals(expectedTutorList, cliTutors.getTutorList());
     }
 
     @Test
@@ -96,179 +96,179 @@ public class AddressBookTest {
                 .build();
         List<Tutor> newTutors = Arrays.asList(ALICE, editedAlice);
         List<Student> newStudents = List.of(DANIEL);
-        AddressBookStub newData = new AddressBookStub(newTutors, newStudents);
+        CliTutorsStub newData = new CliTutorsStub(newTutors, newStudents);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> cliTutors.resetData(newData));
     }
 
     @Test
     public void hasTutor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTutor(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.hasTutor(null));
     }
 
     @Test
     public void hasStudent_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.hasStudent(null));
     }
 
     @Test
-    public void hasTutor_tutorNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTutor(ALICE));
+    public void hasTutor_tutorNotInCliTutors_returnsFalse() {
+        assertFalse(cliTutors.hasTutor(ALICE));
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStudent(DANIEL));
+    public void hasStudent_studentNotInCliTutors_returnsFalse() {
+        assertFalse(cliTutors.hasStudent(DANIEL));
     }
 
     @Test
-    public void hasTutor_tutorInAddressBook_returnsTrue() {
-        addressBook.addTutor(ALICE);
-        assertTrue(addressBook.hasTutor(ALICE));
+    public void hasTutor_tutorInCliTutors_returnsTrue() {
+        cliTutors.addTutor(ALICE);
+        assertTrue(cliTutors.hasTutor(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
-        addressBook.addStudent(DANIEL);
-        assertTrue(addressBook.hasStudent(DANIEL));
+    public void hasStudent_studentInCliTutors_returnsTrue() {
+        cliTutors.addStudent(DANIEL);
+        assertTrue(cliTutors.hasStudent(DANIEL));
     }
 
     @Test
-    public void hasTutor_tutorWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addTutor(ALICE);
+    public void hasTutor_tutorWithSameIdentityFieldsInCliTutors_returnsTrue() {
+        cliTutors.addTutor(ALICE);
         Tutor editedAlice = new TutorBuilder(ALICE).withGender(VALID_GENDER_BOB).withTags(VALID_TAG_PM)
                 .withQualification(VALID_QUALIFICATION_BOB).build();
-        assertTrue(addressBook.hasTutor(editedAlice));
+        assertTrue(cliTutors.hasTutor(editedAlice));
     }
 
     @Test
-    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStudent(DANIEL);
+    public void hasStudent_studentWithSameIdentityFieldsInCliTutors_returnsTrue() {
+        cliTutors.addStudent(DANIEL);
         Student editedDaniel = new StudentBuilder(DANIEL).withGender(VALID_GENDER_BOB).withTag(VALID_TAG_PM)
                 .build();
-        assertTrue(addressBook.hasStudent(editedDaniel));
+        assertTrue(cliTutors.hasStudent(editedDaniel));
     }
 
     @Test
     public void getTutorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTutorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> cliTutors.getTutorList().remove(0));
     }
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> cliTutors.getStudentList().remove(0));
     }
 
     @Test
     public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getMatchedTutorList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> cliTutors.getMatchedTutorList().remove(0));
     }
 
     @Test
     public void getTutorList_modifyList_success() {
-        addressBook.addTutor(ALICE);
+        cliTutors.addTutor(ALICE);
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(ALICE);
-        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getTutorList());
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getTutorList());
     }
 
     @Test
     public void getStudentList_modifyList_success() {
-        addressBook.addStudent(DANIEL);
+        cliTutors.addStudent(DANIEL);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(DANIEL);
-        assertEquals(expectedUniqueStudentList.asUnmodifiableObservableList(), addressBook.getStudentList());
+        assertEquals(expectedUniqueStudentList.asUnmodifiableObservableList(), cliTutors.getStudentList());
     }
 
     @Test
     public void getMatchedTutorList_modifyList_success() {
-        addressBook.addTutor(ALICE);
+        cliTutors.addTutor(ALICE);
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(ALICE);
-        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void getMatchedTutorList_afterMatchCommand_success() {
-        addressBook.addTutor(ALICE);
-        addressBook.addTutor(BENSON);
+        cliTutors.addTutor(ALICE);
+        cliTutors.addTutor(BENSON);
 
         List<Tag> studentTagList = new ArrayList<>();
         studentTagList.addAll(ELLE.getTags());
-        addressBook.sortMatchedTutorList(studentTagList);
+        cliTutors.sortMatchedTutorList(studentTagList);
 
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
         expectedUniqueTutorList.add(ALICE);
-        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void sortMatchedTutorList_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.sortMatchedTutorList(null));
+        assertThrows(NullPointerException.class, () -> cliTutors.sortMatchedTutorList(null));
     }
 
     @Test
     public void sortMatchedTutorList_validInputModifyTutorList_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> addressBook.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
         List<Tag> studentTagList = new ArrayList<>();
         studentTagList.addAll(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
         expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
-        addressBook.sortMatchedTutorList(studentTagList);
-        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), addressBook.getMatchedTutorList());
+        cliTutors.sortMatchedTutorList(studentTagList);
+        assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void sortMatchedTutorList_validInputNoModification_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> addressBook.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
         // Student chosen has no matching tags with any tutor
         List<Tag> studentTagList = new ArrayList<>();
         studentTagList.addAll(GEORGE.getTags());
-        ObservableList<Tutor> expectedUniqueTutorList = addressBook.getMatchedTutorList();
-        addressBook.sortMatchedTutorList(studentTagList);
-        assertEquals(expectedUniqueTutorList, addressBook.getMatchedTutorList());
+        ObservableList<Tutor> expectedUniqueTutorList = cliTutors.getMatchedTutorList();
+        cliTutors.sortMatchedTutorList(studentTagList);
+        assertEquals(expectedUniqueTutorList, cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void equals() {
-        addressBook.addTutor(ALICE);
-        addressBook.addStudent(DANIEL);
-        AddressBook addressBookWithDifferentTutor =
-                new AddressBookBuilder().withTutor(BENSON).withStudent(DANIEL).build();
-        AddressBook addressBookWithDifferentStudent =
-                new AddressBookBuilder().withTutor(ALICE).withStudent(IDA).build();
+        cliTutors.addTutor(ALICE);
+        cliTutors.addStudent(DANIEL);
+        CliTutors cliTutorsWithDifferentTutor =
+                new CliTutorsBuilder().withTutor(BENSON).withStudent(DANIEL).build();
+        CliTutors cliTutorsWithDifferentStudent =
+                new CliTutorsBuilder().withTutor(ALICE).withStudent(IDA).build();
 
         // same object -> returns true
-        assertTrue(addressBook.equals(addressBook));
+        assertTrue(cliTutors.equals(cliTutors));
 
         // same values -> returns true
-        AddressBook addressBookCopy = new AddressBook(addressBook);
-        assertTrue(addressBook.equals(addressBookCopy));
+        CliTutors cliTutorsCopy = new CliTutors(cliTutors);
+        assertTrue(cliTutors.equals(cliTutorsCopy));
 
         // null -> returns false
-        assertFalse(addressBook.equals(null));
+        assertFalse(cliTutors.equals(null));
 
         // different types -> returns false
-        assertFalse(addressBook.equals(5));
+        assertFalse(cliTutors.equals(5));
 
         // different students -> return false
-        assertFalse(addressBook.equals(addressBookWithDifferentStudent));
+        assertFalse(cliTutors.equals(cliTutorsWithDifferentStudent));
 
         // different tutors -> return false
-        assertFalse(addressBook.equals(addressBookWithDifferentTutor));
+        assertFalse(cliTutors.equals(cliTutorsWithDifferentTutor));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyCliTutors whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class CliTutorsStub implements ReadOnlyCliTutors {
         private final ObservableList<Tutor> tutors = FXCollections.observableArrayList();
         private final ObservableList<Student> students = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Tutor> tutors, Collection<Student> students) {
+        CliTutorsStub(Collection<Tutor> tutors, Collection<Student> students) {
             this.tutors.setAll(tutors);
             this.students.setAll(students);
         }

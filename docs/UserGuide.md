@@ -30,7 +30,7 @@ Before going into the rest of the contents in our user guide, here are a few **i
 
 1. Ensure you have Java `11` or above installed on your computer.
 2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.2) the latest `CLITutors.jar`.
-3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
+3. Copy the file to the folder you want to use as the *home folder* for your CliTutors.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data: <br> ![Ui](images/Ui.png)
 5. Type the command in the command box and press `Enter` to execute it. Here are example commands you can try:
     - `add`: add a tutor/student to the program
@@ -320,7 +320,7 @@ Format: <br>`exit`
 
 ### Editing the data file
 
-`CLITutors` data is saved as 1 JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`CLITutors` data is saved as 1 JSON file `[JAR file location]/data/clitutors.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
 <b>:heavy_exclamation_mark: Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
@@ -335,7 +335,7 @@ Format: <br>`exit`
 
 **Q**: Where is the data of CLITutors saved?
 
-**A**: CLITutors data is saved automatically after every command into a JSON file named addressbook.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
+**A**: CLITutors data is saved automatically after every command into a JSON file named clitutors.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
