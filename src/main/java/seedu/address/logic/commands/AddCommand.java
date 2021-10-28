@@ -45,8 +45,8 @@ public class AddCommand extends Command {
             + PREFIX_QUALIFICATION + "2 "
             + PREFIX_REMARK + "This is a remark "
             + PREFIX_TAG + "PM";
-    public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added: %1$s";
-    public static final String MESSAGE_SUCCESS_STUDENT = "New student added: %1$s";
+    public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added:\n%1$s";
+    public static final String MESSAGE_SUCCESS_STUDENT = "New student added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 

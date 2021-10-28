@@ -86,7 +86,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #34353A;
     -fx-border-radius: 18;
 }
 
@@ -290,7 +290,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#34353A, 10%);
     -fx-pref-width: 10px;
     -fx-background-radius: 10px;
 }
@@ -344,9 +344,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #202022;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #797979 #383838;
+    -fx-border-color: #202022 #202022 #797979 #202022;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
@@ -354,12 +354,35 @@
     -fx-text-fill: white;
 }
 
+#commandBoxPlaceholder, #resultDisplayPlaceholder {
+    -fx-background-color: #202022;
+    -fx-border-color: #202022;
+}
+
+#matchList {
+    -fx-background-color: #171718;
+    -fx-border-radius: 0px;
+    -fx-border-color: #171718 #171718 #171718 #3A3C40;
+}
+
+#matchedListView {
+    -fx-background-color: #202022;
+    -fx-background-radius: 10px;
+    -fx-border-color: #202022;
+    -fx-border-radius: 10px;
+}
+
+#studentList, #tutorList {
+    -fx-background-color: #34353A;
+    -fx-border-color: #34353A;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #202022, transparent, #202022;
     -fx-background-radius: 0;
 }
 

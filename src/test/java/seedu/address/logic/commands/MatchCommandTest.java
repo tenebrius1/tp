@@ -34,7 +34,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
         ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -52,7 +52,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_THIRD_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_THIRD_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch.getName());
 
         assertCommandFailure(matchCommandStudent, model, expectedMessageStudent);
     }
@@ -72,7 +72,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
         Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
@@ -94,7 +94,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch.getName());
 
         assertCommandFailure(matchCommandStudent, model, expectedMessageStudent);
     }
