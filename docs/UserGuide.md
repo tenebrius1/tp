@@ -5,20 +5,20 @@ nav-text: User Guide
 ---
 ![](https://i.imgur.com/dLt7IDY.png)
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a tuition agency with a **big list of tutors to manage**, `CLITutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CLITutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
 ## Table of Contents
 {: .no_toc}
-1. Table of Contents
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## Navigating the User Guide
-Before going into the rest of the contents in our user guide, here are a few **important** syntax to take note of to facilitate your reading:
+Before going into the rest of the content in our user guide, here are a few **important** syntax to take note of to facilitate your reading:
 
 | Syntax                                                                  | Description                                         |
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
-| `Markdown`                                                              | Denotes distinct classes, their methods or examples |
+| `Codeblock`                                                              | Denotes distinct classes, their methods or examples |
 | <div markdown="span" class="alert alert-info">:information_source: Note</div> | Useful information/tips                    |
 | <div markdown="span" class="alert alert-warning">:heavy_exclamation_mark: Caution</div> | Important things to take note of                    |
 
@@ -30,7 +30,7 @@ Before going into the rest of the contents in our user guide, here are a few **i
 
 1. Ensure you have Java `11` or above installed on your computer.
 2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.2) the latest `CLITutors.jar`.
-3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
+3. Copy the file to the folder you want to use as the *home folder* for `CLITutors`.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data: <br> ![Ui](images/Ui.png)
 5. Type the command in the command box and press `Enter` to execute it. Here are example commands you can try:
     - `add`: add a tutor/student to the program
@@ -65,7 +65,7 @@ For your convenience, a list of all parameters along with their prefixes has bee
 | Parameter | Description    | Argument Requirements                                      |
 |:---------:|:-------------- | ------------------------------------------------------ |
 |    n/     | Name           | Contains alphanumeric characters and spaces, not blank |
-|    p/     | Phone          | Contain numbers, and it should be 8 digits long        |
+|    p/     | Phone Number          | Contain numbers, and it should be 8 digits long        |
 |    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
 |    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
 |    r/     | Remark         | Can contain any string but not only whitespaces        |
@@ -85,12 +85,12 @@ For your convenience, a list of all parameters along with their prefixes has bee
   e.g. Both `n/John q/1` and `q/1 n/John` are acceptable.
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add t n/NAME`, `NAME` is a parameter that can be used as `add t n/John Doe`.
+  e.g. The format `add t n/NAME` can be written as `add t n/John Doe`.
 
-- Items in square brackets are optional.<br>
-  e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/This is a remark` or as `n/John Doe`.
+- Parameters in square brackets are optional.<br>
+  e.g. `n/NAME [r/REMARK]` can be used as `n/John Doe r/This is a remark` or as `n/John Doe`.
 
-- Items with `…` after them can have multiple arguments in them.<br>
+- Parameters with `…` after them can have multiple arguments in them.<br>
   e.g. `t/TAG...` can be used as `t/PM` or `t/PM SC TB` etc.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -118,15 +118,15 @@ Shows a message with all the commands available to use on `CLITutors`.
 
 ### Adding a tutor or student: `add` / `a`
 
-Adds a tutor/student to the data.
+Adds a tutor/student to CLITutors.
 
 Format:<br>
-`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS [r/REMARK] t/TAG...`<br>
+`add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...`<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
 
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
-`add s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
+`a s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -140,13 +140,13 @@ Examples:<br>
 
 ### Editing a tutor or student: `edit` / `e`
 
-Edits an existing tutor/student in the data.
+Edits an existing tutor/student in CLITutors.
 
 Format:<br>
-`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [r/REMARK] [t/TAG...]` <br>
+`edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`
 
-* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e 1, 2, 3...
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e. 1, 2, 3...
 * At least one of the optional fields **must** be provided.
 * Existing values will be updated to the input values.
 * You must specify at least one tag when editing the tags with `t/`.
@@ -155,12 +155,12 @@ Format:<br>
 
 - Editing information of any `Person` will override the current information stored about the specified `Person`.
 
-- When editing tags, the existing tags of the tutor/student will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the tutor/student will be removed i.e. adding of tags is not cumulative.
 </div>
 
 Examples:<br>
 `edit t 3 n/John Doe g/M q/2 t/PM TE TM TL`<br>
-`edit s 9 n/Mary Sue p/98765432`
+`e s 9 n/Mary Sue p/98765432`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -174,18 +174,18 @@ Examples:<br>
 
 ### Deleting a tutor or student: `delete` / `d`
 
-Deletes the tutor/student at the specified `INDEX` from the data.
+Deletes the tutor/student at the specified `INDEX` from CLITutors.
 
 Format:<br>
 `delete t INDEX`<br>
 `delete s INDEX`
 
 - The `INDEX` refers to the index number shown on the **displayed tutor/student list**.
-- The `INDEX` **must be a positive integer**. <br> eg. `1`, `2`, `3`, ...
+- The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Examples:<br>
 `list t` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
-`find n/Betsy` followed by `delete t 1` deletes the 1st person in the results of the find command for the tutor list.
+`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the tutor list.
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -218,7 +218,7 @@ Format: <br>`list t` <br> `list s`
 Find a tutor/student.
 
 Format: <br>
-`find t [n/NAME] [g/GENDER] [q/QUALIFICATIONS] [t/TAG...]` <br>
+`find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br>
 `find s [n/NAME] [g/GENDER] [t/TAG...]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
@@ -314,10 +314,10 @@ Format: <br>`exit`
 
 |   Action   | Format, Examples |
 |:----------:|:---------------- |
-|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATIONS [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
+|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATIONS] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t n/NAME` <br> `find s n/NAME` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
