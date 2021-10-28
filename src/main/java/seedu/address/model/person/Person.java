@@ -110,9 +110,12 @@ public abstract class Person {
                 .append("\nPhone: ")
                 .append(getPhone())
                 .append("\nGender: ")
-                .append(getGender())
-                .append("\nRemark: ")
-                .append(getRemark());
+                .append(getGender());
+
+        if (!getRemark().toString().equals("")) {
+            builder.append("\nRemark: ")
+                    .append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
