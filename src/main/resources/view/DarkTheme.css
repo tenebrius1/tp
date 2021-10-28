@@ -95,6 +95,7 @@
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
     -fx-background-radius: 20px;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:even {
@@ -354,7 +355,7 @@
     -fx-text-fill: white;
 }
 
-#commandBoxPlaceholder, #resultDisplayPlaceholder {
+#commandBoxPlaceholder, #resultDisplayPlaceholder, #matchListPanelPlaceholder {
     -fx-background-color: #202022;
     -fx-border-color: #202022;
 }
@@ -370,6 +371,11 @@
     -fx-background-radius: 10px;
     -fx-border-color: #202022;
     -fx-border-radius: 10px;
+}
+
+#matchedListViewBox, #matchListPanelPlaceholder {
+    -fx-background-color: #171718;
+    -fx-border-color: #171718;
 }
 
 #studentList, #tutorList {
