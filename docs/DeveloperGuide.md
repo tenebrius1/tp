@@ -698,16 +698,25 @@ to be added.
 
 ### Deleting a Tutor/Student
 {:.no_toc}
+to be added.
 
-1. Deleting a person while all persons are being shown
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-1. _{ more test cases …}_
+[comment]: <> (1. Deleting a person while all persons are being shown)
+
+[comment]: <> (    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.)
+
+[comment]: <> (    1. Test case: `delete 1`<br>)
+
+[comment]: <> (       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.)
+
+[comment]: <> (    1. Test case: `delete 0`<br>)
+
+[comment]: <> (       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.)
+
+[comment]: <> (    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` &#40;where x is larger than the list size&#41;<br>)
+
+[comment]: <> (       Expected: Similar to previous.)
+
+[comment]: <> (1. _{ more test cases …}_)
 
 ### Find Tutor/Student
 {:.no_toc}
@@ -781,10 +790,13 @@ to be added.
 
 ### Saving data
 {:.no_toc}
+to be added.
 
-1. Dealing with missing/corrupted data files
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-2. _{ more test cases …}_
+[comment]: <> (1. Dealing with missing/corrupted data files)
+
+[comment]: <> (    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_)
+
+[comment]: <> (2. _{ more test cases …}_)
 
 ### Opening help window
 {:.no_toc}
