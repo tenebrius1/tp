@@ -58,9 +58,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUALIFICATION,
                 PREFIX_GENDER);
 
-        System.out.println(ParserUtil.parsePersonType(argMultimap.getPreamble().trim()));
-
-
         if (!ParserUtil.parsePersonType(argMultimap.getPreamble().trim()).toString()
                 .equals(PersonType.TUTOR.toString())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));

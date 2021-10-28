@@ -459,22 +459,22 @@ Given below is a sequence diagram to show how a **valid** `filter` implementatio
 
 ![FilterCommandSequenceDiagram](images/FilterCommandSequenceDiagram.png)
 
-Given below is an activity diagram to show how a `find` implementation works for a `filter` input:
+Given below is an activity diagram to show how a `ilter` implementation works for a `filter` input:
 
 ![FilterCommandActivityDiagram](images/FilterCommandActivityDiagram.png)
 
 #### Design Considerations
 
-##### Aspect: How `find` is executed
+##### Aspect: How `filter` is executed
 {:.no_toc}
 
-- **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
+- **Alternative 1 (current choice)**: User can `filter` using multiple prefixes at once.
     - Pros: It allows the user to find tutor/student more easily by their fields.
-      <br>(for e.g. they can find all tutors who are women and teaches Primary Math)
+      <br>(for e.g. they can filter all tutors who are women and teaches Primary Math)
     - Cons: It would be more complex since it has to parse multiple prefixes and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
-- **Alternative 2**: User can only `find` using one prefix at a time.
+- **Alternative 2**: User can only `filter` using one prefix at a time.
     - Pros: Simpler to implement since there are lesser cases to consider and hence, making the code less prone to bugs.
-    - Cons: Significant impact on the overall user experience since finding a person with only one prefix may generate a large list if there are many tutors/students stored. User may not be able to find what he/she specifically wants.
+    - Cons: Significant impact on the overall user experience since finding a person with only one prefix may generate a large list if there are many tutors/students stored. User may not be able to filter what he/she specifically wants.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
