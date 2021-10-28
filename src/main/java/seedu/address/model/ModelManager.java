@@ -24,31 +24,31 @@ import seedu.address.model.tag.Tag;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final CliTutors cliTutors;
     private final UserPrefs userPrefs;
     private final FilteredList<Tutor> filteredTutors;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Tutor> matchedTutors;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given cliTutors and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCliTutors cliTutors, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(cliTutors, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + cliTutors + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.cliTutors = new CliTutors(cliTutors);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTutors = new FilteredList<>(this.addressBook.getTutorList());
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        matchedTutors = new FilteredList<>(this.addressBook.getMatchedTutorList());
+        filteredTutors = new FilteredList<>(this.cliTutors.getTutorList());
+        filteredStudents = new FilteredList<>(this.cliTutors.getStudentList());
+        matchedTutors = new FilteredList<>(this.cliTutors.getMatchedTutorList());
         matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CliTutors(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,69 +76,69 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCliTutorsFilePath() {
+        return userPrefs.getCliTutorsFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setCliTutorsFilePath(Path cliTutorsFilePath) {
+        requireNonNull(cliTutorsFilePath);
+        userPrefs.setCliTutorsFilePath(cliTutorsFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== CliTutors ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public void setTutorData(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetTutorData(addressBook);
+    public void setCliTutors(ReadOnlyCliTutors cliTutors) {
+        this.cliTutors.resetData(cliTutors);
     }
 
     @Override
-    public void setStudentData(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetStudentData(addressBook);
+    public void setTutorData(ReadOnlyCliTutors cliTutors) {
+        this.cliTutors.resetTutorData(cliTutors);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setStudentData(ReadOnlyCliTutors cliTutors) {
+        this.cliTutors.resetStudentData(cliTutors);
+    }
+
+    @Override
+    public ReadOnlyCliTutors getCliTutors() {
+        return cliTutors;
     }
 
     @Override
     public boolean hasTutor(Tutor tutor) {
         requireNonNull(tutor);
-        return addressBook.hasTutor(tutor);
+        return cliTutors.hasTutor(tutor);
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return cliTutors.hasStudent(student);
     }
 
     @Override
     public void deleteTutor(Tutor target) {
-        addressBook.removeTutor(target);
+        cliTutors.removeTutor(target);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        cliTutors.removeStudent(target);
     }
 
     @Override
     public void addTutor(Tutor tutor) {
-        addressBook.addTutor(tutor);
+        cliTutors.addTutor(tutor);
         updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        cliTutors.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
@@ -146,21 +146,21 @@ public class ModelManager implements Model {
     public void setTutor(Tutor target, Tutor editedTutor) {
         requireAllNonNull(target, editedTutor);
 
-        addressBook.setTutor(target, editedTutor);
+        cliTutors.setTutor(target, editedTutor);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setStudent(target, editedStudent);
+        cliTutors.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of tutors backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedCliTutors}
      */
     @Override
     public ObservableList<Tutor> getFilteredTutorList() {
@@ -169,7 +169,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of students backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedCliTutors}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -196,7 +196,7 @@ public class ModelManager implements Model {
         matchedTutors.setPredicate(predicate);
         if (!matchedTutors.isEmpty()) {
             assert(!studentTagList.isEmpty()) : "studentTagList should not be empty at this point.";
-            addressBook.sortMatchedTutorList(studentTagList);
+            cliTutors.sortMatchedTutorList(studentTagList);
         }
     }
 
@@ -230,7 +230,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return cliTutors.equals(other.cliTutors)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTutors.equals(other.filteredTutors)
                 && filteredStudents.equals(other.filteredStudents)

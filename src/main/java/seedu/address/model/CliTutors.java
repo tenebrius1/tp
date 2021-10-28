@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CliTutors implements ReadOnlyCliTutors {
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
     private final UniqueTutorList matchedTutors;
@@ -34,12 +34,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         matchedTutors = new UniqueTutorList();
     }
 
-    public AddressBook() {}
+    public CliTutors() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an CliTutors using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CliTutors(ReadOnlyCliTutors toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -64,9 +64,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CliTutors} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setTutors(newData.getTutorList());
@@ -74,18 +74,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing tutor data of this {@code AddressBook} with that in {@code newData}.
+     * Resets the existing tutor data of this {@code CliTutors} with that in {@code newData}.
      */
-    public void resetTutorData(ReadOnlyAddressBook newData) {
+    public void resetTutorData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setTutors(newData.getTutorList());
     }
 
     /**
-     * Resets the existing student data of this {@code AddressBook} with that in {@code newData}.
+     * Resets the existing student data of this {@code CliTutors} with that in {@code newData}.
      */
-    public void resetStudentData(ReadOnlyAddressBook newData) {
+    public void resetStudentData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code tutor} from this {@code AddressBook}.
+     * Removes {@code tutor} from this {@code CliTutors}.
      * {@code tutor} must exist in the address book.
      */
     public void removeTutor(Tutor tutor) {
@@ -160,7 +160,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code student} from this {@code AddressBook}.
+     * Removes {@code student} from this {@code CliTutors}.
      * {@code student} must exist in the address book.
      */
     public void removeStudent(Student student) {
@@ -202,10 +202,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && tutors.equals(((AddressBook) other).tutors)
-                && students.equals(((AddressBook) other).students))
-                && matchedTutors.equals(((AddressBook) other).matchedTutors);
+                || (other instanceof CliTutors // instanceof handles nulls
+                && tutors.equals(((CliTutors) other).tutors)
+                && students.equals(((CliTutors) other).students))
+                && matchedTutors.equals(((CliTutors) other).matchedTutors);
     }
 
     @Override

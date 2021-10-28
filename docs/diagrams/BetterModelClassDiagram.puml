@@ -4,9 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-down-> "1" UniqueTutorList
-AddressBook *-down-> "1" UniqueStudentList
-AddressBook *-right-> "1" UniqueTagList
+CliTutors *-down-> "1" UniqueTutorList
+CliTutors *-down-> "1" UniqueStudentList
+CliTutors *-right-> "1" UniqueTagList
 
 UniqueTutorList -down-> "*" Tutor
 UniqueStudentList -down-> "*" Student

@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showTutorAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -38,7 +38,7 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredTutorList_success() {
@@ -48,7 +48,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(model.getFilteredTutorList().get(0), editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -62,7 +62,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -83,7 +83,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(lastTutor, editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -106,7 +106,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -119,7 +119,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -131,7 +131,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -147,7 +147,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(model.getFilteredTutorList().get(0), editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -164,7 +164,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -193,7 +193,7 @@ public class EditCommandTest {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit tutor in filtered list into a duplicate in address book
-        Tutor tutorInList = model.getAddressBook().getTutorList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Tutor tutorInList = model.getCliTutors().getTutorList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditTutorDescriptorBuilder(tutorInList).build(), PersonType.TUTOR);
 
@@ -205,7 +205,7 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit student in filtered list into a duplicate in address book
-        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Student studentInList = model.getCliTutors().getStudentList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditStudentDescriptorBuilder(studentInList).build(), PersonType.STUDENT);
 
@@ -239,7 +239,7 @@ public class EditCommandTest {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTutorList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCliTutors().getTutorList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
@@ -256,7 +256,7 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCliTutors().getStudentList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.STUDENT);
