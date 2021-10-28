@@ -27,7 +27,7 @@
                 <URL value="@Extensions.css"/>
             </stylesheets>
 
-            <VBox style="-fx-background-color: #171718">
+            <VBox style="-fx-background-color: #171718;">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit"
