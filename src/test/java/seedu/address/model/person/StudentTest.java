@@ -52,6 +52,19 @@ public class StudentTest {
     }
 
     @Test
+    public void isRemarkEmptyTest() {
+        String remark = "";
+        // empty remark
+        Student editedDaniel = new StudentBuilder(DANIEL).withRemark(remark).build();
+        assertTrue(editedDaniel.isRemarkEmpty());
+
+        // valid remark
+        remark = "remark";
+        editedDaniel = new StudentBuilder(DANIEL).withRemark(remark).build();
+        assertFalse(editedDaniel.isRemarkEmpty());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Student danielCopy = new StudentBuilder(DANIEL).build();

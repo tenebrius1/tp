@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel tutorListPanel;
     private PersonListPanel studentListPanel;
-    private PersonListPanel matchedTutorListPanel;
+    private MatchedListPanel matchedTutorListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private CommandBox commandBox;
@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new PersonListPanel<>(studentList);
         studentListPanelPlaceholder.getChildren().add((Node) studentListPanel.getRoot());
 
-        matchedTutorListPanel = new PersonListPanel<>(matchedTutorList);
+        matchedTutorListPanel = new MatchedListPanel(matchedTutorList);
         matchListPanelPlaceholder.getChildren().add((Node) matchedTutorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
