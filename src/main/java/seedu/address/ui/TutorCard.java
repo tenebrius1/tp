@@ -56,7 +56,7 @@ public class TutorCard extends UiPart<Region> {
         phone.setText("Contact: " + tutor.getPhone().value);
         gender.setText("Gender: " + tutor.getGender().genderSymbol);
         qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
-        if (tutor.getRemark().description.equals("")) {
+        if (tutor.isRemarkEmpty()) {
             remark.setVisible(false);
         }
         remark.setText("Remark: " + tutor.getRemark().description);

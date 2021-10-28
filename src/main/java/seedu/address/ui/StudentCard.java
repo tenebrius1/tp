@@ -52,7 +52,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText("Contact: " + student.getPhone().value);
         gender.setText("Gender: " + student.getGender().genderSymbol);
-        if (student.getRemark().description.equals("")) {
+        if (student.isRemarkEmpty()) {
             remark.setVisible(false);
         }
         remark.setText("Remark: " + student.getRemark().description);
