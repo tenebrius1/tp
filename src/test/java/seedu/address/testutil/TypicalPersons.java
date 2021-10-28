@@ -36,24 +36,24 @@ public class TypicalPersons {
     // Students
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGender("M").withTag("PM", "PE").build();
-    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("94822240")
             .withGender("F").withRemark("Wants tutor in Bishan").withTag("SC", "SB", "SM").build();
-    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("94824270")
             .withGender("F").withTag("TG").build();
-    public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
+    public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("94824420")
             .withGender("M").withTag("TP").build();
 
     // Manually added
-    public static final Tutor HOON = new TutorBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Tutor HOON = new TutorBuilder().withName("Hoon Meier").withPhone("84824242")
             .withGender("M").withQualification("2").withTags("TG", "TL").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("84821313")
             .withGender("F").withTag("PE").build();
 
     // Manually added - Students with similar names
-    public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("9482423")
+    public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("94824231")
             .withGender("M").withTag("SC").build();
     public static final Student JOHN_P = new StudentBuilder().withName("John Prue")
-            .withPhone("9482452").withGender("M").withTag("TP").build();
+            .withPhone("94824526").withGender("M").withTag("TP").build();
 
     // Manually added - Tutors with similar names
     public static final Tutor DON_A = new TutorBuilder().withName("Don Archie").withPhone("95398563")
@@ -67,6 +67,16 @@ public class TypicalPersons {
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withGender(VALID_GENDER_BOB).withQualification(VALID_QUALIFICATION_BOB).withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
+
+    // Manually added - Testing FilterCommand
+    public static final Student JACKSON = new StudentBuilder().withName("Jackson King").withPhone("90909839")
+            .withGender("M").withTag("PM").build();
+    public static final Tutor ENZIO = new TutorBuilder().withName("Enzio Lee").withPhone("95092183")
+            .withGender("M").withQualification("2").withTags("PM", "TL", "TC").build();
+    public static final Tutor MICHAEL = new TutorBuilder().withName("Michael Chen").withPhone("89102932")
+            .withGender("M").withQualification("3").withTags("PM", "PS").build();
+    public static final Tutor ROXANNE = new TutorBuilder().withName("Roxanne Tan").withPhone("91119222")
+            .withGender("F").withQualification("2").withTags("PM", "SG").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -87,7 +97,7 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the persons with similar names.
      */
     public static AddressBook getTypicalAddressBookWithSimilarNames() {
         AddressBook ab = new AddressBook();
@@ -95,6 +105,20 @@ public class TypicalPersons {
             ab.addTutor(tutor);
         }
         for (Student student : getStudentsWithSimilarNames()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the persons for FilterCommand Test
+     */
+    public static AddressBook getTypicalAddressBookForFilterTest() {
+        AddressBook ab = new AddressBook();
+        for (Tutor tutor : getTutorsForFilterCommandTest()) {
+            ab.addTutor(tutor);
+        }
+        for (Student student : getStudentsForFilterCommandTest()) {
             ab.addStudent(student);
         }
         return ab;
@@ -114,5 +138,13 @@ public class TypicalPersons {
 
     public static List<Student> getStudentsWithSimilarNames() {
         return new ArrayList<>(Arrays.asList(DANIEL, ELLE, FIONA, GEORGE, JOHN_P, JOHN_R));
+    }
+
+    public static List<Tutor> getTutorsForFilterCommandTest() {
+        return new ArrayList<>(Arrays.asList(ENZIO, MICHAEL, ROXANNE));
+    }
+
+    public static List<Student> getStudentsForFilterCommandTest() {
+        return new ArrayList<>(Arrays.asList(JACKSON));
     }
 }

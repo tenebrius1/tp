@@ -20,7 +20,7 @@ Before going into the rest of the contents in our user guide, here are a few **i
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | `Markdown`                                                              | Denotes distinct classes, their methods or examples |
 | <div markdown="span" class="alert alert-info">:information_source: Note</div> | Useful information/tips                    |
-| <div markdown="span" class="alert alert-warning">❗ Caution</div> | Important things to take note of                    |
+| <div markdown="span" class="alert alert-warning">:heavy_exclamation_mark: Caution</div> | Important things to take note of                    |
 
 
 <div style="page-break-after: always;"></div>
@@ -150,8 +150,8 @@ Format:<br>
 * At least one of the optional fields **must** be provided.
 * Existing values will be updated to the input values.
 * You must specify at least one tag when editing the tags with `t/`.
-<div markdown="span" class="alert alert-warning">
-❗<b>Caution:</b> <br> 
+<div markdown="block" class="alert alert-warning">
+<b>:heavy_exclamation_mark: Caution:</b> <br> 
 
 - Editing information of any `Person` will override the current information stored about the specified `Person`.
 
@@ -264,6 +264,34 @@ Example:<br>
 <img src="images/screenshots/Match.png">
 </details>
 
+### Filtering tutors from the matched tutors: `filter`
+
+Filter tutor(s) from the list of matched tutors.
+
+Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATIONS]`
+- The search is case-insensitive. <br>
+  e.g. `n/hans` will match `Hans`.
+- Only the last name given is searched. <br>
+  e.g. `filter t n/John n/Amy` will find names that match `Amy`.
+- Only full words will be matched. <br>
+  e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
+- At least one of the optional fields **must** be provided.
+
+Example:<br>
+`filter t q/3`
+
+**Need mac people to help w this ty**
+
+<details>
+<summary>Expected outcome:</summary>
+<p>Command Executed: <code>filter t q/3 1</code></p>
+<p>Before:</p>
+<img src="images/screenshots/Main%20Window.png">
+<br>
+<p>After:</p>
+<img src="images/screenshots/Match.png">
+</details>
+
 ### Clearing all entries: `clear`
 
 Clears all entries of tutors/students from storage.
@@ -294,8 +322,8 @@ Format: <br>`exit`
 
 `CLITutors` data is saved as 1 JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
-❗<b>Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
+<div markdown="block" class="alert alert-warning">
+<b>:heavy_exclamation_mark: Caution:</b> If your changes to the data file makes its format invalid, `CLITutors` will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------

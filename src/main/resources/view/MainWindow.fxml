@@ -27,7 +27,7 @@
                 <URL value="@Extensions.css"/>
             </stylesheets>
 
-            <VBox style="-fx-background-color: #1d1d1d">
+            <VBox style="-fx-background-color: #171718;">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit"
@@ -40,14 +40,14 @@
                 </MenuBar>
 
                 <VBox prefHeight="${screen.visualBounds.height}">
-                    <VBox style="-fx-background-color: #1d1d1d;">
+                    <VBox style="-fx-background-color: #171718;">
                         <padding>
                             <Insets top="5" right="5" bottom="5" left="5"/>
                         </padding>
                     </VBox>
 
                     <HBox prefWidth="${screen.visualBounds.width}">
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -69,7 +69,7 @@
                                        VBox.vgrow="ALWAYS"/>
                         </VBox>
 
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -91,7 +91,7 @@
                                        VBox.vgrow="ALWAYS"/>
                         </VBox>
 
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -113,7 +113,7 @@
                                        VBox.vgrow="ALWAYS"/>
                         </VBox>
 
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -121,14 +121,14 @@
 
                     </HBox>
 
-                    <VBox style="-fx-background-color: #1d1d1d;">
+                    <VBox style="-fx-background-color: #171718;">
                         <padding>
                             <Insets top="5" right="5" bottom="5" left="5"/>
                         </padding>
                     </VBox>
 
                     <HBox prefWidth="${screen.visualBounds.width}">
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -144,7 +144,7 @@
                             </padding>
                         </StackPane>
 
-                        <VBox style="-fx-background-color: #1d1d1d;">
+                        <VBox style="-fx-background-color: #171718;">
                             <padding>
                                 <Insets top="5" right="5" bottom="5" left="5"/>
                             </padding>
@@ -152,14 +152,14 @@
                     </HBox>
                 </VBox>
 
-                <VBox style="-fx-background-color: #1d1d1d;">
+                <VBox style="-fx-background-color: #171718;">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
                 </VBox>
 
                 <HBox prefWidth="${screen.visualBounds.width}">
-                    <VBox style="-fx-background-color: #1d1d1d;">
+                    <VBox style="-fx-background-color: #171718;">
                         <padding>
                             <Insets top="5" right="5" bottom="5" left="5"/>
                         </padding>

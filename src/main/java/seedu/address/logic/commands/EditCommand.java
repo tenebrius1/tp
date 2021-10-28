@@ -60,8 +60,8 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " t 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor: %1$s";
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";

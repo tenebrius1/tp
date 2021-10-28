@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -52,6 +53,24 @@ public class ListCommandTest {
         // Temporarily only shows first student
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(PersonType.STUDENT), model, ListCommand.MESSAGE_SUCCESS_STUDENT,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_tutorListIsCleared_showsEmptyList() throws CommandException {
+        ClearCommand clearCommand = new ClearCommand(PersonType.TUTOR);
+        clearCommand.execute(expectedModel);
+        clearCommand.execute(model);
+        assertCommandSuccess(new ListCommand(PersonType.TUTOR), model, ListCommand.MESSAGE_EMPTY_LIST,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_studentListIsCleared_showsEmptyList() throws CommandException {
+        ClearCommand clearCommand = new ClearCommand(PersonType.STUDENT);
+        clearCommand.execute(expectedModel);
+        clearCommand.execute(model);
+        assertCommandSuccess(new ListCommand(PersonType.STUDENT), model, ListCommand.MESSAGE_EMPTY_LIST,
                 expectedModel);
     }
 }
