@@ -147,9 +147,9 @@ Format:<br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`
 
 * Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e. 1, 2, 3...
-* At least one of the optional fields **must** be provided.
+* **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You must specify at least one tag when editing the tags with `t/`.
+* You must specify **at least one** tag when editing the tags with `t/`.
 <div markdown="block" class="alert alert-warning">
 <b>:heavy_exclamation_mark: Caution:</b> <br> 
 
@@ -215,7 +215,7 @@ Format: <br>`list t` <br> `list s`
 
 ### Finding a tutor or student: `find` / `f`
 
-Find a tutor/student.
+Finds tutor(s)/student(s) that match with the specified parameters.
 
 Format: <br>
 `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br>
@@ -226,12 +226,12 @@ Format: <br>
   e.g. `find t n/John n/Amy` will find names that match `Amy`.
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
-- At least one of the optional fields **must** be provided.
-- You must specify at least one tag when finding tags with `t/`.
+- **At least one** of the optional fields must be provided.
+- You must specify **at least one** tag when finding tags with `t/`.
 
 Example:<br>
 `find t n/Yu t/SC`<br>
-`find s g/M t/PS`
+`f s g/M t/PS`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -249,10 +249,11 @@ Find tutor(s) who teaches the subject that the student wants.
 
 Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed student list**.
-- The `INDEX` **must be a positive integer** <br> eg. `1`, `2`, `3`, ...
+- The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Example:<br>
-`match 1`
+`match 1`<br>
+`m 1`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
