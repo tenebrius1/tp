@@ -10,8 +10,8 @@ import static seedu.address.testutil.TypicalPersons.DON_A;
 import static seedu.address.testutil.TypicalPersons.DON_E;
 import static seedu.address.testutil.TypicalPersons.JOHN_P;
 import static seedu.address.testutil.TypicalPersons.JOHN_R;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithSimilarNames;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutorsWithSimilarNames;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,11 +31,11 @@ import seedu.address.model.person.Tutor;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model similarNamesModel = new ModelManager(getTypicalAddressBookWithSimilarNames(),
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private Model similarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
-    private Model expectedSimilarNamesModel = new ModelManager(getTypicalAddressBookWithSimilarNames(),
+    private Model expectedSimilarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
 
     @Test
