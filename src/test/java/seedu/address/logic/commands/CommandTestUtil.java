@@ -79,6 +79,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG = "ABCDE";
     public static final String INVALID_ZERO_INDEX = "0";
     public static final String INVALID_INDEX = "-69";
+    public static final String INVALID_INTEGER_MIN = Long.toString(Integer.MIN_VALUE + 1);
+    public static final String INVALID_INTEGER_MAX = Long.toString(Integer.MAX_VALUE + 1);
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
 

@@ -25,9 +25,9 @@ public class MatchCommand extends Command {
     public static final String COMMAND_ALIAS = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Matches Student identified by the index number used in the displayed student list with Tutors "
-            + "who teach the subjects the Student wants.\n"
-            + "Parameters: s/t INDEX (must be a positive integer)\n"
+            + ": Matches student identified by the index number used in the displayed student list with tutors "
+            + "who teach the subjects the student wants\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MATCHED_SUCCESS = "Successfully matched %1$s";
