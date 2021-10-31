@@ -1,21 +1,69 @@
 @startuml
 !include ../style.puml
 
-Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
-Participant ":EditCommandParser" as ecp LOGIC_COLOR
-Participant "command:EditCommand" as ec LOGIC_COLOR
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CliTutorsParser" as CliTutorsParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-[-> logic : execute
-activate logic
-logic -> abp ++: parseCommand(commandText)
-create ecp
-abp -> ecp
-abp -> ecp ++: parse(arguments)
-create ec
-ecp -> ec ++: index, editPersonDescriptor
-ec --> ecp --
-ecp --> abp --: command
-abp --> logic --: command
+box Model MODEL_COLOR_T1
+participant "<u>:Model" as Model MODEL_COLOR
+end box
 
+[-> LogicManager : execute("delete s 1")
+activate LogicManager
+
+LogicManager -> CliTutorsParser : parseCommand("delete s 1")
+activate CliTutorsParser
+
+create DeleteCommandParser
+CliTutorsParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> CliTutorsParser
+deactivate DeleteCommandParser
+
+CliTutorsParser -> DeleteCommandParser : parse("s 1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> CliTutorsParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> CliTutorsParser
+destroy DeleteCommandParser
+
+CliTutorsParser --> LogicManager : d
+deactivate CliTutorsParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> Model : deleteStudent(1)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+[<--LogicManager : result
+deactivate LogicManager
 @enduml

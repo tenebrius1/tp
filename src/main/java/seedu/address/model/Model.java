@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -17,7 +19,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_TUTORS = unused -> true;
 
     /** {@code Predicate} that always evaluate to false */
-    Predicate<Person> PREDICATE_SHOW_NO_TUTORS = unused -> false;
+    Predicate<Person> PREDICATE_SHOW_NO_PERSON = unused -> false;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
@@ -45,20 +47,30 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCliTutorsFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCliTutorsFilePath(Path cliTutorsFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code cliTutors}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCliTutors(ReadOnlyCliTutors cliTutors);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /**
+     * Replaces tutor data with the tutor data in {@code cliTutors}.
+     */
+    void setTutorData(ReadOnlyCliTutors cliTutors);
+
+    /**
+     * Replaces student data with the student data in {@code cliTutors}.
+     */
+    void setStudentData(ReadOnlyCliTutors cliTutors);
+
+    /** Returns the CliTutors */
+    ReadOnlyCliTutors getCliTutors();
 
     /**
      * Returns true if a tutor with the same identity as {@code tutor} exists in the address book.
@@ -131,7 +143,13 @@ public interface Model {
      * Updates the filter of the matched tutors list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateMatchedTutor(Predicate<Person> predicate);
+    void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls);
+
+    /**
+     * Updates the filter of the matched tutors list by additionally filtering by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void filterMatchedTutor(Predicate<Person> predicate);
 
     /** Returns an unmodifiable view of the matched tutor list */
     ObservableList<Tutor> getMatchedTutorList();

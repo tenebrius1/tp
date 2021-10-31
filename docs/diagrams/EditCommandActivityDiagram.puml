@@ -1,0 +1,18 @@
+@startuml
+start
+:User enters edit tutor command;
+:Parse command arguments;
+
+if () then ([input is valid])
+    :Create new tutor and populate
+    with edited details if present;
+    :Replace original tutor in
+    tutor list with edited tutor;
+    :Display changes
+    to edited tutor;
+    stop
+else ([else])
+    :Throw ParseException;
+    stop
+endif
+@enduml

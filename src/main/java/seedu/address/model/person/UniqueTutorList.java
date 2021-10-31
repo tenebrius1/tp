@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * A list of tutors that enforces uniqueness between its elements and does not allow nulls.
@@ -101,6 +104,33 @@ public class UniqueTutorList implements Iterable<Tutor> {
      */
     public ObservableList<Tutor> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Sorts tutors based on number of matching tags with ls in descending order.
+     * @param studentTagList List of Tags used to compare with each tutor.
+     */
+    public void sortTutors(List<Tag> studentTagList) {
+        requireNonNull(studentTagList);
+        Collections.sort(internalList, new Comparator<Tutor>() {
+            @Override
+            public int compare(Tutor o1, Tutor o2) {
+                int countO1 = 0;
+                int countO2 = 0;
+                for (Tag t: o1.getTags()) {
+                    if (studentTagList.contains(t)) {
+                        countO1++;
+                    }
+                }
+                for (Tag t: o2.getTags()) {
+                    if (studentTagList.contains(t)) {
+                        countO2++;
+                    }
+                }
+                return countO1 > countO2 ? -1 : 1;
+
+            }
+        });
     }
 
     @Override

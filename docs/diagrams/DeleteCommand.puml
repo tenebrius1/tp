@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes delete tutor command;
+:Parse command arguments;
+
+if () then ([input is valid])
+    :Create delete tutor command;
+    :Execute delete tutor command;
+    if () then ([index is valid])
+        : Get tutor to be deleted at
+        index in displayed tutor list;
+        : Delete specified tutor;
+        :Display success message;
+        stop
+    else ([else])
+        :Throw CommandException;
+        stop
+    endif
+else ([else])
+    :Throw ParseException;
+    stop
+endif
+@enduml

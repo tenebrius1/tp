@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,14 +26,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
     }
 
     @Test
     public void execute_newTutor_success() {
         Tutor validTutor = new TutorBuilder().build();
 
-        Model expectedModelTutor = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelTutor = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelTutor.addTutor(validTutor);
 
         assertCommandSuccess(new AddCommand(validTutor, PersonType.TUTOR), model,
@@ -44,7 +44,7 @@ public class AddCommandIntegrationTest {
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
-        Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModelStudent.addStudent(validStudent);
 
         assertCommandSuccess(new AddCommand(validStudent, PersonType.STUDENT), model,
@@ -53,7 +53,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateTutor_throwsCommandException() {
-        Tutor tutorInList = model.getAddressBook().getTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Tutor tutorInList = model.getCliTutors().getTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(tutorInList, PersonType.TUTOR),
                 model, AddCommand.MESSAGE_DUPLICATE_TUTOR);
@@ -61,7 +61,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
-        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student studentInList = model.getCliTutors().getStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(studentInList, PersonType.STUDENT),
                 model, AddCommand.MESSAGE_DUPLICATE_STUDENT);

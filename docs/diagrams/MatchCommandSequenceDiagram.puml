@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CliTutorsParser" as CliTutors LOGIC_COLOR
+participant ":MatchCommandParser" as MatchCommandParser LOGIC_COLOR
+participant "m:MatchCommand" as MatchCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:TagsContainsTagPredicate" as TagPredicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("match 1")
+activate LogicManager
+
+LogicManager -> CliTutors : parseCommand("match 1")
+activate CliTutors
+create MatchCommandParser
+CliTutors -> MatchCommandParser
+activate MatchCommandParser
+
+MatchCommandParser --> CliTutors
+deactivate MatchCommandParser
+
+CliTutors -> MatchCommandParser : parse(" 1")
+activate MatchCommandParser
+create MatchCommand
+MatchCommandParser -> MatchCommand
+activate MatchCommand
+MatchCommand --> MatchCommandParser : m
+deactivate MatchCommand
+
+MatchCommandParser --> CliTutors : m
+deactivate MatchCommandParser
+MatchCommandParser -[hidden]-> CliTutors : result
+destroy MatchCommandParser
+
+CliTutors --> LogicManager : m
+deactivate CliTutors
+
+LogicManager -> MatchCommand : execute(model)
+activate MatchCommand
+
+create TagPredicate
+MatchCommand -> TagPredicate
+activate TagPredicate
+TagPredicate --> MatchCommand
+deactivate TagPredicate
+
+MatchCommand -> Model : updateMatchedTutor(p)
+activate Model
+Model --> MatchCommand
+deactivate Model
+
+create CommandResult
+MatchCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MatchCommand
+deactivate CommandResult
+
+MatchCommand --> LogicManager : result
+deactivate MatchCommand
+MatchCommand -[hidden]-> LogicManager : result
+destroy MatchCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

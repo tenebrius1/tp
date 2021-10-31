@@ -12,10 +12,10 @@ public class Qualification {
     public static final String VALIDATION_REGEX = "[0123]";
     public final String index;
 
-    enum Qualifications {
+    public enum Qualifications {
         PREUNI("0", "Pre-University"),
         UNI("1", "University"),
-        POSTGRAD("2", "Post-Graduate"),
+        GRAD("2", "Graduate"),
         MOE("3", "MOE-Trained"),
         INVALID("Invalid", "Invalid");
 
