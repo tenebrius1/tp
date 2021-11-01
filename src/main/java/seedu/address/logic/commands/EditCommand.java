@@ -158,7 +158,6 @@ public class EditCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         handleMatchList(model, studentToEdit, editedStudent);
-        
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
