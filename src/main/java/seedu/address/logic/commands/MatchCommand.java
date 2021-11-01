@@ -57,10 +57,12 @@ public class MatchCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
+        // if displayed student list is empty
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
         }
 
+        // if index is larger than displayed student list
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
@@ -69,10 +71,9 @@ public class MatchCommand extends Command {
         Set<Tag> studentTag = studentToMatch.getTags();
         ArrayList<Tag> ls = new ArrayList<>();
         studentTag.stream().forEach(tag -> ls.add(tag));
-        model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls);
+        model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, studentToMatch);
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch.getName()));
         }
 

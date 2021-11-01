@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
@@ -59,5 +60,10 @@ public class TagsContainTagPredicateTest {
         // Non-matching keyword
         predicate = new TagsContainTagPredicate(Arrays.asList(new Tag(VALID_TAG_PM)));
         assertFalse(predicate.test(new TutorBuilder().withTags(VALID_TAG_TP).build()));
+    }
+
+    @Test
+    public void tagsContainTagPredicateTest_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new TagsContainTagPredicate(null));
     }
 }

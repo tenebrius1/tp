@@ -41,7 +41,8 @@ public class MatchCommandTest {
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
 
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -81,7 +82,8 @@ public class MatchCommandTest {
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
 
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }

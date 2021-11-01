@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
-import static seedu.address.model.Model.PREDICATE_SHOW_NO_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ENZIO;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
@@ -26,7 +26,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.GenderContainsGenderPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Qualification;
+import seedu.address.model.person.QualificationContainsQualificationPredicate;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
@@ -149,7 +153,13 @@ public class ModelManagerTest {
 
     @Test
     public void updateMatchedTutor_modifyList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.updateMatchedTutor(null, null));
+        assertThrows(NullPointerException.class, () -> modelManager.updateMatchedTutor(null, null,
+                null));
+    }
+
+    @Test
+    public void filterMatchedTutor_modifyList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.filterMatchedTutor(null));
     }
 
     @Test
@@ -187,8 +197,9 @@ public class ModelManagerTest {
         CliTutors cliTutors = new CliTutors();
         cliTutors.addTutor(ALICE);
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
-        modelManager.updateMatchedTutor(predicate, ls);
+        modelManager.updateMatchedTutor(predicate, ls, DANIEL);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
+        assertEquals(DANIEL, modelManager.getMatchedStudent());
     }
 
     @Test
@@ -199,8 +210,10 @@ public class ModelManagerTest {
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
         CliTutors cliTutors = new CliTutors();
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
-        modelManager.updateMatchedTutor(predicate, ls);
+        modelManager.updateMatchedTutor(predicate, ls, GEORGE);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
+        // Check matched student
+        assertEquals(null, modelManager.getMatchedStudent());
     }
 
     @Test
@@ -209,8 +222,109 @@ public class ModelManagerTest {
         ls.addAll(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
-        assertThrows(AssertionError.class, () -> modelManager.updateMatchedTutor(predicate, new ArrayList<>()));
+        assertThrows(AssertionError.class, () -> modelManager.updateMatchedTutor(predicate, new ArrayList<>(),
+                DANIEL));
     }
+
+    @Test
+    public void clearMatchedTutorTest() {
+        // Expected empty match list
+        FilteredList<Tutor> expectedMatchList = new FilteredList<>(modelManager.getMatchedTutorList());
+
+        // Clear empty list
+        modelManager.clearMatchedTutor();
+        assertEquals(expectedMatchList, modelManager.getMatchedTutorList());
+
+        // Clear list after matching
+        ArrayList<Tag> ls = new ArrayList<>();
+        ls.addAll(DANIEL.getTags());
+        TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        // Valid match as TypicalTutors have tutors that teach subject that student DANIEL wants
+        modelManager.updateMatchedTutor(predicate, ls, DANIEL);
+        modelManager.clearMatchedTutor();
+        assertEquals(expectedMatchList, modelManager.getMatchedTutorList());
+    }
+
+    @Test
+    public void filterMatchedTutor_modifyList_success() {
+        ArrayList<Tag> ls = new ArrayList<>();
+        ls.addAll(DANIEL.getTags());
+        TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        modelManager.addTutor(ENZIO);
+        CliTutors cliTutors = new CliTutors();
+        cliTutors.addTutor(ENZIO);
+        cliTutors.addTutor(ALICE);
+        FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
+        modelManager.updateMatchedTutor(predicate, ls, DANIEL);
+        assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
+        // Check matched student
+        assertEquals(DANIEL, modelManager.getMatchedStudent());
+
+        // filter out females only
+        ArrayList<Gender> genderList = new ArrayList<>();
+        genderList.add(new Gender("F"));
+        GenderContainsGenderPredicate predicate1 = new GenderContainsGenderPredicate(genderList);
+        modelManager.filterMatchedTutor(predicate1);
+        cliTutors.removeTutor(ENZIO);
+        expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
+        assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
+        // Check matched student
+        assertEquals(DANIEL, modelManager.getMatchedStudent());
+
+        // filter out graduate qualification, no matches
+        ArrayList<Qualification> qualificationList = new ArrayList<>();
+        genderList.add(new Gender("F"));
+        QualificationContainsQualificationPredicate predicate2 = new QualificationContainsQualificationPredicate(
+                qualificationList);
+        modelManager.filterMatchedTutor(predicate2);
+        cliTutors.removeTutor(ALICE);
+        expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
+        assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
+        // Check matched student
+        assertEquals(null, modelManager.getMatchedStudent());
+    }
+
+    @Test
+    public void getMatchedStudentTest() {
+        Student expectedStudent = null;
+
+        // Initial student; first start up
+        assertEquals(expectedStudent, modelManager.getMatchedStudent());
+
+        // After successful match
+        expectedStudent = DANIEL;
+        ArrayList<Tag> ls = new ArrayList<>();
+        ls.addAll(DANIEL.getTags());
+        TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        // Valid match as TypicalTutors have tutors that teach subject that student DANIEL wants
+        modelManager.updateMatchedTutor(predicate, ls, DANIEL);
+        assertEquals(expectedStudent, modelManager.getMatchedStudent());
+
+        // After successful filtering match list
+        ArrayList<Gender> genderList = new ArrayList<>();
+        genderList.add(new Gender("F"));
+        GenderContainsGenderPredicate predicate1 = new GenderContainsGenderPredicate(genderList);
+        modelManager.filterMatchedTutor(predicate1);
+        assertEquals(expectedStudent, modelManager.getMatchedStudent());
+
+        // After filtering to 0 matches
+        expectedStudent = null;
+        ArrayList<Qualification> qualificationList = new ArrayList<>();
+        genderList.add(new Gender("F"));
+        QualificationContainsQualificationPredicate predicate2 = new QualificationContainsQualificationPredicate(
+                qualificationList);
+        modelManager.filterMatchedTutor(predicate2);
+        assertEquals(expectedStudent, modelManager.getMatchedStudent());
+
+        // After clearing
+        modelManager.clearMatchedTutor();
+        assertEquals(expectedStudent, modelManager.getMatchedStudent());
+    }
+
+
 
     @Test
     public void equals() {
@@ -245,21 +359,31 @@ public class ModelManagerTest {
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
+        // different match list
+        ArrayList<Tag> tagList = new ArrayList<>();
+        tagList.addAll(DANIEL.getTags());
+        TagsContainTagPredicate predicate = new TagsContainTagPredicate(tagList);
+        modelManager.updateMatchedTutor(predicate, tagList, DANIEL);
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+        
+        // different matchStudent after above match
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
+        modelManager.clearMatchedTutor();
 
         Set<Tag> studentTag = DANIEL.getTags();
         List<Tag> ls = new ArrayList<>();
         studentTag.stream().forEach(tag -> ls.add(tag));
-        modelManager.updateMatchedTutor(new TagsContainTagPredicate(ls), ls);
+        modelManager.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, DANIEL);
         assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        modelManager.updateMatchedTutor(PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
+        modelManager.clearMatchedTutor();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
