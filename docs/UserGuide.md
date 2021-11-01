@@ -213,12 +213,12 @@ Format: <br>`list t` <br> `list s`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
-<p>Command Executed: <code>list t</code></p>
-<p>Before:</p>
-<img src="images/screenshots/Main%20Window.png">
+<p>Commands Executed: <code>find t g/M</code>, then <code>list t</code></p>
+<p>Before (when <code>find t g/M</code> is executed):</p>
+<img src="images/screenshots/List_Before.png">
 <br>
 <p>After:</p>
-<img src="images/screenshots/List.png">
+<img src="images/screenshots/List_After.png">
 </details>
 
 ### Finding a tutor or student: `find` / `f`
@@ -285,16 +285,16 @@ Format: <br>`filter t [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - **At least one** of the optional fields must be provided.
 
 Example:<br>
-`filter t q/0`
+`filter g/F`
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>filter t q/0 1</code></p>
-<p>Before:</p>
-<img src="images/screenshots/Main%20Window.png">
+<p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
+<p>Before (when <code>match 1</code> is executed):</p>
+<img src="images/screenshots/Filter_Before.png">
 <br>
 <p>After:</p>
-<img src="images/screenshots/Filter.png">
+<img src="images/screenshots/Filter_After.png">
 </details>
 
 ### Clearing all entries: `clear`
