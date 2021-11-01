@@ -8,11 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
@@ -67,27 +69,35 @@ public class FindCommandParser implements Parser<FindCommand> {
     private Predicate<Person> generatePredicate(String args, PersonType personType) throws ParseException {
         Predicate<Person> predicate = x -> true;
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
+        int prefixCount = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
                 PREFIX_QUALIFICATION, PREFIX_GENDER);
 
         String trimmed = argMultimap.getPreamble().trim();
 
-        if (trimmed.length() > 1) {
+        if (trimmed.length() > 1) { // Checks if user entered anything other than t/s in preamble
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            prefixCount += 1;
             predicate = handleName(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            prefixCount += 1;
             predicate = handleGender(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
+            prefixCount += 1;
             predicate = handleQualification(personType, predicate, builder, argMultimap);
         }
         if (parseTags(argMultimap.getAllValues(PREFIX_TAG)).isPresent()) {
+            prefixCount += 1;
             predicate = handleTags(predicate, builder, argMultimap);
+        }
+        if (prefixCount == 0) { // Checks if user entered any parameter
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return builder.setPredicate(predicate).build();
@@ -95,9 +105,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     private Predicate<Person> handleTags(Predicate<Person> predicate, ChainedPredicate.Builder builder,
                                          ArgumentMultimap argMultimap) throws ParseException {
-        List<Tag> tags = parseTags(argMultimap.getAllValues(PREFIX_TAG)).get();
-        predicate = predicate.and(new TagsContainTagPredicate(tags));
-        builder.setTags(tags);
+        Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        List<Tag> parsedTags = new ArrayList<>(tags);
+        predicate = predicate.and(new TagsContainTagPredicate(parsedTags));
+        builder.setTags(parsedTags);
         return predicate;
     }
 

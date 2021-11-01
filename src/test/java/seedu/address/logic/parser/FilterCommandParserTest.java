@@ -2,9 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUALIFICATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -87,6 +91,21 @@ public class FilterCommandParserTest {
     public void parse_invalidValue_failure() {
         // Invalid Name
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // Missing parameters
+        assertParseFailure(parser, VALID_TUTOR_LETTER, MESSAGE_INVALID_FILTER_COMMAND_FORMAT);
+
+        // Invalid qualification
+        assertParseFailure(parser, INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
+
+        // Invalid gender
+        assertParseFailure(parser, INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // Blank gender
+        assertParseFailure(parser, " " + PREFIX_GENDER, Gender.MESSAGE_CONSTRAINTS);
+
+        // Blank qualification
+        assertParseFailure(parser, " " + PREFIX_QUALIFICATION, Qualification.MESSAGE_CONSTRAINTS);
     }
 }
 
