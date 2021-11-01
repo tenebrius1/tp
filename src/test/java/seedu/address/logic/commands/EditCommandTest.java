@@ -138,8 +138,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredTutorList_success() {
-        showTutorAtIndex(model, INDEX_FIRST_PERSON);
-
         Tutor tutorInFilteredList = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         Tutor editedTutor = new TutorBuilder(tutorInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
@@ -150,13 +148,15 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(model.getFilteredTutorList().get(0), editedTutor);
 
+        // After the name change, expected filtered list should be empty.
+        expectedModel.updateFilteredTutorList(x -> false);
+        showTutorAtIndex(model, INDEX_FIRST_PERSON);
+
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredStudentList_success() {
-        showStudentAtIndex(model, INDEX_FIRST_PERSON);
-
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
@@ -166,6 +166,10 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+
+        // After the name change, expected filtered list should be empty.
+        expectedModel.updateFilteredStudentList(x -> false);
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
