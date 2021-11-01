@@ -54,7 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]>\n"
+            + "[" + PREFIX_TAG + "TAG...]>\n"
             + "Example: " + COMMAND_WORD + " t 1 "
             + PREFIX_PHONE + "91234567 ";
 
