@@ -23,27 +23,27 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_ALIAS = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor or student to the database. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor or student to the database. \n"
             + "Parameters: "
-            + "<s "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_GENDER + "GENDER "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + PREFIX_TAG + "TAG>"
-            + " or <t "
+            + "<t "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_QUALIFICATION + "QUALIFICATION "
             + "[" + PREFIX_REMARK + "REMARK] "
             + PREFIX_TAG + "TAG...>\n"
+            + "or <s "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_GENDER + "GENDER "
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + PREFIX_TAG + "TAG>\n"
             + "Example: " + COMMAND_WORD + " t "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
             + PREFIX_QUALIFICATION + "2 "
-            + PREFIX_REMARK + "This is a remark "
+            + PREFIX_REMARK + "Prefers teaching in the West "
             + PREFIX_TAG + "PM";
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added:\n%1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added:\n%1$s";
