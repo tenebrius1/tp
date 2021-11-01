@@ -365,7 +365,6 @@ public class ModelManagerTest {
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(tagList);
         modelManager.updateMatchedTutor(predicate, tagList, DANIEL);
         assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
-        
         // different matchStudent after above match
         assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
