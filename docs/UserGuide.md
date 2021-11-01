@@ -262,12 +262,6 @@ Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed student list**.
 - The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
-<div markdown="block" class="alert alert-warning">
-<b>:heavy_exclamation_mark: Caution:</b> <br> 
-
-The Match List does not update immediately after an `edit` on existing data. Users are expected to `match` again after editing the Tutor or Student Lists. 
-</div>
-
 Example:<br>
 `match 1`<br>
 `m 1`
