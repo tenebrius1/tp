@@ -67,7 +67,7 @@ public class StringUtil {
     }
 
     /**
-     * @@author baeldung-reused
+     * @@author zihaooo9-reused
      * Reused from https://www.baeldung.com/java-check-string-number
      * with minor modifications
      *
