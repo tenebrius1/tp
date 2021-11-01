@@ -3,12 +3,15 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -62,21 +65,30 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             String trimmed = argMultimap.getPreamble().trim();
-            String[] split = trimmed.split(" ", 2);
+            String[] split = trimmed.split(" ");
             // Preamble should only have personType and Index
             if (split.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            // If personType or index not given, it is an invalid command format. ArrayIndexOutOfBoundsException
-            // will be thrown by these lines below, but we catch it and throw a ParseException
+            // If personType or index not given, it is an invalid command format. ParseException with
+            // MESSAGE_INVALID_INDEX will be thrown by the line below, but we catch it and throw a more specific and
+            // non-technical ParseException below.
             personIndex = ParserUtil.parseIndex(split[1]);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                if (personType.equals(PersonType.STUDENT)) {
+                    throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                } else {
+                    throw new ParseException(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+                }
+            } else {
+                throw pe;
+            }
         }
         if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
             if (personType.equals(PersonType.STUDENT)) {
                 throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
-            } else {
+            } else if (personType.equals(PersonType.TUTOR)) {
                 EditTutorDescriptor editTutorDescriptor = (EditTutorDescriptor) editPersonDescriptor;
                 editTutorDescriptor.setQualification(ParserUtil.parseQualification(
                         argMultimap.getValue(PREFIX_QUALIFICATION).get()));
