@@ -284,13 +284,9 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetTags_failure() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, Tag.MESSAGE_INVALID_TAG);
     }
 }
