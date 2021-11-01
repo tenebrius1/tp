@@ -7,8 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -129,7 +127,6 @@ public class EditCommand extends Command {
         }
 
         model.setTutor(tutorToEdit, editedTutor);
-        model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor));
     }
@@ -160,9 +157,8 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         handleMatchList(model, studentToEdit, editedStudent);
-
+        
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
