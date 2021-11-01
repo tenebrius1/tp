@@ -115,25 +115,15 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredTutorList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTutorDescriptor(), PersonType.TUTOR);
-        Tutor editedTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
-
-        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_TUTOR;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredStudentList_success() {
+    public void execute_noFieldSpecifiedUnfilteredStudentList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditStudentDescriptor(), PersonType.STUDENT);
-        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-
-        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_STUDENT;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

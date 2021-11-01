@@ -63,6 +63,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
+    public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -120,6 +122,9 @@ public class EditCommand extends Command {
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
         Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
+        if (tutorToEdit.equals(editedTutor)) {
+            throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
+        }
         if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
             throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
         }
@@ -150,6 +155,9 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
 
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
+        }
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
