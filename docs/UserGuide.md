@@ -68,7 +68,7 @@ For your convenience, a list of all parameters along with their prefixes has bee
 |    p/     | Phone Number          | Contain numbers, and it should be 8 digits long        |
 |    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
 |    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
-|    r/     | Remark         | Can contain any string but not only whitespaces        |
+|    r/     | Remark         | Can contain any string not more than 100 characters        |
 |    t/     | Tags           | [Valid tags](#valid-tags)                              |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -347,10 +347,10 @@ Format: <br>`exit`
 
 |   Action   | Format, Examples |
 |:----------:|:---------------- |
-|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
+|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br> `find s [n/NAME] [g/GENDER] [t/TAG...]` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
