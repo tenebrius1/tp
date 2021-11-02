@@ -125,7 +125,7 @@ Format:<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source: Note:</b><br> 
+<b>:information_source: Note:</b><br>
 
 - We support adding of tutors/students with the same name.
 
@@ -159,7 +159,7 @@ Format:<br>
 * Existing values will be updated to the input values.
 * You must specify **at least one** tag when editing the tags with `t/`.
 <div markdown="block" class="alert alert-warning">
-<b>:heavy_exclamation_mark: Caution:</b> <br> 
+<b>:heavy_exclamation_mark: Caution:</b> <br>
 
 - Editing information of any `Person` will override the current information stored about the specified `Person`.
 
