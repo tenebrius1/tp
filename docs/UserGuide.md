@@ -298,7 +298,7 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 <div markdown="block" class="alert alert-warning">
 <b>:heavy_exclamation_mark: Caution:</b> <br> 
 
-* The use of `filter` should be preceded by a `match`. i.e. `filter` cannot be used on an empty Match List.
+* `filter` cannot be used on an empty Match List.
 * Users are expected to type the `match` command again if they wish to apply `filter` individually, as multiple `filter` commands used concurrently on a non-empty Match List will **continue to narrow down** the search. 
 </div>
 
