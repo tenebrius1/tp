@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -28,6 +29,12 @@ import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
     private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+
+    @Test
+    public void execute_throwsNullPointerException() {
+        MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
+        assertThrows(NullPointerException.class, () -> matchCommandStudent.execute(null));
+    }
 
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
@@ -143,6 +150,9 @@ public class MatchCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new MatchCommand(INDEX_SECOND_PERSON)));
+
+        // different command -> returns false
+        assertFalse(standardCommand.equals(new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT)));
     }
 
     private List<Tag> getStudentTagList(Student student) {

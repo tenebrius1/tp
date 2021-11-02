@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,11 @@ public class MatchCommandParserTest {
 
         // no index
         assertParseFailure(parser, MatchCommand.COMMAND_WORD , expectedMessage);
+    }
+
+    @Test
+    public void parse_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
 
     @Test
