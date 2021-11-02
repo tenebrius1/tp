@@ -87,8 +87,6 @@ public class EditCommandTest {
         expectedModel.setTutor(lastTutor, editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-
-
     }
 
     @Test
