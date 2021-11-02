@@ -9,11 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -24,7 +24,6 @@ import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.GenderContainsGenderPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.QualificationContainsQualificationPredicate;
@@ -43,13 +42,11 @@ public class FilterCommandParserTest {
     // Valid Qualification
     private final Qualification validQualification = new Qualification("0");
 
-    // Predicates
-    private final Predicate<Person> namePredicateDaniel = new NameContainsKeywordsPredicate(
-            Collections.singletonList("Daniel"));
-    private final Predicate<Person> namePredicateAlice = new NameContainsKeywordsPredicate(
-            Collections.singletonList("Alice"));
-    private final Predicate<Person> qualificationPredicate = new QualificationContainsQualificationPredicate(
-            Collections.singletonList(validQualification));
+    // Preambles
+    private final String invalidPreamble = "kobebeef";
+
+    // Prefixes
+    private final String invalidPrefix = "d/";
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -62,11 +59,11 @@ public class FilterCommandParserTest {
         Predicate<Person> predicate = x -> true;
 
         // Valid Name test
-        Predicate<Person> tutorPredicate = predicate.and(namePredicateAlice);
+        Predicate<Person> tutorPredicate = predicate;
         ChainedPredicate tutorTestPredicate =
                 new ChainedPredicate.Builder().setName(alice).setPredicate(tutorPredicate).build();
         FilterCommand expectedFilterCommand = new FilterCommand(tutorTestPredicate);
-        assertParseSuccess(parser, " n/Alice", expectedFilterCommand);
+        assertParseSuccess(parser, NAME_DESC_ALICE, expectedFilterCommand);
 
         // Valid Gender test
         tutorPredicate = predicate.and(new GenderContainsGenderPredicate(List.of(female)));
@@ -90,8 +87,7 @@ public class FilterCommandParserTest {
         Predicate<Person> predicate = x -> true;
 
         // Valid Name and Gender test
-        Predicate<Person> tutorPredicate = predicate.and(namePredicateAlice)
-                .and(new GenderContainsGenderPredicate(List.of(female)));
+        Predicate<Person> tutorPredicate = predicate;
         ChainedPredicate tutorTestPredicate =
                 new ChainedPredicate.Builder().setName(alice).setGender(female).setPredicate(tutorPredicate).build();
         FilterCommand expectedFilterCommand = new FilterCommand(tutorTestPredicate);
@@ -126,22 +122,31 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // Invalid Name
-        assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
-
         // Missing parameters
         assertParseFailure(parser, VALID_TUTOR_LETTER, MESSAGE_INVALID_FILTER_COMMAND_FORMAT);
 
-        // Invalid qualification
-        assertParseFailure(parser, INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
+        // Invalid Preamble
+        assertParseFailure(parser, invalidPreamble, MESSAGE_INVALID_FILTER_COMMAND_FORMAT);
 
-        // Invalid gender
+        // Invalid Prefix
+        assertParseFailure(parser, invalidPrefix, MESSAGE_INVALID_FILTER_COMMAND_FORMAT);
+
+        // Invalid Name
+        assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // Invalid Gender
         assertParseFailure(parser, INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
 
-        // Blank gender
+        // Invalid Qualification
+        assertParseFailure(parser, INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
+
+        //Blank Name
+        assertParseFailure(parser, " " + PREFIX_NAME, Name.MESSAGE_CONSTRAINTS);
+
+        // Blank Gender
         assertParseFailure(parser, " " + PREFIX_GENDER, Gender.MESSAGE_CONSTRAINTS);
 
-        // Blank qualification
+        // Blank Qualification
         assertParseFailure(parser, " " + PREFIX_QUALIFICATION, Qualification.MESSAGE_CONSTRAINTS);
     }
 }
