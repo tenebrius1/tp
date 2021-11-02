@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_ELON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ROXANNE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_GRADUATE;
@@ -41,28 +42,6 @@ public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalCliTutorsForFilterTest(), new UserPrefs());
 
     @Test
-    public void execute_validFilterCommandGender_success() {
-        // Match the first student in the list
-        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
-        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
-
-        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
-
-        GenderContainsGenderPredicate predicate = prepareGenderPredicate(VALID_GENDER_AMY);
-        expectedModel.filterMatchedTutor(predicate);
-
-        FilterCommand filterCommand = new FilterCommand(predicate);
-
-        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
-
-        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_validFilterCommandName_success() {
         // Match the first student in the list
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -80,6 +59,28 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(predicate);
 
         String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validFilterCommandGender_success() {
+        // Match the first student in the list
+        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+
+        GenderContainsGenderPredicate predicate = prepareGenderPredicate(VALID_GENDER_AMY);
+        expectedModel.filterMatchedTutor(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
