@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should not only contain whitespaces";
+            "Remarks should be at most 100 characters long";
 
-    public static final String VALIDATION_REGEX = "^$|.*\\S.*";
+    public static final String VALIDATION_REGEX = ".{0,100}";
 
     public final String description;
 
