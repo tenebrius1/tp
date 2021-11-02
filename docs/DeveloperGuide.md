@@ -721,6 +721,7 @@ to be added.
 ### Find Tutor/Student
 {:.no_toc}
 
+[comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
 1. Find a student while all students are shown.
    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
    2. Test case: `find s n/david`
