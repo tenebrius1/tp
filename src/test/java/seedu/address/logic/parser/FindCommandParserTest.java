@@ -4,9 +4,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUALIFICATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE;
@@ -15,6 +17,10 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -42,7 +48,7 @@ public class FindCommandParserTest {
     private final FindCommandParser parser = new FindCommandParser();
 
     // Valid Name
-    private final Name alice = new Name("ALice");
+    private final Name alice = new Name("Alice");
     private final Name daniel = new Name("Daniel");
 
     // Valid Gender
@@ -171,6 +177,16 @@ public class FindCommandParserTest {
         // Multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC + INVALID_PHONE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
+
+        // Invalid preamble
+        assertParseFailure(parser, INVALID_PREAMBLE, MESSAGE_INVALID_FIND_COMMAND_FORMAT);
+
+        // Multiple preamble
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + VALID_STUDENT_LETTER,
+                MESSAGE_INVALID_FIND_COMMAND_FORMAT);
+
+        // Parameters absent
+        assertParseFailure(parser, VALID_TUTOR_LETTER, MESSAGE_INVALID_FIND_COMMAND_FORMAT);
     }
 
     @Test
@@ -182,7 +198,25 @@ public class FindCommandParserTest {
         assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // Blank Name
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " n/", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + PREFIX_NAME, Name.MESSAGE_CONSTRAINTS);
+
+        // Invalid tag
+        assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // Blank tag
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + PREFIX_TAG, Tag.MESSAGE_INVALID_TAG);
+
+        // Invalid gender
+        assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // Blank gender
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + PREFIX_GENDER, Gender.MESSAGE_CONSTRAINTS);
+
+        // Invalid qualification
+        assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
+
+        // Blank qualification
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + PREFIX_QUALIFICATION, Qualification.MESSAGE_CONSTRAINTS);
 
         // Find Qualification for Student
         assertParseFailure(parser, VALID_STUDENT_LETTER + QUALIFICATION_DESC_BOB,

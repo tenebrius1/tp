@@ -135,6 +135,14 @@ Format:<br>
 `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...`<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
 
+<div markdown="block" class="alert alert-info">
+<b>:information_source: Note:</b><br> 
+
+- We support adding of tutors/students with the same name.
+
+- Tutors/students with the <b>same phone number will be counted as duplicates</b> in our app.
+</div>
+
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `a s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
@@ -233,8 +241,6 @@ Format: <br>
 `find s [n/NAME] [g/GENDER] [t/TAG...]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
-- Only the last name given is searched. <br>
-  e.g. `find t n/John n/Amy` will find names that match `Amy`.
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
 - **At least one** of the optional fields must be provided.

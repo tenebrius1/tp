@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -160,7 +159,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredTutorList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredTutorList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredTutorList().size());
     }
@@ -174,7 +173,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredStudentList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
