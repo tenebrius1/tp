@@ -7,7 +7,7 @@ import seedu.address.model.person.Tutor;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyCliTutors {
 
     /**
      * Returns an unmodifiable view of the tutors list.

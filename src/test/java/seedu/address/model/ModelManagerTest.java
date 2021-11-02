@@ -31,7 +31,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.CliTutorsBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class ModelManagerTest {
@@ -41,7 +41,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new CliTutors(), new CliTutors(modelManager.getCliTutors()));
     }
 
     @Test
@@ -52,14 +52,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setCliTutorsFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setCliTutorsFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -76,15 +76,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setCliTutorsFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCliTutorsFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setCliTutorsFilePath_validPath_setsCliTutorsFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setCliTutorsFilePath(path);
+        assertEquals(path, modelManager.getCliTutorsFilePath());
     }
 
     @Test
@@ -98,23 +98,23 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTutor_tutorNotInAddressBook_returnsFalse() {
+    public void hasTutor_tutorNotInCliTutors_returnsFalse() {
         assertFalse(modelManager.hasTutor(ALICE));
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInCliTutors_returnsFalse() {
         assertFalse(modelManager.hasStudent(DANIEL));
     }
 
     @Test
-    public void hasTutor_tutorInAddressBook_returnsTrue() {
+    public void hasTutor_tutorInCliTutors_returnsTrue() {
         modelManager.addTutor(ALICE);
         assertTrue(modelManager.hasTutor(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
+    public void hasStudent_studentInCliTutors_returnsTrue() {
         modelManager.addStudent(DANIEL);
         assertTrue(modelManager.hasStudent(DANIEL));
     }
@@ -158,9 +158,9 @@ public class ModelManagerTest {
         ls.add("Alice");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(ls);
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
-        AddressBook addressBook = new AddressBook();
-        addressBook.addTutor(ALICE);
-        FilteredList<Tutor> expectedTutorList = new FilteredList<>(addressBook.getTutorList());
+        CliTutors cliTutors = new CliTutors();
+        cliTutors.addTutor(ALICE);
+        FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateFilteredTutorList(predicate);
         assertEquals(expectedTutorList, modelManager.getFilteredTutorList());
     }
@@ -171,9 +171,9 @@ public class ModelManagerTest {
         ls.add("Daniel");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(ls);
         TypicalPersons.getTypicalStudents().stream().forEach(student -> modelManager.addStudent(student));
-        AddressBook addressBook = new AddressBook();
-        addressBook.addStudent(DANIEL);
-        FilteredList<Student> expectedStudentList = new FilteredList<>(addressBook.getStudentList());
+        CliTutors cliTutors = new CliTutors();
+        cliTutors.addStudent(DANIEL);
+        FilteredList<Student> expectedStudentList = new FilteredList<>(cliTutors.getStudentList());
         modelManager.updateFilteredStudentList(predicate);
         assertEquals(expectedStudentList, modelManager.getFilteredStudentList());
     }
@@ -184,9 +184,9 @@ public class ModelManagerTest {
         ls.addAll(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
-        AddressBook addressBook = new AddressBook();
-        addressBook.addTutor(ALICE);
-        FilteredList<Tutor> expectedTutorList = new FilteredList<>(addressBook.getTutorList());
+        CliTutors cliTutors = new CliTutors();
+        cliTutors.addTutor(ALICE);
+        FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateMatchedTutor(predicate, ls);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
     }
@@ -197,8 +197,8 @@ public class ModelManagerTest {
         ls.addAll(GEORGE.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
-        AddressBook addressBook = new AddressBook();
-        FilteredList<Tutor> expectedTutorList = new FilteredList<>(addressBook.getTutorList());
+        CliTutors cliTutors = new CliTutors();
+        FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateMatchedTutor(predicate, ls);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
     }
@@ -214,13 +214,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withTutor(ALICE).withStudent(DANIEL).build();
-        AddressBook differentAddressBook = new AddressBook();
+        CliTutors cliTutors = new CliTutorsBuilder().withTutor(ALICE).withStudent(DANIEL).build();
+        CliTutors differentCliTutors = new CliTutors();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(cliTutors, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(cliTutors, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -232,18 +232,18 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different cliTutors -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentCliTutors, userPrefs)));
 
         // different filteredList (tutor) -> returns false
         String[] keywords = BENSON.getName().fullName.split("\\s+");
         modelManager.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
         // different filteredList (student) -> returns false
         keywords = IDA.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
@@ -254,7 +254,7 @@ public class ModelManagerTest {
         List<Tag> ls = new ArrayList<>();
         studentTag.stream().forEach(tag -> ls.add(tag));
         modelManager.updateMatchedTutor(new TagsContainTagPredicate(ls), ls);
-        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
@@ -263,7 +263,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setCliTutorsFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, differentUserPrefs)));
     }
 }

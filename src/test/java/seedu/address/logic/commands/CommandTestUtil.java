@@ -11,13 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -136,13 +135,13 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        CliTutors expectedCliTutors = new CliTutors(actualModel.getCliTutors());
         List<Tutor> expectedFilteredTutorList = new ArrayList<>(actualModel.getFilteredTutorList());
         List<Student> expectedFilteredStudentList = new ArrayList<>(actualModel.getFilteredStudentList());
         List<Tutor> expectedMatchedTutorList = new ArrayList<>(actualModel.getMatchedTutorList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedCliTutors, actualModel.getCliTutors());
         assertEquals(expectedFilteredTutorList, actualModel.getFilteredTutorList());
         assertEquals(expectedFilteredStudentList, actualModel.getFilteredStudentList());
         assertEquals(expectedMatchedTutorList, actualModel.getMatchedTutorList());
@@ -157,7 +156,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredTutorList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredTutorList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredTutorList().size());
     }
@@ -171,7 +170,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredStudentList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }

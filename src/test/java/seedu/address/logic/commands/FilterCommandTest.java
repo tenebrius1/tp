@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_M
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookForFilterTest;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutorsForFilterTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,14 +38,14 @@ import seedu.address.model.tag.Tag;
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookForFilterTest(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutorsForFilterTest(), new UserPrefs());
 
     @Test
     public void execute_validFilterCommandGender_success() {
         // Match the first student in the list
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
@@ -67,7 +67,7 @@ public class FilterCommandTest {
         // Match the first student in the list
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
@@ -89,7 +89,7 @@ public class FilterCommandTest {
         // Match the first student in the list
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
@@ -110,7 +110,7 @@ public class FilterCommandTest {
     public void execute_emptyTutorList_throwsCommandException() {
         Predicate<Person> predicate = prepareGenderPredicate(VALID_GENDER_AMY);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModel.filterMatchedTutor(predicate);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_FAILED);

@@ -47,30 +47,30 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCliTutorsFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCliTutorsFilePath(Path cliTutorsFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code cliTutors}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCliTutors(ReadOnlyCliTutors cliTutors);
 
     /**
-     * Replaces tutor data with the tutor data in {@code addressBook}.
+     * Replaces tutor data with the tutor data in {@code cliTutors}.
      */
-    void setTutorData(ReadOnlyAddressBook addressBook);
+    void setTutorData(ReadOnlyCliTutors cliTutors);
 
     /**
-     * Replaces student data with the student data in {@code addressBook}.
+     * Replaces student data with the student data in {@code cliTutors}.
      */
-    void setStudentData(ReadOnlyAddressBook addressBook);
+    void setStudentData(ReadOnlyCliTutors cliTutors);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CliTutors */
+    ReadOnlyCliTutors getCliTutors();
 
     /**
      * Returns true if a tutor with the same identity as {@code tutor} exists in the address book.

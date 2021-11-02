@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.CliTutors;
+import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -16,7 +16,7 @@ import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CliTutors} with sample data.
  */
 public class SampleDataUtil {
     public static Tutor[] getSampleTutors() {
@@ -41,8 +41,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyCliTutors getSampleCliTutors() {
+        CliTutors sampleAb = new CliTutors();
         for (Tutor sampleTutor : getSampleTutors()) {
             sampleAb.addTutor(sampleTutor);
         }

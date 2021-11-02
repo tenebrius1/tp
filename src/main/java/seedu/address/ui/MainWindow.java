@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new PersonListPanel<>(studentList);
         studentListPanelPlaceholder.getChildren().add((Node) studentListPanel.getRoot());
 
-        matchedTutorListPanel = new MatchedListPanel(matchedTutorList);
+        matchedTutorListPanel = new MatchedListPanel<>(matchedTutorList);
         matchListPanelPlaceholder.getChildren().add((Node) matchedTutorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

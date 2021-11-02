@@ -29,9 +29,9 @@ Before going into the rest of the content in our user guide, here are a few **im
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
-2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.2) the latest `CLITutors.jar`.
+2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.3) the latest `CLITutors.jar`.
 3. Copy the file to the folder you want to use as the *home folder* for `CLITutors`.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data: <br> ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data: <br> <img src="images/Ui.png" alt="Ui" width="1000"/>
 5. Type the command in the command box and press `Enter` to execute it. Here are example commands you can try:
     - `add`: add a tutor/student to the program
     - `list`: lists all tutors/students
@@ -123,6 +123,14 @@ Adds a tutor/student to CLITutors.
 Format:<br>
 `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...`<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
+
+<div markdown="block" class="alert alert-info">
+<b>:information_source: Note:</b><br> 
+
+- We support adding of tutors/students with the same name.
+
+- Tutors/students with the <b>same phone number will be counted as duplicates</b> in our app.
+</div>
 
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
@@ -222,8 +230,6 @@ Format: <br>
 `find s [n/NAME] [g/GENDER] [t/TAG...]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
-- Only the last name given is searched. <br>
-  e.g. `find t n/John n/Amy` will find names that match `Amy`.
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
 - **At least one** of the optional fields must be provided.

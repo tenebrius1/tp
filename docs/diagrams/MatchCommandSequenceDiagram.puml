@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBook LOGIC_COLOR
+participant ":CliTutorsParser" as CliTutors LOGIC_COLOR
 participant ":MatchCommandParser" as MatchCommandParser LOGIC_COLOR
 participant "m:MatchCommand" as MatchCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -17,16 +17,16 @@ end box
 [-> LogicManager : execute("match 1")
 activate LogicManager
 
-LogicManager -> AddressBook : parseCommand("match 1")
-activate AddressBook
+LogicManager -> CliTutors : parseCommand("match 1")
+activate CliTutors
 create MatchCommandParser
-AddressBook -> MatchCommandParser
+CliTutors -> MatchCommandParser
 activate MatchCommandParser
 
-MatchCommandParser --> AddressBook
+MatchCommandParser --> CliTutors
 deactivate MatchCommandParser
 
-AddressBook -> MatchCommandParser : parse(" 1")
+CliTutors -> MatchCommandParser : parse(" 1")
 activate MatchCommandParser
 create MatchCommand
 MatchCommandParser -> MatchCommand
@@ -34,13 +34,13 @@ activate MatchCommand
 MatchCommand --> MatchCommandParser : m
 deactivate MatchCommand
 
-MatchCommandParser --> AddressBook : m
+MatchCommandParser --> CliTutors : m
 deactivate MatchCommandParser
-MatchCommandParser -[hidden]-> AddressBook : result
+MatchCommandParser -[hidden]-> CliTutors : result
 destroy MatchCommandParser
 
-AddressBook --> LogicManager : m
-deactivate AddressBook
+CliTutors --> LogicManager : m
+deactivate CliTutors
 
 LogicManager -> MatchCommand : execute(model)
 activate MatchCommand

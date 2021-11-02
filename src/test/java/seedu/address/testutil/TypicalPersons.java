@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
@@ -51,7 +51,7 @@ public class TypicalPersons {
 
     // Manually added - Students with similar names
     public static final Student JOHN_R = new StudentBuilder().withName("John Rhys").withPhone("94824231")
-            .withGender("M").withTag("SC").build();
+            .withGender("M").withTag("TP").build();
     public static final Student JOHN_P = new StudentBuilder().withName("John Prue")
             .withPhone("94824526").withGender("M").withTag("TP").build();
 
@@ -83,10 +83,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code CliTutors} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static CliTutors getTypicalCliTutors() {
+        CliTutors ab = new CliTutors();
         for (Tutor tutor : getTypicalTutors()) {
             ab.addTutor(tutor);
         }
@@ -97,10 +97,10 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the persons with similar names.
+     * Returns an {@code CliTutors} with all the persons with similar names.
      */
-    public static AddressBook getTypicalAddressBookWithSimilarNames() {
-        AddressBook ab = new AddressBook();
+    public static CliTutors getTypicalCliTutorsWithSimilarNames() {
+        CliTutors ab = new CliTutors();
         for (Tutor tutor : getTutorsWithSimilarNames()) {
             ab.addTutor(tutor);
         }
@@ -111,10 +111,10 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the persons for FilterCommand Test
+     * Returns an {@code CliTutors} with all the persons for FilterCommand Test
      */
-    public static AddressBook getTypicalAddressBookForFilterTest() {
-        AddressBook ab = new AddressBook();
+    public static CliTutors getTypicalCliTutorsForFilterTest() {
+        CliTutors ab = new CliTutors();
         for (Tutor tutor : getTutorsForFilterCommandTest()) {
             ab.addTutor(tutor);
         }

@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
@@ -132,12 +132,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getCliTutorsFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCliTutorsFilePath(Path cliTutorsFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -152,22 +152,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setCliTutors(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setTutorData(ReadOnlyAddressBook newData) {
+        public void setTutorData(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setStudentData(ReadOnlyAddressBook newData) {
+        public void setStudentData(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyCliTutors getCliTutors() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -292,8 +292,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCliTutors getCliTutors() {
+            return new CliTutors();
         }
     }
 
@@ -316,8 +316,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCliTutors getCliTutors() {
+            return new CliTutors();
         }
     }
 }

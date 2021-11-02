@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.PersonType.STUDENT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 
 /**
@@ -42,11 +42,11 @@ public class ClearCommand extends Command {
 
         switch (personType) {
         case TUTOR:
-            model.setTutorData(new AddressBook());
+            model.setTutorData(new CliTutors());
             return new CommandResult(MESSAGE_SUCCESS_TUTOR);
             // No break necessary due to return statement
         case STUDENT:
-            model.setStudentData(new AddressBook());
+            model.setStudentData(new CliTutors());
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
             // No break necessary due to return statement
         default:
