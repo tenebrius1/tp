@@ -721,7 +721,40 @@ to be added.
 ### Find Tutor/Student
 {:.no_toc}
 
-to be added.
+1. Find a student while all students are shown.
+   1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
+   2. Test case: `find s n/david`
+      <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
+      <br>e.g. Students with the names: 'David Li', 'david tan' and 'John David' will be shown.
+   3. Test case: `find s n/david t/pm`
+      <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the student list.
+      <br>e.g A student named 'David Li' and has tag `PM` will be shown but a student named 'David' and has tag `PS` will not be shown.
+   4. Test case: `find`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+   5. Test case: `find s q/2`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
+   6. Test case: `find s`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+
+2. Find a tutor while all tutors are shown.
+   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the tutor list.
+   2. Test case: `find t n/alex`
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the tutor list.
+      <br>e.g. Tutors with the names: 'Alex Yeoh', 'alex lim' and 'Alex' will be shown.
+   3. Test case: `find t n/alex q/1`
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) with qualification 1 (undergraduate) will be displayed in the tutor list.
+      <br>e.g A tutor named 'Alex Yeoh' with qualification 1 will be shown but a tutor named 'Alex Tan' with qualification 2 will not be shown.
+   4. Test case: `find`
+      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+   5. Test case: `find t`
+      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+
+3. Find a tutor/student while the tutor/student list is empty.
+   1. Prerequisites: Clear the tutor and student lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
+   2. Test case: `find t n/alex`
+      <br>Expected: Error details shown in the result display, with a result message `Tutor list is empty!`.
+   3. Test case: `find s n/david`
+      <br>Expected: Error details shown in the result display, with a result message `Student list is empty!`.
 
 ### Match Student
 {:.no_toc}
@@ -790,11 +823,24 @@ to be added.
 
 ### Saving data
 {:.no_toc}
-to be added.
 
-[comment]: <> (1. Dealing with missing/corrupted data files)
+[comment]: <> (@@author tenebrius1-reused)
+[comment]: <> (Reused from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuidehtml#appendix-h-instructions-for-manual-testing with minor modifications)
+1. Saving data between sessions
+   1. Launch the app by double-clicking on the jar file.
+   2. Add a new tutor with a valid `add t` command. Confirm that the tutor has been added by checking whether it is shown in the tutor list in the GUI.
+   3. Close the app by using the `exit` command.
+   4. Relaunch the app by double-clicking the jar file.
+      <br>Expected: The newly added tutor is still present in the tutor list.
 
-[comment]: <> (    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_)
+2. Dealing with corrupted data files
+   1. Prerequisite: Opened and closed (by entering the command `exit`) the application  and ensured that `data/clitutors.json` is created.
+   2. Corrupt the save file (`data/clitutors.json`). The easiest way is to type '-' somewhere in one of the saved tutor's phone. Another way may be to add random characters that make the JSON format unreadable.
+   3. Relaunch the app by double-clicking on the jar file
+      <br>Expected: Shows the GUI with no data.
+   4. Delete the current save file.
+   5. Relaunch the app again by double-clicking on the jar file.
+      <br>Expected: Shows the GUI with sample data.
 
 [comment]: <> (2. _{ more test cases …}_)
 
