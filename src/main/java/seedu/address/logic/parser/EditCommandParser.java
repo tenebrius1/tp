@@ -62,7 +62,6 @@ public class EditCommandParser implements Parser<EditCommand> {
     private EditCommand parsePerson(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor,
                                     PersonType personType) throws ParseException {
         Index personIndex;
-
         try {
             String trimmed = argMultimap.getPreamble().trim();
             String[] split = trimmed.split(" ");
@@ -76,22 +75,41 @@ public class EditCommandParser implements Parser<EditCommand> {
             personIndex = ParserUtil.parseIndex(split[1]);
         } catch (ParseException pe) {
             if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
-                if (personType.equals(PersonType.STUDENT)) {
+                switch (personType) {
+                case STUDENT:
                     throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-                } else {
+                case TUTOR:
                     throw new ParseException(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+                default:
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-            } else {
-                throw pe;
             }
+            throw pe;
         }
+        setDescriptorValues(argMultimap, editPersonDescriptor, personType);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return new EditCommand(personIndex, editPersonDescriptor, personType);
+    }
+
+    /**
+     * Sets the editPersonDescriptor with values (i.e. {@code Name}, {@code Phone}, {@code Gender},
+     * {@code Qualification}, {@code Remark}, {@code Tag}) if present.
+     */
+    private void setDescriptorValues(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor,
+                                     PersonType personType) throws ParseException {
         if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
-            if (personType.equals(PersonType.STUDENT)) {
+            switch (personType) {
+            case STUDENT:
                 throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
-            } else if (personType.equals(PersonType.TUTOR)) {
+            case TUTOR:
                 EditTutorDescriptor editTutorDescriptor = (EditTutorDescriptor) editPersonDescriptor;
                 editTutorDescriptor.setQualification(ParserUtil.parseQualification(
                         argMultimap.getValue(PREFIX_QUALIFICATION).get()));
+                break;
+            default:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -109,11 +127,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         }
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-        return new EditCommand(personIndex, editPersonDescriptor, personType);
     }
 
     /**
