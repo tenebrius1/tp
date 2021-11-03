@@ -264,7 +264,8 @@ public class ModelManagerTest {
 
         // filter out females only
         ArrayList<Gender> genderList = new ArrayList<>();
-        genderList.add(new Gender("F"));
+        Gender g = new Gender("F");
+        genderList.add(g);
         GenderContainsGenderPredicate predicate1 = new GenderContainsGenderPredicate(genderList);
         modelManager.filterMatchedTutor(predicate1);
         cliTutors.removeTutor(ENZIO);
@@ -275,7 +276,8 @@ public class ModelManagerTest {
 
         // filter out graduate qualification, no matches
         ArrayList<Qualification> qualificationList = new ArrayList<>();
-        genderList.add(new Gender("F"));
+        Qualification q = new Qualification("3");
+        qualificationList.add(q);
         QualificationContainsQualificationPredicate predicate2 = new QualificationContainsQualificationPredicate(
                 qualificationList);
         modelManager.filterMatchedTutor(predicate2);
@@ -305,7 +307,8 @@ public class ModelManagerTest {
 
         // After successful filtering match list
         ArrayList<Gender> genderList = new ArrayList<>();
-        genderList.add(new Gender("F"));
+        Gender g = new Gender("F");
+        genderList.add(g);
         GenderContainsGenderPredicate predicate1 = new GenderContainsGenderPredicate(genderList);
         modelManager.filterMatchedTutor(predicate1);
         assertEquals(expectedStudent, modelManager.getMatchedStudent());
@@ -313,7 +316,8 @@ public class ModelManagerTest {
         // After filtering to 0 matches
         expectedStudent = null;
         ArrayList<Qualification> qualificationList = new ArrayList<>();
-        genderList.add(new Gender("F"));
+        Qualification q = new Qualification("3");
+        qualificationList.add(q);
         QualificationContainsQualificationPredicate predicate2 = new QualificationContainsQualificationPredicate(
                 qualificationList);
         modelManager.filterMatchedTutor(predicate2);
