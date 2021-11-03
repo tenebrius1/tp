@@ -83,6 +83,9 @@ public class CommandTestUtil {
     public static final String INVALID_INTEGER_MIN = Long.toString(Integer.MIN_VALUE + 1);
     public static final String INVALID_INTEGER_MAX = Long.toString(Integer.MAX_VALUE + 1);
 
+    public static final String INVALID_INTEGER_MIN = Long.toString(Integer.MIN_VALUE + 1);
+    public static final String INVALID_INTEGER_MAX = Long.toString(Integer.MAX_VALUE + 1);
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
