@@ -1,11 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.PersonType.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -34,15 +41,58 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, INVALID_PREAMBLE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    public void parse_invalidPersonTypeButValidIndex_throwsParseException() {
+        assertParseFailure(parser, INVALID_PREAMBLE + validIndex, String.format(MESSAGE_INVALID_PERSON_TYPE,
                 DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
+    public void parse_validPersonTypeButInvalidNegativeIndex_throwsParseException() {
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INDEX,
+                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INDEX,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validPersonTypeButInvalidZeroIndex_throwsParseException() {
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_ZERO_INDEX,
+                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_ZERO_INDEX,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validPersonTypeButInvalidMaxIntIndex_throwsParseException() {
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MAX,
+                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MAX,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validPersonTypeButInvalidMinIntIndex_throwsParseException() {
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MIN,
+                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MIN,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidNumberOfArgs_throwsParseException() {
+        // too many arguments
         assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + validIndex,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
+
+        // too little arguments
+        assertParseFailure(parser, VALID_STUDENT_LETTER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
+
+        // no arguments
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
     }
 }
