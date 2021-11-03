@@ -399,7 +399,7 @@ Upon the user's entry of the command, the validity of the user's input is checke
 
 ##### Sequence of action
 {:.no_toc}
-Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
+Given below is an example valid usage scenario and how the `match` command implementation behaves at each step.
 
 **Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 

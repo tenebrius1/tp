@@ -31,23 +31,23 @@ Before going into the rest of the content in our user guide, here are a few **im
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
-   
+
 2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.3) the latest `clitutors.jar`.
-   
+
 3. Copy the file to the folder you want to use as the *home folder* for `CliTutors`.
-   
+
 4. **Double-click** the file to start the application. A GUI containing the annotated **5 main components** should show up as below. Note how the application contains some sample data: <br> <img src="images/UiLabelled.png" alt="Labelled Ui" width="1200"/>
-   
+
 5. Try typing `match 1` in the **Command Box** and press <kbd>Enter</kbd> (or click the ➤ button on the GUI) to execute it.
-   
+
 6. You should see the results appear on the **Match List**. You can see whether your command was successful from the **Command Results Display** as well.
-   
+
 7. For a **quick overview** of all available commands, please refer to our [Command Summary](#command-summary).
-   
+
 8. For the **details** of each command, please proceed to the next section on [Features](#features).
-   
+
 9. When you are ready to start adding your own data, clear the **Tutor and Student Lists** using `clear t` and `clear s` respectively.
-   
+
 10. If you are new and unsure of what the **expected outcomes** are for each command, fret not! You can click on the **dropdown list** under each command that illustrates the *before* and *after* of an example command input.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ For your convenience, a list of all parameters along with their prefixes has bee
 |    p/     | Phone Number          | Contain numbers, and it should be 8 digits long        |
 |    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
 |    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
-|    r/     | Remark         | Can contain any string but not only whitespaces        |
+|    r/     | Remark         | Can contain any string not more than 100 characters        |
 |    t/     | Tags           | [Valid tags](#valid-tags)                              |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ Format:<br>
 `add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...`
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source: Note:</b><br> 
+<b>:information_source: Note:</b><br>
 
 - We support adding of tutors/students with the same name.
 
@@ -170,7 +170,7 @@ Format:<br>
 * Existing values will be updated to the input values.
 * You must specify **at least one** tag when editing the tags with `t/`.
 <div markdown="block" class="alert alert-warning">
-<b>:heavy_exclamation_mark: Caution:</b> <br> 
+<b>:heavy_exclamation_mark: Caution:</b> <br>
 
 - Editing information of any `Person` will override the current information stored about the specified `Person`.
 
@@ -224,12 +224,12 @@ Format: <br>`list t` <br> `list s`
 
 <details>
 <summary style="cursor: pointer;">Expected outcome:</summary>
-<p>Command Executed: <code>list t</code></p>
-<p>Before:</p>
-<img src="images/screenshots/Main%20Window.png">
+<p>Commands Executed: <code>find t g/M</code>, then <code>list t</code></p>
+<p>Before (when <code>find t g/M</code> is executed):</p>
+<img src="images/screenshots/List_Before.png">
 <br>
 <p>After:</p>
-<img src="images/screenshots/List.png">
+<img src="images/screenshots/List_After.png">
 </details>
 
 ### Finding a tutor or student: `find` / `f`
@@ -296,23 +296,23 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - **At least one** of the optional fields must be provided.
 
 <div markdown="block" class="alert alert-warning">
-<b>:heavy_exclamation_mark: Caution:</b> <br> 
+<b>:heavy_exclamation_mark: Caution:</b> <br>
 
 * `filter` cannot be used on an empty Match List.
-* Users are expected to type the `match` command again if they wish to apply `filter` individually, as multiple `filter` commands used concurrently on a non-empty Match List will **continue to narrow down** the search. 
+* Users are expected to type the `match` command again if they wish to apply `filter` individually, as multiple `filter` commands used concurrently on a non-empty Match List will **continue to narrow down** the search.
 </div>
 
 Example:<br>
-`filter q/0`
+`filter g/F`
 
 <details>
 <summary>Expected outcome:</summary>
-<p>Command Executed: <code>filter q/0</code></p>
-<p>Before:</p>
-<img src="images/screenshots/Main%20Window.png">
+<p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
+<p>Before (when <code>match 1</code> is executed):</p>
+<img src="images/screenshots/Filter_Before.png">
 <br>
 <p>After:</p>
-<img src="images/screenshots/Filter.png">
+<img src="images/screenshots/Filter_After.png">
 </details>
 
 ### Clearing all entries: `clear`
@@ -365,10 +365,10 @@ Format: <br>`exit`
 
 |   Action   | Format, Examples |
 |:----------:|:---------------- |
-|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
+|  **Add**   | `add t n/NAME p/PHONE_NUMBER g/GENDER q/QUALIFICATION [r/REMARK] t/TAG...` <br>`add s n/NAME p/PHONE_NUMBER g/GENDER [r/REMARK] t/TAG...` <br> e.g. `add t n/John Doe p/98765432 g/M q/3 r/Prefers students in Bishan t/PM`    |
 | **Delete** | `delete t INDEX` <br> `delete s INDEX` <br> e.g. `delete s 3`                 |
 |  **Help**  | `help`           |
-|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG]`<br> e.g. `edit t 2 n/John Doe q/1`   |
+|  **Edit**  | `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>`edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`<br> e.g. `edit t 2 n/John Doe q/1`   |
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br> `find s [n/NAME] [g/GENDER] [t/TAG...]` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
