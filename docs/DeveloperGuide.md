@@ -701,10 +701,10 @@ Given below are instructions to test the app manually.
        Expected: No student is added. Error details shown in the result display, with a result message `Students do not have any qualifications tagged to them!`.
     3. Test case: `add s n/李白 p/98765432 g/M t/PM`<br>
        Expected: No student is added. Error details shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
-    4. Test case: `add t n/John Doe p/98765432 g/M t/GH`<br>
-       Expected: No tutor is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
-    5. Test case: `add t n/John Doe p/98765432 g/MF t/PM`<br>
-       Expected: No tutor is added. Error details shown in the result display, with result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+    4. Test case: `add s n/John Doe p/98765432 g/M t/GH`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
+    5. Test case: `add s n/John Doe p/98765432 g/MF t/PM`<br>
+       Expected: No student is added. Error details shown in the result display, with result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
 
 ### Edit Tutor/Student List
 {:.no_toc}
