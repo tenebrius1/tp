@@ -243,10 +243,9 @@ public class CliTutorsTest {
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
         TypicalPersons.getTypicalStudents().stream().forEach(student -> cliTutors.addStudent(student));
 
-        Phone phone = new Phone("94351253");
-        assertTrue(cliTutors.hasPersonWithSamePhone(phone));
+        assertTrue(cliTutors.hasPersonWithSamePhone(ALICE.getPhone()));
 
-        phone = new Phone("94351259");
+        Phone phone = new Phone("94351259");
         assertFalse(cliTutors.hasPersonWithSamePhone(phone));
     }
 

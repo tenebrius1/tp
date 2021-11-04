@@ -339,10 +339,9 @@ public class ModelManagerTest {
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
         TypicalPersons.getTypicalStudents().stream().forEach(student -> modelManager.addStudent(student));
 
-        Phone phone = new Phone("94351253");
-        assertTrue(modelManager.hasPersonWithSamePhone(phone));
+        assertTrue(modelManager.hasPersonWithSamePhone(ALICE.getPhone()));
 
-        phone = new Phone("94351259");
+        Phone phone = new Phone("94351259");
         assertFalse(modelManager.hasPersonWithSamePhone(phone));
     }
 

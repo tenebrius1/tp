@@ -124,7 +124,6 @@ public class EditCommand extends Command {
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
         Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
-
         if (tutorToEdit.equals(editedTutor)) {
             throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
         }
@@ -164,8 +163,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
         }
 
-        if (model.hasPersonWithSamePhone(editedStudent.getPhone())
-                && !studentToEdit.getPhone().equals(editedStudent.getPhone())) {
+        if (!studentToEdit.getPhone().equals(editedStudent.getPhone())
+                && model.hasPersonWithSamePhone(editedStudent.getPhone())) {
             throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
