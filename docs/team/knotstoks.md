@@ -5,7 +5,7 @@ title: Kenneth's Project Portfolio Page
 
 ### Project: CLITutors
 
-CLITutors is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+`CliTutors` is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CliTutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
 Given below are my contributions to the project.
 
@@ -21,24 +21,15 @@ Given below are my contributions to the project.
   * Managed releases `v1.2`, `v1.2.1`, `v1.3` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-  * Updated the Add Command to be specified in the  (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Updated the Add Command to be split into adding tutors and students (Pull requests [\#49](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/49))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Add Use Cases: [\#24](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/24)
+    * Did cosmetic tweaks to existing documentation of some commands: [\#102](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/102)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `add` and `list` features: [\#121](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/121)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#52](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/52), [\#58](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/58)
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/knotstoks/ped/issues/2), [2](https://github.com/knotstoks/ped/issues/4), [3](https://github.com/knotstoks/ped/issues/5))
