@@ -482,7 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                           | search students and tutors by tags                    | easily import data from one machine to another                    |
 | `* *`    | user                                           | load in pre-existing data                             | save time keying in full commands                                 |
 | `* *`    | user                                           | filter from the list of matched tutors | find more suitable tutors for the student based on their requirements            |
-| `* *`    | user                                           | sort the list of matched tutors by number of matched tags | see the most suitable tutors at the top of the list           | 
+| `* *`    | user                                           | sort the list of matched tutors by number of matched tags | see the most suitable tutors at the top of the list           |
 
 ### Use Cases
 
