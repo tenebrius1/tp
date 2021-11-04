@@ -63,7 +63,7 @@ public class Qualification {
 
     @Override
     public String toString() {
-        return index;
+        return Qualifications.getLabel(index);
     }
 
     @Override
