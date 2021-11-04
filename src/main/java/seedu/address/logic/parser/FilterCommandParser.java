@@ -50,6 +50,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUALIFICATION,
                 PREFIX_GENDER);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             prefixCount += 1;
             predicate = handleName(predicate, builder, argMultimap);
