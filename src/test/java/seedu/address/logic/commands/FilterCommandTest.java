@@ -41,6 +41,30 @@ public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalCliTutorsForFilterTest(), new UserPrefs());
 
     @Test
+    public void execute_validFilterCommandName_success() {
+        // Match the first student in the list
+        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
+
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
+
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate(VALID_NAME_ROXANNE);
+        expectedModel.filterMatchedTutor(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(predicate);
+
+        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
+
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_validFilterCommandGender_success() {
         // Match the first student in the list
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -60,30 +84,6 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(predicate);
 
         String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
-
-        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_validFilterCommandName_success() {
-        // Match the first student in the list
-        Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
-        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
-                studentToMatch);
-
-        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
-                studentToMatch);
-
-        NameContainsKeywordsPredicate predicate = prepareNamePredicate(VALID_NAME_ROXANNE);
-        expectedModel.filterMatchedTutor(predicate);
-
-        FilterCommand filterCommand = new FilterCommand(predicate);
-
-        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
