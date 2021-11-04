@@ -127,8 +127,10 @@ public class EditCommand extends Command {
         if (tutorToEdit.equals(editedTutor)) {
             throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
         }
-        if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
+
+        if (!tutorToEdit.getPhone().equals(editedTutor.getPhone())
+                && model.hasPersonWithSamePhone(editedTutor.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setTutor(tutorToEdit, editedTutor);
@@ -160,8 +162,10 @@ public class EditCommand extends Command {
         if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
         }
-        if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+
+        if (!studentToEdit.getPhone().equals(editedStudent.getPhone())
+                && model.hasPersonWithSamePhone(editedStudent.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setStudent(studentToEdit, editedStudent);

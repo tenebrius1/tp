@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 
@@ -74,6 +75,10 @@ public class AddCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
             }
 
+            if (model.hasPersonWithSamePhone(tutor.getPhone())) {
+                throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
+            }
+
             model.addTutor(tutor);
             return new CommandResult(String.format(MESSAGE_SUCCESS_TUTOR, tutor));
             // No break necessary due to return statement
@@ -81,6 +86,10 @@ public class AddCommand extends Command {
             Student student = (Student) toAdd;
             if (model.hasStudent(student)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            }
+
+            if (model.hasPersonWithSamePhone(student.getPhone())) {
+                throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
             }
 
             model.addStudent(student);
