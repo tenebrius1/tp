@@ -304,7 +304,6 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 
 Example:<br>
 `filter g/F`
-
 <details>
 <summary>Expected outcome:</summary>
 <p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
