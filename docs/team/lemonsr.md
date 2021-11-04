@@ -42,4 +42,3 @@ title: Xin Yan's Project Portfolio Page
   - Updated `delete` to accept tutor and student input (Pull request [#52](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/52))
   - Split `list` and `clear` commands to use tutor and student prefixes (Pull request [#100](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/100))
   - Added a Help menu on the application to display available commands and tags list (Pull request [#91](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/91))
-  
