@@ -92,7 +92,7 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - A whitespace **must** be included before every prefix. <br>
   e.g. `edit t 1 n/Alex Yeo q/2` is acceptable but `edit t 1 n/Alex Yeoq/2` is not.
 
-- Parameters may be entered **in any order, except for tags**. i.e. tags must be entered last in the command. <br>
+- Parameters may be entered **in any order, except for tags**, which must be **entered last** in the command. <br>
   e.g. Both `n/John q/1` and `q/1 n/John` are acceptable. `n/John t/PE q/1` is not acceptable, but `n/John q/1 t/PE` is acceptable.
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -165,7 +165,7 @@ Format:<br>
 `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`
 
-* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e. 1, 2, 3...
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed Tutor/Student List**. The index **must be a positive integer**, i.e. 1, 2, 3...
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * You must specify **at least one** tag when editing the tags with `t/`.
@@ -199,12 +199,12 @@ Format:<br>
 `delete t INDEX`<br>
 `delete s INDEX`
 
-- The `INDEX` refers to the index number shown on the **displayed tutor/student list**.
+- The `INDEX` refers to the index number shown on the **displayed Tutor/Student List**.
 - The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Examples:<br>
-`list t` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
-`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the tutor list.
+`list t` followed by `delete t 2` deletes the 2nd person in the Tutor List. <br>
+`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the Tutor List.
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -265,7 +265,7 @@ Example:<br>
 Finds tutor(s) who teaches the subject that the student wants.
 
 Format: <br>`match INDEX`
-- The `INDEX` refers to the index number shown on the **displayed student list**.
+- The `INDEX` refers to the index number shown on the **displayed Student List**.
 - The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Example:<br>
@@ -284,7 +284,7 @@ Example:<br>
 
 ### Filtering tutors from the matched tutors: `filter`
 
-Filters tutor(s) from the list of **matched** tutors.
+Filters tutor(s) from the **list of matched tutors**.
 
 Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - The search is case-insensitive. <br>
@@ -372,7 +372,7 @@ Format: <br>`exit`
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br> `find s [n/NAME] [g/GENDER] [t/TAG...]` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
-| **Filter**  | `filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`<br>Note: must have **at least one** optional field     |
+| **Filter**  | `filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`<br> e.g. `filter g/F`     |
 | **Clear**  | `clear t` <br> `clear s`          |
 |  **Exit**  | `exit`           |
 

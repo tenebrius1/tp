@@ -193,7 +193,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### What it is
 
-Adds a tutor/student to the tutor/student list respectively. The `add` command must have all the fields required for tutor/student.
+Adds a tutor/student to the Tutor/Student List respectively. The `add` command must have all the fields required for tutor/student.
 
 #### Implementation details
 
@@ -205,7 +205,7 @@ Given below is an example usage scenario and how the `add` command implementatio
 1. The user input `add t n/Jonathan Chan p/92102339 g/M q/2 t/PM SM` is passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `CliTutorsParser#parseCommand` method which in turn creates a new `AddCommandParser`.
 3. The `AddCommandParser#parse` method is then called which will return a new `AddCommand` if the input is valid.
-4. `AddCommand` will then update the tutor list using the `Model#addTutor` method.
+4. `AddCommand` will then update the Tutor List using the `Model#addTutor` method.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `add` implementation works:
@@ -232,7 +232,7 @@ Given below is an activity diagram to show how the `add` command works for a tut
 
 ### Delete feature
 #### What it is
-Deletes the tutor or student at the specified `INDEX` from the displayed tutor/student list.
+Deletes the tutor or student at the specified `INDEX` from the displayed Tutor/Student List.
 
 #### Implementation details
 Similar to the `AddCommand` class above, the `DeleteCommand` class extends the `Command` class. The actual execution of the `delete` command is similar to that of the `add` command, except the `delete` command decides on the tutor/student to delete based on the `INDEX` of the tutor/student displayed on the `filteredTutors` list or the `filteredStudents` list of the `ModelManager` class.
@@ -246,7 +246,7 @@ Given below is an example usage scenario and how the `delete` command implementa
 2. The `LogicManager` calls `CliTutorsParser#parseCommand` to parse the given user input.
 3. The `CliTutorsParser` identifies the `delete` command and creates a new `DeleteCommandParser` object. It then calls `DeleteCommandParser#parse` with the command arguments as the parameter.
 4. `DeleteCommandParser` then generates a `DeleteCommand` object with the `INDEX` (of the tutor/student to be deleted) and `PersonType` as parameters.
-5. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the tutor list.
+5. As the `PersonType` is a tutor, `DeleteCommand` retrieves the `Tutor` (to be deleted) from the `filteredTutors` list of the `ModelManager`. `DeleteCommand` will then call `Model#deleteTutor`, which will delete the tutor from the Tutor List.
 6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `delete` implementation works for a **valid** `delete` tutor input:
@@ -275,7 +275,7 @@ Given below is an activity diagram to show how the `delete` command works for a 
 
 ### Edit feature
 #### What it is
-Edits a tutor/student in the tutor/student list respectively. All fields are **optional** in the `edit` command, but **at least one field** must be specified for the command to execute successfully.
+Edits a tutor/student in the Tutor/Student List respectively. All fields are **optional** in the `edit` command, but **at least one field** must be specified for the command to execute successfully.
 
 #### Implementation details
 ##### Sequence of action
@@ -286,7 +286,7 @@ Given below is an example usage scenario and how the `edit` command implementati
 1. The user input `edit t 1 p/94203825` is passed to `LogicManager` to be executed.
 2. `LogicManager` calls `CliTutorsParser#parseCommand` which in turn creates a new `EditCommandParser`.
 3. The `EditCommandParser` calls its own `parse()` method which will return a new `EditCommand` if the input is valid.
-4. `EditCommand` will then update the tutor list in the `Model` class by replacing the existing tutor (to be edited) with the edited tutor.
+4. `EditCommand` will then update the Tutor List in the `Model` class by replacing the existing tutor (to be edited) with the edited tutor.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `edit` implementation works for a **valid** `edit` tutor input:
@@ -322,7 +322,7 @@ Given below is an example usage scenario and how the `list` command implementati
 1. The user input `list s` is passed to LogicManager to be executed.
 2. `LogicManager` calls the `CliTutorsParser#parseCommand` method which in turn creates a new `ListCommandParser`.
 3. The `ListCommandParser#parse` method is then called which will return a new `ListCommand` if the input is valid.
-4. `ListCommand` will then show all students in the student list in the `Model` class.
+4. `ListCommand` will then show all students in the Student List in the `Model` class.
 5. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how the `list` implementation works:
@@ -343,7 +343,7 @@ Given below is an activity diagram to show how the `list s` command works:
     - Cons: It is troublesome to type the command twice if the user wanted to view all the tutors and students.
 - **Alternative 2**: User inputs `list` and all tutors and students are shown.
     - Pros: Simpler for the user to list all tutors and students.
-    - Cons: Will remove all filters applied to both the tutor and student lists and show all tutors and students. The user is unable to customise the view of tutor/student lists independently.
+    - Cons: Will remove all filters applied to both the tutor and Student Lists and show all tutors and students. The user is unable to customise the view of Tutor/Student Lists independently.
 
 ### Find feature
 
@@ -364,7 +364,7 @@ Given below is an example usage scenario and how the `find` command implementati
 2. `LogicManager` calls on `CliTutorsParser#parseCommand` method which creates a new `FindCommandParser`.
 3. The `FindCommandParser` then calls its own `parse()` method which will return a new `FindCommand` if the input is valid.
 4. `LogicManager` will execute the `FindCommand` through `FindCommand#execute`.
-5. `FindCommand` will then search and update the student list in the `Model` class using the `Model#updateFilteredStudentList` method.
+5. `FindCommand` will then search and update the Student List in the `Model` class using the `Model#updateFilteredStudentList` method.
 6. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
 Given below is a sequence diagram to show how a **valid** `find` implementation works for a `find` student input:
@@ -401,14 +401,14 @@ Upon the user's entry of the command, the validity of the user's input is checke
 {:.no_toc}
 Given below is an example valid usage scenario and how the `match` command implementation behaves at each step.
 
-**Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
+**Prerequisite**: There are students in the Student List and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 
 Steps:
-1. The user input `match 1` (i.e. match the first student in the student list) is passed to `LogicManager` to be executed.
+1. The user input `match 1` (i.e. match the first student in the Student List) is passed to `LogicManager` to be executed.
 2. `LogicManager` calls on `CliTutorsParser#parseCommand`, which creates a new `MatchCommandParser` object.
 3. The `MatchCommandParser` object calls on its own parse() method which will validate the user input and return a new `MatchCommand`.
 4. `LogicManager` will execute the `MatchCommand` through `MatchCommand#execute`, which will be responsible for matching the `Student`.
-5. `MatchCommand` will find the first student in the student list and a `TagsContainTagPredicate` object is created.
+5. `MatchCommand` will find the first student in the Student List and a `TagsContainTagPredicate` object is created.
 6. The `matchTutorList` in the `Model` will then be updated via `Model#updateMatchedTutor`.
 7. Lastly, a new `CommandResult` with the success message is returned to the `LogicManager`.
 
@@ -666,7 +666,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.<br>All tutors and students used in the test cases below are based off the sample data given when the application is first launched.<br>Please reload the sample data after testing each section below.
 </div>
 
 ### Launch and shutdown
@@ -706,32 +706,33 @@ Given below are instructions to test the app manually.
     5. Test case: `add t n/John Doe p/98765432 g/MF t/PM`<br>
        Expected: No tutor is added. Error details shown in the result display, with result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
 
-### Edit Tutor/Student list
+### Edit Tutor/Student List
 {:.no_toc}
 
 1. Edit a tutor in the Tutor List.
     1. Test case: `edit t 1 n/John Doe`<br>
-       Expected: The first tutor `Alex Yeoh` is renamed to `John Doe`. Details of the added tutor are shown in the result display.
+       Expected: The first tutor `Alex Yeoh` is renamed to `John Doe`. Details of the edited tutor are shown in the result display.
     2. Test case: `edit t 1`<br>
-       Expected: No tutor is added. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
+       Expected: No tutor is edited. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
     3. Test case: `edit t 1 g/Z`<br>
-       Expected: No tutor is added. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
-    4. Test case: `edit t 2 n/Bernice Yu p/99272758 g/F q/1 t/SC SP`<br>
-       Expected: No tutor is added. Error details shown in the result display, with a result message `This tutor is unchanged`.
+       Expected: No tutor is edited. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+    4. Prerequisite: All tutors in the Tutor List are the default values loaded from `SampleDataUtil`<br>
+       Test case: `edit t 2 n/Bernice Yu p/99272758 g/F q/1 t/SC SP`<br>
+       Expected: No tutor is edited. Error details shown in the result display, with a result message `This tutor is unchanged`.
     5. Test case: `edit t 2 p/87438807`<br>
-       Expected: No tutor is added. Error details shown in the result display, with result message `Some other person already has this phone number...` since tutor Alex Yeoh already has this phone number.
+       Expected: No tutor is edited. Error details shown in the result display, with result message `Some other person already has this phone number...` since tutor Alex Yeoh already has this phone number.
 
 2. Edit a student in the Student List.
     1. Test case: `edit s 1 n/John Doe`<br>
-       Expected: The first student `David Li` is renamed to `John Doe`. Details of the added student are shown in the result display.
+       Expected: The first student `David Li` is renamed to `John Doe`. Details of the edited student are shown in the result display.
     2. Test case: `edit s 1`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
+       Expected: No student is edited. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
     3. Test case: `edit s 1 g/Z`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+       Expected: No student is edited. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
     4. Test case: `edit s 2 n/Irfan Ibrahim p/92492021 g/M t/SC`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `This student is unchanged`.
+       Expected: No student is edited. Error details shown in the result display, with a result message `This student is unchanged`.
     5. Test case: `edit s 2 p/91031282`<br>
-       Expected: No student is added. Error details shown in the result display, with result message `Some other person already has this phone number...` since student David Li already has this phone number.
+       Expected: No student is edited. Error details shown in the result display, with result message `Some other person already has this phone number...` since student David Li already has this phone number.
 
 ### Delete a Tutor/Student
 {:.no_toc}
@@ -757,7 +758,7 @@ Given below are instructions to test the app manually.
     4. Test case: `clear s` then `delete s 1`<br>
       Expected: Error details shown in the result display, with a result message `Student list is empty!`
     5. Test case: `clear s` then `delete s -10`<br>
-          Expected: Error details shown in the result display, with a result message `The student index provided is invalid`
+      Expected: Error details shown in the result display, with a result message `The student index provided is invalid`
 
 ### Find Tutor/Student
 {:.no_toc}
@@ -765,34 +766,34 @@ Given below are instructions to test the app manually.
 [comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
 
 1. Find a tutor while all tutors are shown.
-   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the tutor list.
+   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the Tutor List.
    2. Test case: `find t n/alex`
-      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the tutor list.
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the Tutor List.
       <br>e.g. Tutors with the names: 'Alex Yeoh', 'alex lim' and 'Alex' will be shown.
    3. Test case: `find t n/alex q/1`
-      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) with qualification 1 (undergraduate) will be displayed in the tutor list.
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) with qualification 1 (undergraduate) will be displayed in the Tutor List.
       <br>e.g A tutor named 'Alex Yeoh' with qualification 1 will be shown but a tutor named 'Alex Tan' with qualification 2 will not be shown.
    4. Test case: `find`
-      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+      <br>Expected: Tutor List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
    5. Test case: `find t`
-      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+      <br>Expected: Tutor List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
 
 2. Find a student while all students are shown.
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the Student List.
     2. Test case: `find s n/david`
-       <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
+       <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the Student List.
        <br>e.g. Students with the names: 'David Li', 'david tan' and 'John David' will be shown.
     3. Test case: `find s n/david t/pm`
-       <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the student list.
+       <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the Student List.
        <br>e.g A student named 'David Li' and has tag `PM` will be shown but a student named 'David' and has tag `PS` will not be shown.
     4. Test case: `find`
-       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
     5. Test case: `find s q/2`
-       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
+       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
     6. Test case: `find s`
-       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
-3. Find a tutor/student while the tutor/student list is empty.
-   1. Prerequisites: Clear the tutor and student lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
+       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+3. Find a tutor/student while the Tutor/Student List is empty.
+   1. Prerequisites: Clear the Tutor and Student Lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
    2. Test case: `find t n/alex`
       <br>Expected: Error details shown in the result display, with a result message `Tutor list is empty!`.
    3. Test case: `find s n/david`
@@ -800,21 +801,17 @@ Given below are instructions to test the app manually.
 
 ### Match Student
 {:.no_toc}
-[comment]: <> (to update based on our sample data)
 1. Match a student while all students are being shown
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list.
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list and at least one matching tutor.
     2. Test case: `match 1`<br>
-       Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
+        Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
     3. Test case: `match`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
     4. Test case: `match 0`<br>
-       Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
+       Expected: No student is matched. Error details shown in the result display, with a result message `The student index provided is invalid`
        Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
-    5. Test case: `match 100` //some index to add later<br>
-       Expected: No endpoint is deleted. Error details shown in the result display, with a result message saying `Index provided is not within...`
-       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer).
 
-### Filter matched Tutor list
+### Filter matched Tutor List
 {:.no_toc}
 
 1. Filter tutors before matching tutors to a student.
@@ -833,45 +830,45 @@ Given below are instructions to test the app manually.
 {:.no_toc}
 
 1. List all tutors.
-    1. Prerequisites: There are tutors are in the tutor list.
+    1. Prerequisites: There are tutors are in the Tutor List.
     2. Test case: `list t`<br>
-       Expected: All stored tutors are shown in the tutor list, with a result message `Listed all tutors!`.
-2. List all tutors from the tutor list after a `find` command
-   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the tutor list shows less than actual number of tutors.
+       Expected: All stored tutors are shown in the Tutor List, with a result message `Listed all tutors!`.
+2. List all tutors from the Tutor List after a `find` command
+   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the Tutor List shows less than actual number of tutors.
    2. Test case: `list t`<br>
       Expected: Filter from the `find` will be cleared and all tutors are shown in the endpoint list, with a result message `Listed all tutors!`.
 3. List all students
-    1. Prerequisites: All students are in the student list.
+    1. Prerequisites: All students are in the Student List.
     2. Test case: `list s`<br>
-       Expected: All students are shown in the student list, with a result message `Listed all students!`.
-4. List all students from the student list after a `find` command
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the student list shows less than actual number of students.
+       Expected: All students are shown in the Student List, with a result message `Listed all students!`.
+4. List all students from the Student List after a `find` command
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the Student List shows less than actual number of students.
     2. Test case: `list s`<br>
-       Expected: Filter from the `find` will be cleared and all students are shown in the student list, with a result message `Listed all students!`.
-5. List all tutor from the tutor list after a `clear t` command
-    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `clear t` command such that all tutors are cleared from the tutor list.
+       Expected: Filter from the `find` will be cleared and all students are shown in the Student List, with a result message `Listed all students!`.
+5. List all tutor from the Tutor List after a `clear t` command
+    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `clear t` command such that all tutors are cleared from the Tutor List.
     2. Test case: `list t`<br>
-       Expected: No tutors are shown in the tutor list, with a result message saying `List is empty!`.
-6. List all students from the student list after a `clear s` command
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `clear s` command such that all students are cleared from the student list.
+       Expected: No tutors are shown in the Tutor List, with a result message saying `List is empty!`.
+6. List all students from the Student List after a `clear s` command
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `clear s` command such that all students are cleared from the Student List.
     2. Test case: `list s`<br>
-       Expected: No students are shown in the student list, with a result message saying `List is empty!`.
+       Expected: No students are shown in the Student List, with a result message saying `List is empty!`.
 
-### Clear Tutor/Student list
+### Clear Tutor/Student List
 {:.no_toc}
 
-1. Clear all tutors from the tutor list
+1. Clear all tutors from the Tutor List
     1. Prerequisites: None
     2. Test case: `clear t`<br>
        Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
     3. Test case: `clear t 123`<br>
-       Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
-2. Clear all students from the student list
+       Expected: Tutor List not cleared with a result message `Invalid command format! ...`.
+2. Clear all students from the Student List
     1. Prerequisites: None
     2. Test case: `clear s`<br>
        Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
     3. Test case: `clear s 123`<br>
-       Expected: Student list not cleared with a result message `Invalid command format! ...`.
+       Expected: Student List not cleared with a result message `Invalid command format! ...`.
 
 ### Saving data
 {:.no_toc}
@@ -880,10 +877,10 @@ Given below are instructions to test the app manually.
 [comment]: <> (Reused from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuidehtml#appendix-h-instructions-for-manual-testing with minor modifications)
 1. Saving data between sessions
    1. Launch the app by double-clicking on the jar file.
-   2. Add a new tutor with a valid `add t` command. Confirm that the tutor has been added by checking whether it is shown in the tutor list in the GUI.
+   2. Add a new tutor with a valid `add t` command. Confirm that the tutor has been added by checking whether it is shown in the Tutor List in the GUI.
    3. Close the app by using the `exit` command.
    4. Relaunch the app by double-clicking the jar file.
-      <br>Expected: The newly added tutor is still present in the tutor list.
+      <br>Expected: The newly added tutor is still present in the Tutor List.
 
 2. Dealing with corrupted data files
    1. Prerequisite: Opened and closed (by entering the command `exit`) the application  and ensured that `data/clitutors.json` is created.
