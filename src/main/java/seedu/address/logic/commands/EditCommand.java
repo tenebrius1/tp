@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -89,7 +90,6 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         switch(personType) {
         case TUTOR:
             return executeEditTutor(model);
@@ -119,6 +119,10 @@ public class EditCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
@@ -154,6 +158,10 @@ public class EditCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
