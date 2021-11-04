@@ -3,44 +3,41 @@ layout: page
 title: Kleon's Project Portfolio Page
 ---
 
-### Project: CLITutors
+# **Project: CLITutors**
 
-CLITutors is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+## **Overview**
 
-Given below are my contributions to the project.
+`CliTutors` is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CliTutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=kleonang&tabRepo=AY2122S1-CS2103T-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+## **My contributions**
 
-* **Code contributed**: [RepoSense link]()
+### **New Features & Enhancements**
+- Removed `Email` and `Address` fields, added `Gender` field to `Person` class (Pull request [#48](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/48))
+- Split `Person` class into `Tutor` and `Student` classes, along with their associated classes (including `JsonAdaptedPerson`, `UniquePersonList` and `PersonBuilder`) (Pull request [#48](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/48))
+- Make `StudentUtil` and `TutorUtil` inherit from `PersonUtil` (Pull request [#53](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/53))
+- Integrate `EditCommand` to work with new `Tutor` and `Student` classes (Pull request [#58](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/58))
+- Add `Remark` field in `Person` class (Pull request [#113](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/113))
+- Make `Phone` accept exactly 8 digits (Pull request [#125](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/125))
+- Make `Remark` accept a maximum of 100 characters ([#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+### **Documentation**
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+#### **User Guide**
+- Add Use Cases UC01 to UC05 (Pull request [#25](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/25/files))
+- Fix broken links and grammar (Pull request [#108](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/108/files))
+- Miscellaneous collaborative edits in group discussions
 
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
+#### **Developer Guide**
+- Add `Model` diagrams and description to DG (Pull request [#104](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/104))
+- Fix broken links and grammar (Pull request [#108](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/108/files))
+- Update `EditCommand` implementation details (Pull requests [#114](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/114), [#119](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/119))
+- Miscellaneous collaborative edits in group discussions
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+#### **Miscellaneous**
+- Bug fixes for issues identified in PE-D ([#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
 
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+### **Community**
+- PRs reviewed (Pull requests [#55](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/55), [#62](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/62), [#68](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/68), [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105), [#121](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/121), [#123](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/123), [#129](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/129))
+- Tested the product of other teams and [reported bugs](https://github.com/kleonang/ped/issues) during PE-D

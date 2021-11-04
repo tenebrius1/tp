@@ -28,7 +28,7 @@ title: Xin Yan's Project Portfolio Page
 
 #### **User Guide**
   - Did cosmetic tweaks to the User Guide
-  - Added the documentation for the features `edit`, `delete` (Pull request [#65](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/65)) 
+  - Added the documentation for the features `edit`, `delete` (Pull request [#65](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/65))
   - Updated the documentation for commands and Quick Start (Pull request [#100](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/100), [#192](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/192))
 
 #### **Developer Guide**
@@ -43,7 +43,7 @@ title: Xin Yan's Project Portfolio Page
 #### **Miscellaneous**
 - Designed the user interface and updated Ui.png (Pull requests [#10](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/10), [#18](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/18), [#19](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/19), [#56](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/56))
 - Updated README.md for CLITutors (Pull request [#13](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/13))
-  
+
 ### **Community**
   - PRs reviewed (with non-trivial review comments) (Pull requests [#49](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/49), [#60](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/60),  [#69](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/69), [#74](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/74),  [#98](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/98), [#112](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/112), [#126](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/126), [#127](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/127), [#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
   - Contributed to forum discussions (example: [#141](https://github.com/nus-cs2103-AY2122S1/forum/issues/141))
