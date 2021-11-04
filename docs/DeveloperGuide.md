@@ -796,14 +796,15 @@ to be added.
 {:.no_toc}
 
 1. Filter tutors before matching tutors to a student.
-   1. Test case: No tutors are filtered. Error details shown in the result display, with a result message `Failed to filter as no match command was given prior.`.
+   1. Test case: `filter q/3`<br>
+      Expected: No tutors are filtered. Error details shown in the result display, with a result message `Failed to filter as no match command was given prior.`.
 2. Filter tutors after matching tutors to a student.
    1. Prerequisites: A valid match command was entered.
-   2. Test case: `filter q/3`
+   2. Test case: `filter q/3`<br>
       Expected: All tutors with the qualification `MOE-Trained` will be filtered out.
 2. Filter tutors after matching tutors to a student.
     1. Prerequisites: A valid match command was entered.
-    2. Test case: `filter p/12341234`
+    2. Test case: `filter p/12341234`<br>
        Expected: No tutors are filtered. Error details shown in the result display, with a result message `Invalid command format! ...`.
 
 ### List all Tutor/Student
