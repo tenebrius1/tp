@@ -139,12 +139,14 @@
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-line-spacing: 0em;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+    -fx-line-spacing: 0em;
 }
 
 .stack-pane {

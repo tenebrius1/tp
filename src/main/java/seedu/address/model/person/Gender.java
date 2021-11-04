@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidGender(String)}
  */
 public class Gender {
-    public static final String MESSAGE_CONSTRAINTS = "Gender should be 'M' or 'F'";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should be 'M' / 'm' or 'F' / 'f'";
     public static final String VALIDATION_REGEX = "[MmFf]";
     public final String genderSymbol;
 
