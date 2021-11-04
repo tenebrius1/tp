@@ -29,6 +29,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.GenderContainsGenderPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.QualificationContainsQualificationPredicate;
 import seedu.address.model.person.Student;
@@ -160,6 +161,11 @@ public class ModelManagerTest {
     @Test
     public void filterMatchedTutor_modifyList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.filterMatchedTutor(null));
+    }
+
+    @Test
+    public void hasPersonWithSamePhone_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasPersonWithSamePhone(null));
     }
 
     @Test
@@ -328,7 +334,16 @@ public class ModelManagerTest {
         assertEquals(expectedStudent, modelManager.getMatchedStudent());
     }
 
+    @Test
+    public void hasPersonWithSamePhoneTest() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalStudents().stream().forEach(student -> modelManager.addStudent(student));
 
+        assertTrue(modelManager.hasPersonWithSamePhone(ALICE.getPhone()));
+
+        Phone phone = new Phone("94351259");
+        assertFalse(modelManager.hasPersonWithSamePhone(phone));
+    }
 
     @Test
     public void equals() {

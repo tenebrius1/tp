@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniqueStudentList;
@@ -60,6 +61,11 @@ public class CliTutorsTest {
     @Test
     public void resetStudentData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> cliTutors.resetStudentData(null));
+    }
+
+    @Test
+    public void hasPersonWithSamePhone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> cliTutors.hasPersonWithSamePhone(null));
     }
 
     @Test
@@ -230,6 +236,17 @@ public class CliTutorsTest {
         ObservableList<Tutor> expectedUniqueTutorList = cliTutors.getMatchedTutorList();
         cliTutors.sortMatchedTutorList(studentTagList);
         assertEquals(expectedUniqueTutorList, cliTutors.getMatchedTutorList());
+    }
+
+    @Test
+    public void hasPersonWithSamePhoneTest() {
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
+        TypicalPersons.getTypicalStudents().stream().forEach(student -> cliTutors.addStudent(student));
+
+        assertTrue(cliTutors.hasPersonWithSamePhone(ALICE.getPhone()));
+
+        Phone phone = new Phone("94351259");
+        assertFalse(cliTutors.hasPersonWithSamePhone(phone));
     }
 
     @Test

@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
@@ -237,6 +238,12 @@ public class ModelManager implements Model {
     @Override
     public Student getMatchedStudent() {
         return matchedStudent;
+    }
+
+    @Override
+    public boolean hasPersonWithSamePhone(Phone p) {
+        requireNonNull(p);
+        return cliTutors.hasPersonWithSamePhone(p);
     }
 
     @Override
