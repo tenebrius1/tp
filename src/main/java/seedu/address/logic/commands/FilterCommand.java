@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -23,7 +22,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all the tutor names that contain "
             + "the specified search parameters (case-insensitive) and displays them in the matched tutors list."
             + "Parameters: [n/NAME] [g/GENDER] [q/QUALIFICATION]\n"
-            + "Example: " + COMMAND_WORD + " t q/3";
+            + "Example: " + COMMAND_WORD + " q/3";
 
     public static final String MESSAGE_FILTER_FAILED = "Failed to filter as no match command was given prior.";
 
@@ -45,7 +44,7 @@ public class FilterCommand extends Command {
         }
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
+            model.clearMatchedTutor();
             throw new CommandException(String.format(MESSAGE_FILTER_FAILED));
         }
 

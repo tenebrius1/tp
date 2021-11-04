@@ -48,9 +48,11 @@ public class FilterCommandTest {
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
-        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
-        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         GenderContainsGenderPredicate predicate = prepareGenderPredicate(VALID_GENDER_AMY);
         expectedModel.filterMatchedTutor(predicate);
@@ -70,9 +72,11 @@ public class FilterCommandTest {
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
-        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
-        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         NameContainsKeywordsPredicate predicate = prepareNamePredicate(VALID_NAME_ROXANNE);
         expectedModel.filterMatchedTutor(predicate);
@@ -92,9 +96,11 @@ public class FilterCommandTest {
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         List<Tag> ls = new ArrayList<>();
         ls.addAll(studentToMatch.getTags());
-        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
-        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls);
+        model.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         QualificationContainsQualificationPredicate predicate = prepareQualificationPredicate(VALID_QUALIFICATION_MOE);
         expectedModel.filterMatchedTutor(predicate);

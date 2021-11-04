@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
@@ -32,23 +33,14 @@ public class StudentTest {
         // null -> returns false
         assertFalse(DANIEL.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Student editedDaniel = new StudentBuilder(DANIEL).withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY)
+        // same phone, all other attributes different -> returns true
+        Student editedDaniel = new StudentBuilder(DANIEL).withName(VALID_NAME_BOB).withGender(VALID_GENDER_AMY)
                 .withTag(VALID_TAG_PM).build();
         assertTrue(DANIEL.isSamePerson(editedDaniel));
 
-        // different name, all other attributes same -> returns false
-        editedDaniel = new StudentBuilder(DANIEL).withName(VALID_NAME_AMY).build();
+        // different phone, all other attributes same -> returns false
+        editedDaniel = new StudentBuilder(DANIEL).withPhone(VALID_PHONE_AMY).build();
         assertFalse(DANIEL.isSamePerson(editedDaniel));
-
-        // name differs in case, all other attributes same -> returns false
-        Student editedAmy = new StudentBuilder(AMY).withName(VALID_NAME_AMY.toLowerCase()).build();
-        assertTrue(AMY.isSamePerson(editedAmy));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_AMY + " ";
-        editedAmy = new StudentBuilder(AMY).withName(nameWithTrailingSpaces).build();
-        assertFalse(AMY.isSamePerson(editedAmy));
     }
 
     @Test

@@ -34,16 +34,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Removes any trailing and leading white spaces
-        String trimmedArgs = args.trim();
-
-        // If user just type in "filter", then throw ParseException
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
-
-        return new FilterCommand(generatePredicate(trimmedArgs));
+        return new FilterCommand(generatePredicate(args));
     }
 
     /**
@@ -54,23 +45,25 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     private Predicate<Person> generatePredicate(String args) throws ParseException {
         Predicate<Person> predicate = x -> true;
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
+        int prefixCount = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUALIFICATION,
                 PREFIX_GENDER);
 
-        if (!ParserUtil.parsePersonType(argMultimap.getPreamble().trim()).toString()
-                .equals(PersonType.TUTOR.toString())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
-
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            prefixCount += 1;
             predicate = handleName(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            prefixCount += 1;
             predicate = handleGender(predicate, builder, argMultimap);
         }
         if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
+            prefixCount += 1;
             predicate = handleQualification(predicate, builder, argMultimap);
+        }
+        if (prefixCount == 0) { // Checks if user entered any parameter
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         return builder.setPredicate(predicate).build();

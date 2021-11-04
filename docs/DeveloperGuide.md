@@ -21,15 +21,13 @@ nav-text: Developer Guide
 * Table of Contents
 {:toc}
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Introduction**
 
-`CLITutors` is a desktop application for managers to manage private tutoring jobs, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). CLITutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
+`CliTutors` is a desktop application for managers to manage private tutoring jobs, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). CliTutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
 
-This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to `CLITutors`, a [glossary](#glossary) has been provided for readers.
+This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to `CliTutors`, a [glossary](#glossary) has been provided for readers.
 
 Readers are also advised to [download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases) our latest releases from our main website in order to test out the application.
 
@@ -401,7 +399,7 @@ Upon the user's entry of the command, the validity of the user's input is checke
 
 ##### Sequence of action
 {:.no_toc}
-Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
+Given below is an example valid usage scenario and how the `match` command implementation behaves at each step.
 
 **Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 
@@ -500,8 +498,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User keys in the tutor's details
-2. Tutor is added to the database
+1. User keys in the tutor's details.
+2. Tutor is added to the database.
    <br>Use case ends.
 
 **Extensions**
@@ -515,8 +513,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User keys in the student's details
-2. Student is added to the database
+1. User keys in the student's details.
+2. Student is added to the database.
    <br>Use case ends.
 
 **Extensions**
@@ -530,8 +528,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the command to edit the name of Student A
-2. System replies with a confirmation message that the edit is successful
+1. User enters the command to edit the name of Student A.
+2. System replies with a confirmation message that the edit is successful.
    <br>Use case ends.
 
 **Extensions**
@@ -547,8 +545,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the command to edit the phone number of Student B
-2. System replies with a confirmation message that the edit is successful
+1. User enters the command to edit the phone number of Student B.
+2. System replies with a confirmation message that the edit is successful.
    <br>Use case ends.
 
 **Extensions**
@@ -564,10 +562,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list tutors
-2. `CLITutorsBook` shows a list of tutors
-3. User requests to delete a specific tutor in the list
-4. `CLITutorsBook` deletes the tutor
+1. User requests to list tutors.
+2. `CliTutors` shows a list of tutors.
+3. User requests to delete a specific tutor in the list.
+4. `CliTutors` deletes the tutor.
    <br>Use case ends.
 
 **Extensions**
@@ -575,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. `CLITutorsBook` shows an error message.
+    * 3a1. `CliTutors` shows an error message.
       <br>Use case resumes at step 2.
 
 #### Use case (UC06): Delete a Student
@@ -583,10 +581,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list students
-2. `CLITutorsBook` shows a list of students
-3. User requests to delete a specific student from the list
-4. `CLITutorsBook` deletes the student
+1. User requests to list students.
+2. `CliTutors` shows a list of students.
+3. User requests to delete a specific student from the list.
+4. `CliTutors` deletes the student.
    <br>Use case ends.
 
 **Extensions**
@@ -594,7 +592,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. `CLITutorsBook` shows an error message.
+    * 3a1. `CliTutors` shows an error message.
       <br>Use case resumes at step 2.
 
 #### Use case (UC07): Find a Tutor
@@ -602,8 +600,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a tutor using his/her name
-2. `CLITutorsBook` shows all tutors that contain that specific name
+1. User requests to find a tutor using his/her name.
+2. `CliTutors` shows all tutors that contain that specific name.
    <br>Use case ends.
 
 **Extensions**
@@ -618,8 +616,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a student using his/her name
-2. `CLITutorsBook` shows all students that contain that specific name
+1. User requests to find a student using his/her name.
+2. `CliTutors` shows all students that contain that specific name.
    <br>Use case ends.
 
 **Extensions**
@@ -634,8 +632,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to match a student with tutors with the required qualifications
-2. `CLITutorsBook` shows the tutors that are able to match with the specified student in a window
+1. User requests to match a student with tutors with the required qualifications.
+2. `CliTutors` shows the tutors that are able to match with the specified student in a window.
    <br>Use case ends.
 
 **Extensions**
@@ -721,7 +719,41 @@ to be added.
 ### Find Tutor/Student
 {:.no_toc}
 
-to be added.
+[comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
+1. Find a student while all students are shown.
+   1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
+   2. Test case: `find s n/david`
+      <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
+      <br>e.g. Students with the names: 'David Li', 'david tan' and 'John David' will be shown.
+   3. Test case: `find s n/david t/pm`
+      <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the student list.
+      <br>e.g A student named 'David Li' and has tag `PM` will be shown but a student named 'David' and has tag `PS` will not be shown.
+   4. Test case: `find`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+   5. Test case: `find s q/2`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
+   6. Test case: `find s`
+      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+
+2. Find a tutor while all tutors are shown.
+   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the tutor list.
+   2. Test case: `find t n/alex`
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the tutor list.
+      <br>e.g. Tutors with the names: 'Alex Yeoh', 'alex lim' and 'Alex' will be shown.
+   3. Test case: `find t n/alex q/1`
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) with qualification 1 (undergraduate) will be displayed in the tutor list.
+      <br>e.g A tutor named 'Alex Yeoh' with qualification 1 will be shown but a tutor named 'Alex Tan' with qualification 2 will not be shown.
+   4. Test case: `find`
+      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+   5. Test case: `find t`
+      <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+
+3. Find a tutor/student while the tutor/student list is empty.
+   1. Prerequisites: Clear the tutor and student lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
+   2. Test case: `find t n/alex`
+      <br>Expected: Error details shown in the result display, with a result message `Tutor list is empty!`.
+   3. Test case: `find s n/david`
+      <br>Expected: Error details shown in the result display, with a result message `Student list is empty!`.
 
 ### Match Student
 {:.no_toc}
@@ -737,7 +769,7 @@ to be added.
        Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
     1. Test case: `match 100` //some index to add later<br>
        Expected: No endpoint is deleted. Error details shown in the result display, with a result message saying `Index provided is not within...`
-       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer
+       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer).
 
 ### Filter matched Tutor list
 {:.no_toc}
@@ -790,11 +822,24 @@ to be added.
 
 ### Saving data
 {:.no_toc}
-to be added.
 
-[comment]: <> (1. Dealing with missing/corrupted data files)
+[comment]: <> (@@author tenebrius1-reused)
+[comment]: <> (Reused from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuidehtml#appendix-h-instructions-for-manual-testing with minor modifications)
+1. Saving data between sessions
+   1. Launch the app by double-clicking on the jar file.
+   2. Add a new tutor with a valid `add t` command. Confirm that the tutor has been added by checking whether it is shown in the tutor list in the GUI.
+   3. Close the app by using the `exit` command.
+   4. Relaunch the app by double-clicking the jar file.
+      <br>Expected: The newly added tutor is still present in the tutor list.
 
-[comment]: <> (    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_)
+2. Dealing with corrupted data files
+   1. Prerequisite: Opened and closed (by entering the command `exit`) the application  and ensured that `data/clitutors.json` is created.
+   2. Corrupt the save file (`data/clitutors.json`). The easiest way is to type '-' somewhere in one of the saved tutor's phone. Another way may be to add random characters that make the JSON format unreadable.
+   3. Relaunch the app by double-clicking on the jar file
+      <br>Expected: Shows the GUI with no data.
+   4. Delete the current save file.
+   5. Relaunch the app again by double-clicking on the jar file.
+      <br>Expected: Shows the GUI with sample data.
 
 [comment]: <> (2. _{ more test cases …}_)
 

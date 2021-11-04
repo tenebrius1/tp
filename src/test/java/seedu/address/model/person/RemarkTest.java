@@ -15,7 +15,8 @@ public class RemarkTest {
 
     @Test
     public void constructor_invalidRemark_throwsIllegalArgumentException() {
-        String invalidRemark = " ";
+        String invalidRemark = "This is a long remark that exceeds 100 characters. "
+                + "This should not be allowed as a remark and should throw an error.";
         assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
     }
 
@@ -25,8 +26,8 @@ public class RemarkTest {
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
         // invalid remark
-        assertFalse(Remark.isValidRemark(" ")); // one space only
-        assertFalse(Remark.isValidRemark("   ")); // multiple spaces only
+        assertFalse(Remark.isValidRemark("This is a long remark that exceeds 100 characters. "
+                + "This should not be allowed as a remark and should throw an error.")); // more than 100 characters
 
         // valid remark
         assertTrue(Remark.isValidRemark("prefers small groups")); // alphabets only
