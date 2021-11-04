@@ -740,7 +740,7 @@ Given below are instructions to test the app manually.
     1. Test case: `delete t 1`<br>
        Expected: First tutor is deleted from the Tutor List. Details of the deleted tutor shown in the result display.
     2. Test case: `delete t 0`<br>
-        Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
     3. Test case: `delete t x` (where x is larger than the list size)<br>
        Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
     4. Test case: `clear t` then `delete t 1`<br>
@@ -751,7 +751,7 @@ Given below are instructions to test the app manually.
     1. Test case: `delete s 1`<br>
        Expected: First student is deleted from the Student List. Details of the deleted student shown in the result display.
     2. Test case: `delete s 0`<br>
-        Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
+       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
     3. Test case: `delete s x` (where x is larger than the list size)<br>
        Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`<br>
     4. Test case: `clear s` then `delete s 1`<br>
@@ -804,7 +804,7 @@ Given below are instructions to test the app manually.
 1. Match a student while all students are being shown
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list.
     2. Test case: `match 1`<br>
-        Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
+       Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
     3. Test case: `match`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
     4. Test case: `match 0`<br>
@@ -843,8 +843,7 @@ Given below are instructions to test the app manually.
 3. List all students
     1. Prerequisites: All students are in the student list.
     2. Test case: `list s`<br>
-        Expected: All students are shown in the student list, with a
-        result message `Listed all students!`.
+       Expected: All students are shown in the student list, with a result message `Listed all students!`.
 4. List all students from the student list after a `find` command
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the student list shows less than actual number of students.
     2. Test case: `list s`<br>
@@ -864,13 +863,13 @@ Given below are instructions to test the app manually.
 1. Clear all tutors from the tutor list
     1. Prerequisites: None
     2. Test case: `clear t`<br>
-        Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
+       Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
     3. Test case: `clear t 123`<br>
        Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
 2. Clear all students from the student list
     1. Prerequisites: None
     2. Test case: `clear s`<br>
-        Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
+       Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
     3. Test case: `clear s 123`<br>
        Expected: Student list not cleared with a result message `Invalid command format! ...`.
 
