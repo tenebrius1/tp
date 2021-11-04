@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
@@ -222,7 +223,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls) {
+        public void updateMatchedTutor(TagsContainTagPredicate predicate, List<Tag> ls, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearMatchedTutor() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -233,6 +239,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Tutor> getMatchedTutorList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getMatchedStudent() {
             throw new AssertionError("This method should not be called.");
         }
     }

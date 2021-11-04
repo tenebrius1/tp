@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUALIFICATION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -46,6 +47,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
@@ -188,61 +190,69 @@ public class AddCommandParserTest {
     public void parse_invalidStudentValue_failure() {
         // invalid name
         assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + TAG_DESC_PM_TP, Name.MESSAGE_CONSTRAINTS);
+                + REMARK_DESC_AMY + TAG_DESC_PM_TP, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + INVALID_PHONE_DESC + GENDER_DESC_AMY
-                + TAG_DESC_PM_TP, Phone.MESSAGE_CONSTRAINTS);
+                + REMARK_DESC_AMY + TAG_DESC_PM_TP, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_GENDER_DESC
-                + TAG_DESC_PM_TP, Gender.MESSAGE_CONSTRAINTS);
+                + REMARK_DESC_AMY + TAG_DESC_PM_TP, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+                + REMARK_DESC_AMY + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + INVALID_REMARK_DESC + TAG_DESC_PM_TP, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, VALID_STUDENT_LETTER + INVALID_NAME_DESC + PHONE_DESC_AMY + INVALID_GENDER_DESC
-                        + TAG_DESC_PM_TP,
+                        + REMARK_DESC_AMY + TAG_DESC_PM_TP,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Invalid personType (not "t" or "s")
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertParseFailure(parser, INVALID_PREAMBLE + NAME_DESC_AMY + PHONE_DESC_AMY
-                + GENDER_DESC_AMY + TAG_DESC_PM_TP, expectedMessage);
+                + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_PM_TP, expectedMessage);
     }
 
     @Test
     public void parse_invalidTutorValue_failure() {
         // invalid name
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, Name.MESSAGE_CONSTRAINTS);
+                + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
-                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, Phone.MESSAGE_CONSTRAINTS);
+                + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
-                + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, Gender.MESSAGE_CONSTRAINTS);
+                + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid qualification
         assertParseFailure(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + INVALID_QUALIFICATION_DESC + TAG_DESC_PM_TP, Qualification.MESSAGE_CONSTRAINTS);
+                + INVALID_QUALIFICATION_DESC + REMARK_DESC_BOB + TAG_DESC_PM_TP, Qualification.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + QUALIFICATION_DESC_BOB + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+                + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_TUTOR_LETTER + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + QUALIFICATION_DESC_BOB + INVALID_REMARK_DESC + TAG_DESC_PM_TP, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, VALID_TUTOR_LETTER + INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_GENDER_DESC
-                        + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP,
+                        + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Invalid personType (not "t" or "s")
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertParseFailure(parser, INVALID_PREAMBLE + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP, expectedMessage);
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP, expectedMessage);
     }
 }
