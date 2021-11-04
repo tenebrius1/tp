@@ -682,7 +682,29 @@ Given below are instructions to test the app manually.
 ### Add a Tutor/Student
 {:.no_toc}
 
-to be added.
+1. Add a tutor to the Tutor List.
+   1. Test case: `add t n/John Doe p/98765432 g/M q/2 r/Prefers teaching in the West t/PM`<br>
+      Expected: The tutor `John Doe` is added to the Tutor List. Details of the added tutor shown in the result display.
+   2. Test case: `add t n/John Doe p/98765432 g/M q/2 r/Prefers teaching in the West`<br>
+      Expected: No tutor is added. Error details shown in the result display, with a result message `Invalid command format! ...`.
+   3. Test case: `add t n/李白 p/98765432 g/M q/2 r/Prefers teaching in the West t/PM`<br>
+      Expected: No tutor is added. Error details shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
+   4. Test case: `add t n/John Doe p/98765432 g/M q/2 r/Prefers teaching in the West t/GH`<br>
+      Expected: No tutor is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
+   5. Test case: `add t n/John Doe p/98765432 g/M q/5 r/Prefers teaching in the West t/PM`<br>
+      Expected: No tutor is added. Error details shown in the result display, with result message `Qualification should be '0', '1', '2' or '3'`.
+   
+2. Add a student to the Student List.
+    1. Test case: `add s n/John Doe p/98765432 g/M`<br>
+       Expected: The student `John Doe` is added to the Student List. Details of the added student shown in the result display.
+    2. Test case: `add s n/John Doe p/98765432 g/M q/2`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `Students do not have any qualifications tagged to them!`.
+    3. Test case: `add s n/李白 p/98765432 g/M t/PM`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
+    4. Test case: `add t n/John Doe p/98765432 g/M t/GH`<br>
+       Expected: No tutor is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
+    5. Test case: `add t n/John Doe p/98765432 g/MF`<br>
+       Expected: No tutor is added. Error details shown in the result display, with result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
 
 ### Edit Tutor/Student list
 {:.no_toc}
@@ -691,7 +713,6 @@ to be added.
 
 ### Delete a Tutor/Student
 {:.no_toc}
-to be added.
 
 1. Delete a tutor from the Tutor List.
     1. Test case: `delete t 1`<br>
@@ -773,7 +794,17 @@ to be added.
 
 ### Filter matched Tutor list
 {:.no_toc}
-to be added.
+
+1. Filter tutors before matching tutors to a student.
+   1. Test case: No tutors are filtered. Error details shown in the result display, with a result message `Failed to filter as no match command was given prior.`.
+2. Filter tutors after matching tutors to a student.
+   1. Prerequisites: A valid match command was entered.
+   2. Test case: `filter q/3`
+      Expected: All tutors with the qualification `MOE-Trained` will be filtered out.
+2. Filter tutors after matching tutors to a student.
+    1. Prerequisites: A valid match command was entered.
+    2. Test case: `filter p/12341234`
+       Expected: No tutors are filtered. Error details shown in the result display, with a result message `Invalid command format! ...`.
 
 ### List all Tutor/Student
 {:.no_toc}
