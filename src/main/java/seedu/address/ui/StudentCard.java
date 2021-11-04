@@ -49,7 +49,7 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().formatName());
+        name.setText(student.getName().formatFullName());
         phone.setText("Contact: " + student.getPhone().value);
         gender.setText("Gender: " + student.getGender().genderSymbol);
         if (student.isRemarkEmpty()) {

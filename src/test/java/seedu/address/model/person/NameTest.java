@@ -25,22 +25,22 @@ public class NameTest {
         String expectedName = "John Doe";
 
         Name n = new Name("john doe");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
 
         n = new Name("John doe");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
 
         n = new Name("john Doe");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
 
         n = new Name("jOhn doe");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
 
         n = new Name("john doE");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
 
         n = new Name("John       Doe");
-        assertEquals(expectedName, n.formatName());
+        assertEquals(expectedName, n.formatFullName());
     }
 
     @Test

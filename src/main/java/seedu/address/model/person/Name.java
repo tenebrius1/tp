@@ -42,7 +42,7 @@ public class Name {
      *
      * @return formatted name.
      */
-    public String formatName() {
+    public String formatFullName() {
         String[] ls = fullName.split(" ");
         List<String> nameFragments = new ArrayList<>();
         for (String s : ls) {
@@ -62,7 +62,7 @@ public class Name {
 
     @Override
     public String toString() {
-        return formatName();
+        return formatFullName();
     }
 
     @Override

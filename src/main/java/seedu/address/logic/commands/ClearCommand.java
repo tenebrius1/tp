@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears all entries of tutors or students from the database "
+            + ": Clears all entries of tutors or students from the database\n "
             + "Parameters: "
             + "t/s\n"
             + "Example: clear s";

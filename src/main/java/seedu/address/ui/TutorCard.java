@@ -52,7 +52,7 @@ public class TutorCard extends UiPart<Region> {
         super(FXML);
         this.tutor = tutor;
         id.setText(displayedIndex + ". ");
-        name.setText(tutor.getName().formatName());
+        name.setText(tutor.getName().formatFullName());
         phone.setText("Contact: " + tutor.getPhone().value);
         gender.setText("Gender: " + tutor.getGender().genderSymbol);
         qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));

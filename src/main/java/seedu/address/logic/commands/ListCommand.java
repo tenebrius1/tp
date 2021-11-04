@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_ALIAS = "l";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all entries of tutors or students "
+            + ": Lists all entries of tutors or students\n"
             + "Parameters: "
             + "t/s\n"
             + "Example: list t";
