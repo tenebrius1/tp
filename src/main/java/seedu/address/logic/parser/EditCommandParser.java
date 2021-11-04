@@ -2,12 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -39,53 +43,75 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
+                PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
         switch (personType) {
         case TUTOR:
-            return handleTutor(args);
+            EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
+            return parsePerson(argMultimap, editTutorDescriptor, PersonType.TUTOR);
             // No break necessary due to return statement
         case STUDENT:
-            return handleStudent(args);
+            EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
+            return parsePerson(argMultimap, editStudentDescriptor, PersonType.STUDENT);
             // No break necessary due to return statement
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
     }
 
-    private EditCommand handleTutor(String args) throws ParseException {
-        ArgumentMultimap tutorArgMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                        PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
-
-        EditTutorDescriptor editTutorDescriptor = new EditTutorDescriptor();
-        return parsePerson(tutorArgMultimap, editTutorDescriptor, PersonType.TUTOR);
-    }
-
-    private EditCommand handleStudent(String args) throws ParseException {
-        ArgumentMultimap studentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_REMARK, PREFIX_TAG);
-
-        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
-        return parsePerson(studentMultimap, editStudentDescriptor, PersonType.STUDENT);
-    }
-
     private EditCommand parsePerson(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor,
                                     PersonType personType) throws ParseException {
         Index personIndex;
-
         try {
             String trimmed = argMultimap.getPreamble().trim();
-            String[] split = trimmed.split(" ", 2);
+            String[] split = trimmed.split(" ");
             // Preamble should only have personType and Index
             if (split.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            // If personType or index not given, it is an invalid command format. ArrayIndexOutOfBoundsException
-            // will be thrown by these lines below, but we catch it and throw a ParseException
+            // If personType or index not given, it is an invalid command format. ParseException with
+            // MESSAGE_INVALID_INDEX will be thrown by the line below, but we catch it and throw a more specific and
+            // non-technical ParseException below.
             personIndex = ParserUtil.parseIndex(split[1]);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                switch (personType) {
+                case STUDENT:
+                    throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                case TUTOR:
+                    throw new ParseException(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+                default:
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+            }
+            throw pe;
         }
+        setDescriptorValues(argMultimap, editPersonDescriptor, personType);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return new EditCommand(personIndex, editPersonDescriptor, personType);
+    }
 
+    /**
+     * Sets the editPersonDescriptor with values (i.e. {@code Name}, {@code Phone}, {@code Gender},
+     * {@code Qualification}, {@code Remark}, {@code Tag}) if present.
+     */
+    private void setDescriptorValues(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor,
+                                     PersonType personType) throws ParseException {
+        if (argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
+            switch (personType) {
+            case STUDENT:
+                throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
+            case TUTOR:
+                EditTutorDescriptor editTutorDescriptor = (EditTutorDescriptor) editPersonDescriptor;
+                editTutorDescriptor.setQualification(ParserUtil.parseQualification(
+                        argMultimap.getValue(PREFIX_QUALIFICATION).get()));
+                break;
+            default:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -95,34 +121,25 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
-        if (personType.equals(PersonType.TUTOR) && argMultimap.getValue(PREFIX_QUALIFICATION).isPresent()) {
-            EditTutorDescriptor x = (EditTutorDescriptor) editPersonDescriptor;
-            x.setQualification(ParserUtil.parseQualification(
-                    argMultimap.getValue(PREFIX_QUALIFICATION).get()));
-        }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         }
-        return new EditCommand(personIndex, editPersonDescriptor, personType);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * {@code Set<Tag>} containing zero tags, which will throw a ParseException.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        if (tagSet.isEmpty()) {
+            throw new ParseException(Tag.MESSAGE_INVALID_TAG);
+        }
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 }

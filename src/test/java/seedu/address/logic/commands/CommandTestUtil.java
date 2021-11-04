@@ -71,7 +71,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Z"; // 'Z' not allowed in gender
     public static final String INVALID_QUALIFICATION_DESC = " " + PREFIX_QUALIFICATION + "4"; // invalid qualification
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // ' ' not allowed in remark
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK
+            + "This is a long remark that exceeds 100 characters. " // more than 100 characters not allowed in remark
+            + "This should not be allowed as a remark and should throw an error.";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "ABCDE"; //  invalid tag argument
@@ -79,7 +81,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG = "ABCDE";
     public static final String INVALID_ZERO_INDEX = "0";
     public static final String INVALID_INDEX = "-69";
-
+    public static final String INVALID_INTEGER_MIN = Long.toString(Integer.MIN_VALUE + 1);
+    public static final String INVALID_INTEGER_MAX = Long.toString(Integer.MAX_VALUE + 1);
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;

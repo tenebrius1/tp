@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -40,19 +42,19 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + "<s "
-            + "INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]>\n"
-            + "or <t "
+            + "<t "
             + "INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_QUALIFICATION + "QUALIFICATION] "
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_TAG + "TAG...]>\n"
+            + "or <s "
+            + "INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG...]>\n"
             + "Example: " + COMMAND_WORD + " t 1 "
@@ -63,6 +65,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
+    public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -120,6 +124,9 @@ public class EditCommand extends Command {
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
         Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
+        if (tutorToEdit.equals(editedTutor)) {
+            throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
+        }
         if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
             throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
         }
@@ -150,13 +157,26 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
 
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
+        }
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.setStudent(studentToEdit, editedStudent);
-
+        handleMatchList(model, studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+    }
+
+    private void handleMatchList(Model model, Student student, Student editedStudent) {
+        Student studentMatched = model.getMatchedStudent();
+        if (studentMatched != null && studentMatched.isSamePerson(student)) {
+            Set<Tag> studentTag = editedStudent.getTags();
+            ArrayList<Tag> ls = new ArrayList<>();
+            studentTag.stream().forEach(tag -> ls.add(tag));
+            model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, editedStudent);
+        }
     }
 
     /**
