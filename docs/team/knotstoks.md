@@ -10,7 +10,7 @@ title: Kenneth's Project Portfolio Page
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to filter tutors after matching to a specific student.
-  * What it does: allows the user to filter the list of matched tutors based on certain parameters.  
+  * What it does: allows the user to filter the list of matched tutors based on certain parameters.
   * Justification: This feature improves the product significantly because it allows the user to filter out tutors based on specifications by the student.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
