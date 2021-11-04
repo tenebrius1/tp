@@ -43,15 +43,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), pe);
         }
 
-        if (personType.equals(PersonType.TUTOR)) {
+        switch (personType) {
+        case TUTOR:
             return parseTutor(args);
-        }
-
-        if (personType.equals(PersonType.STUDENT)) {
+        case STUDENT:
             return parseStudent(args);
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
     private AddCommand parseTutor(String args) throws ParseException {
