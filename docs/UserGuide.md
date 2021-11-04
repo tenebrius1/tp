@@ -92,8 +92,8 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - A whitespace **must** be included before every prefix. <br>
   e.g. `edit t 1 n/Alex Yeo q/2` is acceptable but `edit t 1 n/Alex Yeoq/2` is not.
 
-- Parameters may be entered **in any order**. <br>
-  e.g. Both `n/John q/1` and `q/1 n/John` are acceptable.
+- Parameters may be entered **in any order, except for tags**. i.e. tags must be entered last in the command. <br>
+  e.g. Both `n/John q/1` and `q/1 n/John` are acceptable. `n/John t/PE q/1` is not acceptable, but `n/John q/1 t/PE` is acceptable.
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. The format `add t n/NAME` can be written as `add t n/John Doe`.
@@ -121,7 +121,7 @@ e.g. Both `delete t 1` and `d t 1` represent the same command.
 
 Shows a message with all the commands available to use on `CliTutors`.
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <br>
 <img src="images/screenshots/Help.png">
@@ -147,7 +147,7 @@ Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `a s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
@@ -181,7 +181,7 @@ Examples:<br>
 `edit t 3 n/John Doe g/M q/2 t/PM TE TM TL`<br>
 `e s 9 n/Mary Sue p/98765432`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
@@ -206,7 +206,7 @@ Examples:<br>
 `list t` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
 `find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the tutor list.
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>delete t 2</code></p>
 <p>Before:</p>
@@ -222,7 +222,7 @@ Shows the list of all tutors/students.
 
 Format: <br>`list t` <br> `list s`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Commands Executed: <code>find t g/M</code>, then <code>list t</code></p>
 <p>Before (when <code>find t g/M</code> is executed):</p>
@@ -250,7 +250,7 @@ Example:<br>
 `find t n/Yu t/SC`<br>
 `f s g/M t/PS`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>find t n/Yu t/SC</code></p>
 <p>Before:</p>
@@ -272,7 +272,7 @@ Example:<br>
 `match 1`<br>
 `m 1`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>match 1</code></p>
 <p>Before:</p>
@@ -305,7 +305,7 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 Example:<br>
 `filter g/F`
 
-<details>
+<details open>
 <summary>Expected outcome:</summary>
 <p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
 <p>Before (when <code>match 1</code> is executed):</p>
@@ -321,7 +321,7 @@ Clears all entries of tutors/students from CLITutors.
 
 Format: <br>`clear t` <br> `clear s`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>clear t</code></p>
 <p>Before:</p>
