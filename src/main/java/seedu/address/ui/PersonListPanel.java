@@ -53,5 +53,4 @@ public class PersonListPanel<T extends Person> extends UiPart<Region> {
             }
         }
     }
-
 }
