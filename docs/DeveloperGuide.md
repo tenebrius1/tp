@@ -472,22 +472,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                           | find people that match some keywords                  | avoid scrolling through thousands of entries of data              |
 | `* * *`  | user                                           | assign tags to tutors and students                    | categorize them by their needs                                    |
 | `* * *`  | user                                           | match students and tutors according to their needs    |                                                                   |
-| `* * *`  | user                                           | To get feedback from the system                       | see if my commands are working                                    |
+| `* * *`  | user                                           | get feedback from the system                          | see if my commands are working                                    |
 | `* * *`  | user                                           | type the commands I want to execute                   |                                                                   |
 | `* * *`  | busy user                                      | use shorter commands                                  | save time keying in full commands                                 |
 | `* *`    | first-time user                                | see some sample data when I open the app              | easily try out the features without needing to add my data first  |
-| `* *`    | clumsy user                                    | have a safety net                                     | avoid purging my data by accident                                 |
 | `* *`    | user                                           | edit personal details                                 | update any new particulars of the tutors/students                 |
 | `* *`    | user                                           | sort by tags                                          | easily find groups of people with the same tags                   |
 | `* *`    | forgetful user                                 | see the available commands for the program            | know what tasks I can do with the program                         |
 | `* *`    | user                                           | search students and tutors by tags                    | easily import data from one machine to another                    |
 | `* *`    | user                                           | load in pre-existing data                             | save time keying in full commands                                 |
-| `* *`    | user                                           | assign ratings to tutors                              | see how well their ratings are when teaching students             |
-| `* *`    | user                                           | undo my commands made                                 | retrieve the previous state of data if I’ve made a mistake        |
-| `* *`    | user                                           | add priority for matching certain tutors and students | schedule urgent cases ahead of other cases for greater efficiency |
-| `*`      | user                                           | be able to go through the history of my command       | avoid reentering frequently used commands                         |
-| `*`      | user                                           | save pictures of students and tutors                  | match faces to names                                              |
-| `*`      | first-time user                                | view an interactive tutorial                          | learn how to use the app                                          |
+| `* *`    | user                                           | filter from the list of matched tutors | find more suitable tutors for the student based on their requirements            |
+| `* *`    | user                                           | sort the list of matched tutors by number of matched tags | see the most suitable tutors at the top of the list           |
 
 ### Use Cases
 
@@ -684,7 +679,7 @@ Given below are instructions to test the app manually.
     1. With the app still open, enter `exit` in the command box or click on the close window button.<br>
        Expected: App closes.
 
-### Adding a Tutor/Student
+### Add a Tutor/Student
 {:.no_toc}
 
 to be added.
@@ -694,46 +689,37 @@ to be added.
 
 to be added.
 
-### Deleting a Tutor/Student
+### Delete a Tutor/Student
 {:.no_toc}
 to be added.
 
-[comment]: <> (1. Deleting a person while all persons are being shown)
-
-[comment]: <> (    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.)
-
-[comment]: <> (    1. Test case: `delete 1`<br>)
-
-[comment]: <> (       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.)
-
-[comment]: <> (    1. Test case: `delete 0`<br>)
-
-[comment]: <> (       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.)
-
-[comment]: <> (    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` &#40;where x is larger than the list size&#41;<br>)
-
-[comment]: <> (       Expected: Similar to previous.)
-
-[comment]: <> (1. _{ more test cases …}_)
+1. Delete a tutor from the Tutor List.
+    1. Test case: `delete t 1`<br>
+       Expected: First tutor is deleted from the Tutor List. Details of the deleted tutor shown in the result display.
+    1. Test case: `delete t 0`<br>
+       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+    1. Test case: `delete t x` (where x is larger than the list size)<br>
+       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+    1. Test case: `clear t` then `delete t 1`<br>
+   Expected: Error details shown in the result display, with a result message `Tutor list is empty!`
+    1. Test case: `clear t` then `delete t -10`<br>
+       Expected: Error details shown in the result display, with a result message `The tutor index provided is invalid`
+1. Delete a student from the Student List.
+    1. Test case: `delete s 1`<br>
+       Expected: First student is deleted from the Student List. Details of the deleted student shown in the result display.
+    1. Test case: `delete s 0`<br>
+       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
+    1. Test case: `delete s x` (where x is larger than the list size)<br>
+       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`<br>
+    1. Test case: `clear s` then `delete s 1`<br>
+      Expected: Error details shown in the result display, with a result message `Student list is empty!`
+    1. Test case: `clear s` then `delete s -10`<br>
+          Expected: Error details shown in the result display, with a result message `The student index provided is invalid`
 
 ### Find Tutor/Student
 {:.no_toc}
 
 [comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
-1. Find a student while all students are shown.
-   1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
-   2. Test case: `find s n/david`
-      <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
-      <br>e.g. Students with the names: 'David Li', 'david tan' and 'John David' will be shown.
-   3. Test case: `find s n/david t/pm`
-      <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the student list.
-      <br>e.g A student named 'David Li' and has tag `PM` will be shown but a student named 'David' and has tag `PS` will not be shown.
-   4. Test case: `find`
-      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
-   5. Test case: `find s q/2`
-      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
-   6. Test case: `find s`
-      <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
 
 2. Find a tutor while all tutors are shown.
    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the tutor list.
@@ -748,6 +734,20 @@ to be added.
    5. Test case: `find t`
       <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
 
+1. Find a student while all students are shown.
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
+    2. Test case: `find s n/david`
+       <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
+       <br>e.g. Students with the names: 'David Li', 'david tan' and 'John David' will be shown.
+    3. Test case: `find s n/david t/pm`
+       <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the student list.
+       <br>e.g A student named 'David Li' and has tag `PM` will be shown but a student named 'David' and has tag `PS` will not be shown.
+    4. Test case: `find`
+       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+    5. Test case: `find s q/2`
+       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
+    6. Test case: `find s`
+       <br>Expected: Student list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
 3. Find a tutor/student while the tutor/student list is empty.
    1. Prerequisites: Clear the tutor and student lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
    2. Test case: `find t n/alex`
@@ -757,7 +757,7 @@ to be added.
 
 ### Match Student
 {:.no_toc}
-// to update based on our sample data
+[comment]: <> (to update based on our sample data)
 1. Match a student while all students are being shown
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list.
     1. Test case: `match 1`<br>
@@ -778,7 +778,7 @@ to be added.
 ### List all Tutor/Student
 {:.no_toc}
 
-1. List all tutor
+1. List all tutors.
     1. Prerequisites: There are tutors are in the tutor list.
     2. Test case: `list t`<br>
        Expected: All stored tutors are shown in the tutor list, with a result message `Listed all tutors!`.
