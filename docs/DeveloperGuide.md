@@ -693,7 +693,7 @@ Given below are instructions to test the app manually.
       Expected: No tutor is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
    5. Test case: `add t n/John Doe p/98765432 g/M q/5 r/Prefers teaching in the West t/PM`<br>
       Expected: No tutor is added. Error details shown in the result display, with result message `Qualification should be '0', '1', '2' or '3'`.
-   
+
 2. Add a student to the Student List.
     1. Test case: `add s n/John Doe p/98765432 g/M t/PM`<br>
        Expected: The student `John Doe` is added to the Student List. Details of the added student shown in the result display.
@@ -709,7 +709,29 @@ Given below are instructions to test the app manually.
 ### Edit Tutor/Student list
 {:.no_toc}
 
-to be added.
+1. Edit a tutor in the Tutor List.
+    1. Test case: `edit t 1 n/John Doe`<br>
+       Expected: The first tutor `Alex Yeoh` is renamed to `John Doe`. Details of the added tutor are shown in the result display.
+    2. Test case: `edit t 1`<br>
+       Expected: No tutor is added. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
+    3. Test case: `edit t 1 g/Z`<br>
+       Expected: No tutor is added. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+    4. Test case: `edit t 2 n/Bernice Yu p/99272758 g/F q/1 t/SC SP`<br>
+       Expected: No tutor is added. Error details shown in the result display, with a result message `This tutor is unchanged`.
+    5. Test case: `edit t 2 p/87438807`<br>
+       Expected: No tutor is added. Error details shown in the result display, with result message `Some other person already has this phone number...` since tutor Alex Yeoh already has this phone number.
+
+2. Edit a student in the Student List.
+    1. Test case: `edit s 1 n/John Doe`<br>
+       Expected: The first student `David Li` is renamed to `John Doe`. Details of the added student are shown in the result display.
+    2. Test case: `edit s 1`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `At least one field to edit must be provided.`.
+    3. Test case: `edit s 1 g/Z`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+    4. Test case: `edit s 2 n/Irfan Ibrahim p/92492021 g/M t/SC`<br>
+       Expected: No student is added. Error details shown in the result display, with a result message `This student is unchanged`.
+    5. Test case: `edit s 2 p/91031282`<br>
+       Expected: No student is added. Error details shown in the result display, with result message `Some other person already has this phone number...` since student David Li already has this phone number.
 
 ### Delete a Tutor/Student
 {:.no_toc}
@@ -717,24 +739,24 @@ to be added.
 1. Delete a tutor from the Tutor List.
     1. Test case: `delete t 1`<br>
        Expected: First tutor is deleted from the Tutor List. Details of the deleted tutor shown in the result display.
-    1. Test case: `delete t 0`<br>
+    2. Test case: `delete t 0`<br>
+        Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+    3. Test case: `delete t x` (where x is larger than the list size)<br>
        Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
-    1. Test case: `delete t x` (where x is larger than the list size)<br>
-       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
-    1. Test case: `clear t` then `delete t 1`<br>
+    4. Test case: `clear t` then `delete t 1`<br>
    Expected: Error details shown in the result display, with a result message `Tutor list is empty!`
-    1. Test case: `clear t` then `delete t -10`<br>
+    5. Test case: `clear t` then `delete t -10`<br>
        Expected: Error details shown in the result display, with a result message `The tutor index provided is invalid`
 1. Delete a student from the Student List.
     1. Test case: `delete s 1`<br>
        Expected: First student is deleted from the Student List. Details of the deleted student shown in the result display.
-    1. Test case: `delete s 0`<br>
-       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
-    1. Test case: `delete s x` (where x is larger than the list size)<br>
+    2. Test case: `delete s 0`<br>
+        Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
+    3. Test case: `delete s x` (where x is larger than the list size)<br>
        Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`<br>
-    1. Test case: `clear s` then `delete s 1`<br>
+    4. Test case: `clear s` then `delete s 1`<br>
       Expected: Error details shown in the result display, with a result message `Student list is empty!`
-    1. Test case: `clear s` then `delete s -10`<br>
+    5. Test case: `clear s` then `delete s -10`<br>
           Expected: Error details shown in the result display, with a result message `The student index provided is invalid`
 
 ### Find Tutor/Student
@@ -742,7 +764,7 @@ to be added.
 
 [comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
 
-2. Find a tutor while all tutors are shown.
+1. Find a tutor while all tutors are shown.
    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the tutor list.
    2. Test case: `find t n/alex`
       <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the tutor list.
@@ -755,7 +777,7 @@ to be added.
    5. Test case: `find t`
       <br>Expected: Tutor list does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
 
-1. Find a student while all students are shown.
+2. Find a student while all students are shown.
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the student list.
     2. Test case: `find s n/david`
        <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the student list.
@@ -781,14 +803,14 @@ to be added.
 [comment]: <> (to update based on our sample data)
 1. Match a student while all students are being shown
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list.
-    1. Test case: `match 1`<br>
-       Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
-    1. Test case: `match`<br>
+    2. Test case: `match 1`<br>
+        Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
+    3. Test case: `match`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
-    1. Test case: `match 0`<br>
+    4. Test case: `match 0`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
        Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
-    1. Test case: `match 100` //some index to add later<br>
+    5. Test case: `match 100` //some index to add later<br>
        Expected: No endpoint is deleted. Error details shown in the result display, with a result message saying `Index provided is not within...`
        Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer).
 
@@ -815,14 +837,14 @@ to be added.
     2. Test case: `list t`<br>
        Expected: All stored tutors are shown in the tutor list, with a result message `Listed all tutors!`.
 2. List all tutors from the tutor list after a `find` command
-    3. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the tutor list shows less than actual number of tutors.
-    4. Test case: `list t`<br>
-       Expected: Filter from the `find` will be cleared and all tutors are shown in the endpoint list, with a result message `Listed all tutors!`.
+   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the tutor list shows less than actual number of tutors.
+   2. Test case: `list t`<br>
+      Expected: Filter from the `find` will be cleared and all tutors are shown in the endpoint list, with a result message `Listed all tutors!`.
 3. List all students
     1. Prerequisites: All students are in the student list.
-    1. Test case: `list s`<br>
-       Expected: All students are shown in the student list, with a
-       result message `Listed all students!`.
+    2. Test case: `list s`<br>
+        Expected: All students are shown in the student list, with a
+        result message `Listed all students!`.
 4. List all students from the student list after a `find` command
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the student list shows less than actual number of students.
     2. Test case: `list s`<br>
@@ -841,15 +863,15 @@ to be added.
 
 1. Clear all tutors from the tutor list
     1. Prerequisites: None
-    1. Test case: `clear t`<br>
-       Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
-    1. Test case: `clear t 123`<br>
+    2. Test case: `clear t`<br>
+        Expected: All tutors are cleared from the list with a result message `Tutor data has been cleared!`.
+    3. Test case: `clear t 123`<br>
        Expected: Tutor list not cleared with a result message `Invalid command format! ...`.
-1. Clear all students from the student list
+2. Clear all students from the student list
     1. Prerequisites: None
-    1. Test case: `clear s`<br>
-       Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
-    1. Test case: `clear s 123`<br>
+    2. Test case: `clear s`<br>
+        Expected: All students are cleared from the list with a result message `Student data has been cleared!`.
+    3. Test case: `clear s 123`<br>
        Expected: Student list not cleared with a result message `Invalid command format! ...`.
 
 ### Saving data
@@ -872,8 +894,6 @@ to be added.
    4. Delete the current save file.
    5. Relaunch the app again by double-clicking on the jar file.
       <br>Expected: Shows the GUI with sample data.
-
-[comment]: <> (2. _{ more test cases …}_)
 
 ### Opening help window
 {:.no_toc}
