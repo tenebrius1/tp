@@ -27,6 +27,7 @@ import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -168,7 +169,7 @@ public class EditCommandTest {
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -177,7 +178,7 @@ public class EditCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -189,7 +190,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditTutorDescriptorBuilder(tutorInList).build(), PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -201,7 +202,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditStudentDescriptorBuilder(studentInList).build(), PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
