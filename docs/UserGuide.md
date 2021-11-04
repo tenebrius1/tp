@@ -92,8 +92,8 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - A whitespace **must** be included before every prefix. <br>
   e.g. `edit t 1 n/Alex Yeo q/2` is acceptable but `edit t 1 n/Alex Yeoq/2` is not.
 
-- Parameters may be entered **in any order**. <br>
-  e.g. Both `n/John q/1` and `q/1 n/John` are acceptable.
+- Parameters may be entered **in any order, except for tags**. i.e. tags must be entered last in the command. <br>
+  e.g. Both `n/John q/1` and `q/1 n/John` are acceptable. `n/John t/PE q/1` is not acceptable, but `n/John q/1 t/PE` is acceptable.
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. The format `add t n/NAME` can be written as `add t n/John Doe`.
