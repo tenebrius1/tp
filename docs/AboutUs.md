@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/zihaooo9.png" width="200px" alt="Zi Hao">
 
 [[github](http://github.com/zihaooo9)]
-[[portfolio](team/zihao.md)]
+[[portfolio](team/zihaooo9.md)]
 
 * Role: Developer
 * Responsibilities:
@@ -21,7 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/lemonsr.png" width="200px" alt="Xin Yan">
 
 [[github](http://github.com/Lemonsr)]
-[[portfolio](team/xinyan.md)]
+[[portfolio](team/lemonsr.md)]
 
 * Role: UI Designer and Developer
 * Responsibilities:
@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/kleonang.png" width="200px" alt="Kleon">
 
 [[github](http://github.com/kleonang)]
-[[portfolio](team/kleon.md)]
+[[portfolio](team/kleonang.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -41,7 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/tenebrius1.png" width="200px" alt="Yi Guan">
 
 [[github](http://github.com/tenebrius1)]
-[[portfolio](team/yiguan.md)]
+[[portfolio](team/tenebrius1.md)]
 
 * Role: Developer
 * Responsibilities:
@@ -51,7 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/knotstoks.png" width="200px" alt="Kenneth">
 
 [[github](http://github.com/knotstoks)]
-[[portfolio](team/kennethhong.md)]
+[[portfolio](team/knotstoks.md)]
 
 * Role: Developer
 * Responsibilities: Burden

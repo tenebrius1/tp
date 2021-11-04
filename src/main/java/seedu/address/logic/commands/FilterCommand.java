@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -45,7 +44,7 @@ public class FilterCommand extends Command {
         }
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_PERSON, new ArrayList<>());
+            model.clearMatchedTutor();
             throw new CommandException(String.format(MESSAGE_FILTER_FAILED));
         }
 

@@ -140,4 +140,35 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for isNumeric --------------------------------------
+
+    @Test
+    public void isNumeric_throwNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isNumeric(null));
+    }
+
+    @Test
+    public void isNumericTest() {
+        // EP: empty strings
+        assertFalse(StringUtil.isNumeric("")); // Boundary value
+        assertFalse(StringUtil.isNumeric("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isNumeric("a"));
+        assertFalse(StringUtil.isNumeric("aaa"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNumeric(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isNumeric("1 0")); // Spaces in the middle
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isNumeric("1")); // Boundary value
+        assertTrue(StringUtil.isNumeric("10"));
+        assertTrue(StringUtil.isNumeric("0"));
+        assertTrue(StringUtil.isNumeric("01")); // with 0 prefix
+        assertTrue(StringUtil.isNumeric("-1")); //negative numbers
+        assertTrue(StringUtil.isNumeric(Long.toString(Integer.MAX_VALUE + 1))); // long
+        assertTrue(StringUtil.isNumeric(Long.toString(Integer.MIN_VALUE - 1))); // long
+        assertTrue(StringUtil.isNumeric("1.1")); // double
+    }
 }

@@ -21,15 +21,13 @@ nav-text: Developer Guide
 * Table of Contents
 {:toc}
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you have a big list of tutors to manage, `CLITutors` helps you to manage matching tutors and students for private tuition faster than using a regular database.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Introduction**
 
-`CLITutors` is a desktop application for managers to manage private tutoring jobs, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). CLITutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
+`CliTutors` is a desktop application for managers to manage private tutoring jobs, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). CliTutors is also highly optimised for fast typists and can be fully operated through keyboard commands.
 
-This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to `CLITutors`, a [glossary](#glossary) has been provided for readers.
+This developer guide is for users who would like to extend and modify the application. For certain terms that are unique to `CliTutors`, a [glossary](#glossary) has been provided for readers.
 
 Readers are also advised to [download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases) our latest releases from our main website in order to test out the application.
 
@@ -401,7 +399,7 @@ Upon the user's entry of the command, the validity of the user's input is checke
 
 ##### Sequence of action
 {:.no_toc}
-Given below is an example valid usage scenario and how the `match` command implementation behaves at each step. 
+Given below is an example valid usage scenario and how the `match` command implementation behaves at each step.
 
 **Prerequisite**: There are students in the student list and there are tutors which have `tags` that the student has (i.e. there are matches available for the student).
 
@@ -500,8 +498,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User keys in the tutor's details
-2. Tutor is added to the database
+1. User keys in the tutor's details.
+2. Tutor is added to the database.
    <br>Use case ends.
 
 **Extensions**
@@ -515,8 +513,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User keys in the student's details
-2. Student is added to the database
+1. User keys in the student's details.
+2. Student is added to the database.
    <br>Use case ends.
 
 **Extensions**
@@ -530,8 +528,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the command to edit the name of Student A
-2. System replies with a confirmation message that the edit is successful
+1. User enters the command to edit the name of Student A.
+2. System replies with a confirmation message that the edit is successful.
    <br>Use case ends.
 
 **Extensions**
@@ -547,8 +545,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the command to edit the phone number of Student B
-2. System replies with a confirmation message that the edit is successful
+1. User enters the command to edit the phone number of Student B.
+2. System replies with a confirmation message that the edit is successful.
    <br>Use case ends.
 
 **Extensions**
@@ -564,10 +562,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list tutors
-2. `CLITutorsBook` shows a list of tutors
-3. User requests to delete a specific tutor in the list
-4. `CLITutorsBook` deletes the tutor
+1. User requests to list tutors.
+2. `CliTutors` shows a list of tutors.
+3. User requests to delete a specific tutor in the list.
+4. `CliTutors` deletes the tutor.
    <br>Use case ends.
 
 **Extensions**
@@ -575,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. `CLITutorsBook` shows an error message.
+    * 3a1. `CliTutors` shows an error message.
       <br>Use case resumes at step 2.
 
 #### Use case (UC06): Delete a Student
@@ -583,10 +581,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list students
-2. `CLITutorsBook` shows a list of students
-3. User requests to delete a specific student from the list
-4. `CLITutorsBook` deletes the student
+1. User requests to list students.
+2. `CliTutors` shows a list of students.
+3. User requests to delete a specific student from the list.
+4. `CliTutors` deletes the student.
    <br>Use case ends.
 
 **Extensions**
@@ -594,7 +592,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. `CLITutorsBook` shows an error message.
+    * 3a1. `CliTutors` shows an error message.
       <br>Use case resumes at step 2.
 
 #### Use case (UC07): Find a Tutor
@@ -602,8 +600,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a tutor using his/her name
-2. `CLITutorsBook` shows all tutors that contain that specific name
+1. User requests to find a tutor using his/her name.
+2. `CliTutors` shows all tutors that contain that specific name.
    <br>Use case ends.
 
 **Extensions**
@@ -618,8 +616,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a student using his/her name
-2. `CLITutorsBook` shows all students that contain that specific name
+1. User requests to find a student using his/her name.
+2. `CliTutors` shows all students that contain that specific name.
    <br>Use case ends.
 
 **Extensions**
@@ -634,8 +632,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to match a student with tutors with the required qualifications
-2. `CLITutorsBook` shows the tutors that are able to match with the specified student in a window
+1. User requests to match a student with tutors with the required qualifications.
+2. `CliTutors` shows the tutors that are able to match with the specified student in a window.
    <br>Use case ends.
 
 **Extensions**
@@ -771,7 +769,7 @@ to be added.
        Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
     1. Test case: `match 100` //some index to add later<br>
        Expected: No endpoint is deleted. Error details shown in the result display, with a result message saying `Index provided is not within...`
-       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer
+       Other incorrect remove commands to try: `remove x` (where x is larger than the list size, and is a positive integer that is less than the maximum integer).
 
 ### Filter matched Tutor list
 {:.no_toc}

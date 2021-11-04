@@ -24,7 +24,8 @@ public class JsonAdaptedTutorTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_GENDER = "Z";
-    private static final String INVALID_REMARK = " ";
+    private static final String INVALID_REMARK = "This is a long remark that exceeds 100 characters. "
+            + "This should not be allowed as a remark and should throw an error.";
     private static final String INVALID_QUALIFICATION = "4";
     private static final String INVALID_TAG = "ABCDE";
     private static final String INVALID_TAG_NON_ALPHANUMERIC = "T+";
