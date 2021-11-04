@@ -804,12 +804,12 @@ Given below are instructions to test the app manually.
 1. Match a student while all students are being shown
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list and at least one matching tutor.
     2. Test case: `match 1`<br>
-        Expected: First student is from the student list is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched tutor list.
+        Expected: First student from the Student List is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched Tutor List.
     3. Test case: `match`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
     4. Test case: `match 0`<br>
        Expected: No student is matched. Error details shown in the result display, with a result message `The student index provided is invalid`
-       Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to zero or greater than the student list size).
+       Other incorrect match commands to try: `match x` (where x is a number that is less than or equal to 0 or greater than the Student List size).
 
 ### Filter matched Tutor List
 {:.no_toc}
