@@ -2,45 +2,44 @@
 layout: page
 title: Yi Guan's Project Portfolio Page
 ---
+# **Project: CLITutors**
 
-### Project: CLITutors
+## **Overview**
 
-CLITutors is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+`CliTutors` is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CliTutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
-Given below are my contributions to the project.
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=tenebrius1&tabRepo=AY2122S1-CS2103T-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+## **My contributions**
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+### **New Features & Enhancements**
 
-* **Code contributed**: [RepoSense link]()
+- Added the ability to find for a specific tutor/student with specific parameters using the `find` command (Pull request [#98](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/98))
+- Fixed failing test cases in `model` package (Pull request [#60](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/60))
+- Updated UI to match mockup (Pull request [#66](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/66), [#71](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/71))
+- Improved code test coverage (Pull request [#70](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/70))
+- Fixed various bugs flagged out in PE-Dry run [#188](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/188))
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.2` - `v1.2.1` (2 releases) on GitHub
+  * Maintained [project development board](https://github.com/AY2122S1-CS2103T-T17-2/tp/projects/1)
+  * Set up the GitHub team organisation/repository
+  * Set up CI using GitHub actions
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+### **Documentation**
 
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
+#### **User Guide**
+- Did cosmetic tweaks to the User Guide
+- Added dropdowns for sample results (Pull request [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105))
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
 
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+#### **Developer Guide**
+- Did cosmetic tweaks to the Developer Guide
+- Added user stories (Pull request [#28](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/28))
+- Added `Logic` and `Storage` diagrams (Pull request [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105))
+- Added manual testing instructions for `find` and `saving data` (Pull request [#194](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/194/files))
 
-* _{you can add/remove categories in the list above}_
+### **Community**
+- PRs reviewed (with non-trivial review comments) (Pull requests [#111](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/111), [#61](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/61),  [#69](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/69), [#190](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/190)
+- Contributed to forum discussions (example: [#139](https://github.com/nus-cs2103-AY2122S1/forum/issues/139))
+- Helped to manual test for another group's TP, with 15 non-trivial bug reports (see [here](https://github.com/tenebrius1/ped))
