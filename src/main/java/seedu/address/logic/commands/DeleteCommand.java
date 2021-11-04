@@ -79,6 +79,7 @@ public class DeleteCommand extends Command {
             }
 
             Student studentToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            handleMatchList(model, studentToDelete);
             model.deleteStudent(studentToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
             // No break necessary due to return statement
@@ -93,5 +94,12 @@ public class DeleteCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+    }
+
+    private void handleMatchList(Model model, Student student) {
+        Student studentMatched = model.getMatchedStudent();
+        if (studentMatched != null && studentMatched.isSamePerson(student)) {
+            model.clearMatchedTutor();
+        }
     }
 }

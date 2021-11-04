@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -163,8 +165,18 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-
+        handleMatchList(model, studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+    }
+
+    private void handleMatchList(Model model, Student student, Student editedStudent) {
+        Student studentMatched = model.getMatchedStudent();
+        if (studentMatched != null && studentMatched.isSamePerson(student)) {
+            Set<Tag> studentTag = editedStudent.getTags();
+            ArrayList<Tag> ls = new ArrayList<>();
+            studentTag.stream().forEach(tag -> ls.add(tag));
+            model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, editedStudent);
+        }
     }
 
     /**
