@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.PersonType.STUDENT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 
 /**
@@ -15,9 +14,10 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears all entries of tutors or students from the database. "
+            + ": Clears all entries of tutors or students from the database\n "
             + "Parameters: "
-            + "s/t";
+            + "t/s\n"
+            + "Example: clear s";
 
     public static final String MESSAGE_SUCCESS_TUTOR = "Tutor data has been cleared!";
     public static final String MESSAGE_SUCCESS_STUDENT = "Student data has been cleared!";
@@ -42,11 +42,11 @@ public class ClearCommand extends Command {
 
         switch (personType) {
         case TUTOR:
-            model.setTutorData(new AddressBook());
+            model.setTutorData(new CliTutors());
             return new CommandResult(MESSAGE_SUCCESS_TUTOR);
             // No break necessary due to return statement
         case STUDENT:
-            model.setStudentData(new AddressBook());
+            model.setStudentData(new CliTutors());
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
             // No break necessary due to return statement
         default:

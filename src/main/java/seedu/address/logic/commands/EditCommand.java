@@ -5,10 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUALIFICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +25,9 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -40,27 +42,31 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + "<s "
-            + "INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_TAG + "TAG]>\n"
-            + "or <t "
+            + "<t "
             + "INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_QUALIFICATION + "QUALIFICATION] "
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_TAG + "TAG...]>\n"
+            + "or <s "
+            + "INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG...]>\n"
             + "Example: " + COMMAND_WORD + " t 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor: %1$s";
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
+    public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -107,6 +113,10 @@ public class EditCommand extends Command {
     private CommandResult executeEditTutor(Model model) throws CommandException {
         List<Tutor> lastShownList = model.getFilteredTutorList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         }
@@ -114,12 +124,16 @@ public class EditCommand extends Command {
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
         Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
-        if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
+        if (tutorToEdit.equals(editedTutor)) {
+            throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
+        }
+
+        if (!tutorToEdit.getPhone().equals(editedTutor.getPhone())
+                && model.hasPersonWithSamePhone(editedTutor.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setTutor(tutorToEdit, editedTutor);
-        model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor));
     }
@@ -134,6 +148,10 @@ public class EditCommand extends Command {
     private CommandResult executeEditStudent(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
@@ -141,14 +159,28 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
 
-        if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
+        }
+
+        if (!studentToEdit.getPhone().equals(editedStudent.getPhone())
+                && model.hasPersonWithSamePhone(editedStudent.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-
+        handleMatchList(model, studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+    }
+
+    private void handleMatchList(Model model, Student student, Student editedStudent) {
+        Student studentMatched = model.getMatchedStudent();
+        if (studentMatched != null && studentMatched.isSamePerson(student)) {
+            Set<Tag> studentTag = editedStudent.getTags();
+            ArrayList<Tag> ls = new ArrayList<>();
+            studentTag.stream().forEach(tag -> ls.add(tag));
+            model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, editedStudent);
+        }
     }
 
     /**
@@ -163,9 +195,11 @@ public class EditCommand extends Command {
         Gender updatedGender = editTutorDescriptor.getGender().orElse(tutorToEdit.getGender());
         Qualification updatedQualification = editTutorDescriptor.getQualification()
             .orElse(tutorToEdit.getQualification());
+        Remark updatedRemark = editTutorDescriptor.getRemark().orElse(tutorToEdit.getRemark());
+
         Set<Tag> updatedTags = editTutorDescriptor.getTags().orElse(tutorToEdit.getTags());
 
-        return new Tutor(updatedName, updatedPhone, updatedGender, updatedQualification, updatedTags);
+        return new Tutor(updatedName, updatedPhone, updatedGender, updatedQualification, updatedRemark, updatedTags);
     }
 
     /**
@@ -178,9 +212,10 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Gender updatedGender = editStudentDescriptor.getGender().orElse(studentToEdit.getGender());
+        Remark updatedRemark = editStudentDescriptor.getRemark().orElse(studentToEdit.getRemark());
         Set<Tag> updatedTag = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedGender, updatedTag);
+        return new Student(updatedName, updatedPhone, updatedGender, updatedRemark, updatedTag);
     }
 
     @Override
@@ -209,6 +244,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Gender gender;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -221,6 +257,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -228,7 +265,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, gender, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, gender, remark, tags);
         }
 
         public void setName(Name name) {
@@ -253,6 +290,14 @@ public class EditCommand extends Command {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
@@ -290,6 +335,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getGender().equals(e.getGender())
+                    && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }
     }
@@ -346,6 +392,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getGender().equals(e.getGender())
                     && getQualification().equals(e.getQualification())
+                    && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }
     }

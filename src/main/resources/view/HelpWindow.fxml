@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -29,7 +29,7 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="831.0" style="-fx-background-color: #202022;">
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="976.0" style="-fx-background-color: #202022;">
         <children>
                <BorderPane prefHeight="502.0" prefWidth="773.0" style="-fx-background-color: #202022;">
                   <bottom>
@@ -37,7 +37,7 @@
                         <children>
                            <VBox prefWidth="815.0">
                               <children>
-                                 <Text fill="#e4e4e4" strokeType="OUTSIDE" strokeWidth="0.0" text="For more information, refer to the user guide here:" textAlignment="CENTER" wrappingWidth="842.0">
+                                 <Text fill="#e4e4e4" strokeType="OUTSIDE" strokeWidth="0.0" text="For more information, refer to the user guide here:" textAlignment="CENTER" wrappingWidth="986.5714111328125">
                                     <VBox.margin>
                                        <Insets top="5.0" />
                                     </VBox.margin>
@@ -47,7 +47,7 @@
                                  </Text>
                               </children>
                            </VBox>
-                      <Hyperlink fx:id="helpLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onMouseClicked="#openInBrowser" prefHeight="23.0" prefWidth="838.0" text="Label" textAlignment="CENTER" textFill="#b0c7ff">
+                      <Hyperlink fx:id="helpLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onMouseClicked="#openInBrowser" prefHeight="23.0" prefWidth="985.0" text="Label" textAlignment="CENTER" textFill="#b0c7ff">
                               <font>
                                  <Font name="SansSerif Regular" size="12.0" />
                               </font>
@@ -64,7 +64,7 @@
                            <Insets top="-5.0" />
                         </BorderPane.margin>
                         <children>
-                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Help Menu" textAlignment="CENTER" wrappingWidth="843.0">
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Help Menu" textAlignment="CENTER" wrappingWidth="984.7142949104309">
                               <font>
                                  <Font name="SansSerif Bold" size="16.0" />
                               </font>
@@ -82,21 +82,21 @@
                      </VBox>
                   </top>
                   <center>
-                     <SplitPane dividerPositions="0.31" prefHeight="438.0" prefWidth="777.0" style="-fx-background-color: #353535;" BorderPane.alignment="CENTER">
+                     <SplitPane dividerPositions="0.27907656341320863" prefHeight="438.0" prefWidth="1027.0" style="-fx-background-color: #353535;" BorderPane.alignment="CENTER">
                        <items>
                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="165.0">
                               <children>
                                  <VBox layoutY="-13.0" style="-fx-background-color: #353535;" />
-                                 <Text fill="WHITE" layoutX="71.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supported Tags" textAlignment="CENTER">
+                                 <Text fill="WHITE" layoutX="80.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supported Tags" textAlignment="CENTER">
                                     <font>
                                        <Font name="SansSerif Bold" size="15.0" />
                                     </font>
                                  </Text>
-                                 <TableView fx:id="tagTbData" layoutX="23.0" layoutY="29.0" prefHeight="390.0" prefWidth="218.0" style="-fx-background-color: #CACEF2;">
+                                 <TableView fx:id="tagTbData" layoutX="23.0" layoutY="29.0" prefHeight="390.0" prefWidth="229.0" style="-fx-background-color: #CACEF2;">
                                    <columns>
                                      <TableColumn fx:id="educationLevel" editable="false" prefWidth="104.0" text="Education Level" />
                                      <TableColumn fx:id="subject" prefWidth="72.0" text="Subjects" />
-                                       <TableColumn fx:id="tag" editable="false" prefWidth="41.0" resizable="false" text="Tag" />
+                                       <TableColumn fx:id="tag" editable="false" prefWidth="51.99997384207589" resizable="false" text="Tag" />
                                    </columns>
                                     <effect>
                                        <DropShadow blurType="GAUSSIAN" height="18.14" radius="6.95" spread="0.35" width="11.67">
@@ -111,15 +111,15 @@
                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="563.0" style="-fx-background-color: #353535;" SplitPane.resizableWithParent="false">
                               <children>
                                  <VBox layoutX="152.0" layoutY="14.0" />
-                                 <Text fill="WHITE" layoutX="244.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commands" textAlignment="CENTER">
+                                 <Text fill="WHITE" layoutX="318.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commands" textAlignment="CENTER">
                                     <font>
                                        <Font name="SansSerif Bold" size="15.0" />
                                     </font>
                                  </Text>
-                                 <TableView fx:id="commandTbData" layoutX="14.0" layoutY="28.0" prefHeight="391.0" prefWidth="542.0" style="-fx-background-color: #CACEF2;">
+                                 <TableView fx:id="commandTbData" layoutX="14.0" layoutY="28.0" prefHeight="391.0" prefWidth="675.0" style="-fx-background-color: #CACEF2;">
                                    <columns>
-                                     <TableColumn fx:id="action" editable="false" prefWidth="42.0" text="Action" />
-                                     <TableColumn fx:id="format" editable="false" prefWidth="508.0" resizable="false" text="Format, Examples" />
+                                     <TableColumn fx:id="action" editable="false" prefWidth="65.71423625946045" text="Action" />
+                                     <TableColumn fx:id="format" editable="false" prefWidth="608.5714089529855" resizable="false" text="Format, Examples" />
                                    </columns>
                                     <effect>
                                        <DropShadow height="19.33" radius="4.3325" spread="0.1" width="0.0">

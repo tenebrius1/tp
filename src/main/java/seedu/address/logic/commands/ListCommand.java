@@ -17,12 +17,14 @@ public class ListCommand extends Command {
     public static final String COMMAND_ALIAS = "l";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all entries of tutors or students. "
+            + ": Lists all entries of tutors or students\n"
             + "Parameters: "
-            + "s/t";
+            + "t/s\n"
+            + "Example: list t";
 
     public static final String MESSAGE_SUCCESS_TUTOR = "Listed all tutors!";
     public static final String MESSAGE_SUCCESS_STUDENT = "Listed all students!";
+    public static final String MESSAGE_EMPTY_LIST = "List is empty!";
 
     private PersonType personType;
     /**
@@ -40,10 +42,16 @@ public class ListCommand extends Command {
         switch (personType) {
         case TUTOR:
             model.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
+            if (model.getFilteredTutorList().isEmpty()) {
+                return new CommandResult(MESSAGE_EMPTY_LIST);
+            }
             return new CommandResult(MESSAGE_SUCCESS_TUTOR);
         // No break necessary due to return statement
         case STUDENT:
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            if (model.getFilteredStudentList().isEmpty()) {
+                return new CommandResult(MESSAGE_EMPTY_LIST);
+            }
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
         // No break necessary due to return statement
         default:

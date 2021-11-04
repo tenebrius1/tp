@@ -18,6 +18,7 @@ public abstract class Person {
     private final Name name;
     private final Phone phone;
     private final Gender gender;
+    private final Remark remark;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -25,11 +26,12 @@ public abstract class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Gender gender, Set<Tag> tags) {
-        requireAllNonNull(name, phone, gender, tags);
+    public Person(Name name, Phone phone, Gender gender, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, gender, remark, tags);
         this.name = name;
         this.phone = phone;
         this.gender = gender;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -45,6 +47,10 @@ public abstract class Person {
         return gender;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     public abstract Qualification getQualification();
 
     /**
@@ -56,7 +62,7 @@ public abstract class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -65,7 +71,14 @@ public abstract class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if Remark is empty.
+     */
+    public boolean isRemarkEmpty() {
+        return remark.equals(new Remark());
     }
 
     /**
@@ -86,27 +99,34 @@ public abstract class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getGender().equals(getGender())
+                && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, gender, tags);
+        return Objects.hash(name, phone, gender, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append("Name: ")
+                .append(getName())
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Gender: ")
+                .append("\nGender: ")
                 .append(getGender());
+
+        if (!getRemark().toString().equals("")) {
+            builder.append("\nRemark: ")
+                    .append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();

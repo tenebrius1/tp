@@ -86,7 +86,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #34353A;
     -fx-border-radius: 18;
 }
 
@@ -95,6 +95,7 @@
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
     -fx-background-radius: 20px;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:even {
@@ -138,12 +139,14 @@
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-line-spacing: 0em;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+    -fx-line-spacing: 0em;
 }
 
 .stack-pane {
@@ -249,14 +252,6 @@
     -fx-text-fill: #1d1d1d;
 }
 
-.button:focused {
-    -fx-border-color: white, white;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: #1d1d1d;
@@ -298,7 +293,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#34353A, 10%);
     -fx-pref-width: 10px;
     -fx-background-radius: 10px;
 }
@@ -326,6 +321,20 @@
     -fx-padding: 8 1 8 1;
 }
 
+.sendButton, .sendButton:hover {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #454393;
+    -fx-background-color: #454393;
+}
+
+.sendButton:pressed {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-color: #272654;
+    -fx-background-color: #272654;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -338,9 +347,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #202022;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #797979 #383838;
+    -fx-border-color: #202022 #202022 #797979 #202022;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
@@ -348,12 +357,40 @@
     -fx-text-fill: white;
 }
 
+#commandBoxPlaceholder, #resultDisplayPlaceholder, #matchListPanelPlaceholder {
+    -fx-background-color: #202022;
+    -fx-border-color: #202022;
+}
+
+#matchList {
+    -fx-background-color: #171718;
+    -fx-border-radius: 0px;
+    -fx-border-color: #171718 #171718 #171718 #3A3C40;
+}
+
+#matchedListView {
+    -fx-background-color: #202022;
+    -fx-background-radius: 10px;
+    -fx-border-color: #202022;
+    -fx-border-radius: 10px;
+}
+
+#matchedListViewBox, #matchListPanelPlaceholder {
+    -fx-background-color: #171718;
+    -fx-border-color: #171718;
+}
+
+#studentList, #tutorList {
+    -fx-background-color: #34353A;
+    -fx-border-color: #34353A;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #202022, transparent, #202022;
     -fx-background-radius: 0;
 }
 

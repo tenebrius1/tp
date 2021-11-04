@@ -17,6 +17,7 @@ abstract class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String gender;
+    private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -24,11 +25,12 @@ abstract class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("gender") String gender,
+            @JsonProperty("gender") String gender, @JsonProperty("remark") String remark,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
+        this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -44,6 +46,10 @@ abstract class JsonAdaptedPerson {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getRemark() {
+        return remark;
     }
 
     public List<JsonAdaptedTag> getTags() {

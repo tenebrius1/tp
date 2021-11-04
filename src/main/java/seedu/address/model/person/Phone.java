@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers, and it should be exactly 8 digits long";
+    public static final String VALIDATION_REGEX = "\\d{8}";
+    public static final String MESSAGE_REPEATED_PHONE =
+            "Some other person already has this phone number (i.e. phone numbers should not be repeated)";
     public final String value;
 
     /**

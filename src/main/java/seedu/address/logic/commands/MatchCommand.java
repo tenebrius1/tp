@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.TagsContainTagPredicate;
@@ -24,9 +25,9 @@ public class MatchCommand extends Command {
     public static final String COMMAND_ALIAS = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Matches Student identified by the index number used in the displayed student list with Tutors "
-            + "who teach the subjects the Student wants.\n"
-            + "Parameters: s/t INDEX (must be a positive integer)\n"
+            + ": Matches student identified by the index number used in the displayed student list with tutors "
+            + "who teach the subjects the student wants\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MATCHED_SUCCESS = "Successfully matched %1$s";
@@ -44,12 +45,6 @@ public class MatchCommand extends Command {
         this.index = index;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        return executeMatch(model);
-    }
-
     /**
      * Executes a Match command.
      *
@@ -57,9 +52,17 @@ public class MatchCommand extends Command {
      * @return A successful CommandResult with the students matched to tutors.
      * @throws CommandException An exception that occurs when matching students.
      */
-    private CommandResult executeMatch(Model model) throws CommandException {
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
+        // if displayed student list is empty
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+        }
+
+        // if index is larger than displayed student list
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
@@ -68,14 +71,13 @@ public class MatchCommand extends Command {
         Set<Tag> studentTag = studentToMatch.getTags();
         ArrayList<Tag> ls = new ArrayList<>();
         studentTag.stream().forEach(tag -> ls.add(tag));
-        model.updateMatchedTutor(new TagsContainTagPredicate(ls));
+        model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, studentToMatch);
 
         if (model.getMatchedTutorList().isEmpty()) {
-            model.updateMatchedTutor(Model.PREDICATE_SHOW_NO_TUTORS);
-            throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch));
+            throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch.getName()));
         }
 
-        return new CommandResult(String.format(MESSAGE_MATCHED_SUCCESS, studentToMatch));
+        return new CommandResult(String.format(MESSAGE_MATCHED_SUCCESS, studentToMatch.getName()));
     }
 
     @Override

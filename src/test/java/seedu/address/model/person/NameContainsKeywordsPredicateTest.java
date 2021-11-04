@@ -87,8 +87,8 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new TutorBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, gender and qualification but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "F", "2"));
-        assertFalse(predicate.test(new TutorBuilder().withName("Alice").withPhone("12345").withQualification("2")
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("91234567", "F", "2"));
+        assertFalse(predicate.test(new TutorBuilder().withName("Alice").withPhone("91234567").withQualification("2")
                 .withGender("F").build()));
     }
 
@@ -103,8 +103,8 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new StudentBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone and gender, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "F"));
-        assertFalse(predicate.test(new StudentBuilder().withName("Alice").withPhone("12345")
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("91234567", "F"));
+        assertFalse(predicate.test(new StudentBuilder().withName("Alice").withPhone("91234567")
                 .withGender("F").build()));
     }
 }

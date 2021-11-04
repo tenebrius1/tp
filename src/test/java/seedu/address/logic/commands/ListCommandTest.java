@@ -4,11 +4,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showTutorAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -23,8 +24,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+        expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
     }
 
     @Test
@@ -52,6 +53,24 @@ public class ListCommandTest {
         // Temporarily only shows first student
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(PersonType.STUDENT), model, ListCommand.MESSAGE_SUCCESS_STUDENT,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_tutorListIsCleared_showsEmptyList() throws CommandException {
+        ClearCommand clearCommand = new ClearCommand(PersonType.TUTOR);
+        clearCommand.execute(expectedModel);
+        clearCommand.execute(model);
+        assertCommandSuccess(new ListCommand(PersonType.TUTOR), model, ListCommand.MESSAGE_EMPTY_LIST,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_studentListIsCleared_showsEmptyList() throws CommandException {
+        ClearCommand clearCommand = new ClearCommand(PersonType.STUDENT);
+        clearCommand.execute(expectedModel);
+        clearCommand.execute(model);
+        assertCommandSuccess(new ListCommand(PersonType.STUDENT), model, ListCommand.MESSAGE_EMPTY_LIST,
                 expectedModel);
     }
 }
