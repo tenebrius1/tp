@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -17,13 +18,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TutorBuilder;
 
@@ -130,12 +133,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getCliTutorsFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCliTutorsFilePath(Path cliTutorsFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -150,22 +153,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setCliTutors(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setTutorData(ReadOnlyAddressBook newData) {
+        public void setTutorData(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setStudentData(ReadOnlyAddressBook newData) {
+        public void setStudentData(ReadOnlyCliTutors newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyCliTutors getCliTutors() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -220,12 +223,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateMatchedTutor(Predicate<Person> predicate) {
+        public void updateMatchedTutor(TagsContainTagPredicate predicate, List<Tag> ls, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearMatchedTutor() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterMatchedTutor(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Tutor> getMatchedTutorList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getMatchedStudent() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -285,13 +303,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCliTutors getCliTutors() {
+            return new CliTutors();
         }
     }
 
     /**
-     * A Model stub that always accepts the tutor being added.
+     * A Model stub that always accepts the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
@@ -309,8 +327,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCliTutors getCliTutors() {
+            return new CliTutors();
         }
     }
 }

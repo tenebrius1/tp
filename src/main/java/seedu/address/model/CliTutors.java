@@ -10,14 +10,16 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniqueStudentList;
 import seedu.address.model.person.UniqueTutorList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CliTutors implements ReadOnlyCliTutors {
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
+    private final UniqueTutorList matchedTutors;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,14 +31,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         tutors = new UniqueTutorList();
         students = new UniqueStudentList();
+        matchedTutors = new UniqueTutorList();
     }
 
-    public AddressBook() {}
+    public CliTutors() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an CliTutors using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CliTutors(ReadOnlyCliTutors toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,6 +52,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTutors(List<Tutor> tutors) {
         this.tutors.setTutors(tutors);
+        this.matchedTutors.setTutors(tutors);
     }
 
     /**
@@ -60,9 +64,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CliTutors} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setTutors(newData.getTutorList());
@@ -70,18 +74,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing tutor data of this {@code AddressBook} with that in {@code newData}.
+     * Resets the existing tutor data of this {@code CliTutors} with that in {@code newData}.
      */
-    public void resetTutorData(ReadOnlyAddressBook newData) {
+    public void resetTutorData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setTutors(newData.getTutorList());
     }
 
     /**
-     * Resets the existing student data of this {@code AddressBook} with that in {@code newData}.
+     * Resets the existing student data of this {@code CliTutors} with that in {@code newData}.
      */
-    public void resetStudentData(ReadOnlyAddressBook newData) {
+    public void resetStudentData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -111,6 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTutor(Tutor tutor) {
         tutors.add(tutor);
+        matchedTutors.add(tutor);
     }
 
     /**
@@ -130,6 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedTutor);
 
         tutors.setTutor(target, editedTutor);
+        matchedTutors.setTutor(target, editedTutor);
     }
 
     /**
@@ -145,19 +151,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code tutor} from this {@code AddressBook}.
+     * Removes {@code tutor} from this {@code CliTutors}.
      * {@code tutor} must exist in the address book.
      */
     public void removeTutor(Tutor tutor) {
         tutors.remove(tutor);
+        matchedTutors.remove(tutor);
     }
 
     /**
-     * Removes {@code student} from this {@code AddressBook}.
+     * Removes {@code student} from this {@code CliTutors}.
      * {@code student} must exist in the address book.
      */
     public void removeStudent(Student student) {
         students.remove(student);
+    }
+
+    /**
+     * Sorts tutors based on number of matching tags with ls in descending order.
+     * @param studentTagList List of Tags used to compare with each tutor.
+     */
+    public void sortMatchedTutorList(List<Tag> studentTagList) {
+        requireNonNull(studentTagList);
+        matchedTutors.sortTutors(studentTagList);
     }
 
     //// util methods
@@ -179,12 +195,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Tutor> getMatchedTutorList() {
+        return matchedTutors.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && tutors.equals(((AddressBook) other).tutors)
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof CliTutors // instanceof handles nulls
+                && tutors.equals(((CliTutors) other).tutors)
+                && students.equals(((CliTutors) other).students))
+                && matchedTutors.equals(((CliTutors) other).matchedTutors);
     }
 
     @Override

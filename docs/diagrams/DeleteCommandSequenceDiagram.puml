@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CliTutorsParser" as CliTutorsParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("delete t 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete t 1")
-activate AddressBookParser
+LogicManager -> CliTutorsParser : parseCommand("delete t 1")
+activate CliTutorsParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+CliTutorsParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> CliTutorsParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse(" t 1")
+CliTutorsParser -> DeleteCommandParser : parse(" t 1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -36,22 +36,17 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> CliTutorsParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> CliTutorsParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+CliTutorsParser --> LogicManager : d
+deactivate CliTutorsParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
-
-DeleteCommand -> Model : getFilteredTutorList()
-activate Model
-Model --> DeleteCommand
-deactivate Model
 
 DeleteCommand -> Model : deleteTutor(tutor)
 activate Model

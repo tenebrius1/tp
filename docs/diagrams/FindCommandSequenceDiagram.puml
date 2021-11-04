@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CliTutorsParser" as CliTutorsParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "f:FindCommand" as FindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -14,20 +14,20 @@ participant "p:ChainedPredicate" as ChainedPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute\n("find s n/David")
+[-> LogicManager : execute("find s n/David")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand\n("find s n/David")
-activate AddressBookParser
+LogicManager -> CliTutorsParser : parseCommand("find s n/David")
+activate CliTutorsParser
 
 create FindCommandParser
-AddressBookParser -> FindCommandParser
+CliTutorsParser -> FindCommandParser
 activate FindCommandParser
 
-AddressBookParser <-- FindCommandParser
+CliTutorsParser <-- FindCommandParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(" s n/David")
+CliTutorsParser -> FindCommandParser : parse(" s n/David")
 activate FindCommandParser
 
 create ChainedPredicate
@@ -38,23 +38,23 @@ ChainedPredicate --> FindCommandParser : p
 deactivate ChainedPredicate
 
 create FindCommand
-FindCommandParser -> FindCommand : p
+FindCommandParser -> FindCommand : FindCommand(p)
 activate FindCommand
 
 FindCommandParser <-- FindCommand : f
 deactivate FindCommand
 
-FindCommandParser --> AddressBookParser : f
+FindCommandParser --> CliTutorsParser : f
 deactivate FindCommandParser
 
-AddressBookParser --> LogicManager : f
-deactivate AddressBookParser
+CliTutorsParser --> LogicManager : f
+deactivate CliTutorsParser
 destroy FindCommandParser
 
 LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredStudentList(predicate)
+FindCommand -> Model : updateFilteredStudentList(p)
 activate Model
 FindCommand <-- Model
 deactivate Model
@@ -66,11 +66,11 @@ activate CommandResult
 CommandResult --> FindCommand
 deactivate CommandResult
 
-FindCommand --> LogicManager : commandResult
+FindCommand --> LogicManager : result
 deactivate FindCommand
 
-[<--LogicManager : commandResult
-FindCommand -[hidden]-> LogicManager
-destroy FindCommand
+[<--LogicManager
 deactivate LogicManager
+destroy FindCommand
+destroy ChainedPredicate
 @enduml

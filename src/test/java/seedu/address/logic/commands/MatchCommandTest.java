@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,28 @@ import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+
+    @Test
+    public void execute_throwsNullPointerException() {
+        MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
+        assertThrows(NullPointerException.class, () -> matchCommandStudent.execute(null));
+    }
 
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
-        ModelManager expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
 
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -49,7 +60,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_THIRD_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_THIRD_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch.getName());
 
         assertCommandFailure(matchCommandStudent, model, expectedMessageStudent);
     }
@@ -69,11 +80,17 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_SUCCESS, studentToMatch.getName());
 
-        Model expectedModelStudent = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
-        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)));
+
+
+        List<Tag> ls = new ArrayList<>();
+        ls.addAll(studentToMatch.getTags());
+
+        expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
+                studentToMatch);
 
         assertCommandSuccess(matchCommandStudent, model, expectedMessageStudent, expectedModelStudent);
     }
@@ -86,7 +103,7 @@ public class MatchCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         MatchCommand matchCommandStudent = new MatchCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch);
+        String expectedMessageStudent = String.format(MatchCommand.MESSAGE_MATCHED_FAILED, studentToMatch.getName());
 
         assertCommandFailure(matchCommandStudent, model, expectedMessageStudent);
     }
@@ -97,7 +114,7 @@ public class MatchCommandTest {
 
         Index outOfBoundIndexStudent = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndexStudent is still in bounds of address book list
-        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndexStudent.getZeroBased() < model.getCliTutors().getStudentList().size());
 
         MatchCommand matchCommandStudent = new MatchCommand(outOfBoundIndexStudent);
 
@@ -133,6 +150,9 @@ public class MatchCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new MatchCommand(INDEX_SECOND_PERSON)));
+
+        // different command -> returns false
+        assertFalse(standardCommand.equals(new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT)));
     }
 
     private List<Tag> getStudentTagList(Student student) {

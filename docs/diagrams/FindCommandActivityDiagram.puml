@@ -3,16 +3,14 @@ start
 :User enters find command;
 :Parse command arguments;
 
-if () then ([Invalid input/s])
-    :Throw \nParseException;
-else ([Valid input/s])
+if () then ([input is valid])
     :Create and chain predicates related
     to prefix/s specified in input;
-    :Execute Find command;
-    :Update student list in Model;
-    :Return CommandResult;
-
-endif
-
-stop
+    :Execute find command;
+    :Update student list;
+    :Display students found;
+    stop
+else ([else])
+    :Throw \nParseException;
+    stop
 @enduml

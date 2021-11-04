@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant "__:LogicManager__" as LogicManager LOGIC_COLOR
-participant "__:AddressBookParser__" as AddressBookParser LOGIC_COLOR
+participant "__:CliTutorsParser__" as CliTutorsParser LOGIC_COLOR
 participant "__:AddCommandParser__" as AddCommandParser LOGIC_COLOR
 participant "__a:AddCommand__" as AddCommand LOGIC_COLOR
 participant "__:CommandResult__" as CommandResult LOGIC_COLOR
@@ -13,19 +13,19 @@ box Model MODEL_COLOR_T1
 participant "__:Model__" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute\n("add t n/Jonathan Chan \n p/92102339 g/M \n q/2 t/PM SM")
+[-> LogicManager : execute("add" + John)
 activate LogicManager
-LogicManager -> AddressBookParser : parseCommand\n("add t n/Jonathan Chan \n p/92102339 g/M \n q/2 t/PM SM")
-activate AddressBookParser
+LogicManager -> CliTutorsParser : parseCommand("add" + John)
+activate CliTutorsParser
 
 create AddCommandParser
-AddressBookParser -> AddCommandParser
+CliTutorsParser -> AddCommandParser
 activate AddCommandParser
 
-AddressBookParser <-- AddCommandParser
+CliTutorsParser <-- AddCommandParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse(" t n/Jonathan Chan p/92102339 \n g/M q/2 t/PM SM")
+CliTutorsParser -> AddCommandParser : parse(John)
 activate AddCommandParser
 
 create AddCommand
@@ -35,11 +35,11 @@ activate AddCommand
 AddCommandParser <-- AddCommand : a
 deactivate AddCommand
 
-AddCommandParser --> AddressBookParser : a
+AddCommandParser --> CliTutorsParser : a
 deactivate AddCommandParser
 
-AddressBookParser --> LogicManager : a
-deactivate AddressBookParser
+CliTutorsParser --> LogicManager : a
+deactivate CliTutorsParser
 destroy AddCommandParser
 
 LogicManager -> AddCommand : execute(model)
@@ -57,11 +57,11 @@ activate CommandResult
 CommandResult --> AddCommand
 deactivate CommandResult
 
-AddCommand --> LogicManager : commandResult
+AddCommand --> LogicManager : result
 deactivate AddCommand
 
-[<--LogicManager : commandResult
+[<--LogicManager
+deactivate LogicManager
 AddCommand -[hidden]-> LogicManager
 destroy AddCommand
-deactivate LogicManager
 @enduml

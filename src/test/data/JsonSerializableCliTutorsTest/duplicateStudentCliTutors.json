@@ -4,23 +4,27 @@
     "phone" : "94351253",
     "gender" : "F",
     "qualification" : "0",
+    "remark" : "",
     "tagged" : [ "PM" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "gender" : "M",
     "qualification" : "1",
+    "remark" : "Wants student in Ang Mo Kio",
     "tagged" : [ "SM", "SC" ]
   } ],
   "students": [ {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
+    "remark" : "",
     "tagged" : [ "PM" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
+    "remark" : "",
     "tagged" : [ "PM" ]
   } ]
 }

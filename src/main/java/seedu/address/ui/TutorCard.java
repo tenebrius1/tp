@@ -23,7 +23,7 @@ public class TutorCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on CliTutors level 4</a>
      */
 
     public final Tutor tutor;
@@ -41,6 +41,8 @@ public class TutorCard extends UiPart<Region> {
     @FXML
     private Label qualification;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -53,9 +55,11 @@ public class TutorCard extends UiPart<Region> {
         name.setText(tutor.getName().fullName);
         phone.setText("Contact: " + tutor.getPhone().value);
         gender.setText("Gender: " + tutor.getGender().genderSymbol);
-        if (tutor instanceof Tutor) {
-            qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
+        qualification.setText("Qualification: " + Qualifications.getLabel(tutor.getQualification().index));
+        if (tutor.isRemarkEmpty()) {
+            remark.setVisible(false);
         }
+        remark.setText("Remark: " + tutor.getRemark().description);
         tutor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(LevelSubjectCode.getLabel(tag.tagName))));

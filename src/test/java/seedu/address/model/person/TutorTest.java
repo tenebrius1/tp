@@ -33,23 +33,27 @@ public class TutorTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Tutor editedAlice = new TutorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+        // same phone, all other attributes different -> returns true
+        Tutor editedAlice = new TutorBuilder(ALICE).withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_PM).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new TutorBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different phone, all other attributes same -> returns false
+        editedAlice = new TutorBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
+    }
 
-        // name differs in case, all other attributes same -> returns false
-        Tutor editedBob = new TutorBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertTrue(BOB.isSamePerson(editedBob));
+    @Test
+    public void isRemarkEmptyTest() {
+        String remark = "";
+        // empty remark
+        Tutor editedAlice = new TutorBuilder(ALICE).withRemark(remark).build();
+        assertTrue(editedAlice.isRemarkEmpty());
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new TutorBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // valid remark
+        remark = "remark";
+        editedAlice = new TutorBuilder(ALICE).withRemark(remark).build();
+        assertFalse(editedAlice.isRemarkEmpty());
     }
 
     @Test

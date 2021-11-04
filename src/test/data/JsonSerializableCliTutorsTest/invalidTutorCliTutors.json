@@ -1,15 +1,17 @@
 {
   "tutors": [ {
-    "name" : "Alice Pauline",
+    "name": "Hans Muster",
     "phone" : "94351253",
     "gender" : "F",
-    "qualification" : "0",
+    "qualification" : "4",
+    "remark" : "",
     "tagged" : [ "PM" ]
   } ],
   "students": [ {
-    "name" : "Dank Muster",
+    "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender" : "M",
-    "tagged" : [ "P*" ]
+    "remark" : "",
+    "tagged" : [ "PM" ]
   } ]
 }
