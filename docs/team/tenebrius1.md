@@ -36,7 +36,7 @@ title: Yi Guan's Project Portfolio Page
 #### **Developer Guide**
 - Did cosmetic tweaks to the Developer Guide
 - Added user stories (Pull request [#28](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/28))
-- Added `logic` and `storage` diagrams (Pull request [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105))
+- Added `Logic` and `Storage` diagrams (Pull request [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105))
 - Added manual testing instructions for `find` and `saving data` (Pull request [#194](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/194/files))
 
 ### **Community**
