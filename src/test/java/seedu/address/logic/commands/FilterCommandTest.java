@@ -59,7 +59,7 @@ public class FilterCommandTest {
 
         FilterCommand filterCommand = new FilterCommand(predicate);
 
-        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
