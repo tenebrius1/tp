@@ -32,7 +32,7 @@ Before going into the rest of the content in our user guide, here are a few **im
 
 1. Ensure you have Java `11` or above installed on your computer.
 
-2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.4) the latest `clitutors.jar`.
+2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases) the latest `clitutors.jar`.
 
 3. Copy the file to the folder you want to use as the *home folder* for `CliTutors`.
 
