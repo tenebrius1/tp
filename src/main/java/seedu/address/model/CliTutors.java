@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
@@ -23,7 +25,7 @@ public class CliTutors implements ReadOnlyCliTutors {
     private final UniqueTutorList tutors;
     private final UniqueStudentList students;
     private final UniqueTutorList matchedTutors;
-    private final Set<Phone> uniquePhoneNumbers;
+    private final Hashtable<Person, Phone> uniquePhoneNumbers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -36,7 +38,7 @@ public class CliTutors implements ReadOnlyCliTutors {
         tutors = new UniqueTutorList();
         students = new UniqueStudentList();
         matchedTutors = new UniqueTutorList();
-        uniquePhoneNumbers = new HashSet<>();
+        uniquePhoneNumbers = new Hashtable<>();
     }
 
     public CliTutors() {}
@@ -58,7 +60,7 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void setTutors(List<Tutor> tutors) {
         this.tutors.setTutors(tutors);
         this.matchedTutors.setTutors(tutors);
-        tutors.stream().forEach(tutor -> uniquePhoneNumbers.add(tutor.getPhone()));
+        tutors.stream().forEach(tutor -> uniquePhoneNumbers.put(tutor, tutor.getPhone()));
     }
 
     /**
@@ -67,7 +69,7 @@ public class CliTutors implements ReadOnlyCliTutors {
      */
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
-        students.stream().forEach(student -> uniquePhoneNumbers.add(student.getPhone()));
+        students.stream().forEach(student -> uniquePhoneNumbers.put(student, student.getPhone()));
     }
 
     /**
@@ -76,6 +78,7 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void resetData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
+        uniquePhoneNumbers.clear();
         setTutors(newData.getTutorList());
         setStudents(newData.getStudentList());
     }
@@ -86,7 +89,21 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void resetTutorData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
-        setTutors(newData.getTutorList());
+        List<Tutor> tutorList = newData.getTutorList();
+        //@@author zihaooo9-reused
+        //Reused from https://www.baeldung.com/java-concurrentmodificationexception
+        // with minor modifications
+        List<Tutor> toRemove = new ArrayList<>();
+        Set<Person> personSet = uniquePhoneNumbers.keySet();
+        for (Person person : personSet) {
+            if (person instanceof Tutor) {
+                toRemove.add((Tutor) person);
+            }
+        }
+        for (Tutor tutor : toRemove) {
+            uniquePhoneNumbers.remove(tutor);
+        }
+        setTutors(tutorList);
     }
 
     /**
@@ -95,6 +112,20 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void resetStudentData(ReadOnlyCliTutors newData) {
         requireNonNull(newData);
 
+        List<Student> studentList = newData.getStudentList();
+        //@@author zihaooo9-reused
+        //Reused from https://www.baeldung.com/java-concurrentmodificationexception
+        // with minor modifications
+        List<Student> toRemove = new ArrayList<>();
+        Set<Person> personSet = uniquePhoneNumbers.keySet();
+        for (Person person : personSet) {
+            if (person instanceof Student) {
+                toRemove.add((Student) person);
+            }
+        }
+        for (Student student : toRemove) {
+            uniquePhoneNumbers.remove(student);
+        }
         setStudents(newData.getStudentList());
     }
 
@@ -123,7 +154,7 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void addTutor(Tutor tutor) {
         tutors.add(tutor);
         matchedTutors.add(tutor);
-        uniquePhoneNumbers.add(tutor.getPhone());
+        uniquePhoneNumbers.put(tutor, tutor.getPhone());
     }
 
     /**
@@ -132,7 +163,7 @@ public class CliTutors implements ReadOnlyCliTutors {
      */
     public void addStudent(Student student) {
         students.add(student);
-        uniquePhoneNumbers.add(student.getPhone());
+        uniquePhoneNumbers.put(student, student.getPhone());
     }
 
     /**
@@ -145,8 +176,8 @@ public class CliTutors implements ReadOnlyCliTutors {
 
         tutors.setTutor(target, editedTutor);
         matchedTutors.setTutor(target, editedTutor);
-        uniquePhoneNumbers.remove(target.getPhone());
-        uniquePhoneNumbers.add(editedTutor.getPhone());
+        uniquePhoneNumbers.remove(target);
+        uniquePhoneNumbers.put(editedTutor, editedTutor.getPhone());
     }
 
     /**
@@ -159,8 +190,8 @@ public class CliTutors implements ReadOnlyCliTutors {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
-        uniquePhoneNumbers.remove(target.getPhone());
-        uniquePhoneNumbers.add(editedStudent.getPhone());
+        uniquePhoneNumbers.remove(target);
+        uniquePhoneNumbers.put(editedStudent, editedStudent.getPhone());
     }
 
     /**
@@ -170,7 +201,7 @@ public class CliTutors implements ReadOnlyCliTutors {
     public void removeTutor(Tutor tutor) {
         tutors.remove(tutor);
         matchedTutors.remove(tutor);
-        uniquePhoneNumbers.remove(tutor.getPhone());
+        uniquePhoneNumbers.remove(tutor);
     }
 
     /**
@@ -179,7 +210,7 @@ public class CliTutors implements ReadOnlyCliTutors {
      */
     public void removeStudent(Student student) {
         students.remove(student);
-        uniquePhoneNumbers.remove(student.getPhone());
+        uniquePhoneNumbers.remove(student);
     }
 
     /**
@@ -237,6 +268,6 @@ public class CliTutors implements ReadOnlyCliTutors {
      */
     public boolean hasPersonWithSamePhone(Phone p) {
         requireNonNull(p);
-        return uniquePhoneNumbers.contains(p);
+        return uniquePhoneNumbers.containsValue(p);
     }
 }

@@ -15,7 +15,7 @@ public class Name {
             "Names should only contain alphanumeric characters and spaces, and it should be between 1-50 "
             + "characters";
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{1,50}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{0,49}";
 
     public final String fullName;
 

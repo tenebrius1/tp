@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears all entries of tutors or students from the database\n "
+            + ": Clears all entries of tutors or students from the database\n"
             + "Parameters: "
             + "t/s\n"
             + "Example: clear s";
@@ -47,6 +47,7 @@ public class ClearCommand extends Command {
             // No break necessary due to return statement
         case STUDENT:
             model.setStudentData(new CliTutors());
+            model.clearMatchedTutor();
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
             // No break necessary due to return statement
         default:
