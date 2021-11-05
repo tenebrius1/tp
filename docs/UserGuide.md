@@ -5,7 +5,7 @@ nav-text: User Guide
 ---
 ![](https://i.imgur.com/dLt7IDY.png)
 
-**`CLITutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CLITutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
+**`CliTutors`** is a desktop app for **managing private tutoring jobs**, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are a private tuition agency with a **big list of tutors to manage**, `CliTutors` can help you to manage matching tutors and students for private tuition faster than using a regular database.
 
 ## Table of Contents
 {: .no_toc}
@@ -32,7 +32,7 @@ Before going into the rest of the content in our user guide, here are a few **im
 
 1. Ensure you have Java `11` or above installed on your computer.
 
-2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.3) the latest `clitutors.jar`.
+2. [Download](https://github.com/AY2122S1-CS2103T-T17-2/tp/releases/tag/v1.4) the latest `clitutors.jar`.
 
 3. Copy the file to the folder you want to use as the *home folder* for `CliTutors`.
 
@@ -48,7 +48,7 @@ Before going into the rest of the content in our user guide, here are a few **im
 
 9. When you are ready to start adding your own data, clear the **Tutor and Student Lists** using `clear t` and `clear s` respectively.
 
-10. If you are new and unsure of what the **expected outcomes** are for each command, fret not! You can click on the **dropdown list** under each command that illustrates the *before* and *after* of an example command input.
+10. If you are new and unsure of what the **expected outcomes** are for each command, fret not! The *before* and *after* state of an example command input is illustrated under each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Syntax
@@ -75,11 +75,11 @@ For your convenience, a list of all parameters along with their prefixes has bee
 
 | Parameter | Description    | Argument Requirements                                      |
 |:---------:|:-------------- | ------------------------------------------------------ |
-|    n/     | Name           | Contains alphanumeric characters and spaces, not blank |
-|    p/     | Phone Number          | Contain numbers, and it should be 8 digits long        |
+|    n/     | Name           | Contains alphanumeric characters and spaces, not blank, and it should be 1 to 50 characters long |
+|    p/     | Phone Number          | Contains numbers, and it should be 8 digits long        |
 |    g/     | Gender         | Must be `M`/`m` for Male, `F`/`f` for Female     |
 |    q/     | Qualification  | [Valid qualifications](#valid-qualifications)          |
-|    r/     | Remark         | Can contain any string not more than 100 characters        |
+|    r/     | Remark         | Contains not more than 100 characters        |
 |    t/     | Tags           | [Valid tags](#valid-tags)                              |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ For your convenience, a list of all parameters along with their prefixes has bee
 - Parameters in square brackets are **optional**.<br>
   e.g. `n/NAME [r/REMARK]` can be used as `n/John Doe r/This is a remark` or as `n/John Doe`.
 
-- Parameters with `…` after them can have **multiple arguments** in them.<br>
+- Parameters with `...` after them can have **multiple arguments** in them.<br>
   e.g. `t/TAG...` can be used as `t/PM` or `t/PM SC TB` etc.
 
 - If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -119,7 +119,7 @@ e.g. Both `delete t 1` and `d t 1` represent the same command.
 
 ### Viewing help: `help`
 
-Shows a message with all the commands available to use on `CliTutors`.
+Opens a window with all the commands available to use on CLITutors.
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -140,12 +140,12 @@ Format:<br>
 
 - We support adding of tutors/students with the same name.
 
-- Tutors/students with the <b>same phone number will be counted as duplicates</b> in our app.
+- Tutors/students with the <b>same phone number will be counted as duplicates</b> in our app, which is not allowed.
 </div>
 
 Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
-`a s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
+`a s n/Mary Sue p/98769420 g/F r/Wants tutor urgently t/PM PE`
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -179,7 +179,7 @@ Format:<br>
 
 Examples:<br>
 `edit t 3 n/John Doe g/M q/2 t/PM TE TM TL`<br>
-`e s 9 n/Mary Sue p/98765432`
+`e s 2 n/Mary Sue p/98765432`
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -204,7 +204,7 @@ Format:<br>
 
 Examples:<br>
 `list t` followed by `delete t 2` deletes the 2nd person in the Tutor List. <br>
-`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the Tutor List.
+`find t n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the Tutor List.
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -260,9 +260,9 @@ Example:<br>
 <img src="images/screenshots/Find.png">
 </details>
 
-### Matching a student to tutor(s): `match` / `m`
+### Matching tutor(s) to a student: `match` / `m`
 
-Finds tutor(s) who teaches the subject that the student wants.
+Matches tutor(s) who teach(es) the subject(s) that the student wants, and sorts the matched tutor(s) in decreasing order by number of tags matched. 
 
 Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed Student List**.
@@ -270,7 +270,7 @@ Format: <br>`match INDEX`
 
 Example:<br>
 `match 1`<br>
-`m 1`
+`m 2`
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
@@ -289,8 +289,6 @@ Filters tutor(s) from the **list of matched tutors**.
 Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - The search is case-insensitive. <br>
   e.g. `n/hans` will match `Hans`.
-- Only the last name given is searched. <br>
-  e.g. `filter n/John n/Amy` will find names that match `Amy`.
 - Only full words will be matched. <br>
   e.g. `n/Han` will not match `Hans`, and `n/Han Solo` will not match `Han Dan`.
 - **At least one** of the optional fields must be provided.
@@ -299,6 +297,7 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 <b>:heavy_exclamation_mark: Caution:</b> <br>
 
 * `filter` cannot be used on an empty Match List.
+  
 * Users are expected to type the `match` command again if they wish to apply `filter` individually, as multiple `filter` commands used concurrently on a non-empty Match List will **continue to narrow down** the search.
 </div>
 
@@ -343,7 +342,7 @@ Format: <br>`exit`
 
 ### Editing the data file
 
-`CliTutors` data is saved as a JSON file `[JAR file location]/data/clitutors.json`. Advanced users are welcome to update data directly by editing that data file.
+`CliTutors` data is saved as a JSON file `[JAR file location]/data/clitutors.json`. Advanced users are welcome to update the data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
 <b>:heavy_exclamation_mark: Caution:</b> If the data file's format is invalid after manual changes, `CliTutors` will discard all data and start with an empty data file at the next run.
@@ -352,13 +351,13 @@ Format: <br>`exit`
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?
+**Q**: How do I transfer my data to another computer?
 
 **A**: Install the application on the other computer and place your current data folder in the same directory as the newly installed application (overwrite the data folder of the new application if applicable).
 
 **Q**: Where is the data of CLITutors saved?
 
-**A**: CLITutors' data is saved automatically after every command into a JSON file named clitutors.json. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
+**A**: CLITutors' data is saved automatically after every command into a JSON file named `clitutors.json`. This file is stored within the data folder in the same location as the application JAR file and is created after the initial launch (and upon a command execution) of a fresh installation.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -381,8 +380,8 @@ Format: <br>`exit`
 
 ### Valid Tags
 
-`Tag` is derived from [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.<br>
-The application supports the following level of education and subjects as shown in the table below.
+`Tag` can be read as [**LEVEL**][**SUBJECT**] e.g. **PM** is Primary Math.<br>
+The application supports the following levels of education and subjects as shown in the table below.
 
 <table>
     <thead>
@@ -476,7 +475,7 @@ The application supports the following level of education and subjects as shown 
 </table>
 
 <div markdown="block" class="alert alert-info">
-<b>:information_source: Note: </b> Tags are case insensitive.
+<b>:information_source: Note: </b> Tags are case-insensitive.
 </div>
 
 ### Valid Qualifications
