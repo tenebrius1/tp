@@ -87,9 +87,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw pe;
         }
         setDescriptorValues(argMultimap, editPersonDescriptor, personType);
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
         return new EditCommand(personIndex, editPersonDescriptor, personType);
     }
 

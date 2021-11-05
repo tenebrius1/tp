@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all the tutor names that contain "
-            + "the specified search parameters (case-insensitive) and displays them in the matched tutors list."
+            + "the specified search parameters (case-insensitive) and displays them in the matched tutors list.\n"
             + "Parameters: [n/NAME] [g/GENDER] [q/QUALIFICATION]\n"
             + "Example: " + COMMAND_WORD + " q/3";
 

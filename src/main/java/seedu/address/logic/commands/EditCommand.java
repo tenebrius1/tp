@@ -63,8 +63,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
     public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
     public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
@@ -89,7 +87,6 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         switch(personType) {
         case TUTOR:
             return executeEditTutor(model);
@@ -119,6 +116,10 @@ public class EditCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
@@ -154,6 +155,10 @@ public class EditCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
