@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_GRADUATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_MOE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.DON_A;
 import static seedu.address.testutil.TypicalPersons.DON_E;
@@ -23,6 +24,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -90,6 +92,22 @@ public class FindCommandTest {
         expectedSimilarNamesModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, similarNamesModel, expectedMessage, expectedSimilarNamesModel);
         assertEquals(new ArrayList<Student>(), similarNamesModel.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_emptyStudentList_failure() {
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT);
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("Alex Yeoh");
+        FindCommand command = new FindCommand(predicate, PersonType.STUDENT);
+        assertCommandFailure(command, new ModelManager(), expectedMessage);
+    }
+
+    @Test
+    public void execute_emptyTutorList_failure() {
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR);
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("David Li");
+        FindCommand command = new FindCommand(predicate, PersonType.TUTOR);
+        assertCommandFailure(command, new ModelManager(), expectedMessage);
     }
 
     @Test

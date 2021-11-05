@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,61 +42,83 @@ public class AddCommandParser implements Parser<AddCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), pe);
         }
+
         switch (personType) {
         case TUTOR:
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                            PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                    PREFIX_QUALIFICATION, PREFIX_TAG)
-                    || argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
-
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-            Qualification qualification = ParserUtil.parseQualification(
-                    argMultimap.getValue(PREFIX_QUALIFICATION).get());
-            Remark remark;
-            if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
-                remark = new Remark();
-            } else {
-                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
-            }
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Tutor tutor = new Tutor(name, phone, gender, qualification, remark, tagList);
-            return new AddCommand(tutor, PersonType.TUTOR);
-            // No break necessary due to return statement
+            return parseTutor(args);
         case STUDENT:
-            argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
-                    PREFIX_REMARK, PREFIX_TAG);
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG)
-                    || argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
-
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
-                remark = new Remark();
-            } else {
-                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
-            }
-
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Student student = new Student(name, phone, gender, remark, tagList);
-            return new AddCommand(student, PersonType.STUDENT);
-            // No break necessary due to return statement
+            return parseStudent(args);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+    }
+
+    private AddCommand parseTutor(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
+                        PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
+                PREFIX_QUALIFICATION, PREFIX_TAG)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+
+        Qualification qualification = ParserUtil.parseQualification(
+                argMultimap.getValue(PREFIX_QUALIFICATION).get());
+
+        Remark remark;
+        // Handles remark if it exists
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
+            remark = new Remark();
+        } else {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        }
+
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Tutor tutor = new Tutor(name, phone, gender, qualification, remark, tagList);
+        return new AddCommand(tutor, PersonType.TUTOR);
+    }
+
+    private AddCommand parseStudent(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER,
+                PREFIX_QUALIFICATION, PREFIX_REMARK, PREFIX_TAG);
+
+        // Check if the user puts in qualification
+        if (arePrefixesPresent(argMultimap, PREFIX_QUALIFICATION)) {
+            throw new ParseException(MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+
+        Remark remark;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
+            remark = new Remark();
+        } else {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        }
+
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Student student = new Student(name, phone, gender, remark, tagList);
+        return new AddCommand(student, PersonType.STUDENT);
     }
 
     /**
@@ -105,5 +128,4 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

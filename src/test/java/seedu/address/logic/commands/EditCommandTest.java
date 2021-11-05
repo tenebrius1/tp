@@ -27,6 +27,7 @@ import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -87,8 +88,6 @@ public class EditCommandTest {
         expectedModel.setTutor(lastTutor, editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-
-
     }
 
     @Test
@@ -115,25 +114,15 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredTutorList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTutorDescriptor(), PersonType.TUTOR);
-        Tutor editedTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
-
-        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_TUTOR;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredStudentList_success() {
+    public void execute_noFieldSpecifiedUnfilteredStudentList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditStudentDescriptor(), PersonType.STUDENT);
-        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-
-        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_STUDENT;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
@@ -180,7 +169,7 @@ public class EditCommandTest {
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -189,7 +178,7 @@ public class EditCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -201,7 +190,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditTutorDescriptorBuilder(tutorInList).build(), PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -213,7 +202,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditStudentDescriptorBuilder(studentInList).build(), PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test

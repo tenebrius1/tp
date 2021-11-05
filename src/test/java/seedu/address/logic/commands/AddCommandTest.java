@@ -9,7 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
@@ -222,7 +226,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls) {
+        public void updateMatchedTutor(TagsContainTagPredicate predicate, List<Tag> ls, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearMatchedTutor() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -233,6 +242,16 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Tutor> getMatchedTutorList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getMatchedStudent() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonWithSamePhone(Phone p) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -278,6 +297,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingTutorAdded extends ModelStub {
         final ArrayList<Tutor> tutorsAdded = new ArrayList<>();
+        final Set<Phone> phoneNumbers = new HashSet<>();
 
         @Override
         public boolean hasTutor(Tutor tutor) {
@@ -295,6 +315,11 @@ public class AddCommandTest {
         public ReadOnlyCliTutors getCliTutors() {
             return new CliTutors();
         }
+
+        @Override
+        public boolean hasPersonWithSamePhone(Phone p) {
+            return phoneNumbers.contains(p);
+        }
     }
 
     /**
@@ -302,6 +327,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
+        final Set<Phone> phoneNumbers = new HashSet<>();
 
         @Override
         public boolean hasStudent(Student student) {
@@ -318,6 +344,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyCliTutors getCliTutors() {
             return new CliTutors();
+        }
+
+        @Override
+        public boolean hasPersonWithSamePhone(Phone p) {
+            return phoneNumbers.contains(p);
         }
     }
 }

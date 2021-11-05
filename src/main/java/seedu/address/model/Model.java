@@ -7,7 +7,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -143,7 +145,12 @@ public interface Model {
      * Updates the filter of the matched tutors list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateMatchedTutor(Predicate<Person> predicate, List<Tag> ls);
+    void updateMatchedTutor(TagsContainTagPredicate predicate, List<Tag> ls, Student student);
+
+    /**
+     * Clears matched tutor list
+     */
+    void clearMatchedTutor();
 
     /**
      * Updates the filter of the matched tutors list by additionally filtering by the given {@code predicate}.
@@ -153,4 +160,19 @@ public interface Model {
 
     /** Returns an unmodifiable view of the matched tutor list */
     ObservableList<Tutor> getMatchedTutorList();
+
+    /**
+     * Returns the student that is currently being matched.
+     *
+     * @return the student that is currently being matched.
+     */
+    Student getMatchedStudent();
+
+    /**
+     * Checks if phone number already exist.
+     *
+     * @param p phone number
+     * @return true if there is a same Phone object in the phone number list, false otherwise.
+     */
+    boolean hasPersonWithSamePhone(Phone p);
 }

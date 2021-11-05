@@ -14,7 +14,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.ChainedPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -29,6 +31,8 @@ public class ModelManager implements Model {
     private final FilteredList<Tutor> filteredTutors;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Tutor> matchedTutors;
+
+    private Student matchedStudent;
 
     /**
      * Initializes a ModelManager with the given cliTutors and userPrefs.
@@ -45,6 +49,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.cliTutors.getStudentList());
         matchedTutors = new FilteredList<>(this.cliTutors.getMatchedTutorList());
         matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
+        matchedStudent = null;
     }
 
     public ModelManager() {
@@ -191,13 +196,23 @@ public class ModelManager implements Model {
     //=========== Matched Tutor List Accessors =============================================================
 
     @Override
-    public void updateMatchedTutor(Predicate<Person> predicate, List<Tag> studentTagList) {
+    public void updateMatchedTutor(TagsContainTagPredicate predicate, List<Tag> studentTagList, Student student) {
         requireAllNonNull(predicate, studentTagList);
         matchedTutors.setPredicate(predicate);
-        if (!matchedTutors.isEmpty()) {
+        matchedStudent = student;
+
+        if (matchedTutors.isEmpty()) {
+            clearMatchedTutor();
+        } else {
             assert(!studentTagList.isEmpty()) : "studentTagList should not be empty at this point.";
             cliTutors.sortMatchedTutorList(studentTagList);
         }
+    }
+
+    @Override
+    public void clearMatchedTutor() {
+        matchedTutors.setPredicate(PREDICATE_SHOW_NO_PERSON);
+        matchedStudent = null;
     }
 
     @Override
@@ -209,11 +224,26 @@ public class ModelManager implements Model {
         Predicate<Person> resultingPredicate = predicate.and(matchingPredicate);
         ChainedPredicate.Builder builder = new ChainedPredicate.Builder();
         matchedTutors.setPredicate(builder.setPredicate(resultingPredicate).build());
+
+        if (matchedTutors.isEmpty()) {
+            matchedStudent = null;
+        }
     }
 
     @Override
     public ObservableList<Tutor> getMatchedTutorList() {
         return matchedTutors;
+    }
+
+    @Override
+    public Student getMatchedStudent() {
+        return matchedStudent;
+    }
+
+    @Override
+    public boolean hasPersonWithSamePhone(Phone p) {
+        requireNonNull(p);
+        return cliTutors.hasPersonWithSamePhone(p);
     }
 
     @Override
@@ -234,6 +264,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredTutors.equals(other.filteredTutors)
                 && filteredStudents.equals(other.filteredStudents)
-                && matchedTutors.equals(other.matchedTutors);
+                && matchedTutors.equals(other.matchedTutors)
+                && (matchedStudent == null
+                        ? other.matchedStudent == null : matchedStudent.equals(other.matchedStudent));
     }
 }
