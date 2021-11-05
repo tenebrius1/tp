@@ -32,11 +32,11 @@ public class FindCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_QUALIFICATION + "QUALIFICATION] "
-            + "[" + PREFIX_TAG + "TAG]>\n"
+            + "[" + PREFIX_TAG + "TAG...]>\n"
             + "or <s "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_TAG + "TAG]>\n"
+            + "[" + PREFIX_TAG + "TAG...]>\n"
             + "Example: " + COMMAND_WORD + " t n/charlie";
 
     private final Predicate<Person> predicate;

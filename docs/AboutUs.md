@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/zihaooo9.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: Oversees testing and code coverage
 
 
 ### Liaw Xin Yan
@@ -24,7 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/lemonsr.md)]
 
 * Role: UI Designer and Developer
-* Responsibilities:
+* Responsibilities: Design and integrate code with GUI
 
 ### Kleon Ang
 
@@ -34,7 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/kleonang.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Ensure code quality
 
 ### Tan Yi Guan
 
@@ -43,8 +43,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/tenebrius1)]
 [[portfolio](team/tenebrius1.md)]
 
-* Role: Developer
-* Responsibilities:
+* Role: Team Lead
+* Responsibilities: Oversees whole project
 
 ### Kenneth Hong Jia Wei
 
@@ -54,4 +54,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/knotstoks.md)]
 
 * Role: Developer
-* Responsibilities: Burden
+* Responsibilities: Maintain documentation

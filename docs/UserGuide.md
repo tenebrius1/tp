@@ -121,7 +121,7 @@ e.g. Both `delete t 1` and `d t 1` represent the same command.
 
 Shows a message with all the commands available to use on `CliTutors`.
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <br>
 <img src="images/screenshots/Help.png">
@@ -147,7 +147,7 @@ Examples:<br>
 `add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL`<br>
 `a s n/Mary Sue p/98765432 g/F r/Wants tutor urgently t/PM PE`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>add t n/John Doe p/98765432 g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
@@ -165,7 +165,7 @@ Format:<br>
 `edit t INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [q/QUALIFICATION] [r/REMARK] [t/TAG...]` <br>
 `edit s INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [r/REMARK] [t/TAG...]`
 
-* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed tutor/student list**. The index **must be a positive integer**, i.e. 1, 2, 3...
+* Edits the tutor/student at the specified `INDEX`. The index refers to the index number shown in the **displayed Tutor/Student List**. The index **must be a positive integer**, i.e. 1, 2, 3...
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * You must specify **at least one** tag when editing the tags with `t/`.
@@ -181,7 +181,7 @@ Examples:<br>
 `edit t 3 n/John Doe g/M q/2 t/PM TE TM TL`<br>
 `e s 9 n/Mary Sue p/98765432`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
@@ -199,14 +199,14 @@ Format:<br>
 `delete t INDEX`<br>
 `delete s INDEX`
 
-- The `INDEX` refers to the index number shown on the **displayed tutor/student list**.
+- The `INDEX` refers to the index number shown on the **displayed Tutor/Student List**.
 - The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Examples:<br>
-`list t` followed by `delete t 2` deletes the 2nd person in the tutor list. <br>
-`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the tutor list.
+`list t` followed by `delete t 2` deletes the 2nd person in the Tutor List. <br>
+`find n/Betsy` followed by `d t 1` deletes the 1st person in the results of the find command for the Tutor List.
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>delete t 2</code></p>
 <p>Before:</p>
@@ -222,7 +222,7 @@ Shows the list of all tutors/students.
 
 Format: <br>`list t` <br> `list s`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Commands Executed: <code>find t g/M</code>, then <code>list t</code></p>
 <p>Before (when <code>find t g/M</code> is executed):</p>
@@ -250,7 +250,7 @@ Example:<br>
 `find t n/Yu t/SC`<br>
 `f s g/M t/PS`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>find t n/Yu t/SC</code></p>
 <p>Before:</p>
@@ -265,14 +265,14 @@ Example:<br>
 Finds tutor(s) who teaches the subject that the student wants.
 
 Format: <br>`match INDEX`
-- The `INDEX` refers to the index number shown on the **displayed student list**.
+- The `INDEX` refers to the index number shown on the **displayed Student List**.
 - The `INDEX` **must be a positive integer**. <br> e.g. `1`, `2`, `3`, ...
 
 Example:<br>
 `match 1`<br>
 `m 1`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>match 1</code></p>
 <p>Before:</p>
@@ -284,7 +284,7 @@ Example:<br>
 
 ### Filtering tutors from the matched tutors: `filter`
 
-Filters tutor(s) from the list of **matched** tutors.
+Filters tutor(s) from the **list of matched tutors**.
 
 Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 - The search is case-insensitive. <br>
@@ -305,7 +305,7 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 Example:<br>
 `filter g/F`
 
-<details>
+<details open>
 <summary>Expected outcome:</summary>
 <p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
 <p>Before (when <code>match 1</code> is executed):</p>
@@ -321,7 +321,7 @@ Clears all entries of tutors/students from CLITutors.
 
 Format: <br>`clear t` <br> `clear s`
 
-<details>
+<details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
 <p>Command Executed: <code>clear t</code></p>
 <p>Before:</p>
@@ -372,7 +372,7 @@ Format: <br>`exit`
 |  **List**  | `list t` <br> `list s`           |
 |  **Find**  | `find t [n/NAME] [g/GENDER] [q/QUALIFICATION] [t/TAG...]` <br> `find s [n/NAME] [g/GENDER] [t/TAG...]` <br> e.g. `find s n/John`  |
 | **Match**  | `match INDEX` <br> e.g. `match 1`          |
-| **Filter**  | `filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`<br>Note: must have **at least one** optional field     |
+| **Filter**  | `filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`<br> e.g. `filter g/F`     |
 | **Clear**  | `clear t` <br> `clear s`          |
 |  **Exit**  | `exit`           |
 

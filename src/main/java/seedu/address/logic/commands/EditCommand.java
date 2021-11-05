@@ -63,8 +63,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
     public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
     public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
@@ -89,7 +87,6 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         switch(personType) {
         case TUTOR:
             return executeEditTutor(model);
@@ -121,14 +118,20 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         }
 
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         Tutor tutorToEdit = lastShownList.get(index.getZeroBased());
         Tutor editedTutor = createEditedTutor(tutorToEdit, (EditTutorDescriptor) editPersonDescriptor);
 
         if (tutorToEdit.equals(editedTutor)) {
             throw new CommandException(MESSAGE_UNCHANGED_TUTOR);
         }
-        if (!tutorToEdit.isSamePerson(editedTutor) && model.hasTutor(editedTutor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
+
+        if (!tutorToEdit.getPhone().equals(editedTutor.getPhone())
+                && model.hasPersonWithSamePhone(editedTutor.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setTutor(tutorToEdit, editedTutor);
@@ -154,14 +157,20 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, (EditStudentDescriptor) editPersonDescriptor);
 
         if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_UNCHANGED_STUDENT);
         }
-        if (!studentToEdit.isSamePerson(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+
+        if (!studentToEdit.getPhone().equals(editedStudent.getPhone())
+                && model.hasPersonWithSamePhone(editedStudent.getPhone())) {
+            throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
         }
 
         model.setStudent(studentToEdit, editedStudent);
