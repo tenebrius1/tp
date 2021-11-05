@@ -20,7 +20,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -64,8 +63,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
     public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
     public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 

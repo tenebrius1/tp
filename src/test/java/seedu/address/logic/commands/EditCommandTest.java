@@ -112,16 +112,16 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredTutorList_success() {
+    public void execute_noFieldSpecifiedUnfilteredTutorList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTutorDescriptor(), PersonType.TUTOR);
-        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_TUTOR;
+        String expectedMessage = EditCommand.MESSAGE_NOT_EDITED;
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredStudentList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditStudentDescriptor(), PersonType.STUDENT);
-        String expectedMessage = EditCommand.MESSAGE_UNCHANGED_STUDENT;
+        String expectedMessage = EditCommand.MESSAGE_NOT_EDITED;
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
