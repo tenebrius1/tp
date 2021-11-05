@@ -164,6 +164,24 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_tutorNotEditedUnfilteredTutorList_failure() {
+        Tutor firstTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.TUTOR);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_UNCHANGED_TUTOR);
+    }
+
+    @Test
+    public void execute_studentNotEditedUnfilteredStudentList_failure() {
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.STUDENT);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_UNCHANGED_STUDENT);
+    }
+
+    @Test
     public void execute_duplicateTutorUnfilteredTutorList_failure() {
         Tutor firstTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
