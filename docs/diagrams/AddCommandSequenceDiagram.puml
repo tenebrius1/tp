@@ -42,7 +42,7 @@ CliTutorsParser --> LogicManager : a
 deactivate CliTutorsParser
 destroy AddCommandParser
 
-LogicManager -> AddCommand : execute(model)
+LogicManager -> AddCommand : execute()
 activate AddCommand
 
 AddCommand -> Model : addTutor(tutor)
