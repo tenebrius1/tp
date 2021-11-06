@@ -182,8 +182,7 @@ public class EditCommand extends Command {
         Student studentMatched = model.getMatchedStudent();
         if (studentMatched != null && studentMatched.isSamePerson(student)) {
             Set<Tag> studentTag = editedStudent.getTags();
-            ArrayList<Tag> ls = new ArrayList<>();
-            studentTag.stream().forEach(tag -> ls.add(tag));
+            ArrayList<Tag> ls = new ArrayList<>(studentTag);
             model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, editedStudent);
         }
     }

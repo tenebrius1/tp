@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -40,7 +41,7 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredTutorList_success() {
@@ -306,27 +307,27 @@ public class EditCommandTest {
         EditStudentDescriptor copyStudentDescriptor = new EditStudentDescriptor(DESC_AMY);
         EditCommand commandWithSameStudentValues = new EditCommand(INDEX_FIRST_PERSON,
                 copyStudentDescriptor, PersonType.STUDENT);
-        assertTrue(standardTutorCommand.equals(commandWithSameTutorValues));
-        assertTrue(standardStudentCommand.equals(commandWithSameStudentValues));
+        assertEquals(standardTutorCommand, commandWithSameTutorValues);
+        assertEquals(standardStudentCommand, commandWithSameStudentValues);
 
         // same object -> returns true
-        assertTrue(standardTutorCommand.equals(standardTutorCommand));
-        assertTrue(standardStudentCommand.equals(standardStudentCommand));
+        assertEquals(standardTutorCommand, standardTutorCommand);
+        assertEquals(standardStudentCommand, standardStudentCommand);
 
         // null -> returns false
-        assertFalse(standardTutorCommand.equals(null));
-        assertFalse(standardStudentCommand.equals(null));
+        assertNotEquals(null, standardTutorCommand);
+        assertNotEquals(null, standardStudentCommand);
 
         // different types -> returns false
-        assertFalse(standardTutorCommand.equals(new ClearCommand()));
-        assertFalse(standardStudentCommand.equals(new ClearCommand()));
+        assertNotEquals(standardTutorCommand, new ClearCommand());
+        assertNotEquals(standardStudentCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_BOB, PersonType.TUTOR)));
-        assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY, PersonType.STUDENT)));
+        assertNotEquals(standardTutorCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_BOB, PersonType.TUTOR));
+        assertNotEquals(standardStudentCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY, PersonType.STUDENT));
 
         // different descriptor -> returns false
-        assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.TUTOR)));
-        assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.STUDENT)));
+        assertNotEquals(standardTutorCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.TUTOR));
+        assertNotEquals(standardStudentCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.STUDENT));
     }
 }
