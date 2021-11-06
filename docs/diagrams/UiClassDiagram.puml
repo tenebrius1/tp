@@ -12,6 +12,7 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
+Class MatchListPanel
 Class StudentCard
 Class TutorCard
 Class CommandBox
@@ -32,17 +33,21 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "3" PersonListPanel
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "2" PersonListPanel
+MainWindow *-down-> "1" MatchListPanel
+MainWindow *--> "0..1" HelpWindow
 
+PersonListPanel -down-> "1" TutorCard
 PersonListPanel -down-> "1" StudentCard
-PersonListPanel -down-> "2" TutorCard
+
+MatchListPanel -down-> "1" TutorCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
+MatchListPanel --|> UiPart
 StudentCard --|> UiPart
 TutorCard --|> UiPart
 HelpWindow --|> UiPart
