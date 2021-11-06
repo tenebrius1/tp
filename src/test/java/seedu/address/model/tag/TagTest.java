@@ -1,7 +1,7 @@
 package seedu.address.model.tag;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -33,18 +33,18 @@ public class TagTest {
         Tag differentTag = new Tag(VALID_TAG_TP);
 
         // same object -> return true
-        assertEquals(tag, tag);
+        assertTrue(tag.equals(tag));
 
         // same tagName -> return true
-        assertEquals(tag, tagCopy);
+        assertTrue(tag.equals(tagCopy));
 
         // null -> returns false
-        assertNotEquals(null, tag);
+        assertFalse(tag.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, tag);
+        assertFalse(tag.equals(5));
 
         // different tagName -> returns false
-        assertNotEquals(tag, differentTag);
+        assertFalse(tag.equals(differentTag));
     }
 }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -136,22 +135,22 @@ public class MatchCommandTest {
 
         // same values -> returns true
         MatchCommand commandWithSameValues = new MatchCommand(INDEX_FIRST_PERSON);
-        assertEquals(standardCommand, commandWithSameValues);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
-        assertEquals(standardCommand, standardCommand);
+        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertNotEquals(null, standardCommand);
+        assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertNotEquals(standardCommand, new ClearCommand());
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new MatchCommand(INDEX_SECOND_PERSON));
+        assertFalse(standardCommand.equals(new MatchCommand(INDEX_SECOND_PERSON)));
 
         // different command -> returns false
-        assertNotEquals(standardCommand, new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT));
+        assertFalse(standardCommand.equals(new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT)));
     }
 
     private List<Tag> getStudentTagList(Student student) {

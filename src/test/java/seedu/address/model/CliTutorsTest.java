@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
@@ -257,23 +256,23 @@ public class CliTutorsTest {
                 new CliTutorsBuilder().withTutor(ALICE).withStudent(IDA).build();
 
         // same object -> returns true
-        assertEquals(cliTutors, cliTutors);
+        assertTrue(cliTutors.equals(cliTutors));
 
         // same values -> returns true
         CliTutors cliTutorsCopy = new CliTutors(cliTutors);
-        assertEquals(cliTutors, cliTutorsCopy);
+        assertTrue(cliTutors.equals(cliTutorsCopy));
 
         // null -> returns false
-        assertNotEquals(null, cliTutors);
+        assertFalse(cliTutors.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, cliTutors);
+        assertFalse(cliTutors.equals(5));
 
         // different students -> return false
-        assertNotEquals(cliTutors, cliTutorsWithDifferentStudent);
+        assertFalse(cliTutors.equals(cliTutorsWithDifferentStudent));
 
         // different tutors -> return false
-        assertNotEquals(cliTutors, cliTutorsWithDifferentTutor);
+        assertFalse(cliTutors.equals(cliTutorsWithDifferentTutor));
     }
 
     /**

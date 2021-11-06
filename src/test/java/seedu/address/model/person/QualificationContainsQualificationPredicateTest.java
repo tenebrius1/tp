@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
@@ -28,21 +26,21 @@ public class QualificationContainsQualificationPredicateTest {
                 new QualificationContainsQualificationPredicate(secondQualificationList);
 
         // same object -> returns true
-        assertEquals(firstPredicate, firstPredicate);
+        assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         QualificationContainsQualificationPredicate firstPredicateCopy =
                 new QualificationContainsQualificationPredicate(firstQualificationList);
-        assertEquals(firstPredicate, firstPredicateCopy);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertNotEquals(1, firstPredicate);
+        assertFalse(firstPredicate.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, firstPredicate);
+        assertFalse(firstPredicate.equals(null));
 
         // different person -> returns false
-        assertNotEquals(firstPredicate, secondPredicate);
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test

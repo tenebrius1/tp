@@ -349,37 +349,37 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(cliTutors, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(cliTutors, userPrefs);
-        assertEquals(modelManager, modelManagerCopy);
+        assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
-        assertEquals(modelManager, modelManager);
+        assertTrue(modelManager.equals(modelManager));
 
         // null -> returns false
-        assertNotEquals(null, modelManager);
+        assertFalse(modelManager.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, modelManager);
+        assertFalse(modelManager.equals(5));
 
         // different cliTutors -> returns false
-        assertNotEquals(modelManager, new ModelManager(differentCliTutors, userPrefs));
+        assertFalse(modelManager.equals(new ModelManager(differentCliTutors, userPrefs)));
 
         // different filteredList (tutor) -> returns false
         String[] keywords = BENSON.getName().fullName.split("\\s+");
         modelManager.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
         // different filteredList (student) -> returns false
         keywords = IDA.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
         // different match list
         ArrayList<Tag> tagList = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(tagList);
         modelManager.updateMatchedTutor(predicate, tagList, DANIEL);
-        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
         // different matchStudent after above match
-        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
@@ -399,6 +399,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setCliTutorsFilePath(Paths.get("differentFilePath"));
-        assertNotEquals(modelManager, new ModelManager(cliTutors, differentUserPrefs));
+        assertFalse(modelManager.equals(new ModelManager(cliTutors, differentUserPrefs)));
     }
 }

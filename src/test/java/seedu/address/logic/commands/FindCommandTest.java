@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
@@ -129,7 +130,7 @@ public class FindCommandTest {
         FindCommand findThirdCommand = new FindCommand(firstPredicate, PersonType.STUDENT);
 
         // same object -> returns true
-        assertEquals(findFirstCommand, findFirstCommand);
+        assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same value and personType -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, PersonType.TUTOR);

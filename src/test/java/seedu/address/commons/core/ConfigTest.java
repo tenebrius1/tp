@@ -1,8 +1,9 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,21 +44,21 @@ public class ConfigTest {
         assertNotNull(defaultConfig);
 
         // same object -> return true
-        assertEquals(defaultConfig, defaultConfig);
+        assertTrue(defaultConfig.equals(defaultConfig));
 
         // null -> return false
-        assertNotEquals(null, defaultConfig);
+        assertFalse(defaultConfig.equals(null));
 
         // different type -> return false
-        assertNotEquals(5, defaultConfig);
+        assertFalse(defaultConfig.equals(5));
 
         // same values -> return true
-        assertEquals(defaultConfig, defaultConfigCopy);
+        assertTrue(defaultConfig.equals(defaultConfigCopy));
 
         // different logLevel -> return false
-        assertNotEquals(defaultConfig, configWithDifferentLogLevel);
+        assertFalse(defaultConfig.equals(configWithDifferentLogLevel));
 
         // different userPrefsFilePath -> return false
-        assertNotEquals(defaultConfig, configWithDifferentUserPrefsFilePath);
+        assertFalse(defaultConfig.equals(configWithDifferentUserPrefsFilePath));
     }
 }

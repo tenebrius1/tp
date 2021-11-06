@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -27,20 +25,20 @@ public class TagsContainTagPredicateTest {
         TagsContainTagPredicate twoTagsPredicate = new TagsContainTagPredicate(twoTagsList);
 
         // same object -> returns true
-        assertEquals(oneTagPredicate, oneTagPredicate);
+        assertTrue(oneTagPredicate.equals(oneTagPredicate));
 
         // same values -> returns true
         TagsContainTagPredicate firstPredicateCopy = new TagsContainTagPredicate(oneTagList);
-        assertEquals(oneTagPredicate, firstPredicateCopy);
+        assertTrue(oneTagPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertNotEquals(1, oneTagPredicate);
+        assertFalse(oneTagPredicate.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, oneTagPredicate);
+        assertFalse(oneTagPredicate.equals(null));
 
         // different person -> returns false
-        assertNotEquals(oneTagPredicate, twoTagsPredicate);
+        assertFalse(oneTagPredicate.equals(twoTagsPredicate));
     }
 
     @Test

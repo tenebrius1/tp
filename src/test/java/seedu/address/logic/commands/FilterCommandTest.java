@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ROXANNE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_GRADUATE;
@@ -135,16 +135,16 @@ public class FilterCommandTest {
 
         // same values -> returns true
         FilterCommand commandWithSameValues = new FilterCommand(predicate);
-        assertEquals(standardCommand, commandWithSameValues);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
-        assertEquals(standardCommand, standardCommand);
+        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertNotEquals(null, standardCommand);
+        assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertNotEquals(standardCommand, new ClearCommand());
+        assertFalse(standardCommand.equals(new ClearCommand()));
     }
 
     private List<Tag> getStudentTagList(Student student) {
