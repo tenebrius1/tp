@@ -1,15 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUALIFICATION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
@@ -45,8 +50,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTutorDescriptorBuilder;
@@ -104,10 +112,14 @@ public class EditCommandParserTest {
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + targetIndex.getOneBased()
                 + " i/string", MESSAGE_INVALID_FORMAT);
+
+        // invalid PersonType
+        assertParseFailure(parser, INVALID_PREAMBLE + " " + INDEX_FIRST_PERSON + NAME_DESC_AMY,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidTutorValue_failure() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String validIndex = " " + targetIndex.getOneBased();
 
@@ -116,8 +128,20 @@ public class EditCommandParserTest {
             + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid gender
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+
+        // invalid qualification
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
@@ -132,12 +156,58 @@ public class EditCommandParserTest {
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + PHONE_DESC_BOB
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex + PHONE_DESC_BOB
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex + INVALID_NAME_DESC + INVALID_PHONE_DESC,
             Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStudentValue_failure() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String validIndex = " " + targetIndex.getOneBased();
+
+        // invalid name
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid gender
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+
+        // qualification incorrectly present in student
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + QUALIFICATION_DESC_BOB, MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
+
+        // invalid tag
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid tag argument ahead of valid tag
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG);
+
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + TAG_DESC_PM + " " + INVALID_TAG , Tag.MESSAGE_INVALID_TAG);
+
+        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + PHONE_DESC_BOB
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // multiple invalid values, but only the first invalid value is captured
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + INVALID_NAME_DESC + INVALID_PHONE_DESC,
+                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
