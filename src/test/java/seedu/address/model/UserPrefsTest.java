@@ -1,7 +1,7 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -29,18 +29,18 @@ public class UserPrefsTest {
         differentUserPrefs.setGuiSettings(new GuiSettings(600, 750, 0 , 0));
 
         // same values -> returns true
-        assertTrue(userPrefs.equals(userPrefsCopy));
+        assertEquals(userPrefs, userPrefsCopy);
 
         // null -> returns false
-        assertFalse(userPrefs.equals(null));
+        assertNotEquals(null, userPrefs);
 
         // same object -> returns true
-        assertTrue(userPrefs.equals(userPrefs));
+        assertEquals(userPrefs, userPrefs);
 
         // different type -> returns false
-        assertFalse(userPrefs.equals(5));
+        assertNotEquals(5, userPrefs);
 
         // different GUISetting -> returns false
-        assertFalse(userPrefs.equals(differentUserPrefs));
+        assertNotEquals(userPrefs, differentUserPrefs);
     }
 }

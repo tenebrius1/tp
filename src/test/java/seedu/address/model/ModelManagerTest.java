@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTORS;
@@ -173,7 +174,7 @@ public class ModelManagerTest {
         ArrayList<String> ls = new ArrayList<>();
         ls.add("Alice");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         CliTutors cliTutors = new CliTutors();
         cliTutors.addTutor(ALICE);
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
@@ -186,7 +187,7 @@ public class ModelManagerTest {
         ArrayList<String> ls = new ArrayList<>();
         ls.add("Daniel");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(ls);
-        TypicalPersons.getTypicalStudents().stream().forEach(student -> modelManager.addStudent(student));
+        TypicalPersons.getTypicalStudents().forEach(student -> modelManager.addStudent(student));
         CliTutors cliTutors = new CliTutors();
         cliTutors.addStudent(DANIEL);
         FilteredList<Student> expectedStudentList = new FilteredList<>(cliTutors.getStudentList());
@@ -196,10 +197,9 @@ public class ModelManagerTest {
 
     @Test
     public void updateMatchedTutor_modifyList_success() {
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(DANIEL.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         CliTutors cliTutors = new CliTutors();
         cliTutors.addTutor(ALICE);
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
@@ -210,24 +210,22 @@ public class ModelManagerTest {
 
     @Test
     public void updateMatchedTutor_emptyMatchedList_success() {
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(GEORGE.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(GEORGE.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         CliTutors cliTutors = new CliTutors();
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateMatchedTutor(predicate, ls, GEORGE);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
         // Check matched student
-        assertEquals(null, modelManager.getMatchedStudent());
+        assertNull(modelManager.getMatchedStudent());
     }
 
     @Test
     public void updateMatchedTutor_modifyList_throwAssertionError() {
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(DANIEL.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         assertThrows(AssertionError.class, () -> modelManager.updateMatchedTutor(predicate, new ArrayList<>(),
                 DANIEL));
     }
@@ -242,10 +240,9 @@ public class ModelManagerTest {
         assertEquals(expectedMatchList, modelManager.getMatchedTutorList());
 
         // Clear list after matching
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(DANIEL.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         // Valid match as TypicalTutors have tutors that teach subject that student DANIEL wants
         modelManager.updateMatchedTutor(predicate, ls, DANIEL);
         modelManager.clearMatchedTutor();
@@ -254,14 +251,13 @@ public class ModelManagerTest {
 
     @Test
     public void filterMatchedTutor_modifyList_success() {
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(DANIEL.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         modelManager.addTutor(ENZIO);
         CliTutors cliTutors = new CliTutors();
-        cliTutors.addTutor(ENZIO);
         cliTutors.addTutor(ALICE);
+        cliTutors.addTutor(ENZIO);
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateMatchedTutor(predicate, ls, DANIEL);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
@@ -291,7 +287,7 @@ public class ModelManagerTest {
         expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());
         // Check matched student
-        assertEquals(null, modelManager.getMatchedStudent());
+        assertNull(modelManager.getMatchedStudent());
     }
 
     @Test
@@ -303,10 +299,9 @@ public class ModelManagerTest {
 
         // After successful match
         expectedStudent = DANIEL;
-        ArrayList<Tag> ls = new ArrayList<>();
-        ls.addAll(DANIEL.getTags());
+        ArrayList<Tag> ls = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(ls);
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
         // Valid match as TypicalTutors have tutors that teach subject that student DANIEL wants
         modelManager.updateMatchedTutor(predicate, ls, DANIEL);
         assertEquals(expectedStudent, modelManager.getMatchedStudent());
@@ -336,8 +331,8 @@ public class ModelManagerTest {
 
     @Test
     public void hasPersonWithSamePhoneTest() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
-        TypicalPersons.getTypicalStudents().stream().forEach(student -> modelManager.addStudent(student));
+        TypicalPersons.getTypicalTutors().forEach(tutor -> modelManager.addTutor(tutor));
+        TypicalPersons.getTypicalStudents().forEach(student -> modelManager.addStudent(student));
 
         assertTrue(modelManager.hasPersonWithSamePhone(ALICE.getPhone()));
 
@@ -354,38 +349,37 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(cliTutors, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(cliTutors, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different cliTutors -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentCliTutors, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentCliTutors, userPrefs));
 
         // different filteredList (tutor) -> returns false
         String[] keywords = BENSON.getName().fullName.split("\\s+");
         modelManager.updateFilteredTutorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
         // different filteredList (student) -> returns false
         keywords = IDA.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
         // different match list
-        ArrayList<Tag> tagList = new ArrayList<>();
-        tagList.addAll(DANIEL.getTags());
+        ArrayList<Tag> tagList = new ArrayList<>(DANIEL.getTags());
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(tagList);
         modelManager.updateMatchedTutor(predicate, tagList, DANIEL);
-        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
         // different matchStudent after above match
-        assertFalse(modelManager.equals(new ModelManager(cliTutors, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTutorList(PREDICATE_SHOW_ALL_TUTORS);
@@ -393,8 +387,7 @@ public class ModelManagerTest {
         modelManager.clearMatchedTutor();
 
         Set<Tag> studentTag = DANIEL.getTags();
-        List<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
+        List<Tag> ls = new ArrayList<>(studentTag);
         modelManager.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, DANIEL);
         assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
@@ -406,6 +399,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setCliTutorsFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(cliTutors, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(cliTutors, differentUserPrefs));
     }
 }

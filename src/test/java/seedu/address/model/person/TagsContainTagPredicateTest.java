@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -25,20 +27,20 @@ public class TagsContainTagPredicateTest {
         TagsContainTagPredicate twoTagsPredicate = new TagsContainTagPredicate(twoTagsList);
 
         // same object -> returns true
-        assertTrue(oneTagPredicate.equals(oneTagPredicate));
+        assertEquals(oneTagPredicate, oneTagPredicate);
 
         // same values -> returns true
         TagsContainTagPredicate firstPredicateCopy = new TagsContainTagPredicate(oneTagList);
-        assertTrue(oneTagPredicate.equals(firstPredicateCopy));
+        assertEquals(oneTagPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(oneTagPredicate.equals(1));
+        assertNotEquals(1, oneTagPredicate);
 
         // null -> returns false
-        assertFalse(oneTagPredicate.equals(null));
+        assertNotEquals(null, oneTagPredicate);
 
         // different person -> returns false
-        assertFalse(oneTagPredicate.equals(twoTagsPredicate));
+        assertNotEquals(oneTagPredicate, twoTagsPredicate);
     }
 
     @Test
@@ -58,7 +60,7 @@ public class TagsContainTagPredicateTest {
         assertFalse(predicate.test(new TutorBuilder().withTags(VALID_TAG_PM).build()));
 
         // Non-matching keyword
-        predicate = new TagsContainTagPredicate(Arrays.asList(new Tag(VALID_TAG_PM)));
+        predicate = new TagsContainTagPredicate(List.of(new Tag(VALID_TAG_PM)));
         assertFalse(predicate.test(new TutorBuilder().withTags(VALID_TAG_TP).build()));
     }
 
