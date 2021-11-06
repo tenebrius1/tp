@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -19,10 +22,12 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("gender") String gender,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tag) {
-        super(name, phone, gender, tag);
+    public JsonAdaptedStudent(@JsonProperty("name") String name,
+                              @JsonProperty("phone") String phone,
+                              @JsonProperty("gender") String gender,
+                              @JsonProperty("remark") String remark,
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tag) {
+        super(name, phone, gender, remark, tag);
     }
 
     /**
@@ -30,7 +35,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      */
     public JsonAdaptedStudent(Student source) {
         super(source.getName().fullName, source.getPhone().value,
-                source.getGender().genderSymbol, getAddedTags(source));
+                source.getGender().genderSymbol, source.getRemark().description, getAddedTags(source));
     }
 
     /**
@@ -53,6 +58,11 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
+        final List<Tag> studentTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : super.getTags()) {
+            studentTags.add(tag.toModelType());
+        }
+
         if (super.getName() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -77,7 +87,15 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(super.getGender());
 
-        final Tag modelTag = super.getTags().get(0).toModelType();
-        return new Student(modelName, modelPhone, modelGender, modelTag);
+        if (super.getRemark() == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(super.getRemark())) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(super.getRemark());
+
+        final Set<Tag> modelTags = new HashSet<>(studentTags);
+        return new Student(modelName, modelPhone, modelGender, modelRemark, modelTags);
     }
 }

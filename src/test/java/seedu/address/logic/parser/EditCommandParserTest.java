@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
@@ -28,7 +32,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTOR_LETTER;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -49,7 +52,6 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTutorDescriptorBuilder;
 
 public class EditCommandParserTest {
-
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -62,10 +64,6 @@ public class EditCommandParserTest {
         // no index specified
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
-        Index targetIndex = INDEX_SECOND_PERSON;
-        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + targetIndex.getOneBased(), MESSAGE_NOT_EDITED);
-
         // no index and no field specified
         assertParseFailure(parser, VALID_TUTOR_LETTER + "", MESSAGE_INVALID_FORMAT);
 
@@ -76,11 +74,27 @@ public class EditCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INDEX + NAME_DESC_AMY,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INDEX + NAME_DESC_AMY,
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
 
         // zero index
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_ZERO_INDEX + NAME_DESC_AMY,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_ZERO_INDEX + NAME_DESC_AMY,
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+
+        // index greater than MAX_INT
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MAX + NAME_DESC_AMY,
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MAX + NAME_DESC_AMY,
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+
+        // index less than MIN_INT
+        assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MIN + NAME_DESC_AMY,
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MIN + NAME_DESC_AMY,
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         Index targetIndex = INDEX_SECOND_PERSON;
@@ -285,13 +299,9 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetTags_failure() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, Tag.MESSAGE_INVALID_TAG);
     }
 }

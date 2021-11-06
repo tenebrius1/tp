@@ -9,7 +9,7 @@ public enum PersonType {
     STUDENT,
     TUTOR;
 
-    public static final String MESSAGE_INVALID_PERSON_TYPE = "The given person type is not t or s.";
+    public static final String MESSAGE_INVALID_PERSON_TYPE = "The given person type is not t or s";
 
     /**
      * Returns the appropriate PersonType entered by the user.
@@ -28,5 +28,11 @@ public enum PersonType {
         } else {
             throw new ParseException(MESSAGE_INVALID_PERSON_TYPE);
         }
+    }
+
+    @Override
+    public String toString() {
+        String personType = super.toString().toLowerCase();
+        return personType.substring(0, 1).toUpperCase() + personType.substring(1).toLowerCase();
     }
 }

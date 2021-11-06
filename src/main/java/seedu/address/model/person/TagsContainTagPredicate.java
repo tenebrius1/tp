@@ -1,10 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Person}'s {@code Tag} matches the Tags given.
+ */
 public class TagsContainTagPredicate implements Predicate<Person> {
     private final List<Tag> tags;
 
@@ -14,6 +19,7 @@ public class TagsContainTagPredicate implements Predicate<Person> {
      * @param tags Valid keywords.
      */
     public TagsContainTagPredicate(List<Tag> tags) {
+        requireNonNull(tags);
         this.tags = tags;
     }
 

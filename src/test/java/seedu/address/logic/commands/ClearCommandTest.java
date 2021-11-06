@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
+import seedu.address.logic.parser.PersonType;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -13,19 +14,40 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyCliTutorsClearTutor_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(PersonType.TUTOR), model, ClearCommand.MESSAGE_SUCCESS_TUTOR,
+                expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+    public void execute_emptyCliTutorsClearStudent_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(PersonType.STUDENT), model, ClearCommand.MESSAGE_SUCCESS_STUDENT,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_nonEmptyCliTutorsClearTutor_success() {
+        Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+        expectedModel.setTutorData(new CliTutors());
+
+        assertCommandSuccess(new ClearCommand(PersonType.TUTOR), model, ClearCommand.MESSAGE_SUCCESS_TUTOR,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_nonEmptyCliTutorsClearStudent_success() {
+        Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+        expectedModel.setStudentData(new CliTutors());
+
+        assertCommandSuccess(new ClearCommand(PersonType.STUDENT), model, ClearCommand.MESSAGE_SUCCESS_STUDENT,
+                expectedModel);
     }
 }

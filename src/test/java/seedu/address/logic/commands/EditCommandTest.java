@@ -7,13 +7,16 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showTutorAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_UNCHANGED_STUDENT;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_UNCHANGED_TUTOR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCliTutors;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +25,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.parser.PersonType;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -37,8 +40,7 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredTutorList_success() {
@@ -48,7 +50,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(model.getFilteredTutorList().get(0), editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -62,7 +64,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -83,7 +85,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(lastTutor, editedTutor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -96,48 +98,36 @@ public class EditCommandTest {
 
         StudentBuilder personInList = new StudentBuilder(lastStudent);
         Student editedStudent = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTag(VALID_TAG_PM).build();
+                .withTag(VALID_TAG_PM, VALID_TAG_TP).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PM).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor, PersonType.STUDENT);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredTutorList_success() {
+    public void execute_noFieldSpecifiedUnfilteredTutorList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTutorDescriptor(), PersonType.TUTOR);
-        Tutor editedTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredStudentList_success() {
+    public void execute_noFieldSpecifiedUnfilteredStudentList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditStudentDescriptor(), PersonType.STUDENT);
-        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = EditCommand.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_filteredTutorList_success() {
-        showTutorAtIndex(model, INDEX_FIRST_PERSON);
-
         Tutor tutorInFilteredList = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         Tutor editedTutor = new TutorBuilder(tutorInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
@@ -145,16 +135,18 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTOR_SUCCESS, editedTutor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setTutor(model.getFilteredTutorList().get(0), editedTutor);
+
+        // After the name change, expected filtered list should be empty.
+        expectedModel.updateFilteredTutorList(x -> false);
+        showTutorAtIndex(model, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredStudentList_success() {
-        showStudentAtIndex(model, INDEX_FIRST_PERSON);
-
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
@@ -162,28 +154,50 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CliTutors(model.getCliTutors()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
+        // After the name change, expected filtered list should be empty.
+        expectedModel.updateFilteredStudentList(x -> false);
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
+
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_tutorNotEditedUnfilteredTutorList_failure() {
+        Tutor firstTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.TUTOR);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_UNCHANGED_TUTOR);
+    }
+
+    @Test
+    public void execute_studentNotEditedUnfilteredStudentList_failure() {
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.STUDENT);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_UNCHANGED_STUDENT);
     }
 
     @Test
     public void execute_duplicateTutorUnfilteredTutorList_failure() {
         Tutor firstTutor = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder(firstTutor).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.TUTOR);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, MESSAGE_UNCHANGED_TUTOR);
     }
 
     @Test
     public void execute_duplicateStudentUnfilteredStudentList_failure() {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, PersonType.STUDENT);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, MESSAGE_UNCHANGED_STUDENT);
     }
 
     @Test
@@ -191,11 +205,11 @@ public class EditCommandTest {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit tutor in filtered list into a duplicate in address book
-        Tutor tutorInList = model.getAddressBook().getTutorList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Tutor tutorInList = model.getFilteredTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditTutorDescriptorBuilder(tutorInList).build(), PersonType.TUTOR);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TUTOR);
+        assertCommandFailure(editCommand, model, MESSAGE_UNCHANGED_TUTOR);
     }
 
     @Test
@@ -203,11 +217,11 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit student in filtered list into a duplicate in address book
-        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Student studentInList = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditStudentDescriptorBuilder(studentInList).build(), PersonType.STUDENT);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editCommand, model, MESSAGE_UNCHANGED_STUDENT);
     }
 
     @Test
@@ -237,7 +251,7 @@ public class EditCommandTest {
         showTutorAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTutorList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCliTutors().getTutorList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
@@ -254,12 +268,30 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCliTutors().getStudentList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.STUDENT);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_emptyStudentList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.STUDENT);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+    }
+
+    @Test
+    public void execute_emptyTutorList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB).build(), PersonType.TUTOR);
+        model.updateFilteredTutorList(Model.PREDICATE_SHOW_NO_PERSON);
+
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
     }
 
     @Test
@@ -297,5 +329,4 @@ public class EditCommandTest {
         assertFalse(standardTutorCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.TUTOR)));
         assertFalse(standardStudentCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.STUDENT)));
     }
-
 }

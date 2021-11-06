@@ -9,6 +9,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -16,7 +17,6 @@ import seedu.address.model.tag.Tag;
  * A utility class to help with building EditTutorDescriptor objects.
  */
 public class EditTutorDescriptorBuilder {
-
     private final EditTutorDescriptor descriptor;
 
     public EditTutorDescriptorBuilder() {
@@ -40,14 +40,6 @@ public class EditTutorDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Gender} of the {@code EditTutorDescriptor} that we are building.
-     */
-    public EditTutorDescriptorBuilder withGender(String gender) {
-        descriptor.setGender(new Gender(gender));
-        return this;
-    }
-
-    /**
      * Sets the {@code Name} of the {@code EditTutorDescriptor} that we are building.
      */
     public EditTutorDescriptorBuilder withName(String name) {
@@ -60,6 +52,22 @@ public class EditTutorDescriptorBuilder {
      */
     public EditTutorDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code EditTutorDescriptor} that we are building.
+     */
+    public EditTutorDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditTutorDescriptor} that we are building.
+     */
+    public EditTutorDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 
@@ -84,5 +92,4 @@ public class EditTutorDescriptorBuilder {
     public EditTutorDescriptor build() {
         return descriptor;
     }
-
 }

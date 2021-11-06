@@ -1,0 +1,14 @@
+@startuml
+start
+:User executes add command for a tutor;
+:Parse command arguments;
+
+if () then ([input is valid])
+:Create a Tutor object as pass \n it as well as the PersonType \n into an Add command;
+    :Execute Add command;
+    :Update tutor list;
+    stop
+else ([else])
+:Throw \nParseException;
+stop
+@enduml

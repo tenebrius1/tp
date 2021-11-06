@@ -14,7 +14,6 @@ import java.util.Optional;
  * can be inserted multiple times for the same prefix.
  */
 public class ArgumentMultimap {
-
     /** Prefixes mapped to their respective arguments**/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
@@ -61,7 +60,7 @@ public class ArgumentMultimap {
     /**
      * Deletes the specified mapping for {@code prefix} key in this map.
      *
-     * @param prefix   Prefix key with which the specified argument value is to be associated
+     * @param prefix Prefix key with which the specified argument value is to be associated
      */
     public void delete(Prefix prefix) {
         argMultimap.remove(prefix);
