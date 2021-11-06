@@ -23,6 +23,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
@@ -33,6 +35,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
@@ -214,12 +218,13 @@ public class EditCommandParserTest {
     public void parse_allTutorFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP;
 
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withGender(VALID_GENDER_BOB)
             .withQualification(VALID_QUALIFICATION_BOB)
+            .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
 
@@ -229,12 +234,13 @@ public class EditCommandParserTest {
     @Test
     public void parse_allStudentFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + NAME_DESC_AMY + TAG_DESC_TP;
+        String userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_TP;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withGender(VALID_GENDER_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_TP).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
 
@@ -275,20 +281,26 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditTutorDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
-        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_AMY;
-        descriptor = new EditTutorDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withGender(VALID_GENDER_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // qualification
         userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + QUALIFICATION_DESC_BOB;
         descriptor = new EditTutorDescriptorBuilder().withQualification(VALID_QUALIFICATION_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // remark
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + REMARK_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withRemark(VALID_REMARK_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -315,8 +327,14 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
-        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_BOB;
-        descriptor = new EditStudentDescriptorBuilder().withGender(VALID_GENDER_BOB).build();
+        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // remark
+        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + REMARK_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withRemark(VALID_REMARK_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
         assertParseSuccess(parser, userInput, expectedCommand);
 
