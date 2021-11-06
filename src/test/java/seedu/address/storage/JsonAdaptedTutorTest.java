@@ -17,7 +17,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedTutorTest {
