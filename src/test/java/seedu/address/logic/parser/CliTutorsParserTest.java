@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -161,5 +162,17 @@ public class CliTutorsParserTest {
         MatchCommand command = (MatchCommand) parser.parseCommand(MatchCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MatchCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        List<String> keywords = List.of("foo");
+        Predicate<Person> predicate = x -> true;
+        predicate = predicate.and(new NameContainsKeywordsPredicate(keywords));
+        ChainedPredicate chainedPredicate = new ChainedPredicate.Builder().setName(new Name("foo"))
+                .setPredicate(predicate).build();
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " "
+                + "n/foo");
+        assertEquals(new FilterCommand(chainedPredicate), command);
     }
 }
