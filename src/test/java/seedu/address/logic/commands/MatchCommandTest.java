@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -28,7 +29,7 @@ import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_throwsNullPointerException() {
@@ -45,8 +46,7 @@ public class MatchCommandTest {
 
         ModelManager expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
 
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
 
         expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
@@ -86,8 +86,7 @@ public class MatchCommandTest {
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
 
 
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
 
         expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
@@ -137,28 +136,26 @@ public class MatchCommandTest {
 
         // same values -> returns true
         MatchCommand commandWithSameValues = new MatchCommand(INDEX_FIRST_PERSON);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MatchCommand(INDEX_SECOND_PERSON)));
+        assertNotEquals(standardCommand, new MatchCommand(INDEX_SECOND_PERSON));
 
         // different command -> returns false
-        assertFalse(standardCommand.equals(new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT)));
+        assertNotEquals(standardCommand, new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT));
     }
 
     private List<Tag> getStudentTagList(Student student) {
         Set<Tag> studentTag = student.getTags();
-        ArrayList<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
-        return ls;
+        return new ArrayList<>(studentTag);
     }
 }

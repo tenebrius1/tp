@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -26,7 +27,7 @@ import seedu.address.model.person.Tutor;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredListTutor_success() {
@@ -152,27 +153,27 @@ public class DeleteCommandTest {
         DeleteCommand deleteSecondCommandStudent = new DeleteCommand(INDEX_SECOND_PERSON, PersonType.STUDENT);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommandTutor.equals(deleteFirstCommandTutor));
-        assertTrue(deleteFirstCommandStudent.equals(deleteFirstCommandStudent));
+        assertEquals(deleteFirstCommandTutor, deleteFirstCommandTutor);
+        assertEquals(deleteFirstCommandStudent, deleteFirstCommandStudent);
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopyTutor = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.TUTOR);
-        assertTrue(deleteFirstCommandTutor.equals(deleteFirstCommandCopyTutor));
+        assertEquals(deleteFirstCommandTutor, deleteFirstCommandCopyTutor);
         DeleteCommand deleteFirstCommandCopyStudent = new DeleteCommand(INDEX_FIRST_PERSON, PersonType.STUDENT);
-        assertTrue(deleteFirstCommandStudent.equals(deleteFirstCommandCopyStudent));
+        assertEquals(deleteFirstCommandStudent, deleteFirstCommandCopyStudent);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommandTutor.equals(1));
-        assertFalse(deleteFirstCommandStudent.equals(1));
+        assertNotEquals(1, deleteFirstCommandTutor);
+        assertNotEquals(1, deleteFirstCommandStudent);
 
         // null -> returns false
-        assertFalse(deleteFirstCommandTutor.equals(null));
-        assertFalse(deleteFirstCommandStudent.equals(null));
+        assertNotEquals(null, deleteFirstCommandTutor);
+        assertNotEquals(null, deleteFirstCommandStudent);
 
         // different tutors -> returns false
-        assertFalse(deleteFirstCommandTutor.equals(deleteSecondCommandTutor));
+        assertNotEquals(deleteFirstCommandTutor, deleteSecondCommandTutor);
         // different students -> returns false
-        assertFalse(deleteFirstCommandStudent.equals(deleteSecondCommandStudent));
+        assertNotEquals(deleteFirstCommandStudent, deleteSecondCommandStudent);
     }
 
     /**

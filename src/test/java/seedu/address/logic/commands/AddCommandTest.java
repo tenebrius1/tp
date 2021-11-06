@@ -2,13 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,12 +52,12 @@ public class AddCommandTest {
         // Adding a tutor
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_TUTOR, validTutor),
                 commandResultTutor.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTutor), modelStubTutor.tutorsAdded);
+        assertEquals(List.of(validTutor), modelStubTutor.tutorsAdded);
 
         // Adding a student
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_STUDENT, validStudent),
                 commandResultStudent.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStubStudent.studentsAdded);
+        assertEquals(List.of(validStudent), modelStubStudent.studentsAdded);
     }
 
     @Test
@@ -92,27 +90,27 @@ public class AddCommandTest {
         AddCommand addCharlieCommand = new AddCommand(studentCharlie, PersonType.STUDENT);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(tutorAlice, PersonType.TUTOR);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different tutor -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
 
         // different class (student) -> returns false
-        assertFalse(addAliceCommand.equals(addCharlieCommand));
+        assertNotEquals(addAliceCommand, addCharlieCommand);
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all methods failing.
      */
     private class ModelStub implements Model {
         @Override
