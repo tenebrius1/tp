@@ -106,12 +106,12 @@ public class CliTutorsParserTest {
         // Test COMMAND_WORD
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + LETTER_DESC_STUDENT + " n/" + String.join(" ", keywords));
-        assertTrue(new FindCommand(chainedPredicate, PersonType.STUDENT).equals(command));
+        assertEquals(new FindCommand(chainedPredicate, PersonType.STUDENT), command);
 
         // Test COMMAND_ALIAS
         command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_ALIAS + LETTER_DESC_STUDENT + " n/" + String.join(" ", keywords));
-        assertTrue(new FindCommand(chainedPredicate, PersonType.STUDENT).equals(command));
+        assertEquals(new FindCommand(chainedPredicate, PersonType.STUDENT), command);
     }
 
     @Test

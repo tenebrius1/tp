@@ -18,7 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MatchCommand;
 
 public class MatchCommandParserTest {
-    private MatchCommandParser parser = new MatchCommandParser();
+    private final MatchCommandParser parser = new MatchCommandParser();
 
     @Test
     public void parse_indexSpecified_success() {

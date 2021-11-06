@@ -28,9 +28,9 @@ import seedu.address.logic.commands.DeleteCommand;
  * therefore should be covered by the ParserUtilTest.
  */
 public class DeleteCommandParserTest {
-    private DeleteCommandParser parser = new DeleteCommandParser();
-    private Index targetIndex = INDEX_FIRST_PERSON;
-    private String validIndex = " " + targetIndex.getOneBased();
+    private final DeleteCommandParser parser = new DeleteCommandParser();
+    private final Index targetIndex = INDEX_FIRST_PERSON;
+    private final String validIndex = " " + targetIndex.getOneBased();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
@@ -42,40 +42,39 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidPersonTypeButValidIndex_throwsParseException() {
-        assertParseFailure(parser, INVALID_PREAMBLE + validIndex, String.format(MESSAGE_INVALID_PERSON_TYPE,
-                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, INVALID_PREAMBLE + validIndex, MESSAGE_INVALID_PERSON_TYPE);
     }
 
     @Test
     public void parse_validPersonTypeButInvalidNegativeIndex_throwsParseException() {
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INDEX,
-                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INDEX,
-                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_validPersonTypeButInvalidZeroIndex_throwsParseException() {
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_ZERO_INDEX,
-                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_ZERO_INDEX,
-                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_validPersonTypeButInvalidMaxIntIndex_throwsParseException() {
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MAX,
-                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MAX,
-                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_validPersonTypeButInvalidMinIntIndex_throwsParseException() {
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + INVALID_INTEGER_MIN,
-                String.format(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
         assertParseFailure(parser, VALID_STUDENT_LETTER + " " + INVALID_INTEGER_MIN,
-                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
