@@ -262,7 +262,7 @@ Example:<br>
 
 ### Matching tutor(s) to a student: `match` / `m`
 
-Matches tutor(s) who teach(es) the subject(s) that the student wants, and sorts the matched tutor(s) in decreasing order by number of tags matched. 
+Matches tutor(s) who teach(es) the subject(s) that the student wants, and sorts the matched tutor(s) in decreasing order by number of tags matched.
 
 Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed Student List**.
@@ -297,7 +297,7 @@ Format: <br>`filter [n/NAME] [g/GENDER] [q/QUALIFICATION]`
 <b>:heavy_exclamation_mark: Caution:</b> <br>
 
 * `filter` cannot be used on an empty Match List.
-  
+
 * Users are expected to type the `match` command again if they wish to apply `filter` individually, as multiple `filter` commands used concurrently on a non-empty Match List will **continue to narrow down** the search.
 </div>
 

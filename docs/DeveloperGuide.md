@@ -649,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>Use case ends.
 
 [comment]: <> (TODO)
-#### Use case (UC10): Filter 
+#### Use case (UC10): Filter
 
 ### Non-Functional Requirements
 
