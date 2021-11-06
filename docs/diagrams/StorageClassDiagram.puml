@@ -40,6 +40,6 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonCliTutorsStorage .up.|> CliTutorsStorage
 JsonCliTutorsStorage ..> JsonSerializableCliTutors
 JsonSerializableCliTutors --> "*" Person
-Person --> "*" JsonAdaptedTag
+Person --> "1..*" JsonAdaptedTag
 
 @enduml
