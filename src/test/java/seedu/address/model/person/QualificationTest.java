@@ -3,8 +3,10 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +44,26 @@ class QualificationTest {
     public void testGetLabel() {
         assertEquals("MOE-Trained", Qualifications.getLabel("3"));
         assertEquals("Invalid", Qualifications.getLabel("FailTest"));
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        Qualification qualification = CARL.getQualification();
+        Qualification qualificationCopy = new Qualification("2");
+        assertEquals(qualification, qualificationCopy);
+
+        // same object -> returns true
+        assertEquals(qualification, qualification);
+
+        // null -> returns false
+        assertNotEquals(null, qualification);
+
+        // different type -> returns false
+        assertNotEquals(5, qualification);
+
+        // different qualification -> returns false
+        Qualification qualificationDifferent = new Qualification("3");
+        assertNotEquals(qualification, qualificationDifferent);
     }
 }
