@@ -20,6 +20,7 @@ public class QualificationContainsQualificationPredicate implements Predicate<Pe
 
     @Override
     public boolean test(Person person) {
+        // Only tutors have qualifications
         if (person instanceof Tutor) {
             Tutor tutor = (Tutor) person;
             return qualification.stream()
