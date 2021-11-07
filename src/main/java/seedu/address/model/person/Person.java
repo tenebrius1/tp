@@ -51,8 +51,6 @@ public abstract class Person {
         return remark;
     }
 
-    public abstract Qualification getQualification();
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
