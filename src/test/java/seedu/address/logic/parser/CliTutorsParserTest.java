@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LETTER_DESC_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.LETTER_DESC_TUTOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -28,6 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ChainedPredicate;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -166,12 +169,18 @@ public class CliTutorsParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " "
+                + GENDER_DESC_AMY);
+        Gender gender = new Gender(VALID_GENDER_AMY);
+        Predicate<Person> predicate = new ChainedPredicate.Builder().setGender(gender).build();
+        assertEquals(new FilterCommand(predicate), command);
+
         List<String> keywords = List.of("foo");
-        Predicate<Person> predicate = x -> true;
+        predicate = x -> true;
         predicate = predicate.and(new NameContainsKeywordsPredicate(keywords));
         ChainedPredicate chainedPredicate = new ChainedPredicate.Builder().setName(new Name("foo"))
                 .setPredicate(predicate).build();
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " "
+        command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " "
                 + "n/foo");
         assertEquals(new FilterCommand(chainedPredicate), command);
     }
