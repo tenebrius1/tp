@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalCliTutorsWithSimil
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -45,11 +46,11 @@ import seedu.address.model.tag.Tag;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
-    private Model similarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model similarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
-    private Model expectedSimilarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
+    private final Model expectedSimilarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
 
     @Test
@@ -159,20 +160,20 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private GenderContainsGenderPredicate prepareGenderPredicate(String userInput) {
-        return new GenderContainsGenderPredicate(Arrays.asList(new Gender(userInput)));
+        return new GenderContainsGenderPredicate(List.of(new Gender(userInput)));
     }
 
     /**
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private QualificationContainsQualificationPredicate prepareQualificationPredicate(String userInput) {
-        return new QualificationContainsQualificationPredicate(Arrays.asList(new Qualification(userInput)));
+        return new QualificationContainsQualificationPredicate(List.of(new Qualification(userInput)));
     }
 
     /**
      * Parses {@code userInput} into a {@code TagsContainsTagPredicate}.
      */
     private TagsContainTagPredicate prepareTagPredicate(String userInput) {
-        return new TagsContainTagPredicate(Arrays.asList(new Tag(userInput)));
+        return new TagsContainTagPredicate(List.of(new Tag(userInput)));
     }
 }

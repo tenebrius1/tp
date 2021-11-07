@@ -199,8 +199,7 @@ public class CliTutorsTest {
         cliTutors.addTutor(ALICE);
         cliTutors.addTutor(BENSON);
 
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(ELLE.getTags());
+        List<Tag> studentTagList = new ArrayList<>(ELLE.getTags());
         cliTutors.sortMatchedTutorList(studentTagList);
 
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
@@ -216,23 +215,21 @@ public class CliTutorsTest {
 
     @Test
     public void sortMatchedTutorList_validInputModifyTutorList_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(ELLE.getTags());
+        TypicalPersons.getTypicalTutors().forEach(cliTutors::addTutor);
+        List<Tag> studentTagList = new ArrayList<>(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
-        expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
+        expectedUniqueTutorList.add(CARL);
         cliTutors.sortMatchedTutorList(studentTagList);
         assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getMatchedTutorList());
     }
 
     @Test
     public void sortMatchedTutorList_validInputNoModification_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
+        TypicalPersons.getTypicalTutors().forEach(cliTutors::addTutor);
         // Student chosen has no matching tags with any tutor
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(GEORGE.getTags());
+        List<Tag> studentTagList = new ArrayList<>(GEORGE.getTags());
         ObservableList<Tutor> expectedUniqueTutorList = cliTutors.getMatchedTutorList();
         cliTutors.sortMatchedTutorList(studentTagList);
         assertEquals(expectedUniqueTutorList, cliTutors.getMatchedTutorList());
@@ -240,8 +237,8 @@ public class CliTutorsTest {
 
     @Test
     public void hasPersonWithSamePhoneTest() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> cliTutors.addTutor(tutor));
-        TypicalPersons.getTypicalStudents().stream().forEach(student -> cliTutors.addStudent(student));
+        TypicalPersons.getTypicalTutors().forEach(cliTutors::addTutor);
+        TypicalPersons.getTypicalStudents().forEach(cliTutors::addStudent);
 
         assertTrue(cliTutors.hasPersonWithSamePhone(ALICE.getPhone()));
 

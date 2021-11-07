@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +45,7 @@ public class QualificationContainsQualificationPredicateTest {
     }
 
     @Test
-    public void test_tutorQualificationContainsGender_returnsTrue() {
+    public void test_tutorQualificationContainsQualification_returnsTrue() {
         // One Tag
         QualificationContainsQualificationPredicate predicate =
                 new QualificationContainsQualificationPredicate(
@@ -53,7 +54,7 @@ public class QualificationContainsQualificationPredicateTest {
     }
 
     @Test
-    public void test_tutorQualificationDoesNotContainsGender_returnsFalse() {
+    public void test_tutorQualificationDoesNotContainsQualification_returnsFalse() {
         QualificationContainsQualificationPredicate predicate =
                 new QualificationContainsQualificationPredicate(Collections.emptyList());
         assertFalse(predicate.test(new TutorBuilder().withQualification(VALID_QUALIFICATION_BOB).build()));
@@ -63,5 +64,8 @@ public class QualificationContainsQualificationPredicateTest {
                 new QualificationContainsQualificationPredicate(List.of(new Qualification(VALID_QUALIFICATION_BOB)));
         assertFalse(predicate.test(new TutorBuilder().withQualification(
                 VALID_QUALIFICATION_UNIVERSITY_STUDENT).build()));
+
+        // test a student
+        assertFalse(predicate.test(DANIEL));
     }
 }

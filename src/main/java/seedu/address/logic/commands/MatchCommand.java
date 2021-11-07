@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -68,11 +67,10 @@ public class MatchCommand extends Command {
         }
 
         Student studentToMatch = lastShownList.get(index.getZeroBased());
-        Set<Tag> studentTag = studentToMatch.getTags();
-        ArrayList<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
         model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, studentToMatch);
 
+        // checks if there are any matched tutors
         if (model.getMatchedTutorList().isEmpty()) {
             throw new CommandException(String.format(MESSAGE_MATCHED_FAILED, studentToMatch.getName()));
         }

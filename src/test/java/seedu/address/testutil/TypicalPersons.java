@@ -78,8 +78,6 @@ public class TypicalPersons {
     public static final Tutor ROXANNE = new TutorBuilder().withName("Roxanne Tan").withPhone("91119222")
             .withGender("F").withQualification("2").withTags("PM", "SG").build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -145,6 +143,6 @@ public class TypicalPersons {
     }
 
     public static List<Student> getStudentsForFilterCommandTest() {
-        return new ArrayList<>(Arrays.asList(JACKSON));
+        return new ArrayList<>(List.of(JACKSON));
     }
 }

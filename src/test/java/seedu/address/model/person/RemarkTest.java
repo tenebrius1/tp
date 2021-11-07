@@ -1,8 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +38,26 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("lives on 2nd street")); // alphanumeric characters
         assertTrue(Remark.isValidRemark("Capital Tan")); // with capital letters
         assertTrue(Remark.isValidRemark("!@#$%")); // symbols
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        Remark remark = BENSON.getRemark();
+        Remark remarkCopy = new Remark("Wants student in Ang Mo Kio");
+        assertEquals(remark, remarkCopy);
+
+        // same object -> returns true
+        assertEquals(remark, remark);
+
+        // null -> returns false
+        assertNotEquals(null, remark);
+
+        // different type -> returns false
+        assertNotEquals(5, remark);
+
+        // different remark -> returns false
+        Remark remarkDifferent = new Remark("F");
+        assertNotEquals(remark, remarkDifferent);
     }
 }
