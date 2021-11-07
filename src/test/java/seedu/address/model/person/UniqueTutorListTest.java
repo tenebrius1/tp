@@ -111,9 +111,8 @@ public class UniqueTutorListTest {
 
     @Test
     public void sortTutor_validInputModifyTutorList_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(ELLE.getTags());
+        TypicalPersons.getTypicalTutors().forEach(uniqueTutorList::add);
+        List<Tag> studentTagList = new ArrayList<>(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
         expectedUniqueTutorList.add(ALICE);
@@ -124,12 +123,11 @@ public class UniqueTutorListTest {
 
     @Test
     public void sortTutor_validInputNoModification_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
+        TypicalPersons.getTypicalTutors().forEach(uniqueTutorList::add);
         // Student chosen has no matching tags with any tutor
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(GEORGE.getTags());
+        List<Tag> studentTagList = new ArrayList<>(GEORGE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> expectedUniqueTutorList.add(tutor));
+        uniqueTutorList.forEach(expectedUniqueTutorList::add);
         uniqueTutorList.sortTutors(studentTagList);
         assertEquals(expectedUniqueTutorList, uniqueTutorList);
     }

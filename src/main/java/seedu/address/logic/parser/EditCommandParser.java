@@ -81,7 +81,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 case TUTOR:
                     throw new ParseException(MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
                 default:
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                    // Should not reach here: invalid personType should be handled in parse()
+                    break;
                 }
             }
             throw pe;
@@ -106,7 +107,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         argMultimap.getValue(PREFIX_QUALIFICATION).get()));
                 break;
             default:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                // Should not reach here: invalid personType should be handled in parse()
+                break;
             }
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

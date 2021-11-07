@@ -17,7 +17,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Qualification;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.LevelSubjectCode;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedTutorTest {
@@ -57,7 +56,6 @@ public class JsonAdaptedTutorTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedTutor tutor = new JsonAdaptedTutor(null, VALID_PHONE, VALID_GENDER,
                 VALID_QUALIFICATION, VALID_REMARK, VALID_TAGS);
-        System.out.println(LevelSubjectCode.getLabel("SM"));
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutor::toModelType);
     }

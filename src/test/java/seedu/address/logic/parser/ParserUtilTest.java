@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -37,8 +39,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        // Above Integer.MAX_VALUE
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex(INVALID_INTEGER_MAX));
+        // Below Integer.MIN_VALUE
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex(INVALID_INTEGER_MIN));
     }
 
     @Test
@@ -52,7 +56,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -75,7 +79,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -137,9 +141,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1),
-                new Tag(VALID_TAG_2)));
-
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
         assertEquals(expectedTagSet, actualTagSet);
     }
 }
