@@ -138,7 +138,7 @@ Format:<br>
 <div markdown="block" class="alert alert-info">
 <b>:information_source: Note:</b><br>
 
-- We support adding of tutors/students with the same name.
+- We support adding tutors/students with the same name.
 
 - Tutors/students with the <b>same phone number will be counted as duplicates</b> in our app, which is not allowed.
 </div>
@@ -178,12 +178,12 @@ Format:<br>
 </div>
 
 Examples:<br>
-`edit t 3 n/John Doe g/M q/2 t/PM TE TM TL`<br>
+`edit t 2 n/John Doe g/M q/2 t/PM TE TM TL`<br>
 `e s 2 n/Mary Sue p/98765432`
 
 <details open>
 <summary style="cursor: pointer;">Expected outcome:</summary>
-<p>Command Executed: <code>edit t 3 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
+<p>Command Executed: <code>edit t 2 n/John Doe g/M q/2 t/PM TE TM TL</code></p>
 <p>Before:</p>
 <img src="images/screenshots/Main%20Window.png">
 <br>
@@ -228,7 +228,7 @@ Format: <br>`list t` <br> `list s`
 <p>Before (when <code>find t g/M</code> is executed):</p>
 <img src="images/screenshots/List_Before.png">
 <br>
-<p>After:</p>
+<p>After (when <code>list t</code> is executed):</p>
 <img src="images/screenshots/List_After.png">
 </details>
 
@@ -262,7 +262,7 @@ Example:<br>
 
 ### Matching tutor(s) to a student: `match` / `m`
 
-Matches tutor(s) who teach(es) the subject(s) that the student wants, and sorts the matched tutor(s) in decreasing order by number of tags matched.
+Matches tutor(s) who teach(es) the subject(s) that the student wants, and sorts the matched tutor(s) in decreasing order by the number of tags matched.
 
 Format: <br>`match INDEX`
 - The `INDEX` refers to the index number shown on the **displayed Student List**.
@@ -306,11 +306,11 @@ Example:<br>
 
 <details open>
 <summary>Expected outcome:</summary>
-<p>Commands Executed: <code>match 1</code>, then <code>filter g/F</code></p>
-<p>Before (when <code>match 1</code> is executed):</p>
+<p>Commands Executed: <code>edit t 2 t/PM</code>, then <code>match 1</code>, followed by <code>filter g/F</code></p>
+<p>Before (when <code>edit t 2 t/PM</code>, then <code>match 1</code> is executed):</p>
 <img src="images/screenshots/Filter_Before.png">
 <br>
-<p>After:</p>
+<p>After (when <code>filter g/F</code> is executed): </p>
 <img src="images/screenshots/Filter_After.png">
 </details>
 
