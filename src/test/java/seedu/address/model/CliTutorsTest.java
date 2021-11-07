@@ -221,8 +221,8 @@ public class CliTutorsTest {
         studentTagList.addAll(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
-        expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
+        expectedUniqueTutorList.add(CARL);
         cliTutors.sortMatchedTutorList(studentTagList);
         assertEquals(expectedUniqueTutorList.asUnmodifiableObservableList(), cliTutors.getMatchedTutorList());
     }

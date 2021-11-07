@@ -161,6 +161,12 @@ public class ModelManager implements Model {
         cliTutors.setStudent(target, editedStudent);
     }
 
+    @Override
+    public boolean hasPersonWithSamePhone(Phone p) {
+        requireNonNull(p);
+        return cliTutors.hasPersonWithSamePhone(p);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -238,12 +244,6 @@ public class ModelManager implements Model {
     @Override
     public Student getMatchedStudent() {
         return matchedStudent;
-    }
-
-    @Override
-    public boolean hasPersonWithSamePhone(Phone p) {
-        requireNonNull(p);
-        return cliTutors.hasPersonWithSamePhone(p);
     }
 
     @Override

@@ -116,8 +116,8 @@ public class UniqueTutorListTest {
         studentTagList.addAll(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
-        expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
+        expectedUniqueTutorList.add(CARL);
         uniqueTutorList.sortTutors(studentTagList);
         assertEquals(expectedUniqueTutorList, uniqueTutorList);
     }
@@ -128,7 +128,8 @@ public class UniqueTutorListTest {
         // Student chosen has no matching tags with any tutor
         List<Tag> studentTagList = new ArrayList<>();
         studentTagList.addAll(GEORGE.getTags());
-        UniqueTutorList expectedUniqueTutorList = uniqueTutorList;
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> expectedUniqueTutorList.add(tutor));
         uniqueTutorList.sortTutors(studentTagList);
         assertEquals(expectedUniqueTutorList, uniqueTutorList);
     }
