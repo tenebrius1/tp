@@ -53,35 +53,10 @@ public class DeleteCommand extends Command {
 
         switch (personType) {
         case TUTOR:
-            List<Tutor> lastShownTutorList = model.getFilteredTutorList();
-
-            if (lastShownTutorList.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
-            }
-
-            if (targetIndex.getZeroBased() >= lastShownTutorList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
-            }
-
-            Tutor tutorToDelete = lastShownTutorList.get(targetIndex.getZeroBased());
-            model.deleteTutor(tutorToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete));
+            return executeDeleteTutor(model);
             // No break necessary due to return statement
         case STUDENT:
-            List<Student> lastShownStudentList = model.getFilteredStudentList();
-
-            if (lastShownStudentList.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
-            }
-
-            if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-            }
-
-            Student studentToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
-            handleMatchList(model, studentToDelete);
-            model.deleteStudent(studentToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+            return executeDeleteStudent(model);
             // No break necessary due to return statement
         default:
             // Any invalid input would be handled by the DeleteCommandParser and will not reach here
@@ -101,5 +76,32 @@ public class DeleteCommand extends Command {
         if (studentMatched != null && studentMatched.isSamePerson(student)) {
             model.clearMatchedTutor();
         }
+    }
+
+    private CommandResult executeDeleteTutor(Model model) throws CommandException {
+        List<Tutor> lastShownTutorList = model.getFilteredTutorList();
+        if (lastShownTutorList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+        }
+        if (targetIndex.getZeroBased() >= lastShownTutorList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+        }
+        Tutor tutorToDelete = lastShownTutorList.get(targetIndex.getZeroBased());
+        model.deleteTutor(tutorToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete));
+    }
+
+    private CommandResult executeDeleteStudent(Model model) throws CommandException {
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        if (lastShownStudentList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+        }
+        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        Student studentToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+        handleMatchList(model, studentToDelete);
+        model.deleteStudent(studentToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 }
