@@ -29,6 +29,7 @@ import seedu.address.model.CliTutors;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -116,6 +117,26 @@ public class EditCommandTest {
     public void execute_noFieldSpecifiedUnfilteredTutorList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTutorDescriptor(), PersonType.TUTOR);
         String expectedMessage = EditCommand.MESSAGE_NOT_EDITED;
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_editedTutorWithSamePhoneNumber_failure() {
+        Index indexLastTutor = Index.fromOneBased(model.getFilteredTutorList().size());
+        EditTutorDescriptor x = new EditTutorDescriptor();
+        x.setPhone(new Phone("94351253"));
+        EditCommand editCommand = new EditCommand(indexLastTutor, x, PersonType.TUTOR);
+        String expectedMessage = Phone.MESSAGE_REPEATED_PHONE;
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_editedStudentWithSamePhoneNumber_failure() {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        EditStudentDescriptor x = new EditStudentDescriptor();
+        x.setPhone(new Phone("87652533"));
+        EditCommand editCommand = new EditCommand(indexLastStudent, x, PersonType.STUDENT);
+        String expectedMessage = Phone.MESSAGE_REPEATED_PHONE;
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
