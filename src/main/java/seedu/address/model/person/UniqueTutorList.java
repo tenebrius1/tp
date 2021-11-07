@@ -127,7 +127,10 @@ public class UniqueTutorList implements Iterable<Tutor> {
                         countO2++;
                     }
                 }
-                return countO1 >= countO2 ? -1 : 1;
+                if (countO1 == countO2) {
+                    return 0;
+                }
+                return countO1 > countO2 ? -1 : 1;
 
             }
         });
