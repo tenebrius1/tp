@@ -16,7 +16,6 @@ import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
-
     @TempDir
     public Path testFolder;
 
@@ -65,4 +64,8 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getCliTutorsFilePath());
     }
 
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
+    }
 }

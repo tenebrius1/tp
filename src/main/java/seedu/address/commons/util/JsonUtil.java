@@ -38,6 +38,8 @@ public class JsonUtil {
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
+    private JsonUtil() {}
+
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
@@ -113,7 +115,6 @@ public class JsonUtil {
      * Contains methods that retrieve logging level from serialized string.
      */
     private static class LevelDeserializer extends FromStringDeserializer<Level> {
-
         protected LevelDeserializer(Class<?> vc) {
             super(vc);
         }

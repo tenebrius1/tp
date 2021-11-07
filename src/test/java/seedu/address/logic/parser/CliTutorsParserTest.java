@@ -174,5 +174,14 @@ public class CliTutorsParserTest {
         Gender gender = new Gender(VALID_GENDER_AMY);
         Predicate<Person> predicate = new ChainedPredicate.Builder().setGender(gender).build();
         assertEquals(new FilterCommand(predicate), command);
+
+        List<String> keywords = List.of("foo");
+        predicate = x -> true;
+        predicate = predicate.and(new NameContainsKeywordsPredicate(keywords));
+        ChainedPredicate chainedPredicate = new ChainedPredicate.Builder().setName(new Name("foo"))
+                .setPredicate(predicate).build();
+        command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " "
+                + "n/foo");
+        assertEquals(new FilterCommand(chainedPredicate), command);
     }
 }

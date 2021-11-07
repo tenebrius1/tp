@@ -35,10 +35,10 @@ public class ChainedPredicate implements Predicate<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ChainedPredicate // instanceof handles nulls
-                        && gender.equals(((ChainedPredicate) other).gender)
-                        && name.equals(((ChainedPredicate) other).name)
-                        && qualification.equals(((ChainedPredicate) other).qualification)
-                        && tags.equals(((ChainedPredicate) other).tags));
+                && gender.equals(((ChainedPredicate) other).gender)
+                && name.equals(((ChainedPredicate) other).name)
+                && qualification.equals(((ChainedPredicate) other).qualification)
+                && tags.equals(((ChainedPredicate) other).tags));
     }
 
     public static class Builder {
