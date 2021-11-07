@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
@@ -63,38 +61,38 @@ public class StudentTest {
     public void equals() {
         // same values -> returns true
         Student elleCopy = new StudentBuilder(ELLE).build();
-        assertEquals(ELLE, elleCopy);
+        assertTrue(ELLE.equals(elleCopy));
 
         // same object -> returns true
-        assertEquals(ELLE, ELLE);
+        assertTrue(ELLE.equals(ELLE));
 
         // null -> returns false
-        assertNotEquals(null, ELLE);
+        assertFalse(ELLE.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, ELLE);
+        assertFalse(ELLE.equals(5));
 
         // different student -> returns false
-        assertNotEquals(ELLE, AMY);
+        assertFalse(ELLE.equals(AMY));
 
         // different name -> returns false
         Student editedElle = new StudentBuilder(ELLE).withName(VALID_NAME_AMY).build();
-        assertNotEquals(ELLE, editedElle);
+        assertFalse(ELLE.equals(editedElle));
 
         // different phone -> returns false
         editedElle = new StudentBuilder(ELLE).withPhone(VALID_PHONE_AMY).build();
-        assertNotEquals(ELLE, editedElle);
+        assertFalse(ELLE.equals(editedElle));
 
         // different gender -> returns false
         editedElle = new StudentBuilder(ELLE).withGender(VALID_GENDER_BOB).build();
-        assertNotEquals(ELLE, editedElle);
+        assertFalse(ELLE.equals(editedElle));
 
         // different tags -> returns false
         editedElle = new StudentBuilder(ELLE).withTag(VALID_TAG_TP).build();
-        assertNotEquals(ELLE, editedElle);
+        assertFalse(ELLE.equals(editedElle));
 
         // different remarks -> returns false
         editedElle = new StudentBuilder(ELLE).withRemark(VALID_REMARK_AMY).build();
-        assertNotEquals(ELLE, editedElle);
+        assertFalse(ELLE.equals(editedElle));
     }
 }

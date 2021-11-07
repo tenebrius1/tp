@@ -10,7 +10,6 @@ import seedu.address.model.person.Tutor;
  *     {@code CliTutors ab = new CliTutorsBuilder().withPerson("John", "Doe").build();}
  */
 public class CliTutorsBuilder {
-
     private final CliTutors cliTutors;
 
     public CliTutorsBuilder() {

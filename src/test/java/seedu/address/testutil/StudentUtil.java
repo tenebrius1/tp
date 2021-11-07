@@ -10,7 +10,6 @@ import seedu.address.model.person.Student;
  * A utility class for Student.
  */
 public class StudentUtil extends PersonUtil {
-
     /**
      * Returns an add command string for adding the {@code student}.
      */

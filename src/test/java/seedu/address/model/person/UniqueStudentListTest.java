@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -179,20 +178,20 @@ public class UniqueStudentListTest {
 
         UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
         uniqueStudentListCopy.setStudents(studentList);
-        assertEquals(uniqueStudentListCopy, uniqueStudentList);
+        assertTrue(uniqueStudentListCopy.equals(uniqueStudentList));
 
         // same object -> returns true
-        assertEquals(uniqueStudentList, uniqueStudentList);
+        assertTrue(uniqueStudentList.equals(uniqueStudentList));
 
         // null -> returns false
-        assertNotEquals(null, uniqueStudentList);
+        assertFalse(uniqueStudentList.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, uniqueStudentList);
+        assertFalse(uniqueStudentList.equals(5));
 
         // different list -> returns false
         UniqueStudentList uniqueStudentListDifferent = new UniqueStudentList();
         uniqueStudentListDifferent.add(DANIEL);
-        assertNotEquals(uniqueStudentList, uniqueStudentListDifferent);
+        assertFalse(uniqueStudentList.equals(uniqueStudentListDifferent));
     }
 }

@@ -22,7 +22,6 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
-
     private Model model;
 
     @BeforeEach

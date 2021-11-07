@@ -23,7 +23,7 @@ class LevelSubjectCodeTest {
     }
 
     @Test
-    public void testgetSubCode() {
+    public void testGetSubCode() {
         assertEquals("pm", LevelSubjectCode.getSubCode("PriMath"));
         assertEquals("sc", LevelSubjectCode.getSubCode("SecChem"));
         assertEquals("Invalid", LevelSubjectCode.getSubCode("asdas"));

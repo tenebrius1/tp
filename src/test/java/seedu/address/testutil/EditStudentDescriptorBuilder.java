@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
  * A utility class to help with building EditStudentDescriptor objects.
  */
 public class EditStudentDescriptorBuilder {
-
     private final EditStudentDescriptor descriptor;
 
     public EditStudentDescriptorBuilder() {
@@ -83,5 +82,4 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptor build() {
         return descriptor;
     }
-
 }

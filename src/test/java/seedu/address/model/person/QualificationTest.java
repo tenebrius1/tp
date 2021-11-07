@@ -3,7 +3,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Qualification.Qualifications;
 
 class QualificationTest {
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Qualification(null));
@@ -51,19 +49,19 @@ class QualificationTest {
         // same values -> returns true
         Qualification qualification = CARL.getQualification();
         Qualification qualificationCopy = new Qualification("2");
-        assertEquals(qualification, qualificationCopy);
+        assertTrue(qualification.equals(qualificationCopy));
 
         // same object -> returns true
-        assertEquals(qualification, qualification);
+        assertTrue(qualification.equals(qualification));
 
         // null -> returns false
-        assertNotEquals(null, qualification);
+        assertFalse(qualification.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, qualification);
+        assertFalse(qualification.equals(5));
 
         // different qualification -> returns false
         Qualification qualificationDifferent = new Qualification("3");
-        assertNotEquals(qualification, qualificationDifferent);
+        assertFalse(qualification.equals(qualificationDifferent));
     }
 }
