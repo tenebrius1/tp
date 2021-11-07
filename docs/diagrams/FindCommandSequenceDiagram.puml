@@ -51,7 +51,7 @@ CliTutorsParser --> LogicManager : f
 deactivate CliTutorsParser
 destroy FindCommandParser
 
-LogicManager -> FindCommand : execute(model)
+LogicManager -> FindCommand : execute()
 activate FindCommand
 
 FindCommand -> Model : updateFilteredStudentList(p)

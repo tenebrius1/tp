@@ -22,18 +22,18 @@ public class MatchCommandParser implements Parser<MatchCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
         String preamble = argMultimap.getPreamble().trim();
+
         // Check if argument passed is a number or not
         if (!StringUtil.isNumeric(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE));
         }
 
-        Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return new MatchCommand(index);
         } catch (ParseException pe) {
             // Catches Non Integer value passed as argument
             throw new ParseException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, pe);
         }
-        return new MatchCommand(index);
     }
 }

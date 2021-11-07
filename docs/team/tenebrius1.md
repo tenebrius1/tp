@@ -40,6 +40,6 @@ title: Yi Guan's Project Portfolio Page
 - Added manual testing instructions for `find` and `saving data` (Pull request [#194](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/194/files))
 
 ### **Community**
-- PRs reviewed (with non-trivial review comments) (Pull requests [#111](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/111), [#61](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/61),  [#69](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/69), [#190](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/190)
+- PRs reviewed (with non-trivial review comments) (Pull requests [#111](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/111), [#61](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/61),  [#69](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/69), [#190](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/190))
 - Contributed to forum discussions (example: [#139](https://github.com/nus-cs2103-AY2122S1/forum/issues/139))
 - Helped to manual test for another group's TP, with 15 non-trivial bug reports (see [here](https://github.com/tenebrius1/ped))

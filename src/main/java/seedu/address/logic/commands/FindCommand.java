@@ -56,28 +56,39 @@ public class FindCommand extends Command {
         List<Student> lastShownListStudent = model.getFilteredStudentList();
         List<Tutor> lastShownListTutor = model.getFilteredTutorList();
 
-        if (personType == PersonType.TUTOR) {
-            // Checks if tutorList is empty
-            if (lastShownListTutor.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
-            }
-
-            model.updateFilteredTutorList(predicate);
-            return new CommandResult(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW,
-                    model.getFilteredTutorList().size()));
-        } else if (personType == PersonType.STUDENT) {
-            // Checks if studentList is empty
-            if (lastShownListStudent.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
-            }
-
-            model.updateFilteredStudentList(predicate);
-            return new CommandResult(String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
-                    model.getFilteredStudentList().size()));
-        } else {
+        switch (personType) {
+        case TUTOR:
+            return executeFindTutor(model, lastShownListTutor);
+            // No break necessary due to return statement
+        case STUDENT:
+            return executeFindStudent(model, lastShownListStudent);
+            // No break necessary due to return statement
+        default:
+            // Any invalid input would be handled by the FindCommandParser and will not reach here
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
+    }
+
+    private CommandResult executeFindStudent(Model model, List<Student> lastShownListStudent) throws CommandException {
+        // Checks if studentList is empty
+        if (lastShownListStudent.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
+        }
+
+        model.updateFilteredStudentList(predicate);
+        return new CommandResult(String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                model.getFilteredStudentList().size()));
+    }
+
+    private CommandResult executeFindTutor(Model model, List<Tutor> lastShownListTutor) throws CommandException {
+        if (lastShownListTutor.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
+        }
+
+        model.updateFilteredTutorList(predicate);
+        return new CommandResult(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW,
+                model.getFilteredTutorList().size()));
     }
 
     @Override

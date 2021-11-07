@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class UniqueStudentListTest {
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
@@ -165,5 +168,31 @@ public class UniqueStudentListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        List<Student> studentList = new ArrayList<>();
+        studentList.addAll(TypicalPersons.getTypicalStudents());
+        uniqueStudentList.setStudents(studentList);
+
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.setStudents(studentList);
+        assertEquals(uniqueStudentListCopy, uniqueStudentList);
+
+        // same object -> returns true
+        assertEquals(uniqueStudentList, uniqueStudentList);
+
+        // null -> returns false
+        assertNotEquals(null, uniqueStudentList);
+
+        // different type -> returns false
+        assertNotEquals(5, uniqueStudentList);
+
+        // different list -> returns false
+        UniqueStudentList uniqueStudentListDifferent = new UniqueStudentList();
+        uniqueStudentListDifferent.add(DANIEL);
+        assertNotEquals(uniqueStudentList, uniqueStudentListDifferent);
     }
 }

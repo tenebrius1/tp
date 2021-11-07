@@ -42,7 +42,7 @@ destroy MatchCommandParser
 CliTutors --> LogicManager : m
 deactivate CliTutors
 
-LogicManager -> MatchCommand : execute(model)
+LogicManager -> MatchCommand : execute()
 activate MatchCommand
 
 create TagPredicate

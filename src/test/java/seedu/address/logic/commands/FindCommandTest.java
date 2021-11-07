@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
@@ -125,7 +125,7 @@ public class FindCommandTest {
         Predicate<Person> secondPredicate = builder.build();
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate, PersonType.TUTOR);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate, PersonType.STUDENT);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, PersonType.TUTOR);
         FindCommand findThirdCommand = new FindCommand(firstPredicate, PersonType.STUDENT);
 
         // same object -> returns true
@@ -133,19 +133,19 @@ public class FindCommandTest {
 
         // same value and personType -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, PersonType.TUTOR);
-        assertEquals(findFirstCommand, findFirstCommandCopy);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertNotEquals(1, findFirstCommand);
+        assertFalse(findFirstCommand.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, findFirstCommand);
+        assertFalse(findFirstCommand.equals(null));
 
         // different parameters -> returns false
-        assertNotEquals(findFirstCommand, findSecondCommand);
+        assertFalse(findFirstCommand.equals(findSecondCommand));
 
         // different personType -> returns false
-        assertNotEquals(findFirstCommand, findThirdCommand);
+        assertFalse(findFirstCommand.equals(findThirdCommand));
     }
 
     /**

@@ -22,6 +22,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer";
 
+    private ParserUtil() {}
+
     /**
      * Parses {@code String args} and extracts out the type of Person (Tutor/Student).
      *
