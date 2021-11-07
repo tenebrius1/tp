@@ -29,7 +29,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -260,8 +259,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidStudentWithQualification_throwsParseException() {
-        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY +
-                QUALIFICATION_DESC_BOB + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_PM,
+        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY
+                + QUALIFICATION_DESC_BOB + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_PM,
                 MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
     }
 }
