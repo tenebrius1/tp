@@ -112,7 +112,7 @@ All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
 between classes that represent parts of the visible GUI.
 The `PersonListPanel` is split up into `TutorCard` and `StudentCard` on the UI as 2 lists: Tutor List, Student List. The `MatchListPanel` contains only `TutorCard`.
 
-The `Ui` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `Ui` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `Ui` component:
 
@@ -133,7 +133,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `CliTutorsParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete t 1")` API call.
 
@@ -144,7 +144,7 @@ Taking a deeper look into the classes in `Logic` that are used for parsing a use
 ![Insert class diagram for Parser component](images/ParserClasses.png)
 
 How the parsing works:
-* When called upon to parse a user command, the `CliTutorsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g. `AddCommand`) which the `CliTutorsParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `CliTutorsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g. `AddCommand`) which the `CliTutorsParser` returns as a `Command` object.
 * All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
 
 ### Model component
@@ -391,7 +391,7 @@ Given below is an activity diagram to show how a `find` implementation works for
 
 - **Alternative 1 (current choice)**: User can `find` using multiple prefixes at once.
   - Pros: It allows the user to find tutors/students more easily by their fields.
- <br>(for e.g. they can find all tutors who are women and teaches Primary Math)
+ <br>(e.g. they can find all tutors who are women and teaches Primary Math)
   - Cons: It would be more complex since it has to parse multiple prefixes and chain predicates together depending on the user input. The higher complexity may lead to a higher chance of creating bugs.
 - **Alternative 2**: User can only `find` using one prefix at a time.
   - Pros: Simpler to implement since there are lesser use cases to consider and hence, making the code less prone to bugs.
@@ -458,7 +458,7 @@ Given below is an activity diagram to show how the `match` command works for a `
 
 #### Target user profile
 
-* Has a need to manage a significant number of private tutors and students
+* Needs to manage a significant number of private tutors and students
 * Likes a lightweight tutor management application to reduce *bloatware*
 * Wants to have a platform to match students to private tutors
 * Prefers desktop app over other platforms
@@ -578,7 +578,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. `CliTutors` shows an error message.
-    * 3a2. User enters in valid index.
+    * 3a2. User enters in a valid index.
       <br>Use case resumes at step 4.
 
 #### Use case (UC06): Delete a Student
@@ -598,7 +598,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. `CliTutors` shows an error message.
-    * 3a2. User enters in valid index.
+    * 3a2. User enters in a valid index.
       <br>Use case resumes at step 4.
 
 #### Use case (UC07): Find a Tutor
@@ -640,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to match a student with tutors with the required qualifications.
-2. `CliTutors` shows the tutors that are able to match with the specified student in a window.
+2. `CliTutors` shows the tutors that match with the specified student in a window.
    <br>Use case ends.
 
 **Extensions**
@@ -683,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **CLI**           | Command-Line Interface                                                                                                                            |
 | **JSON**          | JSON stands for ***JavaScript Object Notation*** which is a lightweight format for data storage                                                   |
 | **Mainstream OS** | Windows, macOS, Linux                                                                                                                             |
-| **Index**         | Index number shown in the displayed list. The index must be a positive integer 1, 2, 3, …                                                         |
+| **Index**         | Index number that is shown in the displayed list. The index must be a positive integer 1, 2, 3, …                                                         |
 | **Qualification** | How qualified the tutor is with regards to these levels:<br>0.Pre-University<br>1.University Student<br>2.Graduate<br>3.MOE-Trained              |
 | **Tag**           | Subjects each Tutor teaches are saved under [tags](https://ay2122s1-cs2103t-t17-2.github.io/tp/UserGuide.html#valid-tags) as ``[X][Y]`` (X is Level code and Y is Specific Subject code). eg. `PM` stands for Primary Math.|
 | **Bloatware**     | Software that uses excessive memory and disk space, which makes the program run slow                                                              |
@@ -694,7 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br> * These instructions only provide a starting point for testers to work on, testers are expected to do more exploratory testing.
- * All tutors and students used in the test cases below are based off the sample data given when the application is first launched.
+ * All tutors and students used in the test cases below are based on the sample data given when the application is first launched.
  * Please reload the sample data after testing each section below.
 </div>
 
@@ -713,27 +713,27 @@ Given below are instructions to test the app manually.
 
 1. Add a tutor to the Tutor List.
    1. Test case: `add t n/John Doe p/98265432 g/M q/2 r/Prefers teaching in the West t/PM`<br>
-      Expected: The tutor John Doe is added to the Tutor List. Details of the added tutor shown in the result display.
+      Expected: The tutor John Doe is added to the Tutor List. Details of the added tutor are shown in the result display.
    2. Test case: `add t n/John Doe p/98765432 g/M q/2 r/Prefers teaching in the West`<br>
-      Expected: No tutor is added. Error details shown in the result display, with a result message `Invalid command format! ...`.
+      Expected: No tutor is added. Error details are shown in the result display, with a result message `Invalid command format! ...`.
    3. Test case: `add t n/李白 p/98765432 g/M q/2 r/Prefers teaching in the West t/PM`<br>
-      Expected: No tutor is added. Error details shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
+      Expected: No tutor is added. Error details are shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
    4. Test case: `add t n/John Doe p/98765432 g/M q/2 r/Prefers teaching in the West t/GH`<br>
-      Expected: No tutor is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
+      Expected: No tutor is added. Error details are shown in the result display, with a result message `Please enter valid tag(s)`.
    5. Test case: `add t n/John Doe p/98765432 g/M q/5 r/Prefers teaching in the West t/PM`<br>
-      Expected: No tutor is added. Error details shown in the result display, with result message `Qualification should be '0', '1', '2' or '3'`.
+      Expected: No tutor is added. Error details are shown in the result display, with a result message `Qualification should be '0', '1', '2' or '3'`.
 
 2. Add a student to the Student List.
     1. Test case: `add s n/John Doe p/98765132 g/M t/PM`<br>
-       Expected: The student John Doe is added to the Student List. Details of the added student shown in the result display.
+       Expected: The student John Doe is added to the Student List. Details of the added student are shown in the result display.
     2. Test case: `add s n/John Doe p/98765432 g/M q/2 t/PM`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `Students do not have any qualifications tagged to them!`.
+       Expected: No student is added. Error details are shown in the result display, with a result message `Students do not have any qualifications tagged to them!`.
     3. Test case: `add s n/李白 p/98765432 g/M t/PM`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
+       Expected: No student is added. Error details are shown in the result display, with a result message `Names should only contain alphanumeric characters and spaces, and it should not be blank`.
     4. Test case: `add s n/John Doe p/98765432 g/M t/GH`<br>
-       Expected: No student is added. Error details shown in the result display, with a result message `Please enter valid tag(s)`.
+       Expected: No student is added. Error details are shown in the result display, with a result message `Please enter valid tag(s)`.
     5. Test case: `add s n/John Doe p/98765432 g/MF t/PM`<br>
-       Expected: No student is added. Error details shown in the result display, with result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+       Expected: No student is added. Error details are shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
 
 ### Edit Tutor/Student List
 {:.no_toc}
@@ -742,52 +742,52 @@ Given below are instructions to test the app manually.
     1. Test case: `edit t 1 n/John Doe`<br>
        Expected: The first tutor Alex Yeoh is renamed to John Doe. Details of the edited tutor are shown in the result display.
     2. Test case: `edit t 1`<br>
-       Expected: No tutor is edited. Error details shown in the result display, with a result message `At least one field to edit must be provided`.
+       Expected: No tutor is edited. Error details are shown in the result display, with a result message `At least one field to edit must be provided`.
     3. Test case: `edit t 1 g/Z`<br>
-       Expected: No tutor is edited. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+       Expected: No tutor is edited. Error details are shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
     4. Prerequisite: All tutors in the Tutor List are the default values loaded from `SampleDataUtil`<br>
        Test case: `edit t 2 n/Bernice Yu p/99272758 g/F q/1 t/SC SP`<br>
-       Expected: No tutor is edited. Error details shown in the result display, with a result message `This tutor is unchanged`.
+       Expected: No tutor is edited. Error details are shown in the result display, with a result message `This tutor is unchanged`.
     5. Test case: `edit t 2 p/87438807`<br>
-       Expected: No tutor is edited. Error details shown in the result display, with result message `Some other person already has this phone number...` since tutor Alex Yeoh already has this phone number.
+       Expected: No tutor is edited. Error details are shown in the result display, with a result message `Some other person already has this phone number...` since tutor Alex Yeoh already has this phone number.
 
 2. Edit a student in the Student List.
     1. Test case: `edit s 1 n/John Doe`<br>
        Expected: The first student David Li is renamed to John Doe. Details of the edited student are shown in the result display.
     2. Test case: `edit s 1`<br>
-       Expected: No student is edited. Error details shown in the result display, with a result message `At least one field to edit must be provided`.
+       Expected: No student is edited. Error details are shown in the result display, with a result message `At least one field to edit must be provided`.
     3. Test case: `edit s 1 g/Z`<br>
-       Expected: No student is edited. Error details shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
+       Expected: No student is edited. Error details are shown in the result display, with a result message `Gender should be 'M' / 'm' or 'F' / 'f'`.
     4. Test case: `edit s 2 n/Irfan Ibrahim p/92492021 g/M t/SC`<br>
-       Expected: No student is edited. Error details shown in the result display, with a result message `This student is unchanged`.
+       Expected: No student is edited. Error details are shown in the result display, with a result message `This student is unchanged`.
     5. Test case: `edit s 2 p/91031282`<br>
-       Expected: No student is edited. Error details shown in the result display, with result message `Some other person already has this phone number...` since student David Li already has this phone number.
+       Expected: No student is edited. Error details are shown in the result display, with a result message `Some other person already has this phone number...` since student David Li already has this phone number.
 
 ### Delete a Tutor/Student
 {:.no_toc}
 
 1. Delete a tutor from the Tutor List.
     1. Test case: `delete t 1`<br>
-       Expected: First tutor is deleted from the Tutor List. Details of the deleted tutor shown in the result display.
+       Expected: First tutor is deleted from the Tutor List. Details of the deleted tutor are shown in the result display.
     2. Test case: `delete t 0`<br>
-       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+       Expected: No tutor is deleted. Error details are shown in the result display, with a result message `The tutor index provided is invalid`<br>
     3. Test case: `delete t x` (where x is an integer larger than the list size)<br>
-       Expected: No tutor is deleted. Error details shown in the result display, with a result message `The tutor index provided is invalid`<br>
+       Expected: No tutor is deleted. Error details are shown in the result display, with a result message `The tutor index provided is invalid`<br>
     4. Test case: `clear t` then `delete t 1`<br>
-   Expected: Error details shown in the result display, with a result message `Tutor list is empty!`
+   Expected: Error details are shown in the result display, with a result message `Tutor list is empty!`
     5. Test case: `clear t` then `delete t -10`<br>
-       Expected: Error details shown in the result display, with a result message `The tutor index provided is invalid`
+       Expected: Error details are shown in the result display, with a result message `The tutor index provided is invalid`
 1. Delete a student from the Student List.
     1. Test case: `delete s 1`<br>
-       Expected: First student is deleted from the Student List. Details of the deleted student shown in the result display.
+       Expected: First student is deleted from the Student List. Details of the deleted student are shown in the result display.
     2. Test case: `delete s 0`<br>
-       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`
+       Expected: No student is deleted. Error details are shown in the result display, with a result message `The student index provided is invalid`
     3. Test case: `delete s x` (where x is an integer larger than the list size)<br>
-       Expected: No student is deleted. Error details shown in the result display, with a result message `The student index provided is invalid`<br>
+       Expected: No student is deleted. Error details are shown in the result display, with a result message `The student index provided is invalid`<br>
     4. Test case: `clear s` then `delete s 1`<br>
-      Expected: Error details shown in the result display, with a result message `Student list is empty!`
+      Expected: Error details are shown in the result display, with a result message `Student list is empty!`
     5. Test case: `clear s` then `delete s -10`<br>
-      Expected: Error details shown in the result display, with a result message `The student index provided is invalid`
+      Expected: Error details are shown in the result display, with a result message `The student index provided is invalid`
 
 ### Find Tutor/Student
 {:.no_toc}
@@ -795,20 +795,20 @@ Given below are instructions to test the app manually.
 [comment]: <> (Solution below adapted from https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html)
 
 1. Find a tutor while all tutors are shown.
-   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the Tutor List.
+   1. Prerequisites: List all tutors using the `list t` command. There exist multiple tutors in the Tutor List.
    2. Test case: `find t n/alex`
-      <br>Expected: Only tutors with names containing alex (case-insensitive) should be displayed in the Tutor List.
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) should be displayed in the Tutor List.
       <br>e.g. Tutors with the names: Alex Yeoh, Alex Lim and Alex will be shown.
    3. Test case: `find t n/alex q/1`
-      <br>Expected: Only tutors with names containing alex (case-insensitive) with qualification 1 (undergraduate) will be displayed in the Tutor List.
+      <br>Expected: Only tutors with names containing 'alex' (case-insensitive) with qualification 1 (undergraduate) will be displayed in the Tutor List.
       <br>e.g A tutor named Alex Yeoh with qualification 1 will be shown but a tutor named Alex Tan with qualification 2 will not be shown.
    4. Test case: `find`
-      <br>Expected: Tutor List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+      <br>Expected: Tutor List does not get updated. Error details are shown in the result display, with a result message `Invalid command format!...`.
    5. Test case: `find t`
-      <br>Expected: Tutor List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+      <br>Expected: Tutor List does not get updated. Error details are shown in the result display, with a result message `Invalid command format!...`.
 
 2. Find a student while all students are shown.
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the Student List.
+    1. Prerequisites: List all students using the `list s` command. There exist multiple students in the Student List.
     2. Test case: `find s n/david`
        <br>Expected: Only students with names containing 'david' (case-insensitive) should be displayed in the Student List.
        <br>e.g. Students with the names: David Li, David Tan and John David will be shown.
@@ -816,28 +816,28 @@ Given below are instructions to test the app manually.
        <br>Expected: Only students with names containing 'david' (case-insensitive) and has the tag `PM` should be displayed in the Student List.
        <br>e.g A student named David Li and has tag `PM` will be shown but a student named David and has tag `PS` will not be shown.
     4. Test case: `find`
-       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+       <br>Expected: Student List does not get updated. Error details are shown in the result display, with a result message `Invalid command format!...`.
     5. Test case: `find s q/2`
-       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Students do not have any qualifications...`.
+       <br>Expected: Student List does not get updated. Error details are shown in the result display, with a result message `Students do not have any qualifications...`.
     6. Test case: `find s`
-       <br>Expected: Student List does not get updated. Error details shown in the result display, with a result message `Invalid command format!...`.
+       <br>Expected: Student List does not get updated. Error details are shown in the result display, with a result message `Invalid command format!...`.
 3. Find a tutor/student while the Tutor/Student List is empty.
    1. Prerequisites: Clear the Tutor and Student Lists using the `clear t` and `clear s` command respectively. There should not be any tutors or students shown in the respective lists.
    2. Test case: `find t n/alex`
-      <br>Expected: Error details shown in the result display, with a result message `Tutor list is empty!`.
+      <br>Expected: Error details are shown in the result display, with a result message `Tutor list is empty!`.
    3. Test case: `find s n/david`
-      <br>Expected: Error details shown in the result display, with a result message `Student list is empty!`.
+      <br>Expected: Error details are shown in the result display, with a result message `Student list is empty!`.
 
 ### Match Student
 {:.no_toc}
 1. Match a student while all students are being shown
     1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list and at least one matching tutor.
     2. Test case: `match 1`<br>
-        Expected: First student from the Student List is matched. Details of the matched student is shown in the result display and matched tutors are displayed on the matched Tutor List.
+        Expected: First student from the Student List is matched. Details of the matched student are shown in the result display and matched tutors are displayed on the matched Tutor List.
     3. Test case: `match`<br>
-       Expected: No student is matched. Error details shown in the result display, with a result message `Invalid command format!...`
+       Expected: No student is matched. Error details are shown in the result display, with a result message `Invalid command format!...`
     4. Test case: `match 0`<br>
-       Expected: No student is matched. Error details shown in the result display, with a result message `The student index provided is invalid`
+       Expected: No student is matched. Error details are shown in the result display, with a result message `The student index provided is invalid`
        Other incorrect match commands to try: `match x` (where x ≤ 0 or x > Student List size).
 
 ### Filter matched Tutor List
@@ -846,7 +846,7 @@ Given below are instructions to test the app manually.
 1. Filter tutors before matching tutors to a student.
    1. Prerequisites: No `match` command was entered.
    2. Test case: `filter q/3`<br>
-      Expected: No tutors are filtered. Error details shown in the result display, with a result message `Failed to filter as no match command was given prior.`.
+      Expected: No tutors are filtered. Error details are shown in the result display, with a result message `Failed to filter as no match command was given prior.`.
 2. Filter tutors after matching tutors to a student.
    1. Prerequisites: A valid match command was entered.
    2. Test case: `filter q/3`<br>
@@ -854,7 +854,7 @@ Given below are instructions to test the app manually.
 3. Filter tutors after matching tutors to a student.
     1. Prerequisites: A valid match command was entered.
     2. Test case: `filter p/12341234`<br>
-       Expected: No tutors are filtered. Error details shown in the result display, with a result message `Invalid command format! ...`.
+       Expected: No tutors are filtered. Error details are shown in the result display, with a result message `Invalid command format! ...`.
 
 ### List all Tutors/Students
 {:.no_toc}
@@ -864,7 +864,7 @@ Given below are instructions to test the app manually.
     2. Test case: `list t`<br>
        Expected: All stored tutors are shown in the Tutor List, with a result message `Listed all tutors!`.
 2. List all tutors from the Tutor List after a `find` command
-   1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `find` command such that the Tutor List shows less than actual number of tutors.
+   1. Prerequisites: List all tutors using the `list t` command. There exist multiple tutors in the list. Perform a `find` command such that the Tutor List shows less than the actual number of tutors.
    2. Test case: `list t`<br>
       Expected: Filter from the `find` will be cleared and all tutors are shown in the Tutor List, with a result message `Listed all tutors!`.
 3. List all students
@@ -872,11 +872,11 @@ Given below are instructions to test the app manually.
     2. Test case: `list s`<br>
        Expected: All students are shown in the Student List, with a result message `Listed all students!`.
 4. List all students from the Student List after a `find` command
-    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the Student List shows less than actual number of students.
+    1. Prerequisites: List all students using the `list s` command. There exists multiple students in the list. Perform a `find` command such that the Student List shows less than the actual number of students.
     2. Test case: `list s`<br>
        Expected: Filter from the `find` will be cleared and all students are shown in the Student List, with a result message `Listed all students!`.
-5. List all tutor from the Tutor List after a `clear t` command
-    1. Prerequisites: List all tutors using the `list t` command. There exists multiple tutors in the list. Perform a `clear t` command such that all tutors are cleared from the Tutor List.
+5. List all tutors from the Tutor List after a `clear t` command
+    1. Prerequisites: List all tutors using the `list t` command. There exist multiple tutors in the list. Perform a `clear t` command such that all tutors are cleared from the Tutor List.
     2. Test case: `list t`<br>
        Expected: No tutors are shown in the Tutor List, with a result message saying `List is empty!`.
 6. List all students from the Student List after a `clear s` command
@@ -911,12 +911,12 @@ Given below are instructions to test the app manually.
       <br>Expected: The newly added tutor is still present in the Tutor List.
 
 2. Dealing with corrupted data files
-   1. Prerequisite: Opened and closed (by entering the command `exit`) the application  and ensured that `data/clitutors.json` is created.
-   2. Corrupt the save file (`data/clitutors.json`). The easiest way is to type '-' somewhere in one of the saved tutor's phone. Another way may be to add random characters that make the JSON format unreadable.
+   1. Prerequisite: Opened and closed (by entering the command `exit`) the application and ensured that `data/clitutors.json` is created.
+   2. Corrupt the save file (`data/clitutors.json`). The easiest way is to type '-' somewhere in one of the saved tutor's phone number. Another way may be to add random characters that make the JSON format unreadable.
    3. Relaunch the app by double-clicking on the JAR file.
       <br>Expected: Shows the GUI with no data.
    4. Delete the current save file.
-   5. Relaunch the app again by double-clicking on the JAR file.
+   5. Relaunch the app by double-clicking on the JAR file.
       <br>Expected: Shows the GUI with sample data.
 
 ### Opening help window

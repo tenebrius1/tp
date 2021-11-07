@@ -26,7 +26,7 @@ import seedu.address.model.person.Tutor;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredListTutor_success() {

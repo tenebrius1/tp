@@ -37,9 +37,7 @@ public class TutorUtil extends PersonUtil {
         sb.append(PREFIX_GENDER + tutor.getGender().genderSymbol + " ");
         sb.append(PREFIX_QUALIFICATION + tutor.getQualification().index + " ");
         sb.append(PREFIX_REMARK + tutor.getRemark().description + " ");
-        tutor.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        tutor.getTags().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 

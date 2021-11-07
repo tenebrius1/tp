@@ -28,7 +28,7 @@ import seedu.address.model.person.TagsContainTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class MatchCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_throwsNullPointerException() {
@@ -45,8 +45,7 @@ public class MatchCommandTest {
 
         ModelManager expectedModelStudent = new ModelManager(model.getCliTutors(), new UserPrefs());
 
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
 
         expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
@@ -86,8 +85,7 @@ public class MatchCommandTest {
         showStudentAtIndex(expectedModelStudent, INDEX_FIRST_PERSON);
 
 
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
 
         expectedModelStudent.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
@@ -157,8 +155,6 @@ public class MatchCommandTest {
 
     private List<Tag> getStudentTagList(Student student) {
         Set<Tag> studentTag = student.getTags();
-        ArrayList<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
-        return ls;
+        return new ArrayList<>(studentTag);
     }
 }
