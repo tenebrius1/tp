@@ -11,7 +11,7 @@ import seedu.address.model.person.Tutor;
  */
 public class CliTutorsBuilder {
 
-    private CliTutors cliTutors;
+    private final CliTutors cliTutors;
 
     public CliTutorsBuilder() {
         cliTutors = new CliTutors();

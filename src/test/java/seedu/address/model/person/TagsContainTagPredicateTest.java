@@ -58,7 +58,7 @@ public class TagsContainTagPredicateTest {
         assertFalse(predicate.test(new TutorBuilder().withTags(VALID_TAG_PM).build()));
 
         // Non-matching keyword
-        predicate = new TagsContainTagPredicate(Arrays.asList(new Tag(VALID_TAG_PM)));
+        predicate = new TagsContainTagPredicate(List.of(new Tag(VALID_TAG_PM)));
         assertFalse(predicate.test(new TutorBuilder().withTags(VALID_TAG_TP).build()));
     }
 

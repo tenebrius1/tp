@@ -11,4 +11,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_QUALIFICATION = new Prefix("q/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
+    private CliSyntax() {}
 }

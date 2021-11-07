@@ -27,6 +27,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -52,7 +53,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -129,13 +130,18 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getCliTutors_success() {
+        assertEquals(logic.getCliTutors(), new ModelManager().getCliTutors());
+    }
+
+    @Test
     public void getFilteredTutorList_success() {
         assertEquals(logic.getFilteredTutorList(), new ModelManager().getFilteredTutorList());
     }
 
     @Test
     public void getFilteredStudentList_success() {
-        assertEquals(logic.getFilteredStudentList(), new ModelManager().getFilteredTutorList());
+        assertEquals(logic.getFilteredStudentList(), new ModelManager().getFilteredStudentList());
     }
 
     @Test
@@ -158,6 +164,25 @@ public class LogicManagerTest {
     public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
                 logic.getMatchedTutorList().remove(INDEX_FIRST_PERSON.getZeroBased()));
+    }
+
+    @Test
+    public void getCliTutorsFilePath_success() {
+        assertEquals(logic.getCliTutorsFilePath(), new ModelManager().getCliTutorsFilePath());
+    }
+
+    @Test
+    public void getGuiSettings_success() {
+        assertEquals(logic.getGuiSettings(), new ModelManager().getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_success() {
+        GuiSettings guiSettings = new GuiSettings();
+        logic.setGuiSettings(guiSettings);
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setGuiSettings(guiSettings);
+        assertEquals(logic.getGuiSettings(), expectedModel.getGuiSettings());
     }
 
     /**

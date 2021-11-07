@@ -38,7 +38,7 @@ import seedu.address.model.tag.Tag;
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutorsForFilterTest(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutorsForFilterTest(), new UserPrefs());
 
     @Test
     public void execute_validFilterCommandName_success() {
@@ -46,8 +46,7 @@ public class FilterCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
 
@@ -70,8 +69,7 @@ public class FilterCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
 
@@ -94,8 +92,7 @@ public class FilterCommandTest {
         Student studentToMatch = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
-        List<Tag> ls = new ArrayList<>();
-        ls.addAll(studentToMatch.getTags());
+        List<Tag> ls = new ArrayList<>(studentToMatch.getTags());
         expectedModel.updateMatchedTutor(new TagsContainTagPredicate(getStudentTagList(studentToMatch)), ls,
                 studentToMatch);
 
@@ -107,7 +104,7 @@ public class FilterCommandTest {
 
         FilterCommand filterCommand = new FilterCommand(predicate);
 
-        String expectedMessage = String.format(String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1));
+        String expectedMessage = String.format(Messages.MESSAGE_TUTORS_LISTED_OVERVIEW, 1);
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
@@ -119,7 +116,7 @@ public class FilterCommandTest {
         ModelManager expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         expectedModel.filterMatchedTutor(predicate);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_FAILED);
+        String expectedMessage = FilterCommand.MESSAGE_FILTER_FAILED;
 
         FilterCommand filterCommand = new FilterCommand(predicate);
 
@@ -132,7 +129,6 @@ public class FilterCommandTest {
         Gender gender = new Gender(VALID_GENDER_AMY);
         Qualification qualification = new Qualification(VALID_QUALIFICATION_GRADUATE);
         builder.setGender(gender);
-        builder.setQualification(qualification);
         Predicate<Person> predicate = builder.build();
         final FilterCommand standardCommand = new FilterCommand(predicate);
 
@@ -148,13 +144,16 @@ public class FilterCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different value -> return false
+        builder.setQualification(qualification);
+        predicate = builder.build();
+        assertFalse(standardCommand.equals(predicate));
     }
 
     private List<Tag> getStudentTagList(Student student) {
         Set<Tag> studentTag = student.getTags();
-        ArrayList<Tag> ls = new ArrayList<>();
-        studentTag.stream().forEach(tag -> ls.add(tag));
-        return ls;
+        return new ArrayList<>(studentTag);
     }
 
     /**
@@ -168,13 +167,13 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private GenderContainsGenderPredicate prepareGenderPredicate(String userInput) {
-        return new GenderContainsGenderPredicate(Arrays.asList(new Gender(userInput)));
+        return new GenderContainsGenderPredicate(List.of(new Gender(userInput)));
     }
 
     /**
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private QualificationContainsQualificationPredicate prepareQualificationPredicate(String userInput) {
-        return new QualificationContainsQualificationPredicate(Arrays.asList(new Qualification(userInput)));
+        return new QualificationContainsQualificationPredicate(List.of(new Qualification(userInput)));
     }
 }

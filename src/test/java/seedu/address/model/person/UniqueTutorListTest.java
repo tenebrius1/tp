@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -110,24 +111,23 @@ public class UniqueTutorListTest {
 
     @Test
     public void sortTutor_validInputModifyTutorList_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(ELLE.getTags());
+        TypicalPersons.getTypicalTutors().forEach(uniqueTutorList::add);
+        List<Tag> studentTagList = new ArrayList<>(ELLE.getTags());
         UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
         expectedUniqueTutorList.add(BENSON);
-        expectedUniqueTutorList.add(CARL);
         expectedUniqueTutorList.add(ALICE);
+        expectedUniqueTutorList.add(CARL);
         uniqueTutorList.sortTutors(studentTagList);
         assertEquals(expectedUniqueTutorList, uniqueTutorList);
     }
 
     @Test
     public void sortTutor_validInputNoModification_success() {
-        TypicalPersons.getTypicalTutors().stream().forEach(tutor -> uniqueTutorList.add(tutor));
+        TypicalPersons.getTypicalTutors().forEach(uniqueTutorList::add);
         // Student chosen has no matching tags with any tutor
-        List<Tag> studentTagList = new ArrayList<>();
-        studentTagList.addAll(GEORGE.getTags());
-        UniqueTutorList expectedUniqueTutorList = uniqueTutorList;
+        List<Tag> studentTagList = new ArrayList<>(GEORGE.getTags());
+        UniqueTutorList expectedUniqueTutorList = new UniqueTutorList();
+        uniqueTutorList.forEach(expectedUniqueTutorList::add);
         uniqueTutorList.sortTutors(studentTagList);
         assertEquals(expectedUniqueTutorList, uniqueTutorList);
     }
@@ -201,5 +201,31 @@ public class UniqueTutorListTest {
     @Test
     public void sortTutor_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueTutorList.sortTutors(null));
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        List<Tutor> tutorList = new ArrayList<>();
+        tutorList.addAll(TypicalPersons.getTypicalTutors());
+        uniqueTutorList.setTutors(tutorList);
+
+        UniqueTutorList uniqueTutorListCopy = new UniqueTutorList();
+        uniqueTutorListCopy.setTutors(tutorList);
+        assertEquals(uniqueTutorListCopy, uniqueTutorListCopy);
+
+        // same object -> returns true
+        assertEquals(uniqueTutorList, uniqueTutorList);
+
+        // null -> returns false
+        assertNotEquals(null, uniqueTutorList);
+
+        // different type -> returns false
+        assertNotEquals(5, uniqueTutorList);
+
+        // different list -> returns false
+        UniqueTutorList uniqueTutorListDifferent = new UniqueTutorList();
+        uniqueTutorListDifferent.add(ALICE);
+        assertNotEquals(uniqueTutorListCopy, uniqueTutorListDifferent);
     }
 }

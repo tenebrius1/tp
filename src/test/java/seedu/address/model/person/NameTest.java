@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,5 +66,26 @@ public class NameTest {
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         assertTrue(Name.isValidName("Kenneth Jia Wei Yi Guan Kleon Cunrong XinYan ZiHao")); // 50 char
         assertTrue(Name.isValidName("K")); // 1 char
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        Name name = CARL.getName();
+        Name nameCopy = new Name("Carl Kurz");
+        assertEquals(name, nameCopy);
+
+        // same object -> returns true
+        assertEquals(name, name);
+
+        // null -> returns false
+        assertNotEquals(null, name);
+
+        // different type -> returns false
+        assertNotEquals(5, name);
+
+        // different name -> returns false
+        Name nameDifferent = new Name("John");
+        assertNotEquals(name, nameDifferent);
     }
 }

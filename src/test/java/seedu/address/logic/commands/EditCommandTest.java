@@ -40,7 +40,7 @@ import seedu.address.testutil.TutorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredTutorList_success() {

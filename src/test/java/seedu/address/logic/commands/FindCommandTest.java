@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORS_LISTED_OVERVIEW;
@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalCliTutorsWithSimil
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -45,11 +46,11 @@ import seedu.address.model.tag.Tag;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
-    private Model similarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
+    private final Model model = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalCliTutors(), new UserPrefs());
+    private final Model similarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
-    private Model expectedSimilarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
+    private final Model expectedSimilarNamesModel = new ModelManager(getTypicalCliTutorsWithSimilarNames(),
             new UserPrefs());
 
     @Test
@@ -125,7 +126,7 @@ public class FindCommandTest {
         Predicate<Person> secondPredicate = builder.build();
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate, PersonType.TUTOR);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate, PersonType.STUDENT);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, PersonType.TUTOR);
         FindCommand findThirdCommand = new FindCommand(firstPredicate, PersonType.STUDENT);
 
         // same object -> returns true
@@ -133,19 +134,19 @@ public class FindCommandTest {
 
         // same value and personType -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, PersonType.TUTOR);
-        assertEquals(findFirstCommand, findFirstCommandCopy);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertNotEquals(1, findFirstCommand);
+        assertFalse(findFirstCommand.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, findFirstCommand);
+        assertFalse(findFirstCommand.equals(null));
 
         // different parameters -> returns false
-        assertNotEquals(findFirstCommand, findSecondCommand);
+        assertFalse(findFirstCommand.equals(findSecondCommand));
 
         // different personType -> returns false
-        assertNotEquals(findFirstCommand, findThirdCommand);
+        assertFalse(findFirstCommand.equals(findThirdCommand));
     }
 
     /**
@@ -159,20 +160,20 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private GenderContainsGenderPredicate prepareGenderPredicate(String userInput) {
-        return new GenderContainsGenderPredicate(Arrays.asList(new Gender(userInput)));
+        return new GenderContainsGenderPredicate(List.of(new Gender(userInput)));
     }
 
     /**
      * Parses {@code userInput} into a {@code GenderContainsGenderPredicate}.
      */
     private QualificationContainsQualificationPredicate prepareQualificationPredicate(String userInput) {
-        return new QualificationContainsQualificationPredicate(Arrays.asList(new Qualification(userInput)));
+        return new QualificationContainsQualificationPredicate(List.of(new Qualification(userInput)));
     }
 
     /**
      * Parses {@code userInput} into a {@code TagsContainsTagPredicate}.
      */
     private TagsContainTagPredicate prepareTagPredicate(String userInput) {
-        return new TagsContainTagPredicate(Arrays.asList(new Tag(userInput)));
+        return new TagsContainTagPredicate(List.of(new Tag(userInput)));
     }
 }

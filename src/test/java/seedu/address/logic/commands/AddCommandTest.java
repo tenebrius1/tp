@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,12 +53,12 @@ public class AddCommandTest {
         // Adding a tutor
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_TUTOR, validTutor),
                 commandResultTutor.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTutor), modelStubTutor.tutorsAdded);
+        assertEquals(List.of(validTutor), modelStubTutor.tutorsAdded);
 
         // Adding a student
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_STUDENT, validStudent),
                 commandResultStudent.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStubStudent.studentsAdded);
+        assertEquals(List.of(validStudent), modelStubStudent.studentsAdded);
     }
 
     @Test
@@ -72,11 +71,11 @@ public class AddCommandTest {
         ModelStub modelStubStudent = new ModelStubWithStudent(validStudent);
 
         // Check for duplicate tutor
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TUTOR, () ->
+        assertThrows(CommandException.class, Phone.MESSAGE_REPEATED_PHONE, () ->
                 addCommandTutor.execute(modelStubTutor));
 
         // Check for duplicate student
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+        assertThrows(CommandException.class, Phone.MESSAGE_REPEATED_PHONE, () ->
                 addCommandStudent.execute(modelStubStudent));
     }
 
@@ -112,7 +111,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all methods failing.
      */
     private class ModelStub implements Model {
         @Override

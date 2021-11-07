@@ -62,7 +62,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TUTOR_SUCCESS = "Edited Tutor:\n%1$s";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n%1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
     public static final String MESSAGE_UNCHANGED_TUTOR = "This tutor is unchanged";
     public static final String MESSAGE_UNCHANGED_STUDENT = "This student is unchanged";
 
@@ -182,8 +182,7 @@ public class EditCommand extends Command {
         Student studentMatched = model.getMatchedStudent();
         if (studentMatched != null && studentMatched.isSamePerson(student)) {
             Set<Tag> studentTag = editedStudent.getTags();
-            ArrayList<Tag> ls = new ArrayList<>();
-            studentTag.stream().forEach(tag -> ls.add(tag));
+            ArrayList<Tag> ls = new ArrayList<>(studentTag);
             model.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, editedStudent);
         }
     }

@@ -1,6 +1,8 @@
 package seedu.address;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -13,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import javafx.application.Application;
 
 public class AppParametersTest {
-
     private final ParametersStub parametersStub = new ParametersStub();
     private final AppParameters expected = new AppParameters();
 
@@ -22,6 +23,15 @@ public class AppParametersTest {
         parametersStub.namedParameters.put("config", "config.json");
         expected.setConfigPath(Paths.get("config.json"));
         assertEquals(expected, AppParameters.parse(parametersStub));
+    }
+
+    @Test
+    public void equal() {
+        // same object -> return true
+        assertTrue(expected.equals(expected));
+
+        // different type -> return false
+        assertFalse(expected.equals(1));
     }
 
     @Test
@@ -38,7 +48,7 @@ public class AppParametersTest {
     }
 
     private static class ParametersStub extends Application.Parameters {
-        private Map<String, String> namedParameters = new HashMap<>();
+        private final Map<String, String> namedParameters = new HashMap<>();
 
         @Override
         public List<String> getRaw() {

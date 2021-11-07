@@ -6,11 +6,15 @@ start
 if () then ([input is valid])
     :Create new tutor and populate
     with edited details if present;
-    :Replace original tutor in
-    tutor list with edited tutor;
-    :Display changes
-    to edited tutor;
-    stop
+    if () then ([new tutor details are different])
+        :Replace original tutor in
+        tutor list with edited tutor;
+        :Display success message;
+        stop
+    else ([else])
+        :Throw CommandException;
+        stop
+    endif
 else ([else])
     :Throw ParseException;
     stop

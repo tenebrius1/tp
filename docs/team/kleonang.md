@@ -20,7 +20,8 @@ title: Kleon's Project Portfolio Page
 - Integrate `EditCommand` to work with new `Tutor` and `Student` classes (Pull request [#58](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/58))
 - Add `Remark` field in `Person` class (Pull request [#113](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/113))
 - Make `Phone` accept exactly 8 digits (Pull request [#125](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/125))
-- Make `Remark` accept a maximum of 100 characters ([#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
+- Make `Remark` accept a maximum of 100 characters (Pull request [#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
+- Code quality enhancements for test code (Pull request [#214](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/214))
 
 ### **Documentation**
 
@@ -36,8 +37,9 @@ title: Kleon's Project Portfolio Page
 - Miscellaneous collaborative edits in group discussions
 
 #### **Miscellaneous**
-- Bug fixes for issues identified in PE-D ([#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
+- Bug fixes for issues identified in PE-D (Pull request [#191](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/191))
 
 ### **Community**
-- PRs reviewed (Pull requests [#55](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/55), [#62](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/62), [#68](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/68), [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105), [#121](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/121), [#123](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/123), [#129](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/129))
+- PRs reviewed (with non-trivial review comments) (Pull requests [#55](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/55), [#62](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/62), [#68](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/68), [#105](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/105), [#121](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/121), [#123](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/123), [#129](https://github.com/AY2122S1-CS2103T-T17-2/tp/pull/129))
+- Contributed to forum discussions (Issues [#125](https://github.com/nus-cs2103-AY2122S1/forum/issues/125), [#265](https://github.com/nus-cs2103-AY2122S1/forum/issues/265))
 - Tested the product of other teams and [reported bugs](https://github.com/kleonang/ped/issues) during PE-D

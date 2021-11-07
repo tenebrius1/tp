@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -93,6 +94,10 @@ public class TutorTest {
 
         // different tags -> returns false
         editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_TP).build();
+        assertNotEquals(ALICE, editedAlice);
+
+        // different remarks -> returns false
+        editedAlice = new TutorBuilder(ALICE).withRemark(VALID_REMARK_AMY).build();
         assertNotEquals(ALICE, editedAlice);
     }
 }
