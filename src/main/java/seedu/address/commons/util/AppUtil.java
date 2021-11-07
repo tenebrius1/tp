@@ -9,6 +9,7 @@ import seedu.address.MainApp;
  * A container for App specific utility functions
  */
 public class AppUtil {
+    private AppUtil() {}
 
     /**
      * Gets an {@code Image} from the specified path.

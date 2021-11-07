@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code CliTutors} with sample data.
  */
 public class SampleDataUtil {
+    private SampleDataUtil() {}
     public static Tutor[] getSampleTutors() {
         return new Tutor[] {
             new Tutor(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("M"),
@@ -60,5 +61,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }
