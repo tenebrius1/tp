@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
@@ -28,6 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_UNIVERSITY_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
@@ -254,5 +256,12 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertParseFailure(parser, INVALID_PREAMBLE + NAME_DESC_BOB + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidStudentWithQualification_throwsParseException() {
+        assertParseFailure(parser, VALID_STUDENT_LETTER + NAME_DESC_AMY + PHONE_DESC_AMY +
+                QUALIFICATION_DESC_BOB + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_PM,
+                MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
     }
 }

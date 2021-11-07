@@ -48,8 +48,6 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "PM";
     public static final String MESSAGE_SUCCESS_TUTOR = "New tutor added:\n%1$s";
     public static final String MESSAGE_SUCCESS_STUDENT = "New student added:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_TUTOR = "This tutor already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
     private final Person toAdd;
     private final PersonType personType;
@@ -71,11 +69,7 @@ public class AddCommand extends Command {
         switch (personType) {
         case TUTOR:
             Tutor tutor = (Tutor) toAdd;
-            if (model.hasTutor(tutor)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TUTOR);
-            }
-
-            if (model.hasPersonWithSamePhone(tutor.getPhone())) {
+            if (model.hasTutor(tutor) || model.hasPersonWithSamePhone(tutor.getPhone())) {
                 throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
             }
 
@@ -84,11 +78,7 @@ public class AddCommand extends Command {
             // No break necessary due to return statement
         case STUDENT:
             Student student = (Student) toAdd;
-            if (model.hasStudent(student)) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-            }
-
-            if (model.hasPersonWithSamePhone(student.getPhone())) {
+            if (model.hasStudent(student) || model.hasPersonWithSamePhone(student.getPhone())) {
                 throw new CommandException(Phone.MESSAGE_REPEATED_PHONE);
             }
 
