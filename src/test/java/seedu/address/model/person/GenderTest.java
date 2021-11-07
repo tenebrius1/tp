@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -10,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import org.junit.jupiter.api.Test;
 
 public class GenderTest {
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Gender(null));
@@ -46,19 +43,19 @@ public class GenderTest {
         // same values -> returns true
         Gender gender = CARL.getGender();
         Gender genderCopy = new Gender("M");
-        assertEquals(gender, genderCopy);
+        assertTrue(gender.equals(genderCopy));
 
         // same object -> returns true
-        assertEquals(gender, gender);
+        assertTrue(gender.equals(gender));
 
         // null -> returns false
-        assertNotEquals(null, gender);
+        assertFalse(gender.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, gender);
+        assertFalse(gender.equals(5));
 
         // different gender -> returns false
         Gender genderDifferent = new Gender("F");
-        assertNotEquals(gender, genderDifferent);
+        assertFalse(gender.equals(genderDifferent));
     }
 }

@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -61,43 +59,43 @@ public class TutorTest {
     public void equals() {
         // same values -> returns true
         Tutor aliceCopy = new TutorBuilder(ALICE).build();
-        assertEquals(ALICE, aliceCopy);
+        assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
-        assertEquals(ALICE, ALICE);
+        assertTrue(ALICE.equals(ALICE));
 
         // null -> returns false
-        assertNotEquals(null, ALICE);
+        assertFalse(ALICE.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, ALICE);
+        assertFalse(ALICE.equals(5));
 
         // different tutor -> returns false
-        assertNotEquals(ALICE, BOB);
+        assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
         Tutor editedAlice = new TutorBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
         editedAlice = new TutorBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
 
         // different gender -> returns false
         editedAlice = new TutorBuilder(ALICE).withGender(VALID_GENDER_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
 
         // different qualification -> returns false
         editedAlice =
                 new TutorBuilder(ALICE).withQualification(VALID_QUALIFICATION_UNIVERSITY_STUDENT).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
         editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_TP).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
 
         // different remarks -> returns false
         editedAlice = new TutorBuilder(ALICE).withRemark(VALID_REMARK_AMY).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertFalse(ALICE.equals(editedAlice));
     }
 }

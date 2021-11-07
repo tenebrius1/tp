@@ -13,7 +13,6 @@ import seedu.address.model.person.Person;
  * A utility class for test cases.
  */
 public class TestUtil {
-
     /**
      * Folder used for temp files created during testing. Ignored by Git.
      */

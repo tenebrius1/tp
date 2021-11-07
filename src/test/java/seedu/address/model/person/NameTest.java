@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -10,7 +9,6 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import org.junit.jupiter.api.Test;
 
 public class NameTest {
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Name(null));
@@ -73,19 +71,19 @@ public class NameTest {
         // same values -> returns true
         Name name = CARL.getName();
         Name nameCopy = new Name("Carl Kurz");
-        assertEquals(name, nameCopy);
+        assertTrue(name.equals(nameCopy));
 
         // same object -> returns true
-        assertEquals(name, name);
+        assertTrue(name.equals(name));
 
         // null -> returns false
-        assertNotEquals(null, name);
+        assertFalse(name.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, name);
+        assertFalse(name.equals(5));
 
         // different name -> returns false
         Name nameDifferent = new Name("John");
-        assertNotEquals(name, nameDifferent);
+        assertFalse(name.equals(nameDifferent));
     }
 }

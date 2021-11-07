@@ -14,7 +14,6 @@ import seedu.address.model.CliTutors;
 import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializableCliTutorsTest {
-
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableCliTutorsTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsCliTutors.json");
     private static final Path INVALID_TUTOR_FILE = TEST_DATA_FOLDER.resolve("invalidTutorCliTutors.json");
@@ -60,5 +59,4 @@ public class JsonSerializableCliTutorsTest {
         assertThrows(IllegalValueException.class, JsonSerializableCliTutors.MESSAGE_DUPLICATE_STUDENT,
                 dataFromFile::toModelType);
     }
-
 }

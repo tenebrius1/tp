@@ -388,8 +388,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_failure() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = VALID_TUTOR_LETTER + " " + INDEX_THIRD_PERSON.getOneBased() + TAG_EMPTY;
         assertParseFailure(parser, userInput, Tag.MESSAGE_INVALID_TAG);
     }
 }

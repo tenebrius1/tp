@@ -212,20 +212,20 @@ public class UniqueTutorListTest {
 
         UniqueTutorList uniqueTutorListCopy = new UniqueTutorList();
         uniqueTutorListCopy.setTutors(tutorList);
-        assertEquals(uniqueTutorListCopy, uniqueTutorListCopy);
+        assertTrue(uniqueTutorListCopy.equals(uniqueTutorListCopy));
 
         // same object -> returns true
-        assertEquals(uniqueTutorList, uniqueTutorList);
+        assertTrue(uniqueTutorList.equals(uniqueTutorList));
 
         // null -> returns false
-        assertNotEquals(null, uniqueTutorList);
+        assertFalse(uniqueTutorList.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, uniqueTutorList);
+        assertFalse(uniqueTutorList.equals(5));
 
         // different list -> returns false
         UniqueTutorList uniqueTutorListDifferent = new UniqueTutorList();
         uniqueTutorListDifferent.add(ALICE);
-        assertNotEquals(uniqueTutorListCopy, uniqueTutorListDifferent);
+        assertFalse(uniqueTutorListCopy.equals(uniqueTutorListDifferent));
     }
 }

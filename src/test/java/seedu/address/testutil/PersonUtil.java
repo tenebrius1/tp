@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
  * A utility class for Person.
  */
 public class PersonUtil {
-
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
