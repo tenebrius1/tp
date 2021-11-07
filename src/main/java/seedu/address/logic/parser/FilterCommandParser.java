@@ -78,27 +78,28 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Qualification qualification =
                 ParserUtil.parseQualification(argMultimap.getValue(PREFIX_QUALIFICATION).get());
         Qualification[] qualificationList = new Qualification[] {qualification};
-        predicate =
-                predicate.and(new QualificationContainsQualificationPredicate(Arrays.asList(qualificationList)));
+        Predicate<Person> updatedPredicate = predicate
+                .and(new QualificationContainsQualificationPredicate(Arrays.asList(qualificationList)));
         builder.setQualification(qualification);
-        return predicate;
+        return updatedPredicate;
     }
 
     private Predicate<Person> handleGender(Predicate<Person> predicate, ChainedPredicate.Builder builder,
                                            ArgumentMultimap argMultimap) throws ParseException {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Gender[] genderList = new Gender[] {gender};
-        predicate = predicate.and(new GenderContainsGenderPredicate(Arrays.asList(genderList)));
+        Predicate<Person> updatedPredicate = predicate
+                .and(new GenderContainsGenderPredicate(Arrays.asList(genderList)));
         builder.setGender(gender);
-        return predicate;
+        return updatedPredicate;
     }
 
     private Predicate<Person> handleName(Predicate<Person> predicate, ChainedPredicate.Builder builder,
                                          ArgumentMultimap argMultimap) throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         String[] nameList = new String[] {name.toString()};
-        predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameList)));
+        Predicate<Person> updatedPredicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameList)));
         builder.setName(name);
-        return predicate;
+        return updatedPredicate;
     }
 }

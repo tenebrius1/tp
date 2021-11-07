@@ -21,7 +21,7 @@ public class FilterCommand extends Command {
             + "Parameters: [n/NAME] [g/GENDER] [q/QUALIFICATION]\n"
             + "Example: " + COMMAND_WORD + " q/3";
 
-    public static final String MESSAGE_FILTER_FAILED = "Failed to filter as no match command was given prior.";
+    public static final String MESSAGE_FILTER_FAILED = "Failed to filter as match list is empty";
 
     private final Predicate<Person> predicate;
 
