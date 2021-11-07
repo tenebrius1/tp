@@ -83,11 +83,8 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_twoTutorFieldSpecified_success() {
-        // Setup
-        Predicate<Person> predicate = x -> true;
-
         // Valid Name and Gender test
-        Predicate<Person> tutorPredicate = predicate;
+        Predicate<Person> tutorPredicate = x -> true;
         ChainedPredicate tutorTestPredicate =
                 new ChainedPredicate.Builder().setName(alice).setGender(female).setPredicate(tutorPredicate).build();
         FilterCommand expectedFilterCommand = new FilterCommand(tutorTestPredicate);
@@ -108,10 +105,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_threeTutorFieldSpecified_success() {
-        // Setup
-        Predicate<Person> predicate = x -> true;
-
-        Predicate<Person> tutorPredicate = predicate;
+        Predicate<Person> tutorPredicate = x -> true;
         ChainedPredicate tutorTestPredicate =
                 new ChainedPredicate.Builder().setName(alice).setGender(female).setQualification(validQualification)
                         .setPredicate(tutorPredicate).build();

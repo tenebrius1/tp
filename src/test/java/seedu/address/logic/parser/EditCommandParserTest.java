@@ -1,15 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUALIFICATION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ZERO_INDEX;
@@ -18,6 +23,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TP;
@@ -28,6 +35,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUALIFICATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_LETTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
@@ -45,8 +54,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.EditCommand.EditTutorDescriptor;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Qualification;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTutorDescriptorBuilder;
@@ -57,7 +69,7 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -104,10 +116,14 @@ public class EditCommandParserTest {
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, VALID_TUTOR_LETTER + " " + targetIndex.getOneBased()
                 + " i/string", MESSAGE_INVALID_FORMAT);
+
+        // invalid PersonType
+        assertParseFailure(parser, INVALID_PREAMBLE + " " + INDEX_FIRST_PERSON + NAME_DESC_AMY,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidTutorValue_failure() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String validIndex = " " + targetIndex.getOneBased();
 
@@ -116,8 +132,20 @@ public class EditCommandParserTest {
             + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid gender
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+
+        // invalid qualification
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
+                + INVALID_QUALIFICATION_DESC, Qualification.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex
@@ -132,7 +160,7 @@ public class EditCommandParserTest {
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + PHONE_DESC_BOB
+        assertParseFailure(parser, VALID_TUTOR_LETTER + validIndex + PHONE_DESC_BOB
             + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
@@ -141,15 +169,62 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_invalidStudentValue_failure() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String validIndex = " " + targetIndex.getOneBased();
+
+        // invalid name
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid gender
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS);
+
+        // invalid remark
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+
+        // qualification incorrectly present in student
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + QUALIFICATION_DESC_BOB, MESSAGE_INVALID_INPUT_STUDENT_WITH_QUALIFICATION);
+
+        // invalid tag
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_TAG_DESC, Tag.MESSAGE_INVALID_TAG);
+
+        // invalid tag argument ahead of valid tag
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + INVALID_TAG_DESC + " " + VALID_TAG_TP, Tag.MESSAGE_INVALID_TAG);
+
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex
+                + TAG_DESC_PM + " " + INVALID_TAG , Tag.MESSAGE_INVALID_TAG);
+
+        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + PHONE_DESC_BOB
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // multiple invalid values, but only the first invalid value is captured
+        assertParseFailure(parser, VALID_STUDENT_LETTER + validIndex + INVALID_NAME_DESC + INVALID_PHONE_DESC,
+                Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_allTutorFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_PM_TP;
 
         EditTutorDescriptor descriptor = new EditTutorDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withGender(VALID_GENDER_BOB)
             .withQualification(VALID_QUALIFICATION_BOB)
+            .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
 
@@ -159,12 +234,13 @@ public class EditCommandParserTest {
     @Test
     public void parse_allStudentFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + NAME_DESC_AMY + TAG_DESC_TP;
+        String userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_TP;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withGender(VALID_GENDER_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_TP).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
 
@@ -205,20 +281,26 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditTutorDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + PHONE_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
-        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_AMY;
-        descriptor = new EditTutorDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withGender(VALID_GENDER_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // qualification
         userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + QUALIFICATION_DESC_BOB;
         descriptor = new EditTutorDescriptorBuilder().withQualification(VALID_QUALIFICATION_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // remark
+        userInput = VALID_TUTOR_LETTER + " " + targetIndex.getOneBased() + REMARK_DESC_BOB;
+        descriptor = new EditTutorDescriptorBuilder().withRemark(VALID_REMARK_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.TUTOR);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -245,8 +327,14 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
-        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_BOB;
-        descriptor = new EditStudentDescriptorBuilder().withGender(VALID_GENDER_BOB).build();
+        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + GENDER_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // remark
+        userInput = VALID_STUDENT_LETTER + " " + targetIndex.getOneBased() + REMARK_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withRemark(VALID_REMARK_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, PersonType.STUDENT);
         assertParseSuccess(parser, userInput, expectedCommand);
 
