@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -387,7 +386,7 @@ public class ModelManagerTest {
         modelManager.clearMatchedTutor();
 
         Set<Tag> studentTag = DANIEL.getTags();
-        List<Tag> ls = new ArrayList<>(studentTag);
+        ArrayList<Tag> ls = new ArrayList<>(studentTag);
         modelManager.updateMatchedTutor(new TagsContainTagPredicate(ls), ls, DANIEL);
         assertNotEquals(modelManager, new ModelManager(cliTutors, userPrefs));
 
