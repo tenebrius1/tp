@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
             + "Parameters: <t INDEX (must be a positive integer)> or <s INDEX (must be a positive integer)>\n"
             + "Example: " + COMMAND_WORD + " t 1";
 
-    public static final String MESSAGE_DELETE_TUTOR_SUCCESS = "Deleted Tutor: %1$s";
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_TUTOR_SUCCESS = "Deleted Tutor: \n%1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: \n%1$s";
 
     private final Index targetIndex;
     private final PersonType personType;

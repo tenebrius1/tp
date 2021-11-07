@@ -46,6 +46,10 @@ public class LogicManager implements Logic {
         Command command = cliTutorsParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        if (model.getMatchedTutorList().isEmpty()) {
+            model.clearMatchedTutor();
+        }
+
         try {
             storage.saveCliTutors(model.getCliTutors());
         } catch (IOException ioe) {
