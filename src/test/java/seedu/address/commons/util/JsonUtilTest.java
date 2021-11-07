@@ -14,7 +14,6 @@ import seedu.address.testutil.TestUtil;
  * Tests JSON Read and Write
  */
 public class JsonUtilTest {
-
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
 
     @Test
@@ -38,8 +37,4 @@ public class JsonUtilTest {
         assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
-
-    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
-
-    //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
 }

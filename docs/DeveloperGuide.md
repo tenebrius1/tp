@@ -648,8 +648,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. There are no tutors that match the requirements of the student.
   <br>Use case ends.
 
-[comment]: <> (TODO)
-#### Use case (UC10): Filter 
+#### Use case (UC10): Filter tutors after matching
+{:.no_toc}
+
+**MSS**
+
+1. User requests to filter tutors after matching a student.
+2. `CliTutors` shows the tutors that match the required parameters.
+   <br>Use case ends.
+
+**Extensions**
+
+* 1a. No match command has been called prior to the filter command.
+  * 1a1. `CliTutors` shows an error message prompting the user to input a match command.
+  <br>Use case ends.
 
 ### Non-Functional Requirements
 

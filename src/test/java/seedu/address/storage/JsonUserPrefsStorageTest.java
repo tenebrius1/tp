@@ -17,7 +17,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
-
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
 
     @TempDir
@@ -26,6 +25,12 @@ public class JsonUserPrefsStorageTest {
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
+    }
+
+    @Test
+    public void readUserPrefs_getUserPrefsFilePath_success() {
+        JsonUserPrefsStorage testgetJsonUserPrefsStorage = new JsonUserPrefsStorage(TEST_DATA_FOLDER);
+        assertEquals(testgetJsonUserPrefsStorage.getUserPrefsFilePath(), TEST_DATA_FOLDER);
     }
 
     private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
@@ -119,5 +124,4 @@ public class JsonUserPrefsStorageTest {
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
     }
-
 }

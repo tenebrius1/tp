@@ -17,7 +17,6 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataConversionException;
 
 public class ConfigUtilTest {
-
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ConfigUtilTest");
 
     @TempDir
@@ -111,6 +110,4 @@ public class ConfigUtilTest {
                                   ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
                                   : null;
     }
-
-
 }

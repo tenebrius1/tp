@@ -132,7 +132,6 @@ public class FilterCommandTest {
         Gender gender = new Gender(VALID_GENDER_AMY);
         Qualification qualification = new Qualification(VALID_QUALIFICATION_GRADUATE);
         builder.setGender(gender);
-        builder.setQualification(qualification);
         Predicate<Person> predicate = builder.build();
         final FilterCommand standardCommand = new FilterCommand(predicate);
 
@@ -148,6 +147,11 @@ public class FilterCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different value -> return false
+        builder.setQualification(qualification);
+        predicate = builder.build();
+        assertFalse(standardCommand.equals(predicate));
     }
 
     private List<Tag> getStudentTagList(Student student) {

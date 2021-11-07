@@ -260,8 +260,8 @@ public class ModelManagerTest {
         TypicalPersons.getTypicalTutors().stream().forEach(tutor -> modelManager.addTutor(tutor));
         modelManager.addTutor(ENZIO);
         CliTutors cliTutors = new CliTutors();
-        cliTutors.addTutor(ENZIO);
         cliTutors.addTutor(ALICE);
+        cliTutors.addTutor(ENZIO);
         FilteredList<Tutor> expectedTutorList = new FilteredList<>(cliTutors.getTutorList());
         modelManager.updateMatchedTutor(predicate, ls, DANIEL);
         assertEquals(expectedTutorList, modelManager.getMatchedTutorList());

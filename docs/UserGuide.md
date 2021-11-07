@@ -318,6 +318,10 @@ Example:<br>
 
 Clears all entries of tutors/students from CLITutors.
 
+<div markdown="block" class="alert alert-warning">
+<b>:heavy_exclamation_mark: Caution:</b> Clearing the student list will clear the match list as well due to student being deleted.
+</div>
+
 Format: <br>`clear t` <br> `clear s`
 
 <details open>
