@@ -12,6 +12,7 @@ import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.StudentBuilder;
@@ -56,7 +57,7 @@ public class AddCommandIntegrationTest {
         Tutor tutorInList = model.getCliTutors().getTutorList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(tutorInList, PersonType.TUTOR),
-                model, AddCommand.MESSAGE_DUPLICATE_TUTOR);
+                model, Phone.MESSAGE_REPEATED_PHONE);
     }
 
     @Test
@@ -64,6 +65,6 @@ public class AddCommandIntegrationTest {
         Student studentInList = model.getCliTutors().getStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandFailure(new AddCommand(studentInList, PersonType.STUDENT),
-                model, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+                model, Phone.MESSAGE_REPEATED_PHONE);
     }
 }
