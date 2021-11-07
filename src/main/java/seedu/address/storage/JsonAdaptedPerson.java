@@ -31,9 +31,7 @@ abstract class JsonAdaptedPerson {
         this.phone = phone;
         this.gender = gender;
         this.remark = remark;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.tagged.addAll(tagged);
     }
 
     public String getName() {
