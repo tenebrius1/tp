@@ -82,7 +82,7 @@ public class FindCommand extends Command {
     }
 
     private CommandResult executeFindTutor(Model model) throws CommandException {
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_TUTORS);
+        model.updateFilteredTutorList(Model.PREDICATE_SHOW_ALL_TUTORS);
         List<Tutor> tutorList = model.getFilteredTutorList();
         // Checks if tutorList is empty
         if (tutorList.isEmpty()) {
