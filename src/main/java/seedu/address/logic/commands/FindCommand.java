@@ -53,15 +53,13 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownListStudent = model.getFilteredStudentList();
-        List<Tutor> lastShownListTutor = model.getFilteredTutorList();
 
         switch (personType) {
         case TUTOR:
-            return executeFindTutor(model, lastShownListTutor);
+            return executeFindTutor(model);
             // No break necessary due to return statement
         case STUDENT:
-            return executeFindStudent(model, lastShownListStudent);
+            return executeFindStudent(model);
             // No break necessary due to return statement
         default:
             // Any invalid input would be handled by the FindCommandParser and will not reach here
@@ -70,9 +68,11 @@ public class FindCommand extends Command {
         }
     }
 
-    private CommandResult executeFindStudent(Model model, List<Student> lastShownListStudent) throws CommandException {
+    private CommandResult executeFindStudent(Model model) throws CommandException {
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        List<Student> studentList = model.getFilteredStudentList();
         // Checks if studentList is empty
-        if (lastShownListStudent.isEmpty()) {
+        if (studentList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
         }
 
@@ -81,8 +81,11 @@ public class FindCommand extends Command {
                 model.getFilteredStudentList().size()));
     }
 
-    private CommandResult executeFindTutor(Model model, List<Tutor> lastShownListTutor) throws CommandException {
-        if (lastShownListTutor.isEmpty()) {
+    private CommandResult executeFindTutor(Model model) throws CommandException {
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_TUTORS);
+        List<Tutor> tutorList = model.getFilteredTutorList();
+        // Checks if tutorList is empty
+        if (tutorList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.TUTOR));
         }
 
